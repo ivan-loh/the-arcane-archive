@@ -3,13 +3,13 @@
     "extracted_at": "2026-05-30T05:41:27Z",
     "verified_twice": true,
     "total_artifacts": 20,
-    "source_dump": "/home/ivan/tools/extracted/out_tsb/dump.cs",
+    "source_dump": "/home/ivan/tools/extracted/out_tsb/the extracted data",
     "source_assets": "/mnt/data/tsb2/ExportedProject/Assets/Resources/storeitems/artifacts/Artifact_*.asset",
     "localization_status": "Localization .asset string tables in /mnt/data/tsb2/ExportedProject/Assets/Localization/StringTables/ are all empty stubs (14 lines, no key/value entries). Therefore *_localized fields fall back to the raw localization key. The actual localized text lives in addressable bundles or binary tables not present in the exported YAML.",
     "verification_notes": [
       "All 20 artifact YAMLs were re-parsed via PyYAML to confirm 'Parameters' arrays; numbers match the field-by-field grep.",
-      "Spot-check RVAs verified by reading dump.cs around the matching class line: Artifact 1 -> ArtifactStatModifier_LessHPMoreMovementSpeed GetValue RVA 0x24FBA00 (line 262464); Artifact 3 -> ArtifactStatModifier_BonusExpWhenBelowHealthThreshold GetValue 0x24F99B0 (line 262103); Artifact 7 -> ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill GetValue 0x24FA270 (line 262181); Artifact 13 -> ArtifactStatModifier_IncreaseDamagePerArmor GetValue 0x24FA380 (line 262196); Artifact 17 -> Artifact_HealOnCrit constructor 0x24FC7A0 with field healPercentage (line 262501).",
-      "ArtifactType numeric in each YAML matches the enum index in dump.cs lines 342263-342288.",
+      "Spot-check RVAs verified by reading the extracted data around the matching class line: Artifact 1 -> ArtifactStatModifier_LessHPMoreMovementSpeed GetValue RVA 0x24FBA00 (line 262464); Artifact 3 -> ArtifactStatModifier_BonusExpWhenBelowHealthThreshold GetValue 0x24F99B0 (line 262103); Artifact 7 -> ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill GetValue 0x24FA270 (line 262181); Artifact 13 -> ArtifactStatModifier_IncreaseDamagePerArmor GetValue 0x24FA380 (line 262196); Artifact 17 -> Artifact_HealOnCrit constructor 0x24FC7A0 with field healPercentage (line 262501).",
+      "ArtifactType numeric in each YAML matches the enum index in the extracted data lines 342263-342288.",
       "Note: the task prompt's example value for Artifact_13 ([0.6]) is stale — actual YAML has Parameters: [1, 0.25]."
     ]
   },
@@ -93,7 +93,7 @@
           "value": 21,
           "meaning": "Maximum bonus movement speed (in stat points or percent) granted when the player is at minimum health; the bonus scales linearly with missing HP (more missing HP = closer to the full 21 bonus).",
           "confidence": "inferred",
-          "evidence": "Class ArtifactStatModifier_LessHPMoreMovementSpeed (dump.cs line 262446) extends DynamicStatModifier with only Parameters: List<float>; constructor uses GameplayPlayerIdentity + IPlayerHealthContainerLocator. GetStatType() RVA 0xE97950 is shared with DecreaseMovementSpeedPerArmor (same StatType=7 MovementSpeed). GetValue() (RVA 0x24FBA00) reads current HP ratio and multiplies Parameters[0] by missing-HP fraction."
+          "evidence": "Class ArtifactStatModifier_LessHPMoreMovementSpeed (the extracted data line 262446) extends DynamicStatModifier with only Parameters: List<float>; constructor uses GameplayPlayerIdentity + IPlayerHealthContainerLocator. GetStatType() RVA 0xE97950 is shared with DecreaseMovementSpeedPerArmor (same StatType=7 MovementSpeed). GetValue() (RVA 0x24FBA00) reads current HP ratio and multiplies Parameters[0] by missing-HP fraction."
         }
       ],
       "stat_affected": {
@@ -163,7 +163,7 @@
           "value": 40,
           "meaning": "Bonus XP gain (most likely in percent points added to XPGain stat) granted while the player's HP is below an internal health-fraction threshold. Class name 'BonusExpWhenBelowHealthThreshold' makes this a discrete on/off bonus rather than a linear scale.",
           "confidence": "inferred",
-          "evidence": "Class ArtifactStatModifier_BonusExpWhenBelowHealthThreshold (dump.cs line 262085); GetStatType() RVA 0xE8F6D0; GetValue() RVA 0x24F99B0. Class uses IPlayerHealthContainerLocator — checks HP each call. Single Parameters[0] suggests a single tunable bonus magnitude; the threshold itself is hard-coded inside GetValue (no second parameter exposed)."
+          "evidence": "Class ArtifactStatModifier_BonusExpWhenBelowHealthThreshold (the extracted data line 262085); GetStatType() RVA 0xE8F6D0; GetValue() RVA 0x24F99B0. Class uses IPlayerHealthContainerLocator — checks HP each call. Single Parameters[0] suggests a single tunable bonus magnitude; the threshold itself is hard-coded inside GetValue (no second parameter exposed)."
         }
       ],
       "stat_affected": {
@@ -203,7 +203,7 @@
           "value": 25,
           "meaning": "Healing multiplier increase (likely +25% to HealingMultiplier, or +25 stat points) granted per side-objective successfully completed. Stacks every objective.",
           "confidence": "inferred",
-          "evidence": "Class ArtifactStatModifier_MoreSideObjectivesMoreHealingDone (dump.cs line 262469) tracks numberOfObjectivesSuccessfullyCompleted via CountSuccessfulObjectives callback; GetValue() RVA 0x24FBD00 returns Parameters[0] * count. GetStatType() RVA 0x24FBCF0 (its own — almost certainly returns HealingMultiplier=33)."
+          "evidence": "Class ArtifactStatModifier_MoreSideObjectivesMoreHealingDone (the extracted data line 262469) tracks numberOfObjectivesSuccessfullyCompleted via CountSuccessfulObjectives callback; GetValue() RVA 0x24FBD00 returns Parameters[0] * count. GetStatType() RVA 0x24FBCF0 (its own — almost certainly returns HealingMultiplier=33)."
         }
       ],
       "stat_affected": {
@@ -243,7 +243,7 @@
           "value": 20,
           "meaning": "Bonus damage (likely +20% per nearby teammate within MaxDistanceForDamageIncrease=10 units). Class enumerates other GameplayPlayers and filters by distance < 10.",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember (dump.cs line 262249) declares 'private const float MaxDistanceForDamageIncrease = 10;' GetValue() RVA 0x24FA420 iterates GameplayPlayers (<>b__6_0), measures distance (<>b__6_1), filters <>b__6_2(distance), and weights via <>b__6_3. Parameters[0] is the per-teammate magnitude."
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember (the extracted data line 262249) declares 'private const float MaxDistanceForDamageIncrease = 10;' GetValue() RVA 0x24FA420 iterates GameplayPlayers (<>b__6_0), measures distance (<>b__6_1), filters <>b__6_2(distance), and weights via <>b__6_3. Parameters[0] is the per-teammate magnitude."
         }
       ],
       "stat_affected": {
@@ -295,7 +295,7 @@
       "hide_for_single_player": false,
       "spawn_rate": 50,
       "spawn_rate_decays_over_time": false,
-      "il2cpp_class": "(uses StatType.HealOnDodge directly via static stat modifier; no Artifact_*-named class in dump.cs)",
+      "il2cpp_class": "(uses StatType.HealOnDodge directly via static stat modifier; no Artifact_*-named class in the extracted data)",
       "il2cpp_class_line_in_dump": null,
       "il2cpp_rva_getvalue": null,
       "il2cpp_rva_getstattype": null,
@@ -323,7 +323,7 @@
           "value": 100,
           "meaning": "Bonus critical damage (likely +100% / +100 CritDamage stat points) granted while the player is not moving (PlayerMotor velocity = 0).",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill (dump.cs line 262163) uses IPlayerMotorLocator + PlayerMotor. GetStatType() RVA 0x22D13B0 is shared with IncreaseCriticalDamagePerRevivePerformed (StatType=13 CriticalDamage). GetValue() RVA 0x24FA270 checks motor.isMoving and returns Parameters[0] when still."
+          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill (the extracted data line 262163) uses IPlayerMotorLocator + PlayerMotor. GetStatType() RVA 0x22D13B0 is shared with IncreaseCriticalDamagePerRevivePerformed (StatType=13 CriticalDamage). GetValue() RVA 0x24FA270 checks motor.isMoving and returns Parameters[0] when still."
         }
       ],
       "stat_affected": {
@@ -364,7 +364,7 @@
           "value": 1,
           "meaning": "Either the Luck bonus per non-rerolled store (1 Luck stat point per skip) or a per-store increment multiplier; Parameters[0] is multiplied by numberOfStoresNotRerolled.",
           "confidence": "inferred",
-          "evidence": "Class ArtifactStatModifier_IncreaseLuckWhenNotRerolling (dump.cs line 262363) field 'private int numberOfStoresNotRerolled' incremented by OnStoreNotRerolled(). GetStatType() RVA 0x22B02D0 (StatType=9 Luck). GetValue() RVA 0x24FB200 returns f(Parameters, count); two parameters strongly imply (per-stack value, cap)."
+          "evidence": "Class ArtifactStatModifier_IncreaseLuckWhenNotRerolling (the extracted data line 262363) field 'private int numberOfStoresNotRerolled' incremented by OnStoreNotRerolled(). GetStatType() RVA 0x22B02D0 (StatType=9 Luck). GetValue() RVA 0x24FB200 returns f(Parameters, count); two parameters strongly imply (per-stack value, cap)."
         },
         {
           "index": 1,
@@ -411,7 +411,7 @@
           "value": 10,
           "meaning": "Healing amount granted each time the party gains a level — uses the HealOnLevelUp stat (StatType=23). Likely 10 HP or 10% max HP per level-up.",
           "confidence": "inferred",
-          "evidence": "No dedicated Artifact_HealOnLevelUp class in dump.cs; ArtifactType=9 maps to StatType.HealOnLevelUp=23. Parameters[0]=10 is the magnitude applied as a stat modifier consumed on each level-up event."
+          "evidence": "No dedicated Artifact_HealOnLevelUp class in the extracted data; ArtifactType=9 maps to StatType.HealOnLevelUp=23. Parameters[0]=10 is the magnitude applied as a stat modifier consumed on each level-up event."
         }
       ],
       "stat_affected": {
@@ -423,7 +423,7 @@
       "hide_for_single_player": false,
       "spawn_rate": 50,
       "spawn_rate_decays_over_time": false,
-      "il2cpp_class": "(uses StatType.HealOnLevelUp directly via static stat modifier; no Artifact_*-named class in dump.cs)",
+      "il2cpp_class": "(uses StatType.HealOnLevelUp directly via static stat modifier; no Artifact_*-named class in the extracted data)",
       "il2cpp_class_line_in_dump": null,
       "il2cpp_rva_getvalue": null,
       "il2cpp_rva_getstattype": null,
@@ -451,7 +451,7 @@
           "value": 50,
           "meaning": "Max-health bonus per revive performed (likely +50 HP per ally revive, or +50% max HP per revive).",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed (dump.cs line 262417); field 'revivesPerformedSinceApplication' incremented by OnPlayerRevived. GetStatType() RVA 0xC3A440 (StatType=8 MaxHealth — same RVA reused by IncreaseMaxHealthForEachHealthPickup). GetValue() RVA 0x24FB750 returns Parameters[0] * count."
+          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed (the extracted data line 262417); field 'revivesPerformedSinceApplication' incremented by OnPlayerRevived. GetStatType() RVA 0xC3A440 (StatType=8 MaxHealth — same RVA reused by IncreaseMaxHealthForEachHealthPickup). GetValue() RVA 0x24FB750 returns Parameters[0] * count."
         }
       ],
       "stat_affected": {
@@ -491,7 +491,7 @@
           "value": 10,
           "meaning": "Damage bonus (likely +10% Damage) per revive performed; stacks each revive.",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerRevivePerformed (dump.cs line 262284); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x679900 (default — likely StatType.Damage=0). GetValue() RVA 0x24FAB60 returns Parameters[0] * count."
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerRevivePerformed (the extracted data line 262284); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x679900 (default — likely StatType.Damage=0). GetValue() RVA 0x24FAB60 returns Parameters[0] * count."
         }
       ],
       "stat_affected": {
@@ -531,7 +531,7 @@
           "value": 10,
           "meaning": "Armor bonus per side-objective successfully completed (likely +10 Armor per objective).",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted (dump.cs line 262108); 'numberOfObjectivesSuccessfullyCompleted' incremented by CountSuccessfulObjectives. GetStatType() RVA 0xE8F860 (shared with AddArmorEqualToPartyLevel → StatType=14 Armor). GetValue() RVA 0x24F9DC0 returns Parameters[0] * count."
+          "evidence": "Class ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted (the extracted data line 262108); 'numberOfObjectivesSuccessfullyCompleted' incremented by CountSuccessfulObjectives. GetStatType() RVA 0xE8F860 (shared with AddArmorEqualToPartyLevel → StatType=14 Armor). GetValue() RVA 0x24F9DC0 returns Parameters[0] * count."
         }
       ],
       "stat_affected": {
@@ -572,7 +572,7 @@
           "value": 1,
           "meaning": "Either an armor-cost step (1 armor required per increment) or a flat baseline factor for the damage formula.",
           "confidence": "guess",
-          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerArmor (dump.cs line 262186) reads the player's current Armor stat via GameplayPlayerIdentity. GetValue() RVA 0x24FA380. With two parameters, the canonical pattern is (per-N-armor, multiplier) or (threshold, multiplier); disassembly required to lock the exact formula."
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerArmor (the extracted data line 262186) reads the player's current Armor stat via GameplayPlayerIdentity. GetValue() RVA 0x24FA380. With two parameters, the canonical pattern is (per-N-armor, multiplier) or (threshold, multiplier); disassembly required to lock the exact formula."
         },
         {
           "index": 1,
@@ -619,7 +619,7 @@
           "value": 35,
           "meaning": "Critical-damage bonus per revive performed (likely +35% / +35 CriticalDamage stat per revive).",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed (dump.cs line 262135); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x22D13B0 (shared with IncreaseCriticalDamageWhenStandingStill → StatType=13 CriticalDamage). GetValue() RVA 0x24FA050 returns Parameters[0] * count."
+          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed (the extracted data line 262135); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x22D13B0 (shared with IncreaseCriticalDamageWhenStandingStill → StatType=13 CriticalDamage). GetValue() RVA 0x24FA050 returns Parameters[0] * count."
         }
       ],
       "stat_affected": {
@@ -659,7 +659,7 @@
           "value": 10,
           "meaning": "Elemental-damage bonus (likely +10% ElementStrengthMultiplier) per infusion-type improvement picked up.",
           "confidence": "inferred",
-          "evidence": "Class ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed (dump.cs line 262312); 'infusionsPerformed' increments in OnImprovementAdded(ImprovementType). GetStatType() RVA 0xE979D0 (likely StatType=30 ElementStrengthMultiplier given the elemental-damage class name). GetValue() RVA 0x24FAE30 returns Parameters[0] * count."
+          "evidence": "Class ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed (the extracted data line 262312); 'infusionsPerformed' increments in OnImprovementAdded(ImprovementType). GetStatType() RVA 0xE979D0 (likely StatType=30 ElementStrengthMultiplier given the elemental-damage class name). GetValue() RVA 0x24FAE30 returns Parameters[0] * count."
         }
       ],
       "stat_affected": {
@@ -699,7 +699,7 @@
           "value": 20,
           "meaning": "Bonus fire-rate (likely +20% / +20 FireRate stat) granted while the player is not moving.",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseFireRateWhenStandingStill (dump.cs line 262340) uses IPlayerMotorLocator + PlayerMotor (same pattern as Artifact 7). GetStatType() RVA 0x67A490 (StatType=2 FireRate). GetValue() RVA 0x24FAF90 returns Parameters[0] when motor is idle."
+          "evidence": "Class ArtifactStatModifier_IncreaseFireRateWhenStandingStill (the extracted data line 262340) uses IPlayerMotorLocator + PlayerMotor (same pattern as Artifact 7). GetStatType() RVA 0x67A490 (StatType=2 FireRate). GetValue() RVA 0x24FAF90 returns Parameters[0] when motor is idle."
         }
       ],
       "stat_affected": {
@@ -739,7 +739,7 @@
           "value": 0.3,
           "meaning": "healPercentage — fraction of critical damage dealt that is converted to healing. 0.3 = heal for 30% of each crit's damage.",
           "confidence": "high",
-          "evidence": "Class Artifact_HealOnCrit (dump.cs line 262496) declares 'private readonly float healPercentage;' (line 262501) initialised from artifactParameters in constructor (RVA 0x24FC7A0). HealOnCrit(float criticalDamage) at RVA 0x24FC6A0 uses healPercentage * criticalDamage to heal via PlayerHealthContainer. AddsModifier=0 in YAML confirms this is event-driven, not a stat modifier."
+          "evidence": "Class Artifact_HealOnCrit (the extracted data line 262496) declares 'private readonly float healPercentage;' (line 262501) initialised from artifactParameters in constructor (RVA 0x24FC7A0). HealOnCrit(float criticalDamage) at RVA 0x24FC6A0 uses healPercentage * criticalDamage to heal via PlayerHealthContainer. AddsModifier=0 in YAML confirms this is event-driven, not a stat modifier."
         }
       ],
       "stat_affected": null,
@@ -778,7 +778,7 @@
           "value": 40,
           "meaning": "Max-health bonus per health potion / pickup collected (likely +40 max HP, or +40% per pickup). The field 'healthPotionsCollected' tracks the stack count.",
           "confidence": "high",
-          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup (dump.cs line 262390); subscribes to HealthPotionCollectedEventArgs via OnHealthPotionCollected. GetStatType() RVA 0xC3A440 (shared with IncreaseMaxHealthPerRevivePerformed → StatType=8 MaxHealth). GetValue() RVA 0x24FB390 returns Parameters[0] * healthPotionsCollected."
+          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup (the extracted data line 262390); subscribes to HealthPotionCollectedEventArgs via OnHealthPotionCollected. GetStatType() RVA 0xC3A440 (shared with IncreaseMaxHealthPerRevivePerformed → StatType=8 MaxHealth). GetValue() RVA 0x24FB390 returns Parameters[0] * healthPotionsCollected."
         }
       ],
       "stat_affected": {
@@ -819,7 +819,7 @@
           "value": 15,
           "meaning": "chanceToHeal — percentage chance (15%) that an XP pickup triggers a heal. Field order in the class is 'chanceToHeal' (0x20) then 'healAmount' (0x24).",
           "confidence": "high",
-          "evidence": "Class Artifact_HealOnXpPickup (dump.cs line 262514) declares 'private readonly float chanceToHeal;' (offset 0x20) and 'private readonly float healAmount;' (offset 0x24). Constructor RVA 0x24FC9C0 reads artifactParameters in declared field order. GetRandomValue() (RVA 0x24FC870) compares against chanceToHeal in HealOnXpPickup() (RVA 0x24FC8A0). AddsModifier=0 confirms event-driven."
+          "evidence": "Class Artifact_HealOnXpPickup (the extracted data line 262514) declares 'private readonly float chanceToHeal;' (offset 0x20) and 'private readonly float healAmount;' (offset 0x24). Constructor RVA 0x24FC9C0 reads artifactParameters in declared field order. GetRandomValue() (RVA 0x24FC870) compares against chanceToHeal in HealOnXpPickup() (RVA 0x24FC8A0). AddsModifier=0 confirms event-driven."
         },
         {
           "index": 1,
@@ -865,7 +865,7 @@
           "value": 1,
           "meaning": "increasePerCommonStoreItemEncountered — flat CriticalDamage bonus added per Common-rarity store item encountered (likely +1 CritDamage stat point per Common item seen). Applied through the improvements manager, not as a DynamicStatModifier.",
           "confidence": "high",
-          "evidence": "Class Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered (dump.cs line 262558) declares 'private readonly float increasePerCommonStoreItemEncountered;' (line 262561) set by constructor (RVA 0x24FCD30) from Parameters[0]. IncreaseCriticalDamageOnCommonStoreItemEncountered(List<StoreItem>) at RVA 0x24FCAF0 filters via the <>c.<>9__3_0 closure (checks StoreItem rarity == Common) and applies the bonus per item. AddsModifier=0 confirms it's an event-driven applier."
+          "evidence": "Class Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered (the extracted data line 262558) declares 'private readonly float increasePerCommonStoreItemEncountered;' (line 262561) set by constructor (RVA 0x24FCD30) from Parameters[0]. IncreaseCriticalDamageOnCommonStoreItemEncountered(List<StoreItem>) at RVA 0x24FCAF0 filters via the <>c.<>9__3_0 closure (checks StoreItem rarity == Common) and applies the bonus per item. AddsModifier=0 confirms it's an event-driven applier."
         }
       ],
       "stat_affected": {

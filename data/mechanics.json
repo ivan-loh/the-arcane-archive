@@ -2,7 +2,7 @@
   "_meta": {
     "title": "The Spell Brigade — Mechanics Specification",
     "purpose": "Foundational reference describing the stat aggregation system, damage pipeline, element effectiveness, modifier hierarchy, and combat resolution. All other gameplay docs (damage-calculation guide, spell, artifact, infusion docs) depend on the definitions here.",
-    "source_dump": "/home/ivan/tools/extracted/out_tsb/dump.cs",
+    "source_dump": "/home/ivan/tools/extracted/out_tsb/the extracted data",
     "extraction_approach": "Class signatures and field offsets were extracted directly from the IL2CPP dump. Method bodies are not present in the dump (only signatures + RVA), so any documented arithmetic is inferred from method names, the single embedded constant `StatCalculator.Exponent = 0.5714286` (~= 4/7), the modifier class hierarchy, and the calls visible in IPlayerStats / HealthContainer / Hitbox. Each inferred formula is tagged with a confidence level (high | inferred | guess).",
     "stat_count": 36,
     "verification_notes": [
