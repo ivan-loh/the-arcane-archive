@@ -3,7 +3,7 @@
     "extracted_at": "2026-05-30T05:41:27Z",
     "verified_twice": true,
     "total_artifacts": 20,
-    "source_dump": "/home/ivan/tools/Il2CppDumper/out_tsb/dump.cs",
+    "source_dump": "/home/ivan/tools/extracted/out_tsb/dump.cs",
     "source_assets": "/mnt/data/tsb2/ExportedProject/Assets/Resources/storeitems/artifacts/Artifact_*.asset",
     "localization_status": "Localization .asset string tables in /mnt/data/tsb2/ExportedProject/Assets/Localization/StringTables/ are all empty stubs (14 lines, no key/value entries). Therefore *_localized fields fall back to the raw localization key. The actual localized text lives in addressable bundles or binary tables not present in the exported YAML.",
     "verification_notes": [
@@ -13,18 +13,17 @@
       "Note: the task prompt's example value for Artifact_13 ([0.6]) is stale — actual YAML has Parameters: [1, 0.25]."
     ]
   },
-
   "stat_type_map": {
-    "0":  "Damage",
-    "1":  "Range",
-    "2":  "FireRate",
-    "3":  "Speed",
-    "4":  "LifeTime",
-    "5":  "DamageTickRate",
-    "6":  "Size",
-    "7":  "MovementSpeed",
-    "8":  "MaxHealth",
-    "9":  "Luck",
+    "0": "Damage",
+    "1": "Range",
+    "2": "FireRate",
+    "3": "Speed",
+    "4": "LifeTime",
+    "5": "DamageTickRate",
+    "6": "Size",
+    "7": "MovementSpeed",
+    "8": "MaxHealth",
+    "9": "Luck",
     "10": "XPGain",
     "11": "PickupRadius",
     "12": "CriticalChance",
@@ -52,18 +51,17 @@
     "39": "Bans",
     "40": "Pins"
   },
-
   "artifact_type_map": {
-    "0":  "None",
-    "1":  "TheLessHPTheMoreMoveSpeed",
-    "2":  "AddArmorEqualToLevel",
-    "3":  "TheLessHPTheMoreXPGain",
-    "4":  "IncreaseHealingDoneForEveryObjective",
-    "5":  "IncreaseDamageForEveryNearbyTeammate",
-    "6":  "HealOnDodge",
-    "7":  "IncreaseCritDamageWhileStandingStill",
-    "8":  "IncreaseLuckWhenNotRerolling",
-    "9":  "HealOnLevelUp",
+    "0": "None",
+    "1": "TheLessHPTheMoreMoveSpeed",
+    "2": "AddArmorEqualToLevel",
+    "3": "TheLessHPTheMoreXPGain",
+    "4": "IncreaseHealingDoneForEveryObjective",
+    "5": "IncreaseDamageForEveryNearbyTeammate",
+    "6": "HealOnDodge",
+    "7": "IncreaseCritDamageWhileStandingStill",
+    "8": "IncreaseLuckWhenNotRerolling",
+    "9": "HealOnLevelUp",
     "10": "IncreaseMaxHealthForEveryRevive",
     "11": "IncreaseDamageForEveryRevive",
     "12": "IncreaseArmorPerObjectiveCompleted",
@@ -76,7 +74,6 @@
     "19": "HealOnXPPickup",
     "20": "IncreaseCritDamageForEveryCommon"
   },
-
   "artifacts": [
     {
       "id": 1,
@@ -87,7 +84,9 @@
       "title_localized": "Artifact_1_Title",
       "description_entry": "Artifact_1_Description",
       "description_localized": "Artifact_1_Description",
-      "parameters_raw": [21],
+      "parameters_raw": [
+        21
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -97,7 +96,10 @@
           "evidence": "Class ArtifactStatModifier_LessHPMoreMovementSpeed (dump.cs line 262446) extends DynamicStatModifier with only Parameters: List<float>; constructor uses GameplayPlayerIdentity + IPlayerHealthContainerLocator. GetStatType() RVA 0xE97950 is shared with DecreaseMovementSpeedPerArmor (same StatType=7 MovementSpeed). GetValue() (RVA 0x24FBA00) reads current HP ratio and multiplies Parameters[0] by missing-HP fraction."
         }
       ],
-      "stat_affected": { "id": 7, "name": "MovementSpeed" },
+      "stat_affected": {
+        "id": 7,
+        "name": "MovementSpeed"
+      },
       "trigger_condition": "Continuous; scales with (1 - currentHP/maxHP). Stronger when low on HP.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -124,7 +126,10 @@
       "description_localized": "Artifact_2_Description",
       "parameters_raw": [],
       "parameters_decoded": [],
-      "stat_affected": { "id": 14, "name": "Armor" },
+      "stat_affected": {
+        "id": 14,
+        "name": "Armor"
+      },
       "trigger_condition": "Continuous; returns the current party level as the modifier value (no tunable parameters).",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -149,7 +154,9 @@
       "title_localized": "Artifact_3_Title",
       "description_entry": "Artifact_3_Description",
       "description_localized": "Artifact_3_Description",
-      "parameters_raw": [40],
+      "parameters_raw": [
+        40
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -159,7 +166,10 @@
           "evidence": "Class ArtifactStatModifier_BonusExpWhenBelowHealthThreshold (dump.cs line 262085); GetStatType() RVA 0xE8F6D0; GetValue() RVA 0x24F99B0. Class uses IPlayerHealthContainerLocator — checks HP each call. Single Parameters[0] suggests a single tunable bonus magnitude; the threshold itself is hard-coded inside GetValue (no second parameter exposed)."
         }
       ],
-      "stat_affected": { "id": 10, "name": "XPGain" },
+      "stat_affected": {
+        "id": 10,
+        "name": "XPGain"
+      },
       "trigger_condition": "When current HP < hard-coded threshold (commonly low-HP). Off otherwise.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -184,7 +194,9 @@
       "title_localized": "Artifact_4_Title",
       "description_entry": "Artifact_4_Description",
       "description_localized": "Artifact_4_Description",
-      "parameters_raw": [25],
+      "parameters_raw": [
+        25
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -194,7 +206,10 @@
           "evidence": "Class ArtifactStatModifier_MoreSideObjectivesMoreHealingDone (dump.cs line 262469) tracks numberOfObjectivesSuccessfullyCompleted via CountSuccessfulObjectives callback; GetValue() RVA 0x24FBD00 returns Parameters[0] * count. GetStatType() RVA 0x24FBCF0 (its own — almost certainly returns HealingMultiplier=33)."
         }
       ],
-      "stat_affected": { "id": 33, "name": "HealingMultiplier" },
+      "stat_affected": {
+        "id": 33,
+        "name": "HealingMultiplier"
+      },
       "trigger_condition": "Each successfully completed side objective adds one stack of bonus healing.",
       "adds_modifier": true,
       "hide_for_single_player": true,
@@ -219,7 +234,9 @@
       "title_localized": "Artifact_5_Title",
       "description_entry": "Artifact_5_Description",
       "description_localized": "Artifact_5_Description",
-      "parameters_raw": [20],
+      "parameters_raw": [
+        20
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -229,7 +246,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember (dump.cs line 262249) declares 'private const float MaxDistanceForDamageIncrease = 10;' GetValue() RVA 0x24FA420 iterates GameplayPlayers (<>b__6_0), measures distance (<>b__6_1), filters <>b__6_2(distance), and weights via <>b__6_3. Parameters[0] is the per-teammate magnitude."
         }
       ],
-      "stat_affected": { "id": 0, "name": "Damage" },
+      "stat_affected": {
+        "id": 0,
+        "name": "Damage"
+      },
       "trigger_condition": "Each ally within 10 units adds one stack of damage bonus.",
       "adds_modifier": true,
       "hide_for_single_player": true,
@@ -254,7 +274,9 @@
       "title_localized": "Artifact_6_Title",
       "description_entry": "Artifact_6_Description",
       "description_localized": "Artifact_6_Description",
-      "parameters_raw": [20],
+      "parameters_raw": [
+        20
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -264,7 +286,10 @@
           "evidence": "No dedicated Artifact_HealOnDodge class exists; instead the ArtifactType=6 directly maps to StatType.HealOnDodge=22 per the prompt's enum mapping. The single Parameters[0]=20 is the heal magnitude added as a stat modifier."
         }
       ],
-      "stat_affected": { "id": 22, "name": "HealOnDodge" },
+      "stat_affected": {
+        "id": 22,
+        "name": "HealOnDodge"
+      },
       "trigger_condition": "Each time the player successfully dodges an incoming attack.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -289,7 +314,9 @@
       "title_localized": "Artifact_7_Title",
       "description_entry": "Artifact_7_Description",
       "description_localized": "Artifact_7_Description",
-      "parameters_raw": [100],
+      "parameters_raw": [
+        100
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -299,7 +326,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill (dump.cs line 262163) uses IPlayerMotorLocator + PlayerMotor. GetStatType() RVA 0x22D13B0 is shared with IncreaseCriticalDamagePerRevivePerformed (StatType=13 CriticalDamage). GetValue() RVA 0x24FA270 checks motor.isMoving and returns Parameters[0] when still."
         }
       ],
-      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "stat_affected": {
+        "id": 13,
+        "name": "CriticalDamage"
+      },
       "trigger_condition": "Active only while player is stationary (PlayerMotor not moving).",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -324,7 +354,10 @@
       "title_localized": "Artifact_8_Title",
       "description_entry": "Artifact_8_Description",
       "description_localized": "Artifact_8_Description",
-      "parameters_raw": [1, 10],
+      "parameters_raw": [
+        1,
+        10
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -341,7 +374,10 @@
           "evidence": "Same class as above; the second float is conventionally a cap in this codebase (similar pattern seen elsewhere for stacking modifiers). Concrete cap semantics require disassembling RVA 0x24FB200."
         }
       ],
-      "stat_affected": { "id": 9, "name": "Luck" },
+      "stat_affected": {
+        "id": 9,
+        "name": "Luck"
+      },
       "trigger_condition": "Each store visit where the player does NOT use a reroll adds one stack.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -366,7 +402,9 @@
       "title_localized": "Artifact_9_Title",
       "description_entry": "Artifact_9_Description",
       "description_localized": "Artifact_9_Description",
-      "parameters_raw": [10],
+      "parameters_raw": [
+        10
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -376,7 +414,10 @@
           "evidence": "No dedicated Artifact_HealOnLevelUp class in dump.cs; ArtifactType=9 maps to StatType.HealOnLevelUp=23. Parameters[0]=10 is the magnitude applied as a stat modifier consumed on each level-up event."
         }
       ],
-      "stat_affected": { "id": 23, "name": "HealOnLevelUp" },
+      "stat_affected": {
+        "id": 23,
+        "name": "HealOnLevelUp"
+      },
       "trigger_condition": "Each party level-up triggers one heal.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -401,7 +442,9 @@
       "title_localized": "Artifact_10_Title",
       "description_entry": "Artifact_10_Description",
       "description_localized": "Artifact_10_Description",
-      "parameters_raw": [50],
+      "parameters_raw": [
+        50
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -411,7 +454,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed (dump.cs line 262417); field 'revivesPerformedSinceApplication' incremented by OnPlayerRevived. GetStatType() RVA 0xC3A440 (StatType=8 MaxHealth — same RVA reused by IncreaseMaxHealthForEachHealthPickup). GetValue() RVA 0x24FB750 returns Parameters[0] * count."
         }
       ],
-      "stat_affected": { "id": 8, "name": "MaxHealth" },
+      "stat_affected": {
+        "id": 8,
+        "name": "MaxHealth"
+      },
       "trigger_condition": "Each successful revive performed by this player adds one stack.",
       "adds_modifier": true,
       "hide_for_single_player": true,
@@ -436,7 +482,9 @@
       "title_localized": "Artifact_11_Title",
       "description_entry": "Artifact_11_Description",
       "description_localized": "Artifact_11_Description",
-      "parameters_raw": [10],
+      "parameters_raw": [
+        10
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -446,7 +494,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseDamagePerRevivePerformed (dump.cs line 262284); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x679900 (default — likely StatType.Damage=0). GetValue() RVA 0x24FAB60 returns Parameters[0] * count."
         }
       ],
-      "stat_affected": { "id": 0, "name": "Damage" },
+      "stat_affected": {
+        "id": 0,
+        "name": "Damage"
+      },
       "trigger_condition": "Each successful revive performed by this player adds one stack.",
       "adds_modifier": true,
       "hide_for_single_player": true,
@@ -471,7 +522,9 @@
       "title_localized": "Artifact_12_Title",
       "description_entry": "Artifact_12_Description",
       "description_localized": "Artifact_12_Description",
-      "parameters_raw": [10],
+      "parameters_raw": [
+        10
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -481,7 +534,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted (dump.cs line 262108); 'numberOfObjectivesSuccessfullyCompleted' incremented by CountSuccessfulObjectives. GetStatType() RVA 0xE8F860 (shared with AddArmorEqualToPartyLevel → StatType=14 Armor). GetValue() RVA 0x24F9DC0 returns Parameters[0] * count."
         }
       ],
-      "stat_affected": { "id": 14, "name": "Armor" },
+      "stat_affected": {
+        "id": 14,
+        "name": "Armor"
+      },
       "trigger_condition": "Each successfully completed side objective adds one stack of armor.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -506,7 +562,10 @@
       "title_localized": "Artifact_13_Title",
       "description_entry": "Artifact_13_Description",
       "description_localized": "Artifact_13_Description",
-      "parameters_raw": [1, 0.25],
+      "parameters_raw": [
+        1,
+        0.25
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -523,7 +582,10 @@
           "evidence": "Same class; companion class ArtifactStatModifier_DecreaseMovementSpeedPerArmor at line 262207 follows the identical 2-parameter pattern and same per-armor scaling logic."
         }
       ],
-      "stat_affected": { "id": 0, "name": "Damage" },
+      "stat_affected": {
+        "id": 0,
+        "name": "Damage"
+      },
       "trigger_condition": "Continuous; reads current Armor each evaluation.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -548,7 +610,9 @@
       "title_localized": "Artifact_14_Title",
       "description_entry": "Artifact_14_Description",
       "description_localized": "Artifact_14_Description",
-      "parameters_raw": [35],
+      "parameters_raw": [
+        35
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -558,7 +622,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed (dump.cs line 262135); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x22D13B0 (shared with IncreaseCriticalDamageWhenStandingStill → StatType=13 CriticalDamage). GetValue() RVA 0x24FA050 returns Parameters[0] * count."
         }
       ],
-      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "stat_affected": {
+        "id": 13,
+        "name": "CriticalDamage"
+      },
       "trigger_condition": "Each successful revive performed by this player adds one stack.",
       "adds_modifier": true,
       "hide_for_single_player": true,
@@ -583,7 +650,9 @@
       "title_localized": "Artifact_15_Title",
       "description_entry": "Artifact_15_Description",
       "description_localized": "Artifact_15_Description",
-      "parameters_raw": [10],
+      "parameters_raw": [
+        10
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -593,7 +662,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed (dump.cs line 262312); 'infusionsPerformed' increments in OnImprovementAdded(ImprovementType). GetStatType() RVA 0xE979D0 (likely StatType=30 ElementStrengthMultiplier given the elemental-damage class name). GetValue() RVA 0x24FAE30 returns Parameters[0] * count."
         }
       ],
-      "stat_affected": { "id": 30, "name": "ElementStrengthMultiplier" },
+      "stat_affected": {
+        "id": 30,
+        "name": "ElementStrengthMultiplier"
+      },
       "trigger_condition": "Each infusion-type ImprovementAdded event adds one stack.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -618,7 +690,9 @@
       "title_localized": "Artifact_16_Title",
       "description_entry": "Artifact_16_Description",
       "description_localized": "Artifact_16_Description",
-      "parameters_raw": [20],
+      "parameters_raw": [
+        20
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -628,7 +702,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseFireRateWhenStandingStill (dump.cs line 262340) uses IPlayerMotorLocator + PlayerMotor (same pattern as Artifact 7). GetStatType() RVA 0x67A490 (StatType=2 FireRate). GetValue() RVA 0x24FAF90 returns Parameters[0] when motor is idle."
         }
       ],
-      "stat_affected": { "id": 2, "name": "FireRate" },
+      "stat_affected": {
+        "id": 2,
+        "name": "FireRate"
+      },
       "trigger_condition": "Active only while player is stationary.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -653,7 +730,9 @@
       "title_localized": "Artifact_17_Title",
       "description_entry": "Artifact_17_Description",
       "description_localized": "Artifact_17_Description",
-      "parameters_raw": [0.3],
+      "parameters_raw": [
+        0.3
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -690,7 +769,9 @@
       "title_localized": "Artifact_18_Title",
       "description_entry": "Artifact_18_Description",
       "description_localized": "Artifact_18_Description",
-      "parameters_raw": [40],
+      "parameters_raw": [
+        40
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -700,7 +781,10 @@
           "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup (dump.cs line 262390); subscribes to HealthPotionCollectedEventArgs via OnHealthPotionCollected. GetStatType() RVA 0xC3A440 (shared with IncreaseMaxHealthPerRevivePerformed → StatType=8 MaxHealth). GetValue() RVA 0x24FB390 returns Parameters[0] * healthPotionsCollected."
         }
       ],
-      "stat_affected": { "id": 8, "name": "MaxHealth" },
+      "stat_affected": {
+        "id": 8,
+        "name": "MaxHealth"
+      },
       "trigger_condition": "Each health-potion collected adds one stack of max HP.",
       "adds_modifier": true,
       "hide_for_single_player": false,
@@ -725,7 +809,10 @@
       "title_localized": "Artifact_19_Title",
       "description_entry": "Artifact_19_Description",
       "description_localized": "Artifact_19_Description",
-      "parameters_raw": [15, 1],
+      "parameters_raw": [
+        15,
+        1
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -769,7 +856,9 @@
       "title_localized": "Artifact_20_Title",
       "description_entry": "Artifact_20_Description",
       "description_localized": "Artifact_20_Description",
-      "parameters_raw": [1],
+      "parameters_raw": [
+        1
+      ],
       "parameters_decoded": [
         {
           "index": 0,
@@ -779,7 +868,10 @@
           "evidence": "Class Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered (dump.cs line 262558) declares 'private readonly float increasePerCommonStoreItemEncountered;' (line 262561) set by constructor (RVA 0x24FCD30) from Parameters[0]. IncreaseCriticalDamageOnCommonStoreItemEncountered(List<StoreItem>) at RVA 0x24FCAF0 filters via the <>c.<>9__3_0 closure (checks StoreItem rarity == Common) and applies the bonus per item. AddsModifier=0 confirms it's an event-driven applier."
         }
       ],
-      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "stat_affected": {
+        "id": 13,
+        "name": "CriticalDamage"
+      },
       "trigger_condition": "Each time a store offers Common-rarity items, +1 per Common item shown.",
       "adds_modifier": false,
       "hide_for_single_player": false,

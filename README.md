@@ -79,12 +79,12 @@ the-spell-brigade-wiki/
 All wiki content is derived from the shipped game files of *The Spell Brigade*
 (Unity compiled build). Two tools do the extraction:
 
-- **extraction tooling** — unpacks Unity asset bundles into readable
+- **the extraction pipeline** — unpacks Unity asset bundles into readable
   `.prefab`, `ScriptableObject`, and metadata files.
-- **extraction tooling** — reconstructs C# class names, enum maps, and method
-  signatures from the compiled-compiled `GameAssembly.dll`.
+- **the extraction pipeline** — reconstructs C# class names, enum maps, and method
+  signatures from the compiled `GameAssembly.dll`.
 
-This wiki is a **snapshot of build `d121863287924117b1157d5f5d667b78`** (the
+This wiki is a **snapshot of current build** (the
 build hash from `boot.config`). When the developer ships a new build, the
 extraction pipeline is re-run and affected pages are regenerated.
 

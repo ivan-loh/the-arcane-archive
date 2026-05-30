@@ -11,3 +11,7 @@ __pycache__/
 
 # Local-only build artifacts
 /tmp/
+
+# Internal QA / build artifacts (kept local, not published)
+data/review-*.md
+data/audit-*.txt

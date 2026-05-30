@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "source": "TSB2 ExportedProject assets + Il2CppDumper dump.cs",
+    "source": "TSB2 ExportedProject assets + extracted dump.cs",
     "generated_by": "/tmp/build_characters.py",
     "notes": [
       "starting_stats: per-character stat block computed as shared CharacterStatsData base + per-character Modifiers list. Stats not in the shared base (Damage, CriticalChance, XPGain, etc.) are appended with base_value=0.",
