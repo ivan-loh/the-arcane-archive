@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Hydra boss strategy: 3 phases, 165k HP, healer adds. Target-priority management, AoE swap-targeting, and survival tips.">
+  <title>Hydra (boss) — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#hero" aria-current="page">Overview</a></li>
+        <li><a href="#stats">Stat block</a></li>
+        <li><a href="#phases">Phases</a></li>
+        <li><a href="#bullet-hell">Bullet-hell patterns</a></li>
+        <li><a href="#spawn">When she appears</a></li>
+        <li><a href="#strategy">Strategy guide</a></li>
+        <li><a href="#see-also">See also</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bosses</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="squid.html">Squid</a></li>
+        <li><a href="hydra.html" aria-current="page">Hydra</a></li>
+        <li><a href="toad.html">Toad</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bosses</a></li>
+          <li aria-current="page">Hydra</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="hero" class="stack">
+          <h1>Hydra</h1>
+          <p class="prose u-muted">
+            <strong>BossType <code>2</code></strong> &middot; the multi-headed
+            summoner. Appears in <a href="../worlds/index.html">Frozen Ancients / Astral Planes</a>.
+            Hydra is the only boss that <em>self-heals</em>: her healer adds
+            (<code>Enemy_Hydra_Healer.prefab</code>) tick HP back onto her in a
+            radius. Add-kill priority is the entire encounter.
+          </p>
+          <div class="row">
+            <span class="tag">boss</span>
+            <span class="tag">summoner</span>
+            <span class="tag">regen</span>
+            <span class="tag">priority-add</span>
+            <span class="tag">3 phases</span>
+          </div>
+        </section>
+
+        <section id="stats">
+          <h2>Stat block</h2>
+          <dl class="meta-dl">
+            <dt>Health</dt>             <dd><strong>165,000</strong> HP (scales with party size)</dd>
+            <dt>Contact damage</dt>     <dd>350</dd>
+            <dt>Movement speed</dt>     <dd>2.75 m/s</dd>
+            <dt>Acceleration</dt>       <dd>8</dd>
+            <dt>Phase count</dt>        <dd>3</dd>
+            <dt>Primary prefab</dt>     <dd><code>Enemy_Hydra.prefab</code></dd>
+            <dt>Add prefab</dt>         <dd><code>Enemy_Hydra_Healer.prefab</code></dd>
+            <dt>Slow resistance</dt>    <dd>50&thinsp;%</dd>
+          </dl>
+        </section>
+
+        <section id="phases">
+          <h2>Phases</h2>
+          <p class="prose">
+            Hydra's <code>phase_data</code> array is empty in
+            <code>bosses.json</code> — meaning no per-phase ability prefab table
+            is exposed. The three phase names <em>are</em> present, and we
+            interpret them from in-game observation below.
+          </p>
+          <div class="grid grid-cards">
+          <article class="item-card" id="phase-1">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 1</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Hydra</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Walking phase with no adds. Hydra (<code>Enemy_Hydra.prefab</code>) pursues at 2.75 m/s and relies on contact damage and basic projectile attacks. Use this window to position around the arena perimeter and chip ~1/3 of her 165k HP.</p>
+          </article>
+          <article class="item-card" id="phase-2">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 2</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Hydra_Phase_2</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Healer phase. Hydra begins summoning <code>Enemy_Hydra_Healer.prefab</code> adds on a fixed cadence. Each healer in range restores boss HP every second. Burst-kill incoming healers before they reach her — they are fragile but plentiful.</p>
+          </article>
+          <article class="item-card" id="phase-3">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 3</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Hydra_Phase_3</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Enrage phase. Spawn rate of healers increases and Hydra's movement aggression rises. The fight devolves into target-priority chaos: continuous AoE for healers, focused single-target on Hydra.</p>
+          </article>
+          </div>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Data gap</span>
+            <p>
+              Per-phase ability prefabs for Hydra are not exposed in
+              <code>data/bosses.json</code>. Phase descriptions are derived
+              from prefab names and in-game observation rather than asset data.
+            </p>
+          </aside>
+        </section>
+
+        <section id="bullet-hell">
+          <h2>Bullet-hell patterns</h2>
+          <p class="prose">
+            Hydra does <strong>not</strong> appear in the
+            <code>bullet_hell_patterns</code> registry — all six listed
+            patterns belong to Squid. Hydra's ranged threat is conventional
+            projectile attacks, not rotating walls.
+          </p>
+        </section>
+
+        <section id="spawn">
+          <h2>When she appears</h2>
+          <p class="prose">
+            Hydra anchors <a href="../worlds/index.html">Frozen Ancients
+            (Crystal Frostlands)</a> at the end of its 20-wave run and re-appears
+            as a mid-encounter on the Astral Planes leaderboard variant.
+            Run duration is ~1200 s, so expect the fight to open at the
+            18-minute mark of a clean run.
+          </p>
+        </section>
+
+        <section id="strategy">
+          <h2>Strategy guide</h2>
+
+          <h3>1. Add control is the fight</h3>
+          <p class="prose">
+            Every <code>Enemy_Hydra_Healer</code> in range of Hydra restores
+            HP per tick. Even one un-killed healer can stalemate a
+            mid-tier DPS build. Run at least one wide AoE spell
+            (<a href="../spells/index.html">Bell, Meteor, Bomb Launcher</a>) and
+            <em>swap target priority every spawn</em> — never tunnel on the
+            boss while healers live.
+          </p>
+
+          <h3>2. Positioning &amp; mobility</h3>
+          <p class="prose">
+            Unlike Squid, Hydra rewards <em>perimeter</em> kiting. Move counter-
+            clockwise around her hitbox so healers spawn on the inside arc —
+            this funnels them into your trailing AoE. The 350 contact damage
+            applies if you cross her hitbox, so leave a buffer of at least
+            3 meters.
+          </p>
+
+          <h3>3. Recommended spells &amp; artifacts</h3>
+          <p class="prose">
+            Pair one wide-AoE spell with one piercing single-target. Lightning
+            archetypes shine because healers cluster (Chain Lightning bounces
+            between them). For artifacts, <em>HealOnCrit</em> chains well off
+            healer kills since their HP pool is small; <em>IncreaseDamagePerArmor</em>
+            rewards stacking armor to survive accidental healer-clusters that
+            include Hydra in their tag range.
+          </p>
+
+          <h3>4. Phase transition tells</h3>
+          <p class="prose">
+            Hydra's phase transitions are timed to the third and final
+            <code>phase_names</code> entries, with healer spawn cadence stepping
+            up at each. The visual tell is the central head changing posture —
+            a low growl audio cue precedes the spawn-rate bump.
+          </p>
+
+          <h3>5. Co-op roles</h3>
+          <p class="prose">
+            Designate one player as <strong>healer sniper</strong> with high
+            single-target piercing damage; the other 1–3 focus the boss. This
+            split is the single largest predictor of clear time. A team that
+            tunnels Hydra together can take 8+ minutes; a team that splits roles
+            closes in under 4.
+          </p>
+
+          <aside class="callout" data-kind="danger" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Do not</span>
+            <p>
+              Do <strong>not</strong> chase Hydra past her healers — every
+              healer left alive negates your damage output and prolongs the
+              fight, increasing your exposure to the eventual enrage cadence.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Pro tip</span>
+            <p>
+              A pre-placed <em>Bell</em> on the healer-spawn arc deletes
+              freshly-summoned adds before they path to Hydra — effectively
+              converting her summon ability into a free XP fountain.
+            </p>
+          </aside>
+        </section>
+
+        <section id="see-also">
+          <h2>See also</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../worlds/index.html">
+              <strong>Frozen Ancients</strong>
+              The pre-fight wave pool and ice-themed enemies.
+            </a>
+            <a class="see-also__link" href="squid.html">
+              <strong>Squid (previous boss)</strong>
+              The bullet-hell encounter Hydra escalates after.
+            </a>
+            <a class="see-also__link" href="../challenges/index.html">
+              <strong>Challenges</strong>
+              Healer-cadence modifiers and Stronger Enemies stacks.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference for <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

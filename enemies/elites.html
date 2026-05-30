@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Elite enemies of The Spell Brigade — four mini-boss variants with elevated HP and contact damage.">
+  <title>Elite enemies — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro" aria-current="page">Overview</a></li>
+        <li><a href="#table">Elite stat table</a></li>
+        <li><a href="#enemy-eliteteethyworm">Elite Teethy Worm</a></li>
+        <li><a href="#enemy-eliteexplodingtick">Elite Exploding Tick</a></li>
+        <li><a href="#enemy-elitebuffer">Elite Buffer</a></li>
+        <li><a href="#enemy-hoarder">Hoarder</a></li>
+        <li><a href="#strategy">Elite-killing strategy</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bestiary</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="regular.html">Regular</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="../bosses/index.html">Bosses</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bestiary</a></li>
+          <li aria-current="page">Elite enemies</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+        <section id="intro" class="stack">
+          <h1>Elite enemies</h1>
+          <p class="prose u-muted">
+            The bestiary lists four enemies with the <code>elite</code> behavior
+            tag (the three explicit <em>Elite*</em> reskins plus the <a href="#enemy-hoarder">Hoarder</a>
+            loot piñata, which we group here for clarity). Each world reserves
+            <strong>4 elite spawn slots</strong> per run; the elite roster is
+            shared, so picking the right counters is what carries you from
+            wave 15 onward.
+          </p>
+        </section>
+
+        <section id="table">
+          <h2>Elite stat table</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Elite enemies — sorted by enemy_type_id</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Name</th>
+                  <th data-sort="number" class="num">ID</th>
+                  <th data-sort="number" class="num">Health</th>
+                  <th data-sort="number" class="num">Damage</th>
+                  <th data-sort="number" class="num">Speed</th>
+                  <th data-sort="number" class="num">XP</th>
+                  <th data-sort="string">Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#enemy-eliteteethyworm">Elite Teethy Worm</a></td>
+                  <td class="num">26</td>
+                  <td class="num">5000</td>
+                  <td class="num">270</td>
+                  <td class="num">1.8</td>
+                  <td class="num">0</td>
+                  <td><span class="tag">elite</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-eliteexplodingtick">Elite Exploding Tick</a></td>
+                  <td class="num">27</td>
+                  <td class="num">6000</td>
+                  <td class="num">300</td>
+                  <td class="num">1.75</td>
+                  <td class="num">15</td>
+                  <td><span class="tag">elite</span> <span class="tag">explosive</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-elitebuffer">Elite Buffer</a></td>
+                  <td class="num">28</td>
+                  <td class="num">6000</td>
+                  <td class="num">70</td>
+                  <td class="num">2.3</td>
+                  <td class="num">20</td>
+                  <td><span class="tag">elite</span> <span class="tag">support</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-hoarder">Hoarder</a></td>
+                  <td class="num">35</td>
+                  <td class="num">5250</td>
+                  <td class="num">135</td>
+                  <td class="num">2.5</td>
+                  <td class="num">15</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="elite-cards">
+          <h2>Per-elite breakdown</h2>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-eliteteethyworm" data-kind="enemy" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Elite</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Elite Teethy Worm</h3>
+                  <p class="item-card__subtitle">enemy_type_id <code>26</code> · <code>Enemy_TeethyWormElite.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">elite</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Long body, slow turn — pierce it head-to-tail with Glacial Shard, Arrow, or any line spell.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">5000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">270</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.8</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">0</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves (scripted spawn only).</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_TeethyWormElite.prefab</code></li><li><code>Enemy_TeethyWormElite_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-eliteexplodingtick" data-kind="enemy" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Elite</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Elite Exploding Tick</h3>
+                  <p class="item-card__subtitle">enemy_type_id <code>27</code> · <code>Enemy_ExplodingTickElite.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">elite</span> <span class="tag">explosive</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Same kamikaze rule, but with 6,000 HP — never group up. Snipe with Arrow or kite at max range.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">6000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">300</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.75</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">15</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves (scripted spawn only).</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_ExplodingTickElite.prefab</code></li><li><code>Enemy_ExplodingTickElite_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-elitebuffer" data-kind="enemy" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Elite</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Elite Buffer</h3>
+                  <p class="item-card__subtitle">enemy_type_id <code>28</code> · <code>Enemy_BufferElite.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">elite</span> <span class="tag">support</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Highest-priority target whenever it spawns. Burst it with Void Lance / Dark before its aura matters.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">6000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">70</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">20</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves (scripted spawn only).</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_BufferElite.prefab</code></li><li><code>Enemy_BufferElite_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-hoarder" data-kind="enemy" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Elite</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Hoarder</h3>
+                  <p class="item-card__subtitle">enemy_type_id <code>35</code> · <code>Enemy_Hoarder.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Acts as a loot piñata; sustained DPS to kill before it escapes. Drops bonus gold/XP on death.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">5250</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">15</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 16–19 (2 waves).</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Hoarder.prefab</code></li><li><code>Enemy_Hoarder_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <section id="strategy">
+          <h2>Elite-killing strategy</h2>
+          <p class="prose">
+            Elites all share <code>scales_with_players = 1</code>, meaning a
+            full 4-player lobby effectively quadruples their HP pool. Plan for
+            a dedicated elite-killer slot in your party comp.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Pro tip</span>
+            <p>
+              The <a href="../artifacts/index.html">HealOnCrit</a> family of
+              artifacts turns elite fights into sustained-DPS exchanges; pair
+              with a high-crit spell like <a href="../spells/index.html">Glacial Shard</a>
+              for free leech.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Warning</span>
+            <p>
+              The <strong>Elite Buffer</strong> radiates a friendly damage aura.
+              Killing it <em>before</em> it links with a Tripod/Snipjaw pack can
+              be the difference between a one-clip wave and a wipe.
+            </p>
+          </aside>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">An unofficial, community-maintained reference for the indie game <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="index.html">Enemies</a></li>
+        <li><a href="../bosses/index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

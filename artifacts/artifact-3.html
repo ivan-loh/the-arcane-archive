@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Artifact 3 (TheLessHPTheMoreXPGain) — effect, parameters, synergies, and IL2CPP source.">
+  <title>Artifact 3 · The Less HP, The More XP Gain — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body id="top">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" aria-current="page" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle
+            aria-expanded="false" aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Artifacts index">
+      <h2 class="sidebar__title">All 20 Artifacts</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">← Artifacts hub</a></li>
+        <li><a href="artifact-1.html">01 — The Less HP, The More Move Speed</a></li>
+        <li><a href="artifact-2.html">02 — Add Armor Equal To Level</a></li>
+        <li><a href="artifact-3.html" aria-current="page">03 — The Less HP, The More XP Gain</a></li>
+        <li><a href="artifact-4.html">04 — Increase Healing Done For Every Objective</a></li>
+        <li><a href="artifact-5.html">05 — Increase Damage For Every Nearby Teammate</a></li>
+        <li><a href="artifact-6.html">06 — Heal On Dodge</a></li>
+        <li><a href="artifact-7.html">07 — Increase Crit Damage While Standing Still</a></li>
+        <li><a href="artifact-8.html">08 — Increase Luck When Not Rerolling</a></li>
+        <li><a href="artifact-9.html">09 — Heal On Level Up</a></li>
+        <li><a href="artifact-10.html">10 — Increase Max Health For Every Revive</a></li>
+        <li><a href="artifact-11.html">11 — Increase Damage For Every Revive</a></li>
+        <li><a href="artifact-12.html">12 — Increase Armor Per Objective Completed</a></li>
+        <li><a href="artifact-13.html">13 — Increase Damage Per Armor</a></li>
+        <li><a href="artifact-14.html">14 — Increase Crit Damage For Every Revive</a></li>
+        <li><a href="artifact-15.html">15 — Increase Elemental Damage For Every Infusion</a></li>
+        <li><a href="artifact-16.html">16 — Increase Fire Rate While Standing Still</a></li>
+        <li><a href="artifact-17.html">17 — Heal On Crit</a></li>
+        <li><a href="artifact-18.html">18 — Increase Max HP For Every Health Pickup</a></li>
+        <li><a href="artifact-19.html">19 — Heal On XP Pickup</a></li>
+        <li><a href="artifact-20.html">20 — Increase Crit Damage For Every Common</a></li>
+      </ul>
+      <h2 class="sidebar__title">Related</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/stats.html">Stats reference</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage calculation</a></li>
+        <li><a href="../mechanics/index.html">Mechanics hub</a></li>
+        <li><a href="../guides/artifact-priorities.html">Artifact priority guide</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li><li><a href="index.html">Artifacts</a></li><li aria-current="page">Artifact 3 — The Less HP, The More XP Gain</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Artifact 03 — The Less HP, The More XP Gain</h1>
+          <p class="prose u-muted">
+            ArtifactType enum: <code>TheLessHPTheMoreXPGain</code> (id 3).
+            Affects <a href="../mechanics/stats.html#xpgain">XPGain</a>. Spawn rate 50.
+          </p>
+          
+          
+        </section>
+
+        <section id="effect">
+          <h2>Effect</h2>
+          <p class='prose'><strong>The Less HP, The More XP Gain</strong> modifies the <a href='../mechanics/stats.html#xpgain'>XPGain</a> stat. When current HP &lt; hard-coded threshold (commonly low-HP). Off otherwise.</p>
+<p class='prose'>The core parameter is <code>40</code>: Bonus XP gain (most likely in percent points added to XPGain stat) granted while the player&#x27;s HP is below an internal health-fraction threshold. Class name &#x27;BonusExpWhenBelowHealthThreshold&#x27; makes this a discrete on/off bonus rather than a linear scale.</p>
+<p class='prose'>Implemented by the IL2CPP class <code>ArtifactStatModifier_BonusExpWhenBelowHealthThreshold</code>. AddsModifier in the asset YAML is <strong>true</strong>; spawn rate <strong>50</strong>.</p>
+        </section>
+
+        <section id="scaling">
+          <h2>Parameters</h2>
+          <div class="stat-table-wrap">
+          <table class="stat-table">
+            <caption>Parameters declared in <code>Artifact_3.asset</code></caption>
+            <thead><tr><th class="num">Index</th><th class="num">Value</th><th>Confidence</th><th>Decoded meaning</th></tr></thead>
+            <tbody><tr><td class='num'>0</td><td class='num'>40</td><td><span class="rarity-pill" data-rarity="common">inferred</span></td><td>Bonus XP gain (most likely in percent points added to XPGain stat) granted while the player&#x27;s HP is below an internal health-fraction threshold. Class name &#x27;BonusExpWhenBelowHealthThreshold&#x27; makes this a discrete on/off bonus rather than a linear scale.</td></tr></tbody>
+          </table>
+        </div>
+        </section>
+
+        <section id="triggers">
+          <h2>When to pick</h2>
+          <ul>
+<li>Power-leveling in the early game.</li>
+<li>Glass-cannon builds you can&#x27;t realistically heal back up.</li>
+<li>Pairs naturally with HealOnLevelUp (Artifact 9) for sustain on each ding.</li>
+</ul>
+        </section>
+
+        <section id="synergies">
+          <h2>Synergizes with</h2>
+          <ul>
+<li><a href="artifact-1.html"><strong>Artifact 1 — The Less HP, The More Move Speed</strong></a><br><span class="u-muted">Pairs with Artifact 1 (TheLessHPTheMoreMoveSpeed) — both reward low-HP play</span></li>
+</ul>
+          <h3>Other synergy hints</h3><div class="row"><span class="tag">Pairs with low-HP / glass-cannon spell builds</span> <span class="tag">Useful in early game to power-level</span></div>
+        </section>
+
+        <section id="counters">
+          <h2>Avoid combining with</h2>
+          <ul>
+<li>Heavy regen / topped-off builds.</li>
+<li>Tank loadouts that never drop below the HP threshold.</li>
+</ul>
+        </section>
+
+        <section id="related">
+          <h2>Source &amp; references</h2>
+          <dl class='meta-dl'>
+<dt>Class</dt><dd><code>ArtifactStatModifier_BonusExpWhenBelowHealthThreshold</code></dd>
+<dt>Dump line</dt><dd>262085</dd>
+<dt>GetValue RVA</dt><dd><code>0x24F99B0</code></dd>
+<dt>GetStatType RVA</dt><dd><code>0xE8F6D0</code></dd>
+<dt>ArtifactType enum</dt><dd>3 = <code>TheLessHPTheMoreXPGain</code></dd>
+<dt>Source asset</dt><dd><code>Artifact_3.asset</code></dd>
+<dt>AddsModifier</dt><dd>true</dd>
+<dt>SpawnRate</dt><dd>50</dd>
+<dt>Hide for single player</dt><dd>false</dd>
+</dl>
+          <p class="prose">
+            <a href="index.html">← Back to all artifacts</a>
+            &nbsp;·&nbsp;
+            <a href="../mechanics/stat-modifiers.html">Stat calculation pipeline</a>
+            &nbsp;·&nbsp;
+            <a href="../mechanics/damage-system.html">Damage calculation</a>
+          </p>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

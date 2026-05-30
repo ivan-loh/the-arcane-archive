@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Full reference for The Spell Brigade's 36 StatType values — name, calculation mode (Flat / PercentAdd / PercentAddLogarithmic), display format, and game-side meaning.">
+  <title>Stats reference — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#how-stats-work">How stats work</a></li>
+        <li><a href="#calculation-types">Calculation types</a></li>
+        <li><a href="#table">Full stat table</a></li>
+        <li><a href="#gaps">Reserved IDs</a></li>
+        <li><a href="#display-types">Display types</a></li>
+        <li><a href="#core-stats">Core stat blurbs</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html" aria-current="page">Stats reference</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/elements.html">Elements</a></li>
+        <li><a href="../mechanics/stat-modifiers.html">Stat modifiers</a></li>
+        <li><a href="../mechanics/rarity.html">Rarity</a></li>
+        <li><a href="../mechanics/critical-hits.html">Critical hits</a></li>
+        <li><a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Stats</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Stats reference</h1>
+          <p class="prose">
+            The Spell Brigade exposes exactly <strong>36</strong> stats via the
+            <code>StatType</code> enum. Each stat is a small object: a numeric
+            <code>baseValue</code> plus a <code>List&lt;StatModifier&gt;</code>. When the
+            game asks for the current value, it calls <code>Stat.GetValue()</code>, which
+            routes through <code>StatCalculator</code> using the stat&rsquo;s declared
+            calculation type (<em>Flat</em>, <em>PercentAdd</em>, or
+            <em>PercentAddLogarithmic</em>).
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">In one sentence</span>
+            <p>
+              Every <code>+25% Damage</code> roll you pick adds one
+              <code>StaticStatModifier</code> with <code>StatType = Damage</code> and
+              <code>Value = 0.25</code>. At hit time, <code>StatCalculator</code> sums
+              all such modifiers and applies them to the spell&rsquo;s base damage as
+              <code>base × (1 + Σ%)</code>.
+            </p>
+          </aside>
+        </section>
+
+        <section id="how-stats-work" class="stack">
+          <h2>How stats work</h2>
+          <p class="prose">
+            A stat is built from a <code>BaseStat</code> entry on a spell or character
+            configuration. At equip time, <code>BaseStat.CreateCalculator()</code> seeds
+            a fresh <code>Stat</code> with a <code>baseValue</code> and the canonical
+            calculation type for that <code>StatType</code>. From then on, modifiers are
+            <em>added to the list, not summed up front</em>. Aggregation happens lazily
+            every time something reads the stat.
+          </p>
+
+          <pre class="formula"><code><span class="f-comment">// Pseudocode of Stat.GetValue()</span>
+<span class="f-fn">GetValue</span>() = <span class="f-fn">StatCalculator</span>.<span class="f-fn">Calculate</span>(
+              <span class="f-var">baseValue</span>,
+              <span class="f-var">Modifiers</span>,
+              <span class="f-var">statCalculationType</span>
+            )</code></pre>
+
+          <p class="prose">
+            The <code>StatModifier</code> base class is abstract; concrete subclasses
+            include <code>StaticStatModifier</code> (a fixed
+            <code>Value</code> set once), <code>StartingStatModifier</code> (the same
+            but tagged as baseline kit), <code>HiddenStatModifier</code> (numeric but
+            never shown in UI), and ~22 <code>DynamicStatModifier</code> subclasses
+            whose <code>GetValue()</code> is recomputed on the fly. See the
+            <a href="../mechanics/stat-modifiers.html">stat modifiers</a> page for the full tree.
+          </p>
+        </section>
+
+        <section id="calculation-types" class="stack">
+          <h2>Calculation types</h2>
+          <p class="prose">
+            Each stat is hard-bound to one of three calculation modes by
+            <code>StatTypeExtensions.GetCalculationType</code>. You cannot, for example,
+            re-route Damage through Logarithmic — the binding is static.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>The three <code>StatCalculationType</code> modes</caption>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Formula</th>
+                  <th>Confidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num">0</td>
+                  <td><strong>PercentAdd</strong></td>
+                  <td><code>value = baseValue × (1 + Σ modifier.GetValue())</code></td>
+                  <td>high</td>
+                </tr>
+                <tr>
+                  <td class="num">1</td>
+                  <td><strong>Flat</strong></td>
+                  <td><code>value = baseValue + Σ modifier.GetValue()</code></td>
+                  <td>high</td>
+                </tr>
+                <tr>
+                  <td class="num">2</td>
+                  <td><strong>PercentAddLogarithmic</strong></td>
+                  <td><code>value = baseValue × (1 + Σ modifier.GetValue())<sup>0.5714286</sup></code></td>
+                  <td>inferred</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Why 0.5714286?</span>
+            <p>
+              <code>StatCalculator</code> contains exactly one float constant —
+              <code>Exponent = 0.5714286</code> (≈ <code>4/7</code>). This is the
+              classic Risk-of-Rain-style concave-falloff curve and only appears on
+              <strong>Range</strong> and <strong>Size</strong>. It means stacking
+              +600% Size still only gets you about <code>7<sup>0.5714</sup> ≈ 3.21×</code>
+              your starting radius, not 7×. Diminishing returns by design.
+            </p>
+          </aside>
+        </section>
+
+        <section id="table" class="stack">
+          <h2>Full stat table</h2>
+          <p class="prose">
+            All 36 <code>StatType</code> entries the game declares. Click any column
+            header to sort. IDs 21, 28, 29, 31, 32 are reserved enum slots with no
+            stat declared — see <a href="#gaps">Reserved IDs</a>.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>StatType enum — 36 declared entries</caption>
+              <thead>
+                <tr>
+                  <th data-sort="number" class="num">ID</th>
+                  <th data-sort="string">Name</th>
+                  <th data-sort="string">Calculation</th>
+                  <th data-sort="string">Display</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">0</td><td><strong>Damage</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Per-spell damage multiplier. Aggregated as <code>1 + Σ%</code> against base damage.</td></tr>
+                <tr><td class="num">1</td><td id="range">Range</td><td>PercentAddLogarithmic</td><td>ModifierPercent</td><td>Projectile / area range. Logarithmic falloff.</td></tr>
+                <tr><td class="num">2</td><td><strong>FireRate</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Spell cadence (shots per unit time, or <code>1 / interval</code>).</td></tr>
+                <tr><td class="num">3</td><td>Speed</td><td>PercentAdd</td><td>ModifierPercent</td><td>Projectile travel speed.</td></tr>
+                <tr><td class="num">4</td><td id="lifetime">LifeTime</td><td>PercentAdd</td><td>ModifierPercent</td><td>Duration a spell / projectile / zone persists.</td></tr>
+                <tr><td class="num">5</td><td id="damagetickrate">DamageTickRate</td><td>PercentAdd</td><td>ModifierPercent</td><td>How often a sustained spell ticks damage on overlapping enemies.</td></tr>
+                <tr><td class="num">6</td><td id="size">Size</td><td>PercentAddLogarithmic</td><td>ModifierPercent</td><td>Spell scale (radius, beam width…). Strongly diminishing returns.</td></tr>
+                <tr><td class="num">7</td><td><strong>MovementSpeed</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Player walking-speed multiplier.</td></tr>
+                <tr><td class="num">8</td><td><strong>MaxHealth</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Player max-HP multiplier vs character base.</td></tr>
+                <tr><td class="num">9</td><td><strong>Luck</strong></td><td>Flat</td><td>Value</td><td>Flat luck. Biases rarity rolls in drops &amp; store.</td></tr>
+                <tr><td class="num">10</td><td><strong>XPGain</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>XP gained from kills.</td></tr>
+                <tr><td class="num">11</td><td>PickupRadius</td><td>PercentAdd</td><td>ModifierPercent</td><td>Radius at which XP orbs and pickups are attracted.</td></tr>
+                <tr><td class="num">12</td><td><strong>CriticalChance</strong></td><td>Flat</td><td>ValuePercent</td><td>Percent chance to crit (0–100). Compared per-hit against <code>GetRandomFloat(0,100)</code>.</td></tr>
+                <tr><td class="num">13</td><td><strong>CriticalDamage</strong></td><td>Flat</td><td>ValuePercent</td><td>Crit bonus (additive %). On a crit, damage is <code>× (1 + CriticalDamage/100)</code>.</td></tr>
+                <tr><td class="num">14</td><td><strong>Armor</strong></td><td>Flat</td><td>Value</td><td>Flat damage reduction via <code>CalculateDamageAfterArmor</code>.</td></tr>
+                <tr><td class="num">15</td><td><strong>Dodge</strong></td><td>Flat</td><td>ValuePercent</td><td>Chance to ignore a hit. <code>HasDodged()</code> on PlayerHealthContainer.</td></tr>
+                <tr><td class="num">16</td><td>HealthRegeneration</td><td>Flat</td><td>Value</td><td>HP regenerated every 3 s (TimeBetweenHealthRegenerations).</td></tr>
+                <tr><td class="num">17</td><td>Rerolls</td><td>Flat</td><td>Value</td><td>Store rerolls available per shop.</td></tr>
+                <tr><td class="num">18</td><td>ReviveSpeed</td><td>PercentAdd</td><td>ModifierPercent</td><td>How fast a downed teammate is revived.</td></tr>
+                <tr><td class="num">19</td><td>Revives</td><td>Flat</td><td>Value</td><td>Self-revives remaining.</td></tr>
+                <tr><td class="num">20</td><td id="projectiles">Projectiles</td><td>Flat</td><td>Value</td><td>Flat extra projectiles per cast.</td></tr>
+                <tr><td class="num">22</td><td id="healondodge">HealOnDodge</td><td>Flat</td><td>Value</td><td>HP healed each time the player dodges.</td></tr>
+                <tr><td class="num">23</td><td id="healonlevelup">HealOnLevelUp</td><td>Flat</td><td>Value</td><td>HP healed at each level-up.</td></tr>
+                <tr><td class="num">24</td><td>DropChance</td><td>PercentAdd</td><td>ModifierPercent</td><td>Multiplier on enemy drop probability.</td></tr>
+                <tr><td class="num">25</td><td>TerrainSpeedMultiplier</td><td>PercentAdd</td><td>ModifierPercent</td><td>Movement-speed on terrain modifiers (mud, water).</td></tr>
+                <tr><td class="num">26</td><td>HitboxSizeMultiplier</td><td>PercentAdd</td><td>ModifierPercent</td><td>Scales player hitbox; usually a curse downside.</td></tr>
+                <tr><td class="num">27</td><td><strong>ElementWeaknessMultiplier</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Bonus damage <em>taken</em> from elemental hits (target side).</td></tr>
+                <tr><td class="num">30</td><td id="elementstrengthmultiplier"><strong>ElementStrengthMultiplier</strong></td><td>PercentAdd</td><td>ModifierPercent</td><td>Bonus damage <em>dealt</em> with elemental (non-None) spells (attacker side).</td></tr>
+                <tr><td class="num">33</td><td id="healingmultiplier">HealingMultiplier</td><td>PercentAdd</td><td>ModifierPercent</td><td>Multiplier on outgoing/incoming healing.</td></tr>
+                <tr><td class="num">34</td><td>XPGainOnDamageTaken</td><td>Flat</td><td>Value</td><td>XP awarded per point of damage absorbed.</td></tr>
+                <tr><td class="num">35</td><td>HealthPotionAmountMultiplier</td><td>PercentAdd</td><td>ModifierPercent</td><td>HP restored by collected potions.</td></tr>
+                <tr><td class="num">36</td><td>ReviveZoneSize</td><td>PercentAdd</td><td>ModifierPercent</td><td>Radius of the zone where revives count.</td></tr>
+                <tr><td class="num">37</td><td>GoldGain</td><td>PercentAdd</td><td>ModifierPercent</td><td>Gold from any source.</td></tr>
+                <tr><td class="num">38</td><td>HealthPercentageOnRevive</td><td>Flat</td><td>ValuePercent</td><td>% of MaxHealth restored on revive.</td></tr>
+                <tr><td class="num">39</td><td>Bans</td><td>Flat</td><td>Value</td><td>Bans per shop (remove an item from this run&rsquo;s rolls).</td></tr>
+                <tr><td class="num">40</td><td>Pins</td><td>Flat</td><td>Value</td><td>Pins per shop (keep an item for the next visit).</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="gaps" class="stack">
+          <h2>Reserved IDs</h2>
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Missing IDs: 21, 28, 29, 31, 32</span>
+            <p>
+              These five enum slots are reserved but no <code>StatType</code> entry is
+              declared at them. They&rsquo;re almost certainly deprecated or cut stats;
+              keeping the numeric slots open lets old save data continue to parse
+              cleanly. Treat them as unused — they do not appear in any
+              <code>StatCalculator</code> call or modifier in the dump.
+            </p>
+          </aside>
+        </section>
+
+        <section id="display-types" class="stack">
+          <h2>Display types</h2>
+          <p class="prose">
+            How each stat is rendered in tooltips and store cards is decided by
+            <code>StatDisplayType</code>:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>ModifierPercent</code></dt>
+            <dd>Shown as <code>+25%</code> or <code>−15%</code>. Used for almost every PercentAdd / Logarithmic stat.</dd>
+            <dt><code>Value</code></dt>
+            <dd>Plain integer or float (e.g., <code>Armor: 4</code>, <code>Rerolls: 2</code>). Used for Flat stats whose unit is a count.</dd>
+            <dt><code>ValuePercent</code></dt>
+            <dd>A number <em>that is itself</em> a percentage — <code>CriticalChance: 35%</code>. Used by CriticalChance, CriticalDamage, Dodge, HealthPercentageOnRevive.</dd>
+          </dl>
+        </section>
+
+        <section id="core-stats" class="stack">
+          <h2>Core stat blurbs</h2>
+          <p class="prose">
+            Twelve stats carry most of the build weight. Quick notes:
+          </p>
+
+          <dl class="meta-dl">
+            <dt id="damage">Damage <span class="tag">PercentAdd</span></dt>
+            <dd>Per-spell, not character-wide; every spell snapshots its own <code>Damage</code> stat. Equipping an item with <code>+25% Damage</code> appends one <code>StaticStatModifier</code> with <code>Value = 0.25</code>; the spell&rsquo;s outgoing damage becomes <code>base × (1 + Σ%)</code>.</dd>
+
+            <dt id="firerate">FireRate <span class="tag">PercentAdd</span></dt>
+            <dd>Direct multiplier on shots per second. Stacks additively, so two <code>+50% FireRate</code> picks give exactly <code>2×</code> cadence (not <code>2.25×</code>).</dd>
+
+            <dt id="speed">Speed <span class="tag">PercentAdd</span></dt>
+            <dd>Projectile travel speed, not player movement. Important for hitting fast-moving wave enemies.</dd>
+
+            <dt id="critchance">CriticalChance <span class="tag">Flat · 0–100</span></dt>
+            <dd>Snapshotted into the <code>PlayerSpellDamageInfo</code> at cast time. The roll itself happens on hit (<code>Hitbox.IsCriticalDamage</code>) via <code>GetRandomFloat(0,100) &lt; CriticalChance</code>.</dd>
+
+            <dt id="critdamage">CriticalDamage <span class="tag">Flat · %</span></dt>
+            <dd>On a successful crit, damage multiplies by <code>(1 + CriticalDamage / 100)</code>. With <code>CriticalDamage = 150</code>, a crit hits for <code>2.5×</code>. Crit Mastery ascension converts excess <code>CriticalChance</code> above 100 into bonus <code>CriticalDamage</code>.</dd>
+
+            <dt id="armor">Armor <span class="tag">Flat</span></dt>
+            <dd>Flat subtraction: <code>damage_after = max(0, incoming − Armor)</code>. The artifact <em>IncreaseDamagePerArmor</em> only makes sense because armor scales linearly without diminishing returns — see <a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a>.</dd>
+
+            <dt id="dodge">Dodge <span class="tag">Flat · %</span></dt>
+            <dd>A successful dodge ignores 100% of the hit and fires the <code>DodgeAttackEventArgs</code> event. The <code>HealOnDodge</code> stat (id 22) can heal HP on every successful dodge.</dd>
+
+            <dt id="movementspeed">MovementSpeed <span class="tag">PercentAdd</span></dt>
+            <dd>Player walking speed; multiplied further by <code>TerrainSpeedMultiplier</code> (id 25) on hostile terrain. Several artifacts trade this off — <code>DecreaseMovementSpeedPerArmor</code>, <code>LessHPMoreMovementSpeed</code>.</dd>
+
+            <dt id="maxhealth">MaxHealth <span class="tag">PercentAdd</span></dt>
+            <dd>Multiplier on the character&rsquo;s configuration <code>MaxHealth</code>. New cap is computed at level-up and on equip, then any current-HP delta is preserved.</dd>
+
+            <dt id="luck">Luck <span class="tag">Flat</span></dt>
+            <dd>Plain integer fed into <code>RandomRarityPicker</code>. The exact weighting curve isn&rsquo;t exposed, but every extra Luck point biases the per-pick rarity roll toward higher tiers — see <a href="../mechanics/rarity.html">Rarity</a>.</dd>
+
+            <dt id="xpgain">XPGain <span class="tag">PercentAdd</span></dt>
+            <dd>Multiplier on XP from kills. The artifact <code>BonusExpWhenBelowHealthThreshold</code> appends a dynamic <code>XPGain</code> modifier that only contributes while you&rsquo;re under a threshold.</dd>
+
+            <dt id="elementstrength">ElementStrengthMultiplier <span class="tag">PercentAdd</span></dt>
+            <dd>The attacker-side bonus for non-<code>None</code> elemental hits. Multiplied <em>after</em> base damage and crit by <code>ElementEffectivenessCalculator.ApplyAttackerElementStrength</code>. Pairs with <code>ElementWeaknessMultiplier</code> (id 27) on the target.</dd>
+          </dl>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Example — equipping a Damage roll</span>
+            <p>
+              You buy an Epic <code>+25% Damage</code> item from the store. The game
+              creates one <code>StaticStatModifier { StatType = Damage, Value = 0.25 }</code>
+              and calls <code>IPlayerStats.AddCharacterImprovement</code>. Next time any
+              spell asks for its Damage stat, <code>StatCalculator.CalculatePercentAddValue</code>
+              walks the modifier list, sums every <code>+%</code> contribution, and
+              returns <code>baseValue × (1 + Σ%)</code>. Nothing is precomputed: every
+              read is fresh, which is why dynamic modifiers (revives-performed counter,
+              party-members-nearby) can feed back into the formula every frame.
+            </p>
+          </aside>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

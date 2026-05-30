@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Ten mid-run objective types and what they require.">
+  <title>Objectives &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" aria-current="page" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+      <a class="top-nav__link" href="../challenges/index.html">Challenges</a>
+    </nav>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Section index">
+  <h2 class="sidebar__title">Mechanics</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../mechanics/upgrades.html">Upgrades</a></li>
+        <li><a href="../mechanics/curses.html">Curses</a></li>
+        <li><a href="../mechanics/difficulties.html">Difficulties</a></li>
+        <li><a href="../mechanics/modifiers.html">Modifiers</a></li>
+        <li><a aria-current="page" href="../mechanics/objectives.html">Objectives</a></li>
+  </ul>
+  <h2 class="sidebar__title">Related</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+  </ul>
+</aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../mechanics/index.html">Mechanics</a></li>
+            <li aria-current="page">Objectives</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Objectives</h1>
+          <p class="prose u-muted">
+            Ten optional mid-run objectives may roll during any wave. Completing them grants
+            extra rewards and counts toward
+            <a href="../challenges/objective.html">objective challenges</a>.
+          </p>
+          <div class="row">
+            <span class="tag">10 objectives</span>
+          </div>
+        </section>
+
+        <section id="list">
+          <h2>All objectives</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Objective types</caption>
+              <thead><tr><th data-sort="string">Objective</th><th data-sort="number" class="num">ID</th><th data-sort="string">Name entry</th><th data-sort="string">In demo</th></tr></thead>
+              <tbody>
+              <tr id="capture"><td><strong>Capture</strong><br><code class="u-muted">capture_objective</code></td><td class="num">0</td><td>Objective_Name_Capture</td><td>No</td></tr>
+              <tr id="sacrifice"><td><strong>Sacrifice</strong><br><code class="u-muted">sacrifice_objective</code></td><td class="num">1</td><td>Objective_Name_Sacrifice</td><td>No</td></tr>
+              <tr id="end-boss"><td><strong>End Boss</strong><br><code class="u-muted">end_boss_objective</code></td><td class="num">2</td><td>Objective_Name_Boss</td><td>No</td></tr>
+              <tr id="collect"><td><strong>Collect</strong><br><code class="u-muted">collect_objective</code></td><td class="num">3</td><td>Objective_Name_Collect</td><td>No</td></tr>
+              <tr id="hunt"><td><strong>Hunt</strong><br><code class="u-muted">hunttarget_objective</code></td><td class="num">5</td><td>Objective_Name_HuntTarget</td><td>No</td></tr>
+              <tr id="petrified-enemies"><td><strong>Petrified Enemies</strong><br><code class="u-muted">petrified_enemies_objective</code></td><td class="num">6</td><td>Objective_Name_PetrifiedEnemies</td><td>No</td></tr>
+              <tr id="clean"><td><strong>Clean</strong><br><code class="u-muted">clean_objective</code></td><td class="num">7</td><td>Objective_Name_Clean</td><td>No</td></tr>
+              <tr id="push"><td><strong>Push</strong><br><code class="u-muted">push_objective</code></td><td class="num">8</td><td>Objective_Name_Push</td><td>No</td></tr>
+              <tr id="order"><td><strong>Order</strong><br><code class="u-muted">order_objective</code></td><td class="num">9</td><td>Objective_Name_Order</td><td>No</td></tr>
+              <tr id="herding"><td><strong>Herding</strong><br><code class="u-muted">herding_objective</code></td><td class="num">10</td><td>Objective_Name_Herding</td><td>No</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="reference">
+          <h2>Brief reference</h2>
+          <ul>
+            <li><strong>Capture</strong> &mdash; hold a control zone while waves spawn against it.</li>
+            <li><strong>Sacrifice</strong> &mdash; trade HP, gold or an item to clear an objective rune.</li>
+            <li><strong>End Boss</strong> &mdash; the world boss; effectively a marker objective.</li>
+            <li><strong>Collect</strong> &mdash; gather wave-spawned pickups within a time window.</li>
+            <li><strong>Hunt</strong> &mdash; track and kill a marked target enemy.</li>
+            <li><strong>Petrified Enemies</strong> &mdash; break a number of petrified statues before they un-freeze.</li>
+            <li><strong>Clean</strong> &mdash; remove residue/effect tiles from the field.</li>
+            <li><strong>Push</strong> &mdash; escort a moving target through enemies.</li>
+            <li><strong>Order</strong> &mdash; kill targets in a specified sequence.</li>
+            <li><strong>Herding</strong> &mdash; drive a group of mobs into a kill-zone.</li>
+          </ul>
+        </section>
+
+        <section id="related">
+          <h2>Related</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../challenges/objective.html"><strong>Objective challenges</strong> What completing each type earns you.</a>
+            <a class="see-also__link" href="../worlds/index.html"><strong>Worlds</strong> Where these objectives roll.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference. Game names &amp; lore belong to their respective owners.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+        <li><a href="../waves/index.html">Waves</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Fan project &middot; no images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

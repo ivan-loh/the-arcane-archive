@@ -1,0 +1,13 @@
+# Editor / OS
+*.swp
+.DS_Store
+Thumbs.db
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Local-only build artifacts
+/tmp/

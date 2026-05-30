@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Element pairing guide for The Spell Brigade — single vs double vs dual infusion analysis, with formula impact and ranked combos.">
+  <title>Element Pairing &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Guides nav">
+      <h2 class="sidebar__title">Guides</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">All guides</a></li>
+        <li><a href="damage-optimization.html">Damage optimization</a></li>
+        <li><a href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a aria-current="page" href="element-pairing.html">Element pairing</a></li>
+      </ul>
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#elements">The five elements</a></li>
+        <li><a href="#infusion-kinds">Single / double / dual</a></li>
+        <li><a href="#matrix">Combo matrix</a></li>
+        <li><a href="#verdicts">Verdicts</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Guides</a></li>
+          <li aria-current="page">Element Pairing</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section class="stack">
+          <h1>Element pairing &mdash; what the formula says</h1>
+          <p class="prose u-muted">
+            Five elements, two ways to stack them, twenty packed
+            <code>ElementType</code> values. This guide cuts through the
+            symbol soup with one rule: the only element decision that
+            <em>directly</em> multiplies your damage is whether the spell
+            carries an element at all. After that, you&rsquo;re choosing
+            between per-element <em>effects</em>, not damage scalars.
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">The key insight</span>
+            <p>
+              From the
+              <a href="../mechanics/index.html">mechanics spec</a>:
+              <em>&ldquo;If damageInfo.Element == None &rarr; return value
+              unchanged (no elemental scaling).&rdquo;</em>
+              Once a spell has <em>any</em> element, it picks up your
+              <code>ElementStrengthMultiplier</code> bonus. <strong>The
+              second infusion doesn&rsquo;t double-stack the bonus</strong>
+              &mdash; it changes the packed <code>ElementType</code>, which
+              changes which per-element effects fire. The multiplier is
+              the same.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== ELEMENTS ================== -->
+        <section id="elements">
+          <h2>The five base elements &mdash; what they do</h2>
+
+          <div class="grid grid-2">
+
+            <article class="item-card" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Fire</h3>
+                  <p class="item-card__subtitle">Burn DoT</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Per-hit, applies <code>FireEffect</code>: a burn DOT of
+                <em>Damage</em> repeated <em>NumberOfBurns</em> times every
+                <em>SecondsBetweenBurns</em>. Each burn tick can crit if
+                <code>CanCriticalHit</code> is true (it usually is). With
+                <em>FireDouble</em>, both the per-tick damage and the
+                number of burns intensify.
+              </p>
+              <p><strong>Best on:</strong> high-base-damage single-hit spells
+              (the DOT scales with the hit&rsquo;s damage).
+              <a href="../spells/arrow.html">Arrow</a>,
+              <a href="../spells/shotgun.html">Shotgun</a>,
+              <a href="../spells/slash.html">Slash</a>.</p>
+            </article>
+
+            <article class="item-card" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Lightning</h3>
+                  <p class="item-card__subtitle">Ricochet chain</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Per-hit, applies <code>LightningEffect</code>: chains
+                <em>NumberOfLightningRicochets</em> jumps to nearby enemies,
+                each dealing <em>LightningDamageFactor</em> &times; the
+                original damage. <em>LightningDouble</em> increases both
+                the count and the per-ricochet factor.
+              </p>
+              <p><strong>Best on:</strong> single-target high-damage spells
+              in dense waves &mdash; the ricochets effectively convert
+              single-target into AoE.
+              <a href="../spells/rifle.html">Rifle</a>,
+              <a href="../spells/beam.html">Beam</a>,
+              <a href="../spells/orb.html">Orb</a>.</p>
+            </article>
+
+            <article class="item-card" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Ice</h3>
+                  <p class="item-card__subtitle">Chill / slow</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Per-hit, applies <code>IceEffect</code>: chill for
+                <em>ChillDuration</em> seconds scaled by
+                <em>ChillDamageFactor</em>. Clamps between <em>0.2</em>
+                and <em>0.72</em> &mdash; hard cap at 72% slow.
+                <em>IceDouble</em> pushes toward the hard freeze.
+              </p>
+              <p><strong>Best on:</strong> Glass-Cannon and Kiting builds.
+              Not a damage element &mdash; a survivability element. Best
+              utility infusion in the game for bullet-hell phases.
+              <a href="../spells/trail.html">Trail</a>,
+              <a href="../spells/proximity.html">Proximity</a>,
+              <a href="../spells/bell.html">Bell</a>.</p>
+            </article>
+
+            <article class="item-card" data-element="acid">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Acid</h3>
+                  <p class="item-card__subtitle">Resistance reduction</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Per-hit, applies <code>AcidEffect</code>: reduces the
+                target&rsquo;s damage resistance for
+                <em>AcidDuration</em> seconds (effectively increases all
+                subsequent damage they take). Sits on the
+                <em>target-side debuff</em> rail rather than directly
+                scaling attacker damage.
+              </p>
+              <p><strong>Best on:</strong> Boss Killer builds with a
+              setup-and-kill rotation. Acid one spell, drop the heavy
+              hitter through the debuff window. Synergy with co-op &mdash;
+              the debuff applies to <em>everyone&rsquo;s</em> damage.</p>
+            </article>
+
+            <article class="item-card" data-element="dark">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Dark</h3>
+                  <p class="item-card__subtitle">Corruption</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Per-hit, applies <code>DarkEffect</code>: adds corruption
+                points scaling with <em>CorruptionDamageFactor &times;
+                damage</em>. When corruption fills, the enemy becomes
+                hostile to other enemies (Dark = turn the swarm against
+                itself). The corrupted enemy&rsquo;s outgoing damage routes
+                through <code>CorruptedPlayerSpellDamageInfo</code> &mdash;
+                attributed back to the corrupter.
+              </p>
+              <p><strong>Best on:</strong> Swarm Clearer builds in
+              high-density waves. Lower direct damage than Fire/Lightning
+              but the swarm-vs-swarm fights buy time and clear ranged
+              enemies you couldn&rsquo;t reach.
+              <a href="../characters/bell-mage.html">Bell Mage</a> +
+              Dark Bell is a classic combo.</p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ================== INFUSION KINDS ================== -->
+        <section id="infusion-kinds">
+          <h2>Single vs Double vs Dual</h2>
+
+          <h3>Single (Fire, Lightning, Ice, Acid, Dark)</h3>
+          <p class="prose">
+            One infusion applied to a non-elemental spell. Applies that
+            element&rsquo;s effect at baseline configuration. The first
+            infusion is always the biggest leap &mdash; it turns on
+            <code>ElementStrengthMultiplier</code> for the spell and
+            unlocks the per-element effect.
+          </p>
+
+          <h3>Double (FireDouble, LightningDouble, &hellip;)</h3>
+          <p class="prose">
+            The <em>same</em> element infused a second time into an
+            already-same-element spell. Intensifies the per-element
+            <em>effect</em> (more burns, more ricochets, stronger chill,
+            longer corruption, deeper resistance debuff). Does
+            <strong>not</strong> stack the
+            <code>ElementStrengthMultiplier</code> a second time &mdash;
+            it&rsquo;s still one element packed into the
+            <code>ElementType</code> field.
+          </p>
+          <p class="prose">
+            <strong>When to double:</strong> only when the effect itself is
+            doing meaningful work. Fire double doubles the DOT (worth it);
+            Ice double pushes toward freeze (worth it on Glass Cannon).
+            Dark double slightly increases corruption rate (marginal); Acid
+            double extends the debuff window (situational).
+          </p>
+
+          <h3>Dual combo (FireLightning, AcidFire, DarkIce, &hellip;)</h3>
+          <p class="prose">
+            One spell carries <em>two different</em> elements. Both effects
+            fire on each hit. There are 10 unique dual combos (every pair
+            of the 5 base elements). The dual combo is one of the
+            <em>highest-leverage</em> infusion decisions &mdash; you get
+            two effects per hit at the same multiplier cost as one.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Rule of thumb</span>
+            <p>
+              <strong>Default to dual combos.</strong> Two effects per hit
+              for the same <code>ElementStrengthMultiplier</code>
+              activation is strictly better in raw effect-density, unless
+              you&rsquo;re running an
+              <a href="damage-optimization.html#archetypes">Element
+              Specialist</a> build that needs the matching infusion to
+              stack <a href="../artifacts/index.html#artifact-15">#15</a> (which
+              doesn&rsquo;t care which element you pick &mdash; it counts
+              <em>infusion events</em>, not infusion <em>type</em>).
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== MATRIX ================== -->
+        <section id="matrix">
+          <h2>The dual combo matrix</h2>
+          <p class="prose">
+            Every pair of base elements and what they buy you. Read across
+            for the dominant effect, down for the partner. Ratings:
+            <strong>S</strong> = top combo,
+            <strong>A</strong> = excellent,
+            <strong>B</strong> = situational,
+            <strong>C</strong> = niche.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Dual element combos &mdash; per-combo verdict</caption>
+              <thead>
+                <tr>
+                  <th>Combo</th>
+                  <th>What you get</th>
+                  <th>Best on archetype</th>
+                  <th class="num">Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>FireLightning</strong></td><td>Burn DoT + ricochet chain &mdash; the ricochets carry their own burn application.</td><td>Element Specialist, Swarm Clearer</td><td class="num">S</td></tr>
+                <tr><td><strong>AcidFire</strong></td><td>Resistance debuff + burn DoT; the resistance reduction amplifies every subsequent burn tick.</td><td>Boss Killer</td><td class="num">S</td></tr>
+                <tr><td><strong>DarkFire</strong></td><td>Corruption + burn; corrupted enemies still burn and the corrupted attack is Fire (CorruptionElementBehaviour=UseCoreElement).</td><td>Swarm Clearer (co-op)</td><td class="num">A</td></tr>
+                <tr><td><strong>AcidLightning</strong></td><td>Debuff + ricochet; each ricochet hits already-debuffed enemies at higher damage.</td><td>Boss Killer, Swarm Clearer</td><td class="num">A</td></tr>
+                <tr><td><strong>FireIce</strong></td><td>Burn + chill; the chill keeps enemies in the burn area longer.</td><td>Glass Cannon, Swarm Clearer</td><td class="num">A</td></tr>
+                <tr><td><strong>IceLightning</strong></td><td>Chill + ricochet; ricochets prefer nearby targets, chill keeps them clustered.</td><td>Swarm Clearer</td><td class="num">A</td></tr>
+                <tr><td><strong>AcidIce</strong></td><td>Debuff + chill &mdash; the kiting boss-killer.</td><td>Boss Killer (kiting), Glass Cannon</td><td class="num">B</td></tr>
+                <tr><td><strong>DarkLightning</strong></td><td>Corruption + ricochet; corrupted enemies&rsquo; ricochets also corrupt.</td><td>Swarm Clearer</td><td class="num">B</td></tr>
+                <tr><td><strong>DarkIce</strong></td><td>Corruption + chill; slow enemies fail to reach you, then start fighting each other.</td><td>Glass Cannon</td><td class="num">B</td></tr>
+                <tr><td><strong>AcidDark</strong></td><td>Debuff + corruption; corrupted enemies inherit the debuff effect on their attacks.</td><td>Co-op control</td><td class="num">C</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================== VERDICTS ================== -->
+        <section id="verdicts">
+          <h2>Verdicts: per-archetype best infusions</h2>
+
+          <h3>Crit Stacker &mdash; <strong>Fire</strong> or <strong>FireLightning</strong></h3>
+          <p class="prose">
+            Each burn tick can crit. A single Slash crit can fire 3 burn
+            ticks, each rolling for crit independently &mdash; you&rsquo;re
+            multiplying your effective crit-event count by 3&ndash;5. Add
+            Lightning for ricochet crits and you&rsquo;ve doubled the crit
+            surface.
+          </p>
+
+          <h3>Element Specialist &mdash; <strong>any single element, repeated</strong></h3>
+          <p class="prose">
+            What matters is total infusion count for
+            <a href="../artifacts/index.html#artifact-15">#15</a>. Pick the element
+            whose effect you like (Fire for DPS, Lightning for AoE) and
+            stack same-element infusions across every spell you own. Each
+            infusion event is <em>+10</em> ElementStrength, regardless of
+            which element it is.
+          </p>
+
+          <h3>Glass Cannon &mdash; <strong>Ice / FireIce</strong></h3>
+          <p class="prose">
+            You need enemies to stop reaching you. Ice does that better
+            than anything else; FireIce adds burn DPS while they&rsquo;re
+            stuck.
+          </p>
+
+          <h3>Tank-DPS &mdash; <strong>Fire</strong></h3>
+          <p class="prose">
+            You stay alive, you stand in their face, you burn them down.
+            The burn DOT is per-hit and the Tank-DPS build hits often via
+            its inflated Damage bracket. Lightning ricochets are wasted on
+            point-blank fights.
+          </p>
+
+          <h3>Swarm Clearer &mdash; <strong>Dark</strong> or <strong>DarkFire</strong></h3>
+          <p class="prose">
+            Corruption turns wave size into a force multiplier. Once 4&ndash;5
+            enemies in a 30-enemy wave are corrupted, the wave eats itself
+            in seconds. Add Fire for residual DOT cleanup.
+          </p>
+
+          <h3>Boss Killer &mdash; <strong>AcidFire</strong> or <strong>AcidLightning</strong></h3>
+          <p class="prose">
+            Acid&rsquo;s resistance debuff is the rare per-target multiplier
+            that <em>does</em> affect single-target damage meaningfully.
+            Pair with Fire (burn ticks scaling with debuff) or Lightning
+            (ricochet damage scaling with debuff). On bosses with multiple
+            hitboxes, AcidLightning is the better pick &mdash; ricochets
+            count as hits, multi-stage targets eat more.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">One spell per element rule</span>
+            <p>
+              Even outside a strict Element Specialist build, try to make
+              sure each spell in your loadout carries <em>some</em>
+              element. The <em>+10</em> stack from
+              <a href="../artifacts/index.html#artifact-15">#15</a> applies
+              per-infusion-event, so 4 spells with 4 different infusions
+              is still <em>+40</em> ElementStrength &mdash; a real
+              <em>1.40&times;</em> multiplier on every elemental hit.
+            </p>
+          </aside>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="damage-optimization.html#archetypes">
+            <strong>Damage Optimization &rarr; Archetypes</strong>
+            How elements fit each build type.
+          </a>
+          <a class="see-also__link" href="../mechanics/index.html">
+            <strong>Mechanics &rarr; Elements</strong>
+            All 21 ElementType values with raw definitions.
+          </a>
+          <a class="see-also__link" href="artifact-priorities.html">
+            <strong>Artifact priorities &rarr;</strong>
+            Pick order for the artifacts that compound with infusions.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Element data from ElementType enum + per-effect IL2CPP classes.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="index.html">Guides hub</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Every wizard in The Spell Brigade: 16 heroes with stats, starting spells, unique modifiers, skins and unlock challenges. Filter by playstyle, compare stats.">
+  <title>Characters — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#x2736;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../index.html">Home</a>
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" aria-current="page" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">&#x2315;</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+            aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Characters">
+      <h2 class="sidebar__title">Roster</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html" aria-current="page">All characters</a></li>
+        <li><a href="bell-mage.html">Bell Mage</a></li><li><a href="bird-mage.html">Bird Mage</a></li><li><a href="campanelli.html">Campanelli</a></li><li><a href="flute-mage.html">Flute Mage</a></li><li><a href="hatty.html">Hatty</a></li><li><a href="key-mage.html">Key Mage</a></li><li><a href="ludwig.html">Ludwig</a></li><li><a href="moon-mage.html">Moon Mage</a></li><li><a href="plant-mage.html">Plant Mage</a></li><li><a href="reginald.html">Reginald</a></li><li><a href="smithy.html">Smithy</a></li><li><a href="star-mage.html">Star Mage</a></li><li><a href="sun-mage.html">Sun Mage</a></li><li><a href="test-character.html" class="u-muted">Test Character</a></li><li><a href="vampire-mage.html">Vampire Mage</a></li><li><a href="wizard-king.html">Wizard King</a></li>
+      </ul>
+      <h2 class="sidebar__title">Related</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/character-improvements.html">Hero improvements</a></li>
+        <li><a href="../mechanics/stats.html">All stats</a></li>
+        <li><a href="../spells/index.html">All spells</a></li>
+        <li><a href="../challenges/wizard.html">Unlock challenges</a></li>
+      </ul>
+    </aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li aria-current="page">Characters</li></ol></nav>
+      <article class="content-frame">
+        <section id="overview" class="stack">
+          <h1>Characters</h1>
+          <p class="prose u-muted">All 16 wizards in <em>The Spell Brigade</em> — fifteen playable heroes plus the hidden developer test slot. Each card links to a full breakdown of stats, starting loadout, unique modifiers, skins and unlock challenges. Tags are synthesised from the per-character <code>Modifiers</code> and <code>UniqueModifiers</code> blocks in the data dump.</p>
+        </section>
+
+        <section id="filters" class="stack">
+          <h2>Filter by playstyle</h2>
+          <div class="row" role="group" aria-label="Playstyle filter"
+               data-filter-group data-filter-target="#roster .item-card">
+            <button class="tier-chip" type="button" data-filter="all" aria-pressed="true">All</button><button class="tier-chip" type="button" data-filter="tank" aria-pressed="false">Tank</button><button class="tier-chip" type="button" data-filter="glass-cannon" aria-pressed="false">Glass Cannon</button><button class="tier-chip" type="button" data-filter="dps" aria-pressed="false">DPS</button><button class="tier-chip" type="button" data-filter="support" aria-pressed="false">Support</button><button class="tier-chip" type="button" data-filter="elemental" aria-pressed="false">Elemental</button><button class="tier-chip" type="button" data-filter="mobility" aria-pressed="false">Mobility</button><button class="tier-chip" type="button" data-filter="utility" aria-pressed="false">Utility</button><button class="tier-chip" type="button" data-filter="balanced" aria-pressed="false">Balanced</button>
+          </div>
+        </section>
+
+        <section id="roster">
+          <h2 class="u-sr-only">Roster</h2>
+          <div class="grid grid-cards">
+            <article class="item-card" data-filter-tags="tank" data-kind="tank">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="bell-mage.html">Bell Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/bell.html">Bell</a> · 1800g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Tank</span>
+    
+  </div>
+  <p class="item-card__desc">Death-defiant martyr: returns damage when hit and explodes on death.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Max HP</span><span class="item-card__stat-value">600</span></div><div class="item-card__stat"><span class="item-card__stat-label">Move</span><span class="item-card__stat-value">3.6</span></div><div class="item-card__stat"><span class="item-card__stat-label">Crit</span><span class="item-card__stat-value">10%</span></div></div>
+</article><article class="item-card" data-filter-tags="balanced" data-kind="balanced">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="bird-mage.html">Bird Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/arrow.html">Arrow</a> · 1250g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Balanced</span>
+    
+  </div>
+  <p class="item-card__desc">Scout: never loses a pickup or objective with built-in pointers.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Max HP</span><span class="item-card__stat-value">600</span></div><div class="item-card__stat"><span class="item-card__stat-label">Move</span><span class="item-card__stat-value">3.6</span></div><div class="item-card__stat"><span class="item-card__stat-label">Crit</span><span class="item-card__stat-value">10%</span></div></div>
+</article><article class="item-card" data-filter-tags="mobility" data-kind="mobility">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="campanelli.html">Campanelli</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/shotgun.html">Shotgun</a> · 1650g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Mobility</span>
+    
+  </div>
+  <p class="item-card__desc">Spawn-beam vampire who opens fights at full health.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Movement Speed</span><span class="item-card__stat-value">+10%</span></div></div>
+</article><article class="item-card" data-filter-tags="elemental" data-kind="elemental">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="flute-mage.html">Flute Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/summon.html">Summon</a> · 1700g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Elemental</span>
+    
+  </div>
+  <p class="item-card__desc">Gambler — random infusions on every spell roll.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Crit Damage</span><span class="item-card__stat-value">+5%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Crit Chance</span><span class="item-card__stat-value">-3%</span></div></div>
+</article><article class="item-card" data-filter-tags="dps elemental glass-cannon" data-kind="glass-cannon">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="hatty.html">Hatty</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/smg.html">Smg</a> · 1350g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Glass Cannon</span>
+    
+  </div>
+  <p class="item-card__desc">Pure damage glass cannon, halved health for raw multiplicative power.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">+6%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Max Health</span><span class="item-card__stat-value">-300</span></div><div class="item-card__stat"><span class="item-card__stat-label">Element Weakness Mult.</span><span class="item-card__stat-value">+15%</span></div></div>
+</article><article class="item-card" data-filter-tags="balanced" data-kind="balanced">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="key-mage.html">Key Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/trail.html">Trail</a> · 1150g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Balanced</span>
+    
+  </div>
+  <p class="item-card__desc">Turns damage taken into XP — punishment becomes progress.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">XP on Damage Taken</span><span class="item-card__stat-value">+0.025</span></div></div>
+</article><article class="item-card" data-filter-tags="tank" data-kind="tank">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="ludwig.html">Ludwig</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/laser.html">Laser</a> · 850g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Tank</span>
+    
+  </div>
+  <p class="item-card__desc">Armored wall with a wide hitbox; tanks negative effects outright.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Hitbox Size Mult.</span><span class="item-card__stat-value">+25%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Armor</span><span class="item-card__stat-value">+12</span></div><div class="item-card__stat"><span class="item-card__stat-label">Movement Speed</span><span class="item-card__stat-value">-10%</span></div></div>
+</article><article class="item-card" data-filter-tags="utility" data-kind="utility">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="moon-mage.html">Moon Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/boomerang.html">Boomerang</a> · 700g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Utility</span>
+    
+  </div>
+  <p class="item-card__desc">Levels faster than the field and rains boomerangs early.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">XP Gain</span><span class="item-card__stat-value">+3%</span></div></div>
+</article><article class="item-card" data-filter-tags="utility" data-kind="utility">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="plant-mage.html">Plant Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/plant.html">Plant</a> · 1600g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Utility</span>
+    
+  </div>
+  <p class="item-card__desc">Loot vacuum — magnet pulls every orb on the map.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Healing Potion Mult.</span><span class="item-card__stat-value">+20%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Pickup Radius</span><span class="item-card__stat-value">+20%</span></div></div>
+</article><article class="item-card" data-filter-tags="utility" data-kind="utility">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="reginald.html">Reginald</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/orb.html">Orb</a> · Starter</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Utility</span>
+    
+  </div>
+  <p class="item-card__desc">The lucky starter — generous drops and an honest signature orb.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Luck</span><span class="item-card__stat-value">+2</span></div><div class="item-card__stat"><span class="item-card__stat-label">Drop Chance</span><span class="item-card__stat-value">+10%</span></div></div>
+</article><article class="item-card" data-filter-tags="support" data-kind="support">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="smithy.html">Smithy</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/beam.html">Beam</a> · 950g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Support</span>
+    
+  </div>
+  <p class="item-card__desc">Frontline medic with regen, revive speed and healing scaling.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Revive Speed</span><span class="item-card__stat-value">+60%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Health Regen</span><span class="item-card__stat-value">+1</span></div><div class="item-card__stat"><span class="item-card__stat-label">Healing Mult.</span><span class="item-card__stat-value">+25%</span></div></div>
+</article><article class="item-card" data-filter-tags="elemental" data-kind="elemental">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="star-mage.html">Star Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/falling-star.html">Falling Star</a> · 1500g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Elemental</span>
+    
+  </div>
+  <p class="item-card__desc">Element specialist who shines on favoured matchups.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Element Strength Mult.</span><span class="item-card__stat-value">+15%</span></div></div>
+</article><article class="item-card" data-filter-tags="mobility" data-kind="mobility">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="sun-mage.html">Sun Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/proximity.html">Proximity</a> · 400g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Mobility</span>
+    
+  </div>
+  <p class="item-card__desc">Slippery skirmisher with a tiny hitbox and dodge to spare.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Dodge</span><span class="item-card__stat-value">+7%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Terrain Speed Mult.</span><span class="item-card__stat-value">+7%</span></div><div class="item-card__stat"><span class="item-card__stat-label">Hitbox Size Mult.</span><span class="item-card__stat-value">-25%</span></div></div>
+</article><article class="item-card" data-filter-tags="balanced" data-kind="balanced">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="test-character.html">Test Character</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/boomerang.html">Boomerang</a> · Starter</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Balanced</span>
+    <span class="tag" style="color:var(--c-warn);border-color:var(--c-warn);">dev-only</span>
+  </div>
+  <p class="item-card__desc">Developer placeholder used for internal testing.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Crit Chance</span><span class="item-card__stat-value">-10%</span></div></div>
+</article><article class="item-card" data-filter-tags="support" data-kind="support">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="vampire-mage.html">Vampire Mage</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/slash.html">Slash</a> · 1450g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Support</span>
+    
+  </div>
+  <p class="item-card__desc">Self-revives and life-steals on his signature slash.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Max HP</span><span class="item-card__stat-value">600</span></div><div class="item-card__stat"><span class="item-card__stat-label">Move</span><span class="item-card__stat-value">3.6</span></div><div class="item-card__stat"><span class="item-card__stat-label">Crit</span><span class="item-card__stat-value">10%</span></div></div>
+</article><article class="item-card" data-filter-tags="dps" data-kind="dps">
+  <header class="item-card__header">
+    <h3 class="item-card__title"><a href="wizard-king.html">Wizard King</a></h3>
+    <div class="item-card__subtitle">Starter · <a href="../spells/rifle.html">Rifle</a> · 1050g</div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">DPS</span>
+    
+  </div>
+  <p class="item-card__desc">Crit-stacking rifleman — extra base crit chance to kick things off.</p>
+  <div class="item-card__stats"><div class="item-card__stat"><span class="item-card__stat-label">Crit Chance</span><span class="item-card__stat-value">+10%</span></div></div>
+</article>
+          </div>
+        </section>
+
+        <section id="compare" class="stack">
+          <h2>Stat comparison</h2>
+          <p class="prose">All starting values after personal modifiers are applied. Click any header to sort. Damage is shown as the per-character bonus over the spell baseline (heroes without a Damage modifier rely on their spell&rsquo;s native scaling).</p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption class="u-sr-only">Starting stats for every playable wizard</caption>
+              <thead>
+                <tr>
+                  <th scope="col" data-sort="string">Wizard</th>
+                  <th scope="col" data-sort="string">Role</th>
+                  <th scope="col" class="num" data-sort="number">Max HP</th>
+                  <th scope="col" class="num" data-sort="number">Move</th>
+                  <th scope="col" class="num" data-sort="number">Crit</th>
+                  <th scope="col" class="num" data-sort="number">Armor</th>
+                  <th scope="col" class="num" data-sort="number">Dodge</th>
+                  <th scope="col" class="num" data-sort="number">Bonus Dmg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+  <td><a href="bell-mage.html">Bell Mage</a></td>
+  <td>Tank</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="bird-mage.html">Bird Mage</a></td>
+  <td>Balanced</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="campanelli.html">Campanelli</a></td>
+  <td>Mobility</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.9600000000000004">3.96</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="flute-mage.html">Flute Mage</a></td>
+  <td>Elemental</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="7">7%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="hatty.html">Hatty</a></td>
+  <td>Glass Cannon</td>
+  <td class="num" data-value="300">300</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="6">+6%</td>
+</tr><tr>
+  <td><a href="key-mage.html">Key Mage</a></td>
+  <td>Balanced</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="ludwig.html">Ludwig</a></td>
+  <td>Tank</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.24">3.24</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="12">12</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="moon-mage.html">Moon Mage</a></td>
+  <td>Utility</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="plant-mage.html">Plant Mage</a></td>
+  <td>Utility</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="reginald.html">Reginald</a></td>
+  <td>Utility</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="smithy.html">Smithy</a></td>
+  <td>Support</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="star-mage.html">Star Mage</a></td>
+  <td>Elemental</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="sun-mage.html">Sun Mage</a></td>
+  <td>Mobility</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="7">7%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="test-character.html">Test Character</a></td>
+  <td>Balanced</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="vampire-mage.html">Vampire Mage</a></td>
+  <td>Support</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="10">10%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr><tr>
+  <td><a href="wizard-king.html">Wizard King</a></td>
+  <td>DPS</td>
+  <td class="num" data-value="600">600</td>
+  <td class="num" data-value="3.6">3.6</td>
+  <td class="num" data-value="20">20%</td>
+  <td class="num" data-value="0">0</td>
+  <td class="num" data-value="0">0%</td>
+  <td class="num" data-value="0">—</td>
+</tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="related" class="stack">
+          <h2>Related</h2>
+          <div class="grid grid-3">
+            <a class="see-also__link" href="../mechanics/character-improvements.html"><strong>Hero upgrades</strong>13 global, hero-agnostic store upgrades that stack on top of any kit.</a>
+            <a class="see-also__link" href="../mechanics/stats.html"><strong>Stat reference</strong>What every stat does and how it stacks.</a>
+            <a class="see-also__link" href="../challenges/wizard.html"><strong>Unlock challenges</strong>How to recruit every non-starter hero.</a>
+            <a class="see-also__link" href="../guides/best-spells-per-hero.html"><strong>Best spells per hero</strong>Top-three spell pairings for each wizard.</a>
+            <a class="see-also__link" href="../spells/index.html"><strong>Spell catalogue</strong>21 spells, infusions and variants.</a>
+            <a class="see-also__link" href="../guides/index.html"><strong>Co-op roles</strong>How to compose a 4-stack across these archetypes.</a>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; <a href="#main-content">Back to top</a>
+  </div>
+</footer>
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

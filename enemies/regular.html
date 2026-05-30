@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Regular (non-elite, non-boss) enemies of The Spell Brigade — stats, behavior tags, wave appearances and counter strategy.">
+  <title>Regular enemies — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+            aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro" aria-current="page">Overview</a></li>
+        <li><a href="#table">Stat table</a></li>
+        <li><a href="#group-swarm">Swarm &amp; melee</a></li>
+        <li><a href="#group-ranged">Ranged</a></li>
+        <li><a href="#group-explosive">Explosive</a></li>
+        <li><a href="#group-support">Support / aura</a></li>
+        <li><a href="#group-ambush">Ambush / mobility</a></li>
+        <li><a href="#group-spawner">Spawner family</a></li>
+        <li><a href="#group-fast">Fast variants</a></li>
+        <li><a href="#group-objective">Objective</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bestiary</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="elites.html">Elites</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="../bosses/index.html">Bosses</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bestiary</a></li>
+          <li aria-current="page">Regular enemies</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="intro" class="stack">
+          <h1>Regular enemies</h1>
+          <p class="prose u-muted">
+            Of the 36 entries in the enemy registry, <strong>25 are regular threats</strong> —
+            the everyday wave fodder you see between elite spawns and boss
+            phases. The remaining slots belong to 4 elites, 4 scripted events,
+            and 3 bosses. Every stat below is pulled from the prefab definition
+            in <code>EnemyHealthContainer.maxHealth</code>,
+            <code>Enemy.contactDamage</code>, and the navigator's
+            <code>NavMeshAgent.m_Speed</code>.
+          </p>
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Tip</span>
+            <p>
+              Wave spawn probability is <em>relative</em>, not absolute.
+              A Crabling at <code>80.0</code> in wave 1 is the only thing
+              that spawns; a Tripod at <code>40.0</code> in wave 10 competes
+              against six other types.
+            </p>
+          </aside>
+        </section>
+
+        <section id="table">
+          <h2>Sortable stat table</h2>
+          <p class="prose">
+            Click any column header to sort. Speed of <code>—</code> means
+            the prefab has no navigator (turret, event, spawned object).
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Regular enemy roster — base stats at spawn</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Name</th>
+                  <th data-sort="number" class="num">ID</th>
+                  <th data-sort="number" class="num">Health</th>
+                  <th data-sort="number" class="num">Damage</th>
+                  <th data-sort="number" class="num">Speed</th>
+                  <th data-sort="number" class="num">XP</th>
+                  <th data-sort="string">Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#enemy-crabling">Crabling</a></td>
+                  <td class="num">0</td>
+                  <td class="num">154</td>
+                  <td class="num">135</td>
+                  <td class="num">2.52</td>
+                  <td class="num">1</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-fleshcrab">Flesh Crab</a></td>
+                  <td class="num">1</td>
+                  <td class="num">275</td>
+                  <td class="num">135</td>
+                  <td class="num">2.52</td>
+                  <td class="num">2</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-tripod">Tripod</a></td>
+                  <td class="num">2</td>
+                  <td class="num">500</td>
+                  <td class="num">135</td>
+                  <td class="num">2.52</td>
+                  <td class="num">3</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-snipjaw">Snipjaw</a></td>
+                  <td class="num">3</td>
+                  <td class="num">700</td>
+                  <td class="num">135</td>
+                  <td class="num">2.52</td>
+                  <td class="num">5</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-teethyworm">Teethy Worm</a></td>
+                  <td class="num">4</td>
+                  <td class="num">900</td>
+                  <td class="num">135</td>
+                  <td class="num">2.1</td>
+                  <td class="num">—</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-shieldcrab">Shield Crab</a></td>
+                  <td class="num">5</td>
+                  <td class="num">3500</td>
+                  <td class="num">225</td>
+                  <td class="num">1.8</td>
+                  <td class="num">24</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-explodingtick">Exploding Tick</a></td>
+                  <td class="num">6</td>
+                  <td class="num">600</td>
+                  <td class="num">150</td>
+                  <td class="num">2</td>
+                  <td class="num">5</td>
+                  <td><span class="tag">explosive</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-crablodon">Crablodon</a></td>
+                  <td class="num">7</td>
+                  <td class="num">4500</td>
+                  <td class="num">315</td>
+                  <td class="num">0.9</td>
+                  <td class="num">32</td>
+                  <td><span class="tag">melee</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-spitter">Spitter</a></td>
+                  <td class="num">8</td>
+                  <td class="num">280</td>
+                  <td class="num">135</td>
+                  <td class="num">1.6</td>
+                  <td class="num">1</td>
+                  <td><span class="tag">ranged</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-buffer">Buffer</a></td>
+                  <td class="num">9</td>
+                  <td class="num">3000</td>
+                  <td class="num">35</td>
+                  <td class="num">2.6</td>
+                  <td class="num">15</td>
+                  <td><span class="tag">support</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-sneakybug">Sneaky Bug</a></td>
+                  <td class="num">11</td>
+                  <td class="num">2000</td>
+                  <td class="num">200</td>
+                  <td class="num">4</td>
+                  <td class="num">10</td>
+                  <td><span class="tag">ambush</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-hunttarget">Hunt Target</a></td>
+                  <td class="num">12</td>
+                  <td class="num">1250</td>
+                  <td class="num">150</td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                  <td><span class="tag">objective</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-teethyworm-baby">Teethy Worm (Baby)</a></td>
+                  <td class="num">13</td>
+                  <td class="num">135</td>
+                  <td class="num">30</td>
+                  <td class="num">3.1</td>
+                  <td class="num">2</td>
+                  <td><span class="u-muted">—</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-flyingmanta">Flying Manta</a></td>
+                  <td class="num">14</td>
+                  <td class="num">2000</td>
+                  <td class="num">200</td>
+                  <td class="num">—</td>
+                  <td class="num">16</td>
+                  <td><span class="tag">flying</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-mole">Mole</a></td>
+                  <td class="num">15</td>
+                  <td class="num">1500</td>
+                  <td class="num">120</td>
+                  <td class="num">2</td>
+                  <td class="num">10</td>
+                  <td><span class="tag">ambush</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-stinkbug">Stinkbug</a></td>
+                  <td class="num">20</td>
+                  <td class="num">1000</td>
+                  <td class="num">125</td>
+                  <td class="num">2.5</td>
+                  <td class="num">12</td>
+                  <td><span class="u-muted">—</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-staticshooter">Static Shooter</a></td>
+                  <td class="num">21</td>
+                  <td class="num">2000</td>
+                  <td class="num">150</td>
+                  <td class="num">—</td>
+                  <td class="num">7</td>
+                  <td><span class="tag">ranged</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-spawner">Spawner</a></td>
+                  <td class="num">23</td>
+                  <td class="num">3500</td>
+                  <td class="num">200</td>
+                  <td class="num">1.2</td>
+                  <td class="num">17</td>
+                  <td><span class="tag">spawner</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-spawneregg">Spawner Egg</a></td>
+                  <td class="num">24</td>
+                  <td class="num">200</td>
+                  <td class="num">35</td>
+                  <td class="num">—</td>
+                  <td class="num">1</td>
+                  <td><span class="tag">spawner</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-spawnerhatchling">Spawner Hatchling</a></td>
+                  <td class="num">25</td>
+                  <td class="num">500</td>
+                  <td class="num">250</td>
+                  <td class="num">5</td>
+                  <td class="num">1</td>
+                  <td><span class="tag">spawner</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-explodingtickfast">Exploding Tick (Fast)</a></td>
+                  <td class="num">30</td>
+                  <td class="num">650</td>
+                  <td class="num">125</td>
+                  <td class="num">2.85</td>
+                  <td class="num">5</td>
+                  <td><span class="tag">fast</span> <span class="tag">explosive</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-bufferfast">Buffer (Fast)</a></td>
+                  <td class="num">31</td>
+                  <td class="num">3200</td>
+                  <td class="num">35</td>
+                  <td class="num">3</td>
+                  <td class="num">15</td>
+                  <td><span class="tag">fast</span> <span class="tag">support</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-spitterspread">Spitter (Spread)</a></td>
+                  <td class="num">32</td>
+                  <td class="num">280</td>
+                  <td class="num">135</td>
+                  <td class="num">1.6</td>
+                  <td class="num">1</td>
+                  <td><span class="tag">ranged</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-teethywormfast">Teethy Worm (Fast)</a></td>
+                  <td class="num">33</td>
+                  <td class="num">900</td>
+                  <td class="num">140</td>
+                  <td class="num">2.1</td>
+                  <td class="num">—</td>
+                  <td><span class="tag">fast</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#enemy-teethyworm-babyfast">Teethy Worm (Baby, Fast)</a></td>
+                  <td class="num">34</td>
+                  <td class="num">250</td>
+                  <td class="num">40</td>
+                  <td class="num">4</td>
+                  <td class="num">2</td>
+                  <td><span class="tag">fast</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="group-swarm">
+          <h3>Swarm &amp; melee</h3>
+          <p class="prose">Trash mobs and frontline beef. Always present.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-crabling" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Crabling</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>0</code> · <code>Enemy_Crabling.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Trash mob — any AoE (Bell, Meteor) one-shots packs.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">154</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.52</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">1</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 1–8 (8 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Crabling.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-fleshcrab" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Flesh Crab</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>1</code> · <code>Enemy_FleshCrab.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Tougher swarmer; pierce spells (Arrow, Beam) chew rows.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">275</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.52</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">2</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 2–9 (8 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_FleshCrab.prefab</code></li><li><code>Enemy_FleshCrab_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-tripod" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Tripod</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>2</code> · <code>Enemy_Tripod.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Mid-HP melee — chip with sustained DPS (Beam, Bell).</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.52</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">3</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 5–13 (9 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Tripod.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-snipjaw" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Snipjaw</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>3</code> · <code>Enemy_Snipjaw.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Frontline blocker; slow it with Ice then nuke.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">700</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.52</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">5</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 8–20 (13 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Snipjaw.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-teethyworm" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Teethy Worm</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>4</code> · <code>Enemy_TeethyWorm.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Long body, AoE-vulnerable — Meteor splash deletes the train.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">900</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.1</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">—</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 2–20 (18 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_TeethyWorm.prefab</code></li><li><code>Enemy_TeethyWorm_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-teethyworm-baby" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Teethy Worm (Baby)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>13</code> · <code>Enemy_BabyWorm.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Trivial swarm spawned by parents; AoE clears whole brood.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">30</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">3.1</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">2</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_BabyWorm.prefab</code></li><li><code>Enemy_BabyWorm_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-shieldcrab" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Shield Crab</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>5</code> · <code>Enemy_ShieldCrab.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> 3.5k HP wall; flank with piercing or use Dark for raw single-target.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">3500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">225</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.8</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">24</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 9–20 (12 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_ShieldCrab.prefab</code></li><li><code>Enemy_ShieldCrab_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-crablodon" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Crablodon</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>7</code> · <code>Enemy_Crablodon.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> 4.5k-HP slow tank — root with Ice slow and burn down.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">4500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">315</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">0.9</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">32</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 15–18 (2 waves); world variants: astral planes, frozen ancients, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Crablodon.prefab</code></li><li><code>Enemy_Crablodon_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-stinkbug" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Stinkbug</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>20</code> · <code>Enemy_Stinkbug.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Leaves <code>DamageZone</code> on death — kill it on bare ground.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">1000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">125</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">12</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: world variants: astral planes.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Stinkbug.prefab</code></li><li><code>Enemy_Stinkbug_Navigator.prefab</code></li><li><code>Enemy_Stinkbug_DamageZone.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-ranged">
+          <h3>Ranged</h3>
+          <p class="prose">Stand-off shooters; close the distance or out-range.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-spitter" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Spitter</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>8</code> · <code>Enemy_Spitter.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">ranged</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Ranged threat — kill priority; close the gap or use Beam.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">280</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.6</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">1</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 4–19 (15 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Spitter.prefab</code></li><li><code>Enemy_Spitter_Navigator.prefab</code></li><li><code>Enemy_Spitter_Projectile.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-spitterspread" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Spitter (Spread)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>32</code> · <code>Enemy_SpitterSpread.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">ranged</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Fires a cone — strafe perpendicular, do not face it.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">280</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">135</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.6</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">1</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_SpitterSpread.prefab</code></li><li><code>Enemy_SpitterSpread_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-staticshooter" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Static Shooter</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>21</code> · <code>Enemy_StaticShooter.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">ranged</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Stationary turret; close in or out-range with Beam.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">2000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">150</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">—</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">7</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_StaticShooter.prefab</code></li><li><code>Enemy_StaticShooter_Projectile.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-explosive">
+          <h3>Explosive</h3>
+          <p class="prose">Kamikaze ticks; kill before they detonate.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-explodingtick" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Exploding Tick</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>6</code> · <code>Enemy_ExplodingTick.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">explosive</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Kite away — never let it touch you. Snipe at range with Arrow.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">600</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">150</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">5</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 3–20 (18 waves); world variants: astral planes, frozen ancients, pyrestorm pit, verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_ExplodingTick.prefab</code></li><li><code>Enemy_ExplodingTick_Navigator.prefab</code></li><li><code>Enemy_ExplodingTickExplosion.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-explodingtickfast" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Exploding Tick (Fast)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>30</code> · <code>Enemy_ExplodingTickFast.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">fast</span> <span class="tag">explosive</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Fast variant — same kill rule, less reaction window.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">650</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">125</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.85</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">5</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_ExplodingTickFast.prefab</code></li><li><code>Enemy_ExplodingTickFast_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-support">
+          <h3>Support / aura</h3>
+          <p class="prose">Buff allies in a radius; assassinate first.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-buffer" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Buffer</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>9</code> · <code>Enemy_Buffer.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">support</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Support aura — eliminate first or its cluster gets +damage.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">3000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">35</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.6</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">15</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Base waves 5–20 (9 waves).</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Buffer.prefab</code></li><li><code>Enemy_Buffer_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-bufferfast" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Buffer (Fast)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>31</code> · <code>Enemy_BufferFast.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">fast</span> <span class="tag">support</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Fast support — pick it off the moment it appears.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">3200</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">35</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">15</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_BufferFast.prefab</code></li><li><code>Enemy_BufferFast_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-ambush">
+          <h3>Ambush / mobility</h3>
+          <p class="prose">Hit-and-run units that ignore standard pathing.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-sneakybug" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Sneaky Bug</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>11</code> · <code>Enemy_SneakyBug.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">ambush</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Ambushes from offscreen at 4 m/s; reserve a panic Bell.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">2000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">200</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">10</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: world variants: frozen ancients.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_SneakyBug.prefab</code></li><li><code>Enemy_SneakyBug_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-mole" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Mole</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>15</code> · <code>Enemy_Mole.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">ambush</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Burrows then surfaces under you — circle-strafe to dodge spawn.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">1500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">120</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">10</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: world variants: verdant meadows.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Mole.prefab</code></li><li><code>Enemy_Mole_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-flyingmanta" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Flying Manta</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>14</code> · <code>Enemy_FlyingManta.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">flying</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Flying — ignores nav, paths straight at you. Lightning excels.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">2000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">200</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">—</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">16</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: world variants: pyrestorm pit.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_FlyingManta.prefab</code></li><li><code>Enemy_FlyingManta_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-spawner">
+          <h3>Spawner family</h3>
+          <p class="prose">Drops eggs that hatch hatchlings; cascade threat.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-spawner" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Spawner</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>23</code> · <code>Enemy_Spawner.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">spawner</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Drops <em>SpawnerEgg</em> nests — kill spawner first to stop production.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">3500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">200</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">1.2</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">17</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_Spawner.prefab</code></li><li><code>Enemy_Spawner_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-spawneregg" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Spawner Egg</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>24</code> · <code>Enemy_SpawnerEgg.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">spawner</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Fragile egg — Arrow or Bolt one-shots; AoE cleans nests.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">200</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">35</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">—</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">1</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_SpawnerEgg.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-spawnerhatchling" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Spawner Hatchling</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>25</code> · <code>Enemy_SpawnerHatchling.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">spawner</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Fastest non-event unit (5.0 m/s); CC-light spells fall behind.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">500</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">250</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">1</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_SpawnerHatchling.prefab</code></li><li><code>Enemy_SpawnerHatchling_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-fast">
+          <h3>Fast variants (wave 21+)</h3>
+          <p class="prose">Palette-swap re-uses with elevated speed.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-teethywormfast" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Teethy Worm (Fast)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>33</code> · <code>Enemy_TeethyWormFast.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">fast</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Catches up faster than baseline; Ice slow restores parity.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">900</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">140</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.1</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">—</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_TeethyWormFast.prefab</code></li><li><code>Enemy_TeethyWormFast_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+            <article class="item-card" id="enemy-teethyworm-babyfast" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Teethy Worm (Baby, Fast)</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>34</code> · <code>Enemy_BabyWormFast.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">fast</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Trivial but quick swarm — keep an aura (Venom Mist) running.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">250</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">40</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">2</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_BabyWormFast.prefab</code></li><li><code>Enemy_BabyWormFast_Navigator.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+        <section id="group-objective">
+          <h3>Objective</h3>
+          <p class="prose">Spawned by event logic, not the wave probability table.</p>
+          <div class="grid grid-cards">
+            <article class="item-card" id="enemy-hunttarget" data-kind="enemy">
+              <header class="item-card__header">
+                <div>
+                  <h4 class="item-card__title">Hunt Target</h4>
+                  <p class="item-card__subtitle">enemy_type_id <code>12</code> · <code>Enemy_HuntTarget.prefab</code></p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">objective</span></div>
+              <p class="item-card__desc"><strong>Counter:</strong> Objective; protect during Hunt events, no offensive role.</p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">1250</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">150</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">—</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">XP</span><span class="item-card__stat-value">—</span></div>
+              </div>
+              <details style="margin-top: var(--sp-3);">
+                <summary><strong>Prefabs &amp; appearances</strong></summary>
+                <p class="u-muted" style="margin-top: var(--sp-2);">Found in waves: Does not spawn in standard waves.</p>
+                <ul style="margin-top: var(--sp-2);"><li><code>Enemy_HuntTarget.prefab</code></li></ul>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <section id="see-also">
+          <h2>See also</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="elites.html">
+              <strong>Elite enemies</strong>
+              The 4 fortified variants and the Hoarder loot piñata.
+            </a>
+            <a class="see-also__link" href="events.html">
+              <strong>Enemy events</strong>
+              Bounce, Convergent, Line, Mob — scripted hazards.
+            </a>
+            <a class="see-also__link" href="../waves/index.html">
+              <strong>Wave timeline</strong>
+              Per-wave spawn pools and probabilities.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">An unofficial, community-maintained reference for the indie game <em>The Spell Brigade</em>. All game names, lore, and trademarks belong to their respective owners.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN. &nbsp;·&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

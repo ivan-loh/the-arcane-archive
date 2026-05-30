@@ -1,0 +1,1691 @@
+{
+  "_meta": {
+    "verified_twice": true,
+    "total_waves": 32,
+    "note": "Wave files named wave_<n>.asset are the base waves; wave_<n>_<world>.asset are world-specific overrides for that wave number"
+  },
+  "waves": [
+    {
+      "id": "wave_1",
+      "file": "wave_1.asset",
+      "min_concurrent_enemies": 14,
+      "spawn_interval_seconds": 6.4799995,
+      "enemies_per_spawn": 2,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.5,
+        "random_chance": 0.5,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 80.0
+        }
+      ],
+      "probability_sum": 80.0
+    },
+    {
+      "id": "wave_10",
+      "file": "wave_10.asset",
+      "min_concurrent_enemies": 42,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.8,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.2
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 98.0
+    },
+    {
+      "id": "wave_10_astral_planes",
+      "file": "wave_10_astral_planes.asset",
+      "min_concurrent_enemies": 42,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.8,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.2
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 20,
+          "enemy_type": "Stinkbug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1095.0
+    },
+    {
+      "id": "wave_11",
+      "file": "wave_11.asset",
+      "min_concurrent_enemies": 46,
+      "spawn_interval_seconds": 7.695,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 5.0
+        }
+      ],
+      "probability_sum": 105.0
+    },
+    {
+      "id": "wave_12",
+      "file": "wave_12.asset",
+      "min_concurrent_enemies": 57,
+      "spawn_interval_seconds": 6.733125,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        }
+      ],
+      "probability_sum": 110.0
+    },
+    {
+      "id": "wave_12_frozen_ancients",
+      "file": "wave_12_frozen_ancients.asset",
+      "min_concurrent_enemies": 57,
+      "spawn_interval_seconds": 6.733125,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 11,
+          "enemy_type": "SneakyBug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1110.0
+    },
+    {
+      "id": "wave_12_verdant_meadows",
+      "file": "wave_12_verdant_meadows.asset",
+      "min_concurrent_enemies": 57,
+      "spawn_interval_seconds": 6.733125,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 15,
+          "enemy_type": "Mole",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1110.0
+    },
+    {
+      "id": "wave_13",
+      "file": "wave_13.asset",
+      "min_concurrent_enemies": 50,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 9,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 103.0
+    },
+    {
+      "id": "wave_14",
+      "file": "wave_14.asset",
+      "min_concurrent_enemies": 57,
+      "spawn_interval_seconds": 2.835,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 15.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 98.0
+    },
+    {
+      "id": "wave_14_pyrestorm_pit",
+      "file": "wave_14_pyrestorm_pit.asset",
+      "min_concurrent_enemies": 57,
+      "spawn_interval_seconds": 2.835,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 1.0,
+        "random_chance": 0.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 15.0
+        },
+        {
+          "enemy_type_id": 14,
+          "enemy_type": "FlyingManta",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1095.0
+    },
+    {
+      "id": "wave_15",
+      "file": "wave_15.asset",
+      "min_concurrent_enemies": 58,
+      "spawn_interval_seconds": 2.835,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.8,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.2
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 15.0
+        },
+        {
+          "enemy_type_id": 7,
+          "enemy_type": "Crablodon",
+          "probability": 5.0
+        }
+      ],
+      "probability_sum": 100.0
+    },
+    {
+      "id": "wave_15_astral_planes",
+      "file": "wave_15_astral_planes.asset",
+      "min_concurrent_enemies": 58,
+      "spawn_interval_seconds": 2.835,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.8,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.2
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 15.0
+        },
+        {
+          "enemy_type_id": 7,
+          "enemy_type": "Crablodon",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 20,
+          "enemy_type": "Stinkbug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1100.0
+    },
+    {
+      "id": "wave_16",
+      "file": "wave_16.asset",
+      "min_concurrent_enemies": 75,
+      "spawn_interval_seconds": 4.606875,
+      "enemies_per_spawn": 7,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 35,
+          "enemy_type": "Hoarder",
+          "probability": 10.0
+        }
+      ],
+      "probability_sum": 100.0
+    },
+    {
+      "id": "wave_17",
+      "file": "wave_17.asset",
+      "min_concurrent_enemies": 89,
+      "spawn_interval_seconds": 6.84,
+      "enemies_per_spawn": 8,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 103.0
+    },
+    {
+      "id": "wave_18",
+      "file": "wave_18.asset",
+      "min_concurrent_enemies": 115,
+      "spawn_interval_seconds": 5.77125,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 7,
+          "enemy_type": "Crablodon",
+          "probability": 2.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 95.0
+    },
+    {
+      "id": "wave_18_frozen_ancients",
+      "file": "wave_18_frozen_ancients.asset",
+      "min_concurrent_enemies": 115,
+      "spawn_interval_seconds": 5.77125,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 7,
+          "enemy_type": "Crablodon",
+          "probability": 2.0
+        },
+        {
+          "enemy_type_id": 11,
+          "enemy_type": "SneakyBug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1092.0
+    },
+    {
+      "id": "wave_18_verdant_meadows",
+      "file": "wave_18_verdant_meadows.asset",
+      "min_concurrent_enemies": 115,
+      "spawn_interval_seconds": 5.77125,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 7,
+          "enemy_type": "Crablodon",
+          "probability": 2.0
+        },
+        {
+          "enemy_type_id": 15,
+          "enemy_type": "Mole",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1092.0
+    },
+    {
+      "id": "wave_19",
+      "file": "wave_19.asset",
+      "min_concurrent_enemies": 100,
+      "spawn_interval_seconds": 4.212,
+      "enemies_per_spawn": 8,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.7,
+        "void_chance": 0.1,
+        "random_chance": 0.1,
+        "group_chance": 0.1
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 35,
+          "enemy_type": "Hoarder",
+          "probability": 10.0
+        }
+      ],
+      "probability_sum": 100.0
+    },
+    {
+      "id": "wave_2",
+      "file": "wave_2.asset",
+      "min_concurrent_enemies": 15,
+      "spawn_interval_seconds": 2.8349998,
+      "enemies_per_spawn": 3,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.1,
+        "void_chance": 0.45,
+        "random_chance": 0.45,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 70.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 2.0
+        }
+      ],
+      "probability_sum": 82.0
+    },
+    {
+      "id": "wave_20",
+      "file": "wave_20.asset",
+      "min_concurrent_enemies": 18,
+      "spawn_interval_seconds": 2.4299998,
+      "enemies_per_spawn": 3,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 83.0
+    },
+    {
+      "id": "wave_3",
+      "file": "wave_3.asset",
+      "min_concurrent_enemies": 16,
+      "spawn_interval_seconds": 2.8349998,
+      "enemies_per_spawn": 3,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.1,
+        "void_chance": 0.4,
+        "random_chance": 0.4,
+        "group_chance": 0.1
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 60.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        }
+      ],
+      "probability_sum": 88.0
+    },
+    {
+      "id": "wave_4",
+      "file": "wave_4.asset",
+      "min_concurrent_enemies": 17,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 3,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.1,
+        "void_chance": 0.3,
+        "random_chance": 0.5,
+        "group_chance": 0.1
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 20.0
+        }
+      ],
+      "probability_sum": 108.0
+    },
+    {
+      "id": "wave_4_pyrestorm_pit",
+      "file": "wave_4_pyrestorm_pit.asset",
+      "min_concurrent_enemies": 17,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 3,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 1.0,
+        "random_chance": 0.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 50.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 14,
+          "enemy_type": "FlyingManta",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1088.0
+    },
+    {
+      "id": "wave_5",
+      "file": "wave_5.asset",
+      "min_concurrent_enemies": 20,
+      "spawn_interval_seconds": 6.4125,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 1.0,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 103.0
+    },
+    {
+      "id": "wave_5_astral_planes",
+      "file": "wave_5_astral_planes.asset",
+      "min_concurrent_enemies": 20,
+      "spawn_interval_seconds": 6.4125,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 1.0,
+        "void_chance": 0.0,
+        "random_chance": 0.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 20,
+          "enemy_type": "Stinkbug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1100.0
+    },
+    {
+      "id": "wave_6",
+      "file": "wave_6.asset",
+      "min_concurrent_enemies": 28,
+      "spawn_interval_seconds": 6.4125,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 111.0
+    },
+    {
+      "id": "wave_6_frozen_ancients",
+      "file": "wave_6_frozen_ancients.asset",
+      "min_concurrent_enemies": 28,
+      "spawn_interval_seconds": 7.695,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 11,
+          "enemy_type": "SneakyBug",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1108.0
+    },
+    {
+      "id": "wave_6_verdant_meadows",
+      "file": "wave_6_verdant_meadows.asset",
+      "min_concurrent_enemies": 28,
+      "spawn_interval_seconds": 7.695,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 0.0,
+        "random_chance": 1.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 15,
+          "enemy_type": "Mole",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1108.0
+    },
+    {
+      "id": "wave_7",
+      "file": "wave_7.asset",
+      "min_concurrent_enemies": 28,
+      "spawn_interval_seconds": 5.265,
+      "enemies_per_spawn": 6,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 30.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 3.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 5.0
+        }
+      ],
+      "probability_sum": 93.0
+    },
+    {
+      "id": "wave_8",
+      "file": "wave_8.asset",
+      "min_concurrent_enemies": 32,
+      "spawn_interval_seconds": 2.8349998,
+      "enemies_per_spawn": 4,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 0,
+          "enemy_type": "Crabling",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 8,
+          "enemy_type": "Spitter",
+          "probability": 5.0
+        }
+      ],
+      "probability_sum": 95.0
+    },
+    {
+      "id": "wave_9",
+      "file": "wave_9.asset",
+      "min_concurrent_enemies": 34,
+      "spawn_interval_seconds": 2.8349998,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.25,
+        "void_chance": 0.25,
+        "random_chance": 0.25,
+        "group_chance": 0.25
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 9,
+          "enemy_type": "Buffer",
+          "probability": 3.0
+        }
+      ],
+      "probability_sum": 93.0
+    },
+    {
+      "id": "wave_9_pyrestorm_pit",
+      "file": "wave_9_pyrestorm_pit.asset",
+      "min_concurrent_enemies": 34,
+      "spawn_interval_seconds": 2.8349998,
+      "enemies_per_spawn": 5,
+      "spawn_pattern": {
+        "block_player_movement_chance": 0.0,
+        "void_chance": 1.0,
+        "random_chance": 0.0,
+        "group_chance": 0.0
+      },
+      "enemy_probabilities": [
+        {
+          "enemy_type_id": 1,
+          "enemy_type": "FleshCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 2,
+          "enemy_type": "Tripod",
+          "probability": 40.0
+        },
+        {
+          "enemy_type_id": 3,
+          "enemy_type": "Snipjaw",
+          "probability": 20.0
+        },
+        {
+          "enemy_type_id": 4,
+          "enemy_type": "TeethyWorm",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 6,
+          "enemy_type": "ExplodingTick",
+          "probability": 5.0
+        },
+        {
+          "enemy_type_id": 5,
+          "enemy_type": "ShieldCrab",
+          "probability": 10.0
+        },
+        {
+          "enemy_type_id": 14,
+          "enemy_type": "FlyingManta",
+          "probability": 1000.0
+        }
+      ],
+      "probability_sum": 1090.0
+    }
+  ],
+  "elite_enemies": [
+    {
+      "id": "elite",
+      "weighted_enemies": [
+        {
+          "enemy_type_id": 28,
+          "enemy_type": "EliteBuffer",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 23,
+          "enemy_type": "Spawner",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 27,
+          "enemy_type": "EliteExplodingTick",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 26,
+          "enemy_type": "EliteTeethyWorm",
+          "weight": 1.0
+        }
+      ],
+      "spawn_time": "14:00",
+      "enemy_spawn_multiplier": 0.8,
+      "stronger_enemies_curse_stack": 0
+    },
+    {
+      "id": "extra_elite_curse1",
+      "weighted_enemies": [
+        {
+          "enemy_type_id": 28,
+          "enemy_type": "EliteBuffer",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 23,
+          "enemy_type": "Spawner",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 27,
+          "enemy_type": "EliteExplodingTick",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 26,
+          "enemy_type": "EliteTeethyWorm",
+          "weight": 1.0
+        }
+      ],
+      "spawn_time": "10:20",
+      "enemy_spawn_multiplier": 0.8,
+      "stronger_enemies_curse_stack": 1
+    },
+    {
+      "id": "extra_elite_curse2",
+      "weighted_enemies": [
+        {
+          "enemy_type_id": 28,
+          "enemy_type": "EliteBuffer",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 23,
+          "enemy_type": "Spawner",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 27,
+          "enemy_type": "EliteExplodingTick",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 26,
+          "enemy_type": "EliteTeethyWorm",
+          "weight": 1.0
+        }
+      ],
+      "spawn_time": "16:20",
+      "enemy_spawn_multiplier": 0.8,
+      "stronger_enemies_curse_stack": 2
+    },
+    {
+      "id": "extra_elite_curse3",
+      "weighted_enemies": [
+        {
+          "enemy_type_id": 28,
+          "enemy_type": "EliteBuffer",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 23,
+          "enemy_type": "Spawner",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 27,
+          "enemy_type": "EliteExplodingTick",
+          "weight": 1.0
+        },
+        {
+          "enemy_type_id": 26,
+          "enemy_type": "EliteTeethyWorm",
+          "weight": 1.0
+        }
+      ],
+      "spawn_time": "4:10",
+      "enemy_spawn_multiplier": 0.8,
+      "stronger_enemies_curse_stack": 3
+    }
+  ],
+  "enemy_events": [
+    {
+      "id": "BounceEnemyEventConfiguration",
+      "file": "BounceEnemyEventConfiguration.asset",
+      "fields": {
+        "dropHeight": 20,
+        "minDropDistance": 2,
+        "maxDropDistance": 7,
+        "dropDuration": 2.5,
+        "time": 1.0024109,
+        "value": -0.012500763,
+        "inSlope": -1.6471925,
+        "outSlope": -1.6471925,
+        "tangentMode": 0,
+        "weightedMode": 0,
+        "inWeight": 0.9376785,
+        "outWeight": 0,
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4,
+        "dropDamage": 150,
+        "dropDamageRadius": 3.5,
+        "minIdleTime": 0.2,
+        "maxIdleTime": 0.2,
+        "normalNumberOfBounces": 2,
+        "hardNumberOfBounces": 3,
+        "nightmareNumberOfBounces": 4,
+        "minBounceDistance": 1,
+        "maxBounceDistance": 2,
+        "bounceDuration": 1.4,
+        "bounceDamage": 75,
+        "bounceDamageRadius": 2
+      }
+    },
+    {
+      "id": "BounceEnemyEventStarterConfiguration",
+      "file": "BounceEnemyEventStarterConfiguration.asset",
+      "fields": {
+        "minTimeBetweenSpawns": 1.75,
+        "maxTimeBetweenSpawns": 3,
+        "normalNumberOfEnemies": 9,
+        "hardNumberOfEnemies": 12,
+        "nightmareNumberOfEnemies": 14
+      }
+    },
+    {
+      "id": "ConvergentEnemyEventStarterConfiguration",
+      "file": "ConvergentEnemyEventStarterConfiguration.asset",
+      "fields": {
+        "SpawnDistanceFromPlayer": 20,
+        "NumberOfEnemies": 12
+      }
+    },
+    {
+      "id": "LineEnemyEventStarterConfiguration",
+      "file": "LineEnemyEventStarterConfiguration.asset",
+      "fields": {
+        "SpawnDistanceFromCenter": 75,
+        "EnemyDensity": 0.57,
+        "MinLineAngle": 180,
+        "MaxLineAngle": 360,
+        "MinEnemiesBeforeGap": 8,
+        "MaxEnemiesBeforeGap": 12,
+        "GapSizeNormal": 3.2,
+        "GapSizeHard": 2.5,
+        "GapSizeNightmare": 2,
+        "MaxPositionOffset": 0.75
+      }
+    },
+    {
+      "id": "MobEnemyEventStarterConfiguration",
+      "file": "MobEnemyEventStarterConfiguration.asset",
+      "fields": {
+        "SpawnDistanceFromCenter": 90,
+        "MobRadiusNormal": 4.201,
+        "MobRadiusHard": 4.901,
+        "MobRadiusNightmare": 5.601,
+        "EnemyRadius": 0.7
+      }
+    }
+  ]
+}

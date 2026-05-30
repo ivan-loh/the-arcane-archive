@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="An unofficial fan wiki for The Spell Brigade — spells, characters, artifacts, enemies, and strategy guides.">
+  <title>Home — The Arcane Archive</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" aria-current="page" href="index.html">Home</a>
+      <a class="top-nav__link" href="spells/index.html">Spells</a>
+      <a class="top-nav__link" href="characters/index.html">Characters</a>
+      <a class="top-nav__link" href="artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="guides/index.html">Guides</a>
+    </nav>
+
+    <div class="search" data-search data-search-index="data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input"
+             id="site-search"
+             type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off"
+             spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+
+    <button class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="guides/index.html">Guides</a>
+</nav>
+
+<!-- ============================ PAGE =============================== -->
+<div class="container">
+  <div class="page has-sidebar">
+
+    <!-- ----------------------- SIDEBAR ----------------------- -->
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#welcome" aria-current="page">Welcome</a></li>
+        <li><a href="#quickstart">Quick start</a></li>
+        <li><a href="#elements">Elements</a></li>
+        <li><a href="#rarity">Rarity</a></li>
+        <li><a href="#item-cards">Item cards</a></li>
+        <li><a href="#stat-bars">Stat bars</a></li>
+        <li><a href="#stat-table">Comparison table</a></li>
+        <li><a href="#matrix">Element matrix</a></li>
+        <li><a href="#tierlist">Tier list</a></li>
+        <li><a href="#formula">Damage formulas</a></li>
+        <li><a href="#callouts">Callouts &amp; keywords</a></li>
+        <li><a href="#tabs">Tabs</a></li>
+        <li><a href="">Contributing</a></li>
+      </ul>
+
+      <h2 class="sidebar__title">Browse</h2>
+      <ul class="sidebar__nav">
+        <li><a href="spells/index.html">Spells</a></li>
+        <li><a href="characters/index.html">Characters</a></li>
+        <li><a href="artifacts/index.html">Artifacts</a></li>
+        <li><a href="enemies/index.html">Enemies</a></li>
+        <li><a href="bosses/index.html">Bosses</a></li>
+        <li><a href="worlds/index.html">Worlds</a></li>
+        <li><a href="waves/index.html">Waves &amp; runs</a></li>
+        <li><a href="challenges/index.html">Challenges</a></li>
+        <li><a href="mechanics/index.html">Mechanics</a></li>
+        <li><a href="guides/index.html">Guides</a></li>
+      </ul>
+    </aside>
+
+    <!-- ----------------------- MAIN -------------------------- -->
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">Overview &amp; styleguide</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <!-- =================== WELCOME =================== -->
+        <section id="welcome" class="stack">
+          <h1>The Spell Brigade — Fan Wiki</h1>
+          <p class="prose u-muted">
+            An unofficial, text-only reference for <em>The Spell Brigade</em>,
+            the cooperative wave-survival magic-brawler. This landing page also
+            serves as the visual styleguide for every component used across the
+            wiki. Pages are static HTML — no trackers, no images, no CDN.
+          </p>
+
+          <div class="row">
+            <a class="btn btn--primary" href="guides/index.html">Read the guides</a>
+            <a class="btn" href="spells/index.html">Browse spells</a>
+            <a class="btn btn--ghost" href="">How to contribute</a>
+          </div>
+
+          <dl class="meta-dl" style="margin-top: var(--sp-5);">
+            <dt>Game</dt>          <dd>The Spell Brigade</dd>
+            <dt>Genre</dt>         <dd>Co-op wave survival, action roguelike</dd>
+            <dt>Players</dt>       <dd>1–4 online</dd>
+            <dt>Wiki version</dt>  <dd>v0.1 (scaffold)</dd>
+            <dt>Pages</dt>         <dd>0 published · countless planned</dd>
+          </dl>
+        </section>
+
+        <!-- =================== QUICK START =================== -->
+        <section id="quickstart">
+          <h2>Quick start</h2>
+          <p class="prose">
+            New here? Start with the
+            <a href="guides/index.html">beginner&rsquo;s primer</a>,
+            then skim the <a href="mechanics/index.html">mechanics</a> page to
+            understand element interactions. Most build guides live under
+            <a href="guides/index.html">Guides</a>.
+          </p>
+
+          <div class="grid grid-3">
+            <a class="see-also__link" href="characters/index.html">
+              <strong>Characters</strong>
+              Pick a brigade member and learn their passive.
+            </a>
+            <a class="see-also__link" href="spells/index.html">
+              <strong>Spells</strong>
+              Every spell, every element variant, every upgrade path.
+            </a>
+            <a class="see-also__link" href="artifacts/index.html">
+              <strong>Artifacts</strong>
+              Run-altering relics and how to chain their effects.
+            </a>
+          </div>
+        </section>
+
+        <!-- =================== ELEMENTS =================== -->
+        <section id="elements">
+          <h2>Elements</h2>
+          <p class="prose">
+            Every offensive spell belongs to one of five elements. Hovering an
+            element badge anywhere on the wiki cross-links to its mechanics
+            page.
+          </p>
+
+          <div class="row">
+            <a href="mechanics/elements.html#fire"      class="el-badge el-badge--lg" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></a>
+            <a href="mechanics/elements.html#lightning" class="el-badge el-badge--lg" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></a>
+            <a href="mechanics/elements.html#ice"       class="el-badge el-badge--lg" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></a>
+            <a href="mechanics/elements.html#acid"      class="el-badge el-badge--lg" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></a>
+            <a href="mechanics/elements.html#dark"      class="el-badge el-badge--lg" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></a>
+            <a href="mechanics/elements.html#neutral"   class="el-badge el-badge--lg" data-element="neutral"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Neutral</span></a>
+          </div>
+
+          <p class="u-muted" style="margin-top: var(--sp-4);">
+            Smaller inline badges read as
+            <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+            or
+            <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span>
+            inside running text.
+          </p>
+        </section>
+
+        <!-- =================== RARITY =================== -->
+        <section id="rarity">
+          <h2>Rarity</h2>
+          <p class="prose">
+            Spells, artifacts, and drops share a four-tier rarity scale.
+          </p>
+
+          <div class="row">
+            <span class="rarity-pill" data-rarity="common">Common</span>
+            <span class="rarity-pill" data-rarity="rare">Rare</span>
+            <span class="rarity-pill" data-rarity="epic">Epic</span>
+            <span class="rarity-pill" data-rarity="legendary">Legendary</span>
+          </div>
+        </section>
+
+        <!-- =================== ITEM CARDS =================== -->
+        <section id="item-cards">
+          <h2>Item cards</h2>
+          <p class="prose">
+            The workhorse component. Every spell, artifact, and character
+            summary uses this layout.
+          </p>
+
+          <div class="grid grid-cards">
+
+            <article class="item-card" data-element="fire" data-kind="spell" data-rarity="rare">
+              <span class="rarity-ribbon" data-rarity="rare">Rare</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="spells/index.html">Fireball</a></h3>
+                  <p class="item-card__subtitle">Projectile · Tier II</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+                <span class="tag">aoe</span>
+                <span class="tag">projectile</span>
+              </div>
+              <p class="item-card__desc">
+                Hurls a slow, heavy orb that detonates on first impact, igniting
+                everything in a small radius for residual burn damage.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">48</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Cooldown</span><span class="item-card__stat-value">1.8s</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Radius</span><span class="item-card__stat-value">2.4m</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Burn DoT</span><span class="item-card__stat-value">6/s</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-element="ice" data-kind="spell" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Epic</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="spells/index.html">Glacial Shard</a></h3>
+                  <p class="item-card__subtitle">Piercing · Tier III</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span>
+                <span class="tag">pierce</span>
+                <span class="tag">slow</span>
+              </div>
+              <p class="item-card__desc">
+                Launches a crystalline lance that passes through every target in
+                its path, chilling each hit to 60% movement speed for 2s.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">22</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Cooldown</span><span class="item-card__stat-value">0.9s</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Pierce</span><span class="item-card__stat-value">∞</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Slow</span><span class="item-card__stat-value">40%</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-element="dark" data-kind="artifact" data-rarity="legendary">
+              <span class="rarity-ribbon" data-rarity="legendary">Legendary</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="artifacts/index.html">Grim Pact</a></h3>
+                  <p class="item-card__subtitle">Artifact · Curse</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span>
+                <span class="tag">curse</span>
+                <span class="tag">scaling</span>
+              </div>
+              <p class="item-card__desc">
+                You take +25% damage from all sources. In return, every spell
+                you cast deals +60% damage and pierces one extra target.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Self DMG</span><span class="item-card__stat-value">+25%</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Spell DMG</span><span class="item-card__stat-value">+60%</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Pierce</span><span class="item-card__stat-value">+1</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Slot</span><span class="item-card__stat-value">Major</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-element="acid" data-kind="spell" data-rarity="common">
+              <span class="rarity-ribbon" data-rarity="common">Common</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="spells/index.html">Venom Mist</a></h3>
+                  <p class="item-card__subtitle">Aura · Tier I</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span>
+                <span class="tag">aura</span>
+                <span class="tag">dot</span>
+              </div>
+              <p class="item-card__desc">
+                A toxic cloud envelops you, dealing steady damage to every
+                creature standing within 3m. Stacks with other auras.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">DPS</span><span class="item-card__stat-value">14</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Radius</span><span class="item-card__stat-value">3.0m</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Cost</span><span class="item-card__stat-value">passive</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Stack</span><span class="item-card__stat-value">yes</span></div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- =================== STAT BARS =================== -->
+        <section id="stat-bars">
+          <h2>Stat bars</h2>
+          <p class="prose">
+            Compact text-glyph bars for at-a-glance comparisons. Filled at
+            runtime by <code>wiki.js</code> from <code>data-value</code> /
+            <code>data-max</code>.
+          </p>
+
+          <dl class="meta-dl">
+            <dt>Damage</dt>
+            <dd><span class="stat-bar" data-element="fire" data-value="8" data-max="10"
+                       aria-label="Damage 8 of 10"></span></dd>
+            <dt>Cast speed</dt>
+            <dd><span class="stat-bar" data-element="lightning" data-value="9" data-max="10"
+                       aria-label="Cast speed 9 of 10"></span></dd>
+            <dt>Area</dt>
+            <dd><span class="stat-bar" data-element="ice" data-value="4" data-max="10"
+                       aria-label="Area 4 of 10"></span></dd>
+            <dt>Duration</dt>
+            <dd><span class="stat-bar" data-element="acid" data-value="6" data-max="10"
+                       aria-label="Duration 6 of 10"></span></dd>
+            <dt>Utility</dt>
+            <dd><span class="stat-bar" data-element="dark" data-value="3" data-max="10"
+                       aria-label="Utility 3 of 10"></span></dd>
+            <dt>Mana</dt>
+            <dd><span class="stat-bar" data-value="5" data-max="10"
+                       aria-label="Mana 5 of 10"></span></dd>
+          </dl>
+        </section>
+
+        <!-- =================== STAT TABLE =================== -->
+        <section id="stat-table">
+          <h2>Comparison table</h2>
+          <p class="prose">
+            Click any column header to sort. Numeric columns use
+            <code>data-sort="number"</code>.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Tier II projectile spells &mdash; baseline stats at level 1</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Spell</th>
+                  <th data-sort="string">Element</th>
+                  <th data-sort="number" class="num">Damage</th>
+                  <th data-sort="number" class="num">Cooldown</th>
+                  <th data-sort="number" class="num">DPS</th>
+                  <th data-sort="string">Rarity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="spells/index.html">Fireball</a></td>
+                  <td><span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span></td>
+                  <td class="num">48</td>
+                  <td class="num">1.8</td>
+                  <td class="num">26.7</td>
+                  <td><span class="rarity-pill" data-rarity="rare">Rare</span></td>
+                </tr>
+                <tr>
+                  <td><a href="spells/index.html">Glacial Shard</a></td>
+                  <td><span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span></td>
+                  <td class="num">22</td>
+                  <td class="num">0.9</td>
+                  <td class="num">24.4</td>
+                  <td><span class="rarity-pill" data-rarity="epic">Epic</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#">Arc Bolt</a></td>
+                  <td><span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span></td>
+                  <td class="num">18</td>
+                  <td class="num">0.4</td>
+                  <td class="num">45.0</td>
+                  <td><span class="rarity-pill" data-rarity="common">Common</span></td>
+                </tr>
+                <tr>
+                  <td><a href="spells/index.html">Venom Mist</a></td>
+                  <td><span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span></td>
+                  <td class="num">14</td>
+                  <td class="num" data-sort-value="0">—</td>
+                  <td class="num">14.0</td>
+                  <td><span class="rarity-pill" data-rarity="common">Common</span></td>
+                </tr>
+                <tr>
+                  <td><a href="spells/index.html">Void Lance</a></td>
+                  <td><span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span></td>
+                  <td class="num">66</td>
+                  <td class="num">2.4</td>
+                  <td class="num">27.5</td>
+                  <td><span class="rarity-pill" data-rarity="legendary">Legendary</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =================== ELEMENT MATRIX =================== -->
+        <section id="matrix">
+          <h2>Spell &middot; element matrix</h2>
+          <p class="prose">
+            Many spells exist in multiple elemental variants. The matrix shows
+            every variant of a single spell archetype at a glance.
+          </p>
+
+          <h3>Bolt — variants</h3>
+          <div class="element-matrix">
+            <a class="element-matrix__cell" href="spells/index.html">
+              <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+              <span class="element-matrix__cell-name">Cinder Bolt</span>
+              <span class="element-matrix__cell-meta">22 DMG · 0.5s CD</span>
+            </a>
+            <a class="element-matrix__cell" href="spells/index.html">
+              <span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span>
+              <span class="element-matrix__cell-name">Arc Bolt</span>
+              <span class="element-matrix__cell-meta">18 DMG · 0.4s CD</span>
+            </a>
+            <a class="element-matrix__cell" href="spells/index.html">
+              <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span>
+              <span class="element-matrix__cell-name">Frost Bolt</span>
+              <span class="element-matrix__cell-meta">20 DMG · 0.5s CD</span>
+            </a>
+            <a class="element-matrix__cell" href="#">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span>
+              <span class="element-matrix__cell-name">Bile Bolt</span>
+              <span class="element-matrix__cell-meta">16 DMG · 0.5s CD</span>
+            </a>
+            <a class="element-matrix__cell" href="#">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span>
+              <span class="element-matrix__cell-name">Hex Bolt</span>
+              <span class="element-matrix__cell-meta">26 DMG · 0.6s CD</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- =================== TIER LIST =================== -->
+        <section id="tierlist">
+          <h2>Tier list</h2>
+          <p class="prose">
+            Community-voted tier list for the current patch. See
+            <a href="guides/spell-tier-list.html">methodology</a>.
+          </p>
+
+          <div class="tier-list">
+            <div class="tier-row" data-tier="SSS">
+              <div class="tier-row__label">SSS</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="spells/index.html">Void Lance</a>
+                <a class="tier-chip" href="artifacts/index.html">Grim Pact</a>
+              </div>
+            </div>
+            <div class="tier-row" data-tier="S">
+              <div class="tier-row__label">S</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="spells/index.html">Glacial Shard</a>
+                <a class="tier-chip" href="spells/index.html">Fireball</a>
+                <a class="tier-chip" href="#">Runed Belt</a>
+              </div>
+            </div>
+            <div class="tier-row" data-tier="A">
+              <div class="tier-row__label">A</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="spells/index.html">Arc Bolt</a>
+                <a class="tier-chip" href="spells/index.html">Cinder Bolt</a>
+                <a class="tier-chip" href="#">Chain Lightning</a>
+              </div>
+            </div>
+            <div class="tier-row" data-tier="B">
+              <div class="tier-row__label">B</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="spells/index.html">Venom Mist</a>
+                <a class="tier-chip" href="spells/index.html">Frost Bolt</a>
+              </div>
+            </div>
+            <div class="tier-row" data-tier="C">
+              <div class="tier-row__label">C</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="#">Spark</a>
+              </div>
+            </div>
+            <div class="tier-row" data-tier="D">
+              <div class="tier-row__label">D</div>
+              <div class="tier-row__items">
+                <span class="u-muted">No spells currently rated D.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== FORMULAS =================== -->
+        <section id="formula">
+          <h2>Damage formula</h2>
+          <p class="prose">
+            Formulas are plain monospaced blocks with hand-tagged spans for a
+            light syntax tint — no JS, no preprocessor.
+          </p>
+
+          <pre class="formula"><code><span class="f-comment">// Fireball damage at spell level L with artifact stacks A</span>
+<span class="f-fn">damage</span>(<span class="f-var">L</span>, <span class="f-var">A</span>) = (<span class="f-base">48</span> + <span class="f-num">6.5</span> <span class="f-op">×</span> <span class="f-var">L</span>) <span class="f-op">×</span> (<span class="f-num">1.0</span> + <span class="f-num">0.12</span> <span class="f-op">×</span> <span class="f-var">A</span>)
+       <span class="f-op">×</span> <span class="f-el" data-element="fire">[fire bonus]</span>
+       <span class="f-op">+</span> <span class="f-fn">burn</span>(<span class="f-var">L</span>) <span class="f-op">×</span> <span class="f-num">3</span><span class="f-comment">  // 3 burn ticks</span></code></pre>
+
+          <p class="prose">
+            Keywords like <span class="keyword">on_hit</span>,
+            <span class="keyword">on_kill</span>, and
+            <span class="keyword">overcharge</span> are inline-highlighted to
+            stand out in prose.
+          </p>
+        </section>
+
+        <!-- =================== CALLOUTS =================== -->
+        <section id="callouts">
+          <h2>Callouts &amp; keywords</h2>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Tip</span>
+            <p>
+              Holding <kbd>Shift</kbd> while picking an upgrade locks the
+              choice, preventing accidental rerolls.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Warning</span>
+            <p>
+              Acid spells do <strong>not</strong> stack their DoT on bosses
+              with the <span class="keyword">resilient</span> trait.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="danger">
+            <span class="callout__title">Danger</span>
+            <p>
+              The <a href="artifacts/index.html">Grim Pact</a> doubles
+              incoming damage on <a href="#">Hardcore</a>;
+              never run it without a dedicated healer.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="lore">
+            <span class="callout__title">Lore</span>
+            <p>
+              &ldquo;They came not as armies, but as embers carried on the
+              wind — and the brigade answered, syllable by burning syllable.&rdquo;
+            </p>
+          </aside>
+
+          <p class="prose">
+            Inline highlights look like <mark>this</mark>, and key-caps like
+            <kbd>Esc</kbd>, <kbd>Space</kbd>, or
+            <kbd>Ctrl</kbd>+<kbd>K</kbd> sit cleanly in body text.
+          </p>
+        </section>
+
+        <!-- =================== TABS =================== -->
+        <section id="tabs">
+          <h2>Tabs</h2>
+          <p class="prose">
+            Tabs use radio inputs so they work without JavaScript. Each
+            section reuses the same component.
+          </p>
+
+          <div class="tabs">
+            <input type="radio" name="demo-tabs" id="dt-1" checked>
+            <input type="radio" name="demo-tabs" id="dt-2">
+            <input type="radio" name="demo-tabs" id="dt-3">
+
+            <div class="tabs__bar" role="tablist">
+              <label for="dt-1">Overview</label>
+              <label for="dt-2">Stats</label>
+              <label for="dt-3">Build</label>
+            </div>
+
+            <div class="tabs__panels">
+              <section class="tabs__panel">
+                <p>A general description of the entity goes here — the spell&rsquo;s flavor text, its archetype, who unlocked it first, etc.</p>
+              </section>
+              <section class="tabs__panel">
+                <p>Bare numbers and tables — what the spell does at every level, no flavor.</p>
+              </section>
+              <section class="tabs__panel">
+                <p>Suggested artifact pairings and synergy notes from the community.</p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== CONTRIBUTING =================== -->
+        <section id="contributing">
+          <h2>Contributing</h2>
+          <p class="prose">
+            This wiki is generated from plain Markdown plus a small set of HTML
+            partials. To add a page, drop a Markdown file under the relevant
+            section folder (<code>spells/</code>, <code>artifacts/</code>, …)
+            and add an entry to <code>data/search-index.json</code>.
+          </p>
+
+          <ol>
+            <li>Fork the repository.</li>
+            <li>Run the build script to regenerate <code>html</code> from your edits.</li>
+            <li>Open a pull request — the maintainers will review for accuracy.</li>
+          </ol>
+
+          <div class="see-also">
+            <a class="see-also__link" href="styleguide.html">
+              <strong>Editorial style guide</strong>
+              Voice, tone, capitalization, and naming conventions.
+            </a>
+            <a class="see-also__link" href="styleguide.html">
+              <strong>Page templates</strong>
+              Copy-paste skeletons for spell, character, and artifact pages.
+            </a>
+            <a class="see-also__link" href="about.html">
+              <strong>Wiki changelog</strong>
+              What changed when, and which patch we&rsquo;re tracking.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="spells/index.html">Spells</a></li>
+        <li><a href="characters/index.html">Characters</a></li>
+        <li><a href="artifacts/index.html">Artifacts</a></li>
+        <li><a href="enemies/index.html">Enemies</a></li>
+        <li><a href="worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="mechanics/index.html">Game mechanics</a></li>
+        <li><a href="challenges/index.html">Challenges</a></li>
+        <li><a href="about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+<script src="js/wiki.js" defer></script>
+</body>
+</html>

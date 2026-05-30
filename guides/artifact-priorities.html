@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Artifact pick-order discussion for The Spell Brigade — all 20 in-run artifacts ranked under each build archetype.">
+  <title>Artifact Priorities &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Guides nav">
+      <h2 class="sidebar__title">Guides</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">All guides</a></li>
+        <li><a href="damage-optimization.html">Damage optimization</a></li>
+        <li><a href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a aria-current="page" href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a href="element-pairing.html">Element pairing</a></li>
+      </ul>
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#global-tier">Global tier list</a></li>
+        <li><a href="#by-archetype">By archetype</a></li>
+        <li><a href="#by-stat">By stat scaled</a></li>
+        <li><a href="#notes">Per-artifact notes</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Guides</a></li>
+          <li aria-current="page">Artifact Priorities</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section class="stack">
+          <h1>Artifact priorities</h1>
+          <p class="prose u-muted">
+            The 20 in-run artifacts in pickup-priority order. The rankings
+            are <strong>contextual</strong> &mdash; an artifact&rsquo;s value
+            depends entirely on the archetype you&rsquo;re building. Read
+            the <a href="damage-optimization.html#archetypes">archetype
+            section</a> of the damage guide first; this page assumes you
+            know which one you&rsquo;re committed to.
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Where the numbers come from</span>
+            <p>
+              All parameter values quoted here come from
+              <code>data/artifacts.json</code> as extracted from
+              <code>Artifact_*.asset</code> files. The interpretation of
+              <code>Parameters[]</code> indices is inferred from the
+              corresponding <code>ArtifactStatModifier_*</code> class names
+              in the IL2CPP dump; some confidence labels apply.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== GLOBAL TIER ================== -->
+        <section id="global-tier">
+          <h2>Global tier list</h2>
+          <p class="prose">
+            If you had to rank artifacts <em>without</em> knowing your
+            archetype, this is roughly correct. Once you do know, jump to
+            <a href="#by-archetype">By archetype</a>.
+          </p>
+
+          <div class="tier-list">
+
+            <div class="tier-row" data-tier="SSS">
+              <div class="tier-row__label">SSS</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../artifacts/index.html#artifact-15">#15 ElementalDmg / Infusion</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-13">#13 Damage / Armor</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="S">
+              <div class="tier-row__label">S</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../artifacts/index.html#artifact-7">#7 CritDamage Standing Still</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-16">#16 FireRate Standing Still</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-2">#2 Armor / Level</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-5">#5 Damage / Nearby Teammate</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="A">
+              <div class="tier-row__label">A</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../artifacts/index.html#artifact-14">#14 CritDamage / Revive</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-12">#12 Armor / Objective</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-1">#1 LessHP / MoveSpeed</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-3">#3 LessHP / XPGain</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-11">#11 Damage / Revive</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-17">#17 HealOnCrit</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-20">#20 CritDamage / Common</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="B">
+              <div class="tier-row__label">B</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../artifacts/index.html#artifact-6">#6 HealOnDodge</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-8">#8 Luck Not Rerolling</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-10">#10 MaxHP / Revive</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-18">#18 MaxHP / Health Pickup</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-19">#19 HealOnXP Pickup</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="C">
+              <div class="tier-row__label">C</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../artifacts/index.html#artifact-4">#4 Healing / Objective</a>
+                <a class="tier-chip" href="../artifacts/index.html#artifact-9">#9 HealOnLevelUp</a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================== BY ARCHETYPE ================== -->
+        <section id="by-archetype">
+          <h2>Pickup order by archetype</h2>
+
+          <h3>Crit Stacker</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-17">#17 HealOnCrit</a> &mdash; turns offence into sustain; 0.3 HP per crit at high crit rate is sufficient self-heal.</li>
+            <li><a href="../artifacts/index.html#artifact-7">#7 CritDamage Standing Still</a> &mdash; <em>+100</em> CritDamage conditional. Functionally a 2&times; CritDamage doubler when you can stand still (Slash, Bell, Boomerang at apex).</li>
+            <li><a href="../artifacts/index.html#artifact-14">#14 CritDamage / Revive</a> &mdash; <em>+35</em> per revive performed. In a 4-player run you&rsquo;ll hit 4&ndash;6 revives easily &mdash; <em>+140 to +210</em> CritDamage.</li>
+            <li><a href="../artifacts/index.html#artifact-20">#20 CritDamage / Common</a> &mdash; <em>+1</em> per common item picked. Easy to stack <em>+30&ndash;50</em> over a run.</li>
+            <li><a href="../artifacts/index.html#artifact-5">#5 Damage / Nearby Teammate</a> &mdash; co-op only; +20% Damage per nearby ally.</li>
+          </ol>
+
+          <h3>Element Specialist</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-15">#15 ElementalDmg / Infusion</a> &mdash; <strong>the keystone</strong>. Take it the moment it appears. <em>+10 ElementStrength per infusion performed</em>; with 4+ infusions you&rsquo;re multiplying everything by 1.40&times;.</li>
+            <li><a href="../artifacts/index.html#artifact-5">#5 Damage / Nearby Teammate</a> &mdash; pure damage stack, additive but reliable.</li>
+            <li><a href="../artifacts/index.html#artifact-16">#16 FireRate Standing Still</a> &mdash; cadence stacking is multiplicative against your inflated damage.</li>
+            <li><a href="../artifacts/index.html#artifact-20">#20 CritDamage / Common</a> &mdash; passive late-game scaling.</li>
+          </ol>
+
+          <h3>Glass Cannon</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-1">#1 LessHP / MoveSpeed</a> &mdash; <em>+21 MS</em> at minimum HP; survival via mobility.</li>
+            <li><a href="../artifacts/index.html#artifact-3">#3 LessHP / XPGain</a> &mdash; <em>+40% XP</em> at low HP; compounds into more shop picks, which compound into damage.</li>
+            <li><a href="../artifacts/index.html#artifact-6">#6 HealOnDodge</a> &mdash; <em>+20 HP</em> per dodge. Pairs with low max HP to give a meaningful instant-heal.</li>
+            <li><strong>Avoid</strong>: <a href="../artifacts/index.html#artifact-10">#10</a>, <a href="../artifacts/index.html#artifact-18">#18</a>, <a href="../artifacts/index.html#artifact-9">#9</a> &mdash; max HP raises ruin the trade.</li>
+          </ol>
+
+          <h3>Tank-DPS</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-13">#13 Damage / Armor</a> &mdash; <strong>the keystone</strong>. <em>+0.25 Damage per Armor</em> means 100 Armor = +25% Damage in the bracket.</li>
+            <li><a href="../artifacts/index.html#artifact-2">#2 Armor / Level</a> &mdash; feeds #13. <em>+1 Armor per party-member level</em>; at lvl 30 in a 4-stack that&rsquo;s 120 Armor.</li>
+            <li><a href="../artifacts/index.html#artifact-12">#12 Armor / Objective</a> &mdash; <em>+10 Armor per side objective</em>. 5 objectives = +50 Armor = +12.5% Damage.</li>
+            <li><a href="../artifacts/index.html#artifact-11">#11 Damage / Revive</a> &mdash; complements the armor stack with a flat <em>+10% Damage</em> per revive.</li>
+          </ol>
+
+          <h3>Swarm Clearer</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-5">#5 Damage / Nearby Teammate</a> &mdash; standing-in-AoE is your default state; teammates are nearby.</li>
+            <li><a href="../artifacts/index.html#artifact-16">#16 FireRate Standing Still</a> &mdash; persistent-zone spells benefit from standing in them.</li>
+            <li><a href="../artifacts/index.html#artifact-7">#7 CritDamage Standing Still</a> &mdash; same standing-still trigger; double-dips.</li>
+            <li><a href="../artifacts/index.html#artifact-15">#15 ElementalDmg / Infusion</a> &mdash; if you have multi-spell variety.</li>
+          </ol>
+
+          <h3>Boss Killer</h3>
+          <ol>
+            <li><a href="../artifacts/index.html#artifact-7">#7 CritDamage Standing Still</a> &mdash; you&rsquo;ll be kiting or anchored at boss range; static moments give the bonus.</li>
+            <li><a href="../artifacts/index.html#artifact-14">#14 CritDamage / Revive</a> &mdash; pre-boss revives compound here.</li>
+            <li><a href="../artifacts/index.html#artifact-15">#15 ElementalDmg / Infusion</a> &mdash; even if you&rsquo;re not full Element Specialist, 2 infusions = +20% multiplier on every hit.</li>
+            <li><a href="../artifacts/index.html#artifact-16">#16 FireRate Standing Still</a> &mdash; matters more for sustained DPS spells (Beam) than burst (Rifle).</li>
+          </ol>
+        </section>
+
+        <!-- ================== BY STAT ================== -->
+        <section id="by-stat">
+          <h2>Index: artifacts by scaled stat</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>20 artifacts, what stat they push, and how</caption>
+              <thead>
+                <tr>
+                  <th data-sort="number" class="num">#</th>
+                  <th data-sort="string">Artifact</th>
+                  <th data-sort="string">Stat scaled</th>
+                  <th data-sort="string">Trigger</th>
+                  <th data-sort="string">Params</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">1</td><td><a href="../artifacts/index.html#artifact-1">LessHP &rarr; MoveSpeed</a></td><td>MovementSpeed</td><td>Low HP</td><td class="num">21</td></tr>
+                <tr><td class="num">2</td><td><a href="../artifacts/index.html#artifact-2">Armor / PartyLevel</a></td><td>Armor</td><td>Per party-level</td><td class="num">&mdash;</td></tr>
+                <tr><td class="num">3</td><td><a href="../artifacts/index.html#artifact-3">LessHP &rarr; XPGain</a></td><td>XPGain</td><td>Low HP</td><td class="num">40</td></tr>
+                <tr><td class="num">4</td><td><a href="../artifacts/index.html#artifact-4">Healing / Objective</a></td><td>HealingMultiplier</td><td>Per objective</td><td class="num">25</td></tr>
+                <tr><td class="num">5</td><td><a href="../artifacts/index.html#artifact-5">Damage / Teammate</a></td><td>Damage</td><td>Per nearby ally</td><td class="num">20</td></tr>
+                <tr><td class="num">6</td><td><a href="../artifacts/index.html#artifact-6">HealOnDodge</a></td><td>HealOnDodge</td><td>On dodge</td><td class="num">20</td></tr>
+                <tr><td class="num">7</td><td><a href="../artifacts/index.html#artifact-7">CritDmg StandingStill</a></td><td>CriticalDamage</td><td>Static</td><td class="num">100</td></tr>
+                <tr><td class="num">8</td><td><a href="../artifacts/index.html#artifact-8">Luck NotRerolling</a></td><td>Luck</td><td>Per shop</td><td class="num">1, 10</td></tr>
+                <tr><td class="num">9</td><td><a href="../artifacts/index.html#artifact-9">HealOnLevelUp</a></td><td>HealOnLevelUp</td><td>On level</td><td class="num">10</td></tr>
+                <tr><td class="num">10</td><td><a href="../artifacts/index.html#artifact-10">MaxHP / Revive</a></td><td>MaxHealth</td><td>Per revive</td><td class="num">50</td></tr>
+                <tr><td class="num">11</td><td><a href="../artifacts/index.html#artifact-11">Damage / Revive</a></td><td>Damage</td><td>Per revive</td><td class="num">10</td></tr>
+                <tr><td class="num">12</td><td><a href="../artifacts/index.html#artifact-12">Armor / Objective</a></td><td>Armor</td><td>Per objective</td><td class="num">10</td></tr>
+                <tr><td class="num">13</td><td><a href="../artifacts/index.html#artifact-13">Damage / Armor</a></td><td>Damage</td><td>Continuous</td><td class="num">1, 0.25</td></tr>
+                <tr><td class="num">14</td><td><a href="../artifacts/index.html#artifact-14">CritDmg / Revive</a></td><td>CriticalDamage</td><td>Per revive</td><td class="num">35</td></tr>
+                <tr><td class="num">15</td><td><a href="../artifacts/index.html#artifact-15">ElementalDmg / Infusion</a></td><td>ElementStrengthMultiplier</td><td>Per infusion</td><td class="num">10</td></tr>
+                <tr><td class="num">16</td><td><a href="../artifacts/index.html#artifact-16">FireRate StandingStill</a></td><td>FireRate</td><td>Static</td><td class="num">20</td></tr>
+                <tr><td class="num">17</td><td><a href="../artifacts/index.html#artifact-17">HealOnCrit</a></td><td>(heal hook)</td><td>On crit</td><td class="num">0.3</td></tr>
+                <tr><td class="num">18</td><td><a href="../artifacts/index.html#artifact-18">MaxHP / Pickup</a></td><td>MaxHealth</td><td>Per pickup</td><td class="num">40</td></tr>
+                <tr><td class="num">19</td><td><a href="../artifacts/index.html#artifact-19">HealOnXP Pickup</a></td><td>(heal hook)</td><td>Per XP orb</td><td class="num">15, 1</td></tr>
+                <tr><td class="num">20</td><td><a href="../artifacts/index.html#artifact-20">CritDmg / Common</a></td><td>CriticalDamage</td><td>Per common</td><td class="num">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================== NOTES ================== -->
+        <section id="notes">
+          <h2>Per-artifact notes (top 5 only &mdash; deep dives)</h2>
+
+          <article class="item-card">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">#15 IncreaseElementalDamagePerInfusionPerformed</h3>
+                <p class="item-card__subtitle">SSS &middot; ElementStrengthMultiplier</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              The only artifact that pushes the truly-multiplicative
+              <code>ElementStrengthMultiplier</code> stat. <em>+10</em> per
+              infusion event means picking it after 2&ndash;3 infusions
+              already pays back instantly, and every subsequent infusion
+              event compounds. Pairs with
+              <a href="../characters/moon-mage.html">Moon Mage</a> (whose
+              <code>SpellsAndInfusionsGrantedEarlier</code> unique increases
+              total infusion count in a run).
+            </p>
+          </article>
+
+          <article class="item-card">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">#13 IncreaseDamagePerArmor</h3>
+                <p class="item-card__subtitle">SSS &middot; Damage from Armor</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              The single most influential build-defining artifact: it
+              <em>changes the value proposition of Armor</em> from defence to
+              offence. <code>Parameters = [1, 0.25]</code>; inferred meaning:
+              add <em>+1 Damage per N Armor</em> where the rate is <em>0.25</em>
+              per point &mdash; <strong>every 4 Armor = +1% Damage</strong> in
+              the additive bracket. A Tank-DPS build at 100 Armor sits at
+              <em>+25%</em> from this source alone.
+            </p>
+          </article>
+
+          <article class="item-card">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">#7 IncreaseCriticalDamageWhileStandingStill</h3>
+                <p class="item-card__subtitle">S &middot; CriticalDamage</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              <em>+100</em> CritDamage conditional on standing still. Snapshot
+              behaviour (see <a href="damage-optimization.html#pitfalls">snapshot
+              trap</a>): casting before moving locks the bonus into the
+              projectile&rsquo;s DamageInfo. <strong>Cast then dodge</strong>
+              is the play pattern. Worthless on
+              <a href="../spells/trail.html">Trail</a> /
+              <a href="../spells/proximity.html">Proximity</a> users who
+              never stop moving.
+            </p>
+          </article>
+
+          <article class="item-card">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">#2 AddArmorEqualToPartyLevel</h3>
+                <p class="item-card__subtitle">S &middot; Armor</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              No explicit parameters in the data; the IL2CPP class reads
+              the <em>sum of party-member levels</em> each frame. Solo at
+              level 30 = <em>+30 Armor</em>; 4-player party each at level 30
+              = <em>+120 Armor</em>. This is the single biggest Armor source
+              in the game and the natural partner to #13.
+            </p>
+          </article>
+
+          <article class="item-card">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">#16 IncreaseFireRateWhileStandingStill</h3>
+                <p class="item-card__subtitle">S &middot; FireRate</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              <em>+20</em> FireRate conditional on standing still. Pairs
+              with #7 (same trigger) for the standing-still package on
+              spells like Beam, Slash (with size-when-still variant), Bell,
+              and BombLauncher. Multiplicative against your Damage bracket
+              &mdash; this is high-leverage even at 0% existing FireRate
+              modifiers.
+            </p>
+          </article>
+
+          <h3>Honourable mention: the heal-on-X family</h3>
+          <p class="prose">
+            <a href="../artifacts/index.html#artifact-17">#17 HealOnCrit (0.3 HP)</a>,
+            <a href="../artifacts/index.html#artifact-6">#6 HealOnDodge (20 HP)</a>,
+            <a href="../artifacts/index.html#artifact-9">#9 HealOnLevelUp (10 HP)</a>,
+            <a href="../artifacts/index.html#artifact-19">#19 HealOnXP (15 HP / orb)</a>.
+            These all <em>look</em> defensive but their real role is
+            <em>enabling</em>: they let you take the
+            <a href="../artifacts/index.html#artifact-1">Glass Cannon LessHP</a>
+            artifacts safely, or sustain through bullet-hell phases without
+            committing to defensive stats. Stack one heal-on-X with one
+            offence artifact; don&rsquo;t stack two heal-on-X.
+          </p>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="damage-optimization.html">
+            <strong>Damage Optimization &rarr;</strong>
+            The archetypes referenced throughout this page.
+          </a>
+          <a class="see-also__link" href="spell-tier-list.html">
+            <strong>Spell tier list &rarr;</strong>
+            Which spells match each artifact strategy.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Artifact data extracted from <code>Artifact_*.asset</code>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="index.html">Guides hub</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

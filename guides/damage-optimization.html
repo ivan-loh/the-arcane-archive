@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The Spell Brigade — complete damage formula breakdown, stat-priority hierarchy, build archetypes, and worked numerical optimization examples.">
+  <title>Damage Optimization — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="On this page">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#formula">The damage formula</a></li>
+        <li><a href="#log-curve">Logarithmic stacking</a></li>
+        <li><a href="#stat-priority">Stat priority hierarchy</a></li>
+        <li><a href="#archetypes">Build archetypes</a></li>
+        <li><a href="#examples">Worked examples</a></li>
+        <li><a href="#pitfalls">Pitfalls &amp; traps</a></li>
+        <li><a href="#late-game">Late-game scaling</a></li>
+        <li><a href="#cheat-sheet">Cheat sheet</a></li>
+      </ul>
+
+      <h2 class="sidebar__title">Other guides</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Guides hub</a></li>
+        <li><a href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a href="element-pairing.html">Element pairing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Guides</a></li>
+          <li aria-current="page">Damage Optimization</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <!-- ================== INTRO ================== -->
+        <section id="intro" class="stack">
+          <h1>Damage Optimization &mdash; the complete guide</h1>
+          <p class="prose u-muted">
+            Everything you need to push numbers from "I&rsquo;m winning"
+            into "I&rsquo;m bored, where are the enemies." The first half is
+            mechanics &mdash; the actual formula your damage flows through. The
+            second half is what to <em>do</em> with that formula: which stats
+            to chase, in what order, under which archetype.
+          </p>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Empirical caveat</span>
+            <p>
+              The Spell Brigade ships as an IL2CPP build &mdash; only class
+              signatures and a handful of constants survive decompilation.
+              Every multiplicative chain in this guide is reverse-engineered
+              from those signatures plus the single embedded constant
+              <code>StatCalculator.Exponent = 0.5714286</code> (&asymp;&nbsp;4/7).
+              Where ordering or coefficients are inferred, you&rsquo;ll see a
+              <strong>callout</strong>. Real-world damage may differ from the
+              numbers below by a few percent due to call paths we couldn&rsquo;t
+              trace (notably the resistance / corruption ordering inside
+              <code>RemoveHealth</code>). Treat the math as 95% correct, not
+              gospel.
+            </p>
+          </aside>
+
+          <p class="prose">
+            New to the game? Read the
+            <a href="index.html">guides hub</a> first, then come back here once
+            you&rsquo;ve survived your first run. Already familiar?
+            Jump to the <a href="#cheat-sheet">cheat sheet</a> at the end.
+          </p>
+        </section>
+
+        <!-- ================== FORMULA ================== -->
+        <section id="formula">
+          <h2>1. The damage formula</h2>
+          <p class="prose">
+            One screen, one diagram. Every hit your spells deal funnels through
+            this exact pipeline, from the moment you press cast to the moment HP
+            leaves an enemy bar:
+          </p>
+
+          <pre class="formula"><code><span class="f-comment">// Player spell &rarr; enemy HP, end-to-end</span>
+
+<span class="f-var">final</span> = <span class="f-base">base_damage</span>
+        <span class="f-op">&times;</span> (<span class="f-num">1</span> + &Sigma; <span class="f-var">PercentAdd_damage%</span>)            <span class="f-comment">// Damage stat, additive</span>
+        <span class="f-op">&times;</span> <span class="f-var">spell_specific_mult</span>                <span class="f-comment">// e.g. DealsMoreDamageTowardsCenter</span>
+        <span class="f-op">&times;</span> <span class="f-num">1.5</span>                                <span class="f-comment">// if hitbox = Weakspot</span>
+        <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-var">CriticalDamage</span> / <span class="f-num">100</span>)          <span class="f-comment">// if crit roll succeeds</span>
+        <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-var">ElementStrength_attacker%</span>)    <span class="f-comment">// Stat 30, attacker side</span>
+        <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-var">ElementWeakness_target%</span>)      <span class="f-comment">// Stat 27, target side (rare)</span>
+        <span class="f-op">&times;</span> &Pi; <span class="f-var">damage_multiplier_providers</span>     <span class="f-comment">// Acid debuff, Dark corruption, etc.</span>
+        <span class="f-op">&minus;</span> <span class="f-var">target.Armor</span>                       <span class="f-comment">// FLAT subtraction, clamped &ge; 0</span>
+        <span class="f-op">&times;</span> <span class="f-num">0.25</span>                               <span class="f-comment">// only if hitting an ally (friendly fire)</span></code></pre>
+
+          <p class="prose">
+            The single most important thing to internalize: the
+            <strong>Damage</strong> stat (StatType <code>0</code>) is one big
+            additive pool. Every <em>+X% Damage</em> source &mdash; from your
+            character&rsquo;s base modifier, from spell improvements, from
+            artifacts like <a href="../artifacts/index.html#artifact-13">Increase Damage
+            Per Armor</a>, from variants that read your party state &mdash; all
+            collapse into the same <code>1 + &Sigma;</code> bracket. They do
+            <em>not</em> multiply each other.
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">No log exponent on Damage</span>
+            <p>
+              <code>PercentAddLogarithmic</code> (bracket raised to
+              <code>^0.5714</code>) applies to specific stats &mdash;
+              <strong>Range</strong>&nbsp;(1), <strong>Size</strong>&nbsp;(6),
+              Luck, Pickup Radius &mdash; <strong>not</strong> to the
+              <code>Damage</code> stat. Size and Range still affect damage
+              indirectly (more enemies hit, longer dwell), but no exponent
+              ever enters the master damage formula above. See the canonical
+              reference in
+              <a href="../mechanics/damage-system.html">mechanics / damage-system</a>
+              and per-stat calc types on the
+              <a href="../mechanics/stats.html">stats page</a>.
+            </p>
+          </aside>
+
+          <h3 id="formula-terms">Term-by-term breakdown</h3>
+
+          <dl class="meta-dl">
+            <dt><code>base_damage</code></dt>
+            <dd>
+              The <code>Damage</code> entry in the spell&rsquo;s
+              <code>base_stats</code>. e.g.&nbsp;<a href="../spells/arrow.html">Arrow</a>
+              starts at <strong>165</strong>,
+              <a href="../spells/shotgun.html">Shotgun</a> at
+              <strong>300</strong>,
+              <a href="../spells/trail.html">Trail</a> at <strong>33.81</strong>.
+              This is what every multiplier scales.
+            </dd>
+            <dt>&Sigma; <code>PercentAdd_damage%</code></dt>
+            <dd>
+              The whole additive bracket. Most damage sources land here:
+              improvement pick <em>+7% Damage</em>, character bonus
+              <em>+6 Damage</em> (Hatty), epic-tier roll, etc. Confidence:
+              <strong>high</strong> &mdash; this is the canonical
+              <code>StatCalculator.CalculatePercentAddValue</code> path.
+            </dd>
+            <dt><code>spell_specific_mult</code></dt>
+            <dd>
+              Hard-coded per-spell scalars and conditional spell-variant
+              modifiers. Examples: <em>Slash deals 1.5&times; on the front
+              edge</em>, <em>Boomerang crits at apex</em>, <em>Trail does more
+              damage at the end</em>. Confidence: <strong>inferred</strong>
+              &mdash; the dump shows variant classes but not their coefficients
+              outside <code>Parameters[]</code>.
+            </dd>
+            <dt><code>weakspot &times; 1.5</code></dt>
+            <dd>
+              Hard constant <code>Hitbox.WeakspotDamageMultiplier = 1.5f</code>.
+              Hitboxes typed as <code>Weakspot</code> (boss heads, mostly)
+              apply this multiplicatively, before crit. Confidence:
+              <strong>high</strong>.
+            </dd>
+            <dt><code>1 + CriticalDamage/100</code></dt>
+            <dd>
+              On a successful crit roll (<code>random(0,100) &lt; CriticalChance</code>),
+              damage is multiplied by <code>1 + CriticalDamage/100</code>.
+              Default character crit damage is
+              <code>150</code> &rArr; a crit deals <strong>2.5&times;</strong>
+              non-crit. Crit chance and crit damage are
+              <strong>snapshotted</strong> on the <code>PlayerSpellDamageInfo</code>
+              at cast time, not at hit time.
+            </dd>
+            <dt><code>ElementStrength_attacker%</code></dt>
+            <dd>
+              StatType&nbsp;<strong>30</strong>. <code>+X%</code> damage with
+              elemental (non-None) spells. Sources: the
+              <a href="../artifacts/index.html#artifact-15">Elemental Damage per Infusion</a>
+              artifact, <a href="../characters/star-mage.html">Star Mage</a>&rsquo;s
+              <em>+15%</em> innate, certain late-game upgrades.
+              Multiplied <em>after</em> the additive Damage bracket, so this is
+              one of the few true multipliers in the formula &mdash; precious.
+            </dd>
+            <dt><code>ElementWeakness_target%</code></dt>
+            <dd>
+              StatType&nbsp;<strong>27</strong>. Target-side multiplier.
+              For PvE play this only meaningfully appears on
+              <a href="../characters/hatty.html">Hatty</a> (who carries
+              <code>+15</code> as a <em>self</em>-debuff) and on certain
+              enemies tagged with element weaknesses. Effectively, enemies
+              don&rsquo;t carry this stat in normal play &mdash; treat it as 1.
+            </dd>
+            <dt>&Pi; <code>damage_multiplier_providers</code></dt>
+            <dd>
+              The per-target debuff product. Acid&rsquo;s
+              <em>ResistanceReduction</em>, Dark&rsquo;s corruption multiplier,
+              and any boss-script-injected multiplier ride this rail. Each
+              provider returns its own scalar; the dump leaves the
+              <em>composition</em> (sum vs product) ambiguous. Best-guess:
+              product. Confidence: <strong>inferred</strong>.
+            </dd>
+            <dt><code>&minus; target.Armor</code></dt>
+            <dd>
+              <strong>Flat subtraction</strong>, clamped at zero. This matters
+              for player defence; bosses do not publicly expose Armor.
+              Why flat-subtraction is the working hypothesis:
+              (a) Armor is a Flat-calc stat, (b) the artifact
+              <a href="../artifacts/index.html#artifact-13">Increase Damage Per Armor</a>
+              would be pointless if armor had built-in diminishing returns,
+              (c) the genre&rsquo;s ancestor (Vampire Survivors) uses flat
+              subtraction. Confidence: <strong>inferred</strong>.
+            </dd>
+            <dt><code>&times; 0.25</code> (friendly fire)</dt>
+            <dd>
+              Hard constant <code>FriendlyFireMultiplier = 0.25</code> applied
+              when a player damages another player. AOE on top of teammates
+              still does a quarter-strength hit. Confidence: <strong>high</strong>.
+            </dd>
+          </dl>
+        </section>
+
+        <!-- ================== LOG CURVE ================== -->
+        <section id="log-curve">
+          <h2>2. The logarithmic curve (Size, Range)</h2>
+          <p class="prose">
+            Two stats route through a different aggregator:
+            <code>PercentAddLogarithmic</code>. That aggregator does
+            <em>not</em> change the additive sum &mdash; it raises the result
+            to <code>0.5714</code> (&asymp;&nbsp;4/7).
+          </p>
+
+          <pre class="formula"><code><span class="f-comment">// PercentAddLogarithmic, applied to Size and Range</span>
+<span class="f-var">value</span> = <span class="f-base">base</span> <span class="f-op">&times;</span> (<span class="f-num">1</span> + &Sigma; <span class="f-var">mod%</span>)<sup><span class="f-num">0.5714</span></sup></code></pre>
+
+          <p class="prose">
+            That exponent murders runaway stacking. Look at what
+            <em>nominal</em> percentages actually buy you:
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Nominal &Sigma; vs. actual scalar after the <code>^0.5714</code> exponent</caption>
+              <thead>
+                <tr>
+                  <th>&Sigma; modifier %</th>
+                  <th class="num">1&nbsp;+&nbsp;&Sigma;</th>
+                  <th class="num">After ^0.5714</th>
+                  <th class="num">&ldquo;Felt&rdquo; bonus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>+25%</td><td class="num">1.25</td><td class="num">1.136&times;</td><td class="num">+13.6%</td></tr>
+                <tr><td>+50%</td><td class="num">1.50</td><td class="num">1.261&times;</td><td class="num">+26.1%</td></tr>
+                <tr><td>+75%</td><td class="num">1.75</td><td class="num">1.377&times;</td><td class="num">+37.7%</td></tr>
+                <tr><td>+100%</td><td class="num">2.00</td><td class="num">1.486&times;</td><td class="num">+48.6%</td></tr>
+                <tr><td>+150%</td><td class="num">2.50</td><td class="num">1.688&times;</td><td class="num">+68.8%</td></tr>
+                <tr><td>+200%</td><td class="num">3.00</td><td class="num">1.873&times;</td><td class="num">+87.3%</td></tr>
+                <tr><td>+300%</td><td class="num">4.00</td><td class="num">2.208&times;</td><td class="num">+120.8%</td></tr>
+                <tr><td>+500%</td><td class="num">6.00</td><td class="num">2.784&times;</td><td class="num">+178.4%</td></tr>
+                <tr><td>+1000%</td><td class="num">11.00</td><td class="num">3.936&times;</td><td class="num">+293.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Practical reading</span>
+            <p>
+              <strong>You can never out-grow your starting Size by more than
+              about 4&times;</strong> (even <em>+1000%</em> nominal lands at
+              ~3.94&times;), regardless of how much you
+              stack. The first 50&ndash;100% of Size you pick up is almost
+              all the value you&rsquo;ll ever extract from the stat. After
+              that, Size picks become low-priority unless your build
+              <em>needs</em> the coverage (Bell, Plant, EnergyZone, Meteor).
+            </p>
+          </aside>
+
+          <p class="prose">
+            Same curve applies to <strong>Range</strong>. The implication: on
+            short-range spells like
+            <a href="../spells/slash.html">Slash</a> or
+            <a href="../spells/trail.html">Trail</a>, picking <em>any</em>
+            Range improvement is a high-value first pick, but successive
+            picks lose value quickly. On already-long-range spells like
+            <a href="../spells/bell.html">Bell</a> or
+            <a href="../spells/falling-star.html">FallingStar</a>, Range picks
+            are nearly worthless.
+          </p>
+        </section>
+
+        <!-- ================== STAT PRIORITY ================== -->
+        <section id="stat-priority">
+          <h2>3. Stat priority hierarchy</h2>
+          <p class="prose">
+            Every stat that can move your damage number, ranked by how much
+            leverage one point/percent of it actually buys. Order is
+            <em>defaults</em> &mdash; specific spells / artifacts will
+            override individual rows. See <a href="#archetypes">archetypes</a>
+            for the override logic.
+          </p>
+
+          <ol class="stack-lg">
+            <li>
+              <h3>S-tier &mdash; Damage (StatType 0)</h3>
+              <p>
+                The direct multiplier on every spell hit. PercentAdd, so it
+                sums with every other Damage source. Roughly speaking, an
+                epic <em>+15% Damage</em> pick is worth between
+                <em>+8%</em> and <em>+15%</em> final DPS, depending on how
+                large your existing bracket is (diminishing returns are real
+                &mdash; if you&rsquo;re already at <em>1 + 2.00</em>, adding
+                <em>0.15</em> only moves the bracket from 3.00 &rarr; 3.15,
+                a <em>+5%</em> final-damage bump).
+              </p>
+              <p>
+                <strong>Stack ceiling:</strong> none, but each successive
+                pick is worth less in relative DPS terms.
+                <strong>Best sources:</strong> the generic <em>Damage</em>
+                improvement (epic tier <em>+7</em> at lvl 1 cycling 5/3/5/5);
+                spell-specific <em>Damage</em> rolls in the spell&rsquo;s
+                store entry; artifacts
+                <a href="../artifacts/index.html#artifact-5">Damage per Nearby Teammate</a>,
+                <a href="../artifacts/index.html#artifact-11">Damage per Revive</a>,
+                <a href="../artifacts/index.html#artifact-13">Damage per Armor</a>.
+              </p>
+            </li>
+
+            <li>
+              <h3>S-tier &mdash; FireRate (StatType 2)</h3>
+              <p>
+                Multiplies hits per second linearly. Because it&rsquo;s
+                PercentAdd against the spell&rsquo;s base FireRate &mdash;
+                <em>not</em> against the Damage bracket &mdash; FireRate is a
+                true second multiplier on DPS. <em>+30% Damage</em> and
+                <em>+30% FireRate</em> together give roughly
+                <code>1.30 &times; 1.30 = 1.69&times;</code> DPS, while
+                <em>+60% Damage</em> alone gives only
+                <code>1.60&times;</code>. Splitting matters.
+              </p>
+              <p>
+                <strong>Stack ceiling:</strong> spell-dependent. Some
+                spells&rsquo; per-cast animations cap effective rate; verify
+                by watching your spell visibly hit a wall (animation locks).
+                <strong>Best sources:</strong> generic FireRate improvement
+                (epic <em>+3</em> base), starting modifiers on
+                Shotgun/Smg/Arrow (<em>+12</em>, <em>+8</em>, <em>+12</em>),
+                artifact
+                <a href="../artifacts/index.html#artifact-16">FireRate When Standing Still</a>.
+              </p>
+            </li>
+
+            <li>
+              <h3>A-tier &mdash; CriticalChance &times; CriticalDamage (12, 13)</h3>
+              <p>
+                A multiplicative pair: expected per-hit damage gain is
+                <code>1 + (CriticalChance/100) &times; (CriticalDamage/100)</code>.
+                Default character starts at <strong>10% / 150%</strong>, so
+                baseline crits contribute
+                <code>1 + 0.10 &times; 1.50 = 1.15&times;</code> &mdash; a
+                15% effective DPS pad you already had.
+              </p>
+              <h4>The breakeven question</h4>
+              <p>
+                "Should I take <em>+4 CritChance</em> or <em>+7 CritDamage</em>
+                when both are offered?" Compute the partial derivatives at
+                your current values. With <em>C</em> = CriticalChance and
+                <em>D</em> = CriticalDamage:
+              </p>
+              <pre class="formula"><code><span class="f-var">d(multiplier)</span> / <span class="f-var">d C</span> = <span class="f-var">D</span> / <span class="f-num">10000</span>
+<span class="f-var">d(multiplier)</span> / <span class="f-var">d D</span> = <span class="f-var">C</span> / <span class="f-num">10000</span>
+
+<span class="f-comment">// +4 CritChance is better than +7 CritDamage when:</span>
+<span class="f-num">4</span> <span class="f-op">&times;</span> <span class="f-var">D</span> &gt; <span class="f-num">7</span> <span class="f-op">&times;</span> <span class="f-var">C</span>      <span class="f-op">&hArr;</span>      <span class="f-var">D</span> / <span class="f-var">C</span> &gt; <span class="f-num">1.75</span></code></pre>
+              <p class="prose">
+                At default stats (<em>C=10, D=150</em>), <em>D/C = 15</em> &mdash;
+                wildly above 1.75, so CritChance is the right pick. The pivot
+                only flips around <em>D/C&nbsp;&lt;&nbsp;1.75</em>, e.g.
+                <em>C=80, D=140</em>. <strong>In practice, almost always pick
+                CritChance until you&rsquo;re above 40&ndash;50%, then
+                rebalance.</strong>
+              </p>
+              <p>
+                <strong>Best sources:</strong> CritChance improvement (epic
+                <em>+4</em> first, then <em>+2/+2/+4/+4</em>); CritDamage
+                improvement (epic <em>+7/+5/+6/+7/+7</em>); artifacts
+                <a href="../artifacts/index.html#artifact-7">CritDamage Standing Still</a>
+                (<em>+100</em> conditional), <a href="../artifacts/index.html#artifact-14">CritDamage per Revive</a>
+                (<em>+35</em> per), <a href="../artifacts/index.html#artifact-20">CritDamage per Common</a>;
+                <a href="../characters/wizard-king.html">Wizard King</a>
+                starts <em>+10</em> CritChance,
+                <a href="../characters/flute-mage.html">Flute Mage</a>
+                <em>+5</em> CritDamage (but <em>&minus;3</em> CritChance).
+              </p>
+            </li>
+
+            <li>
+              <h3>A-tier (spell-dependent) &mdash; Projectiles (StatType 20)</h3>
+              <p>
+                Flat stat. <strong>Each extra projectile is functionally a
+                +Damage multiplier the size of (new_count / old_count)</strong>.
+                On <a href="../spells/shotgun.html">Shotgun</a> (3 base
+                projectiles), <em>+1 projectile</em> is
+                <code>4/3 = 1.33&times;</code> DPS &mdash; an enormous,
+                multiplicative gain. On
+                <a href="../spells/meteor.html">Meteor</a> (4 base) it&rsquo;s
+                <code>5/4 = 1.25&times;</code>. On a
+                <a href="../spells/beam.html">Beam</a> (1 base), it&rsquo;s a
+                full <em>doubling</em>.
+              </p>
+              <p>
+                The Projectiles stat is <strong>flat-aggregated</strong>, so
+                stacks don&rsquo;t suffer the Damage-bracket dilution, but the
+                proportional gain naturally diminishes as your count grows
+                (5&rarr;6 is only +20%). <strong>Best sources:</strong> the
+                <code>ExtraProjectile</code> variant on Shotgun, Smg, Meteor,
+                Beam; generic Projectiles improvement (rare in store).
+              </p>
+            </li>
+
+            <li>
+              <h3>A-tier (spell-dependent) &mdash; Size (StatType 6)</h3>
+              <p>
+                See <a href="#log-curve">section 2</a> for the math.
+                AOE spells (<a href="../spells/bell.html">Bell</a>,
+                <a href="../spells/plant.html">Plant</a>,
+                <a href="../spells/energy-zone.html">EnergyZone</a>,
+                <a href="../spells/meteor.html">Meteor</a>) treat Size as
+                their primary damage multiplier &mdash; a larger area hits
+                more enemies, and DamageTickRate spells hit each enemy more
+                times.
+              </p>
+              <p>
+                <strong>Stack ceiling:</strong> hard-felt around
+                <em>+200%</em> nominal (1.87&times; effective). Past that,
+                pick anything else. <strong>Best sources:</strong> generic
+                SpellSize improvement (<em>+4</em>); most spells&rsquo; own
+                starting modifiers already include <em>+25%</em> Size; the
+                <code>IncreaseSizeWhenStandingStill</code> variant on Slash
+                / Plant.
+              </p>
+            </li>
+
+            <li>
+              <h3>B-tier &mdash; ElementStrengthMultiplier (StatType 30)</h3>
+              <p>
+                A rare and pure-multiplicative damage source &mdash; it
+                multiplies the post-additive damage by <code>1 + X%</code>.
+                Two sources only matter in the live game:
+                <a href="../characters/star-mage.html">Star Mage</a>&rsquo;s
+                <em>+15</em> baseline, and the
+                <a href="../artifacts/index.html#artifact-15">Elemental Damage per
+                Infusion</a> artifact (<em>+10 per infusion</em>). With
+                <em>4</em> infusions equipped that artifact alone reaches
+                <em>+40%</em> &mdash; a true multiplicative <em>1.40&times;</em>
+                outside the additive bracket.
+              </p>
+              <p>
+                <strong>Best sources:</strong> the infusion artifact &mdash;
+                grab it the moment you commit to elemental builds.
+              </p>
+            </li>
+
+            <li>
+              <h3>B-tier &mdash; Speed, Range, LifeTime (3, 1, 4)</h3>
+              <p>
+                Indirect damage. <em>Speed</em> determines how reliably
+                projectiles connect at a distance and how fast moving targets
+                eat them. <em>Range</em> (log-stacked) widens the engagement
+                envelope &mdash; great on melee
+                (<a href="../spells/slash.html">Slash</a>,
+                <a href="../spells/boomerang.html">Boomerang</a>), useless
+                on already-long
+                (<a href="../spells/falling-star.html">FallingStar</a>).
+                <em>LifeTime</em> matters mostly for area persistence
+                spells (Bell, Plant, EnergyZone, Trail) and beam dwell.
+              </p>
+              <p>
+                Rule of thumb: <strong>one improvement each of these is
+                worth chasing, more than one is not</strong> unless your
+                spell archetype specifically wants it.
+              </p>
+            </li>
+
+            <li>
+              <h3>C-tier &mdash; Luck (StatType 9)</h3>
+              <p>
+                Meta-stat. Biases the rarity roll on store items and drops
+                &mdash; better picks downstream, no immediate damage. Worth
+                taking <em>early</em> when you have many picks ahead, never
+                worth taking on a final shop. The artifact
+                <a href="../artifacts/index.html#artifact-8">Luck When Not Rerolling</a>
+                pairs nicely with a no-reroll discipline.
+              </p>
+            </li>
+
+            <li>
+              <h3>Defensive damage &mdash; Armor (StatType 14)</h3>
+              <p>
+                Listed under damage because of one artifact:
+                <a href="../artifacts/index.html#artifact-13">IncreaseDamagePerArmor</a>
+                converts Armor into <em>Damage</em> at a documented ratio of
+                <em>Parameters[1] = 0.25</em> per point (inferred: each
+                Armor adds <em>+0.25</em> to the Damage bracket, or
+                <em>+25%</em> per <em>100</em> Armor). Stack
+                <a href="../artifacts/index.html#artifact-2">AddArmorEqualToLevel</a> +
+                <a href="../artifacts/index.html#artifact-12">Armor per Objective</a>
+                and Armor becomes a damage stat. Without that artifact, Armor
+                is purely defensive.
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- ================== ARCHETYPES ================== -->
+        <section id="archetypes">
+          <h2>4. Build archetypes</h2>
+          <p class="prose">
+            Six tested skeletons. Each abuses a different multiplicative
+            chain in the formula. Pick the one that matches the
+            <strong>starter spell + first artifact</strong> the game hands
+            you &mdash; trying to <em>force</em> an archetype against a poor
+            opening is the most common reason builds stall.
+          </p>
+
+          <div class="grid grid-2 stack-lg">
+
+            <!-- ARCHETYPE 1 -->
+            <article class="item-card" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Crit Stacker</h3>
+                  <p class="item-card__subtitle">Multiplies the multiplier</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Push <em>CriticalChance &times; CriticalDamage</em> to where
+                every hit averages 4&ndash;5&times; non-crit damage. The
+                expected-damage formula
+                <code>1 + (CC/100) &times; (CD/100)</code> is unbounded
+                &mdash; at 60% chance and 400% damage you&rsquo;re at
+                <code>1 + 0.60 &times; 4.0 = 3.4&times;</code> average. Best
+                on single-target heavy hitters where crits actually matter
+                per shot.
+              </p>
+              <div class="item-card__badges">
+                <span class="tag">single-target</span>
+                <span class="tag">scaling</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li><a href="../spells/rifle.html">Rifle</a> &mdash; 140 base, slow cadence, every shot wants to crit.</li>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base; the <code>FrontEdge</code> hitbox compounds with crit.</li>
+                <li><a href="../spells/boomerang.html">Boomerang</a> &mdash; the <code>BoomerangCriticalDamageOnApex</code> variant is essentially a free <em>+CritDamage</em> on every apex hit.</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li><a href="../artifacts/index.html#artifact-17">HealOnCrit (#17)</a> &mdash; turns offence into sustain; param <em>0.3</em> HP per crit.</li>
+                <li><a href="../artifacts/index.html#artifact-14">CritDamage per Revive (#14)</a> &mdash; <em>+35</em> stacking; reach two revives, you&rsquo;re at <em>+70</em>.</li>
+                <li><a href="../artifacts/index.html#artifact-7">CritDamage Standing Still (#7)</a> &mdash; <em>+100</em> CritDamage while stationary; pairs with kiting walls.</li>
+                <li><a href="../artifacts/index.html#artifact-20">CritDamage per Common (#20)</a> &mdash; <em>+1</em> per common picked; trivially stacks late.</li>
+              </ul>
+              <h4>Heroes</h4>
+              <p><a href="../characters/wizard-king.html">Wizard King</a> (<em>+10</em> CritChance), <a href="../characters/flute-mage.html">Flute Mage</a> if you can keep the <em>&minus;3</em> CritChance trade under control.</p>
+              <p><strong>Why it works:</strong> exploits the only term in the formula besides FireRate that&rsquo;s a <em>true</em> multiplier sitting outside the additive Damage bracket.</p>
+              <p><strong>Counter-play:</strong> very high HP bosses with damage caps; if all your damage comes from rare crit spikes, dry streaks feel awful.</p>
+            </article>
+
+            <!-- ARCHETYPE 2 -->
+            <article class="item-card" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Element Specialist</h3>
+                  <p class="item-card__subtitle">Multiplicative outside the bracket</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Stack the same single-element infusion across every spell to
+                feed <a href="../artifacts/index.html#artifact-15">IncreaseElementalDamagePerInfusionPerformed&nbsp;(#15)</a>
+                until your <code>ElementStrengthMultiplier</code> sits in the
+                <em>+40</em> to <em>+60</em> range &mdash; a true
+                <em>1.40&ndash;1.60&times;</em> outside everything else.
+                Best with Fire (DoT stacks) or Lightning (ricochet damage
+                is itself elemental).
+              </p>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+                <span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span>
+                <span class="tag">scaling</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li>Any 3+ spells, all infused with the <em>same</em> element. Repeat-infuse for <code>FireDouble</code> / <code>LightningDouble</code> to intensify the secondary effect.</li>
+                <li>Best vehicles: <a href="../spells/orb.html">Orb</a>, <a href="../spells/arrow.html">Arrow</a>, <a href="../spells/shotgun.html">Shotgun</a> &mdash; high base damage per infusion event.</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li><a href="../artifacts/index.html#artifact-15">#15</a> is the keystone &mdash; everything else is gravy.</li>
+                <li>Pair with <a href="../artifacts/index.html#artifact-20">#20 CritDamage per Common</a> for late-shop scaling.</li>
+              </ul>
+              <h4>Heroes</h4>
+              <p><a href="../characters/star-mage.html">Star Mage</a> brings a free <em>+15</em>; <a href="../characters/moon-mage.html">Moon Mage</a> unlocks infusions earlier (<code>SpellsAndInfusionsGrantedEarlier</code>), turning more shops into stacking events.</p>
+              <p><strong>Why it works:</strong> StatType 30 is one of two terms that bypass the additive Damage bracket. Every <em>+10%</em> there is "real" damage.</p>
+            </article>
+
+            <!-- ARCHETYPE 3 -->
+            <article class="item-card" data-element="dark">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Glass Cannon</h3>
+                  <p class="item-card__subtitle">Low HP, high reward</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Run with permanent low-HP risk to activate
+                <a href="../artifacts/index.html#artifact-3">TheLessHPTheMoreXPGain&nbsp;(#3)</a>
+                (up to <em>+40%</em> XP) and
+                <a href="../artifacts/index.html#artifact-1">TheLessHPTheMoreMoveSpeed&nbsp;(#1)</a>
+                (up to <em>+21</em> MS). More XP = more picks = more Damage
+                in the bracket. The MS keeps you alive at low HP.
+              </p>
+              <div class="item-card__badges">
+                <span class="tag">risk</span>
+                <span class="tag">scaling</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li>Anything with kiting potential: <a href="../spells/trail.html">Trail</a>, <a href="../spells/proximity.html">Proximity</a>, <a href="../spells/orb.html">Orb</a>, <a href="../spells/bell.html">Bell</a>.</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li><a href="../artifacts/index.html#artifact-1">#1 LessHP &rarr; MoveSpeed</a> + <a href="../artifacts/index.html#artifact-3">#3 LessHP &rarr; XPGain</a> together &mdash; ideally both.</li>
+                <li>Avoid healing artifacts; they ruin the trade.</li>
+              </ul>
+              <h4>Heroes</h4>
+              <p><a href="../characters/hatty.html">Hatty</a> (starts <em>&minus;300</em> MaxHealth, so already low). <a href="../characters/sun-mage.html">Sun Mage</a> with <em>+7</em> Dodge to survive accidents.</p>
+              <p><strong>Counter-play:</strong> single hits that exceed your shrunken HP buffer. Bullet-hell waves and chip damage kill you fast &mdash; don&rsquo;t pick this in <a href="../bosses/squid.html">Squid</a> Phase 3.</p>
+            </article>
+
+            <!-- ARCHETYPE 4 -->
+            <article class="item-card" data-element="neutral">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Tank-DPS</h3>
+                  <p class="item-card__subtitle">Armor IS damage</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                The hidden synergy:
+                <a href="../artifacts/index.html#artifact-13">IncreaseDamagePerArmor&nbsp;(#13)</a>
+                adds <em>+0.25</em> Damage per point of Armor.
+                <a href="../artifacts/index.html#artifact-2">AddArmorEqualToPartyLevel&nbsp;(#2)</a>
+                is assumed to grant a <em>1:1</em> armor-to-party-level
+                scaling (4 players &times; level 30 &rarr; 120 Armor &rarr;
+                <em>+30%</em> Damage at the artifact-13 ratio). Stack
+                <a href="../artifacts/index.html#artifact-12">#12 Armor per Objective</a>
+                (parameters confirm <em>+5</em> Armor per objective) and you
+                can pass <em>+80</em> Damage from armor alone.
+              </p>
+              <aside class="callout" data-kind="note">
+                <span class="callout__title">Assumption: artifact #2 ratio</span>
+                <p>
+                  The <code>parameters_raw</code> list for
+                  <code>AddArmorEqualToPartyLevel</code> in
+                  <code>data/artifacts.json</code> is <strong>empty</strong>.
+                  The 1:1 armor-to-level ratio used above is the most likely
+                  interpretation given the artifact name, but the coefficient
+                  is not exposed in the data dump &mdash; the in-game value
+                  could be a different constant. The example math is correct
+                  <em>under that assumption</em>; treat the absolute numbers
+                  as a working estimate, not a ground truth.
+                </p>
+              </aside>
+              <div class="item-card__badges">
+                <span class="tag">defence</span>
+                <span class="tag">coop</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li>Anything front-line: <a href="../spells/slash.html">Slash</a>, <a href="../spells/trail.html">Trail</a>, <a href="../spells/proximity.html">Proximity</a>.</li>
+                <li><a href="../spells/bell.html">Bell</a> with the <code>BellZoneGivesArmor</code> variant doubles down &mdash; the Bell&rsquo;s aura itself feeds the artifact while standing in it.</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li><a href="../artifacts/index.html#artifact-13">#13</a> + <a href="../artifacts/index.html#artifact-2">#2</a> are the keystones.</li>
+                <li><a href="../artifacts/index.html#artifact-12">#12</a> if you reliably hit objectives.</li>
+              </ul>
+              <h4>Heroes</h4>
+              <p><a href="../characters/ludwig.html">Ludwig</a> starts with <em>+12</em> Armor and <em>&minus;10</em> MS &mdash; perfect baseline.</p>
+            </article>
+
+            <!-- ARCHETYPE 5 -->
+            <article class="item-card" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Swarm Clearer</h3>
+                  <p class="item-card__subtitle">AOE coverage &times; tick rate</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Stack Size and Projectiles on persistent area / multi-hit
+                spells so every tick lands on dozens of enemies at once.
+                Damage per hit stays modest; <em>hits per second</em>
+                across the screen go to four digits.
+              </p>
+              <div class="item-card__badges">
+                <span class="tag">aoe</span>
+                <span class="tag">wave-clear</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; 142 base &times; persistent zone &times; tick rate.</li>
+                <li><a href="../spells/plant.html">Plant</a> &mdash; <code>DamageTickRate 1.35</code>, 5s LifeTime, <code>IncreaseSizeAndDamageWithEveryAttack</code> variant.</li>
+                <li><a href="../spells/falling-star.html">FallingStar</a> &mdash; 13m base size, 201 damage, hits everything in a giant radius.</li>
+                <li><a href="../spells/meteor.html">Meteor</a> &mdash; 4 base projectiles + <code>ExtraProjectile</code> variant + <code>ExtraLine</code>.</li>
+                <li><a href="../spells/energy-zone.html">EnergyZone</a> &mdash; pure DamageTickRate spell, lives off Size + LifeTime.</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li>Anything that doesn&rsquo;t require single-target focus. <a href="../artifacts/index.html#artifact-5">#5 Damage per Nearby Teammate</a> shines in co-op.</li>
+              </ul>
+              <h4>Heroes</h4>
+              <p><a href="../characters/bell-mage.html">Bell Mage</a>, <a href="../characters/plant-mage.html">Plant Mage</a>, <a href="../characters/star-mage.html">Star Mage</a>.</p>
+            </article>
+
+            <!-- ARCHETYPE 6 -->
+            <article class="item-card" data-element="acid">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Boss Killer</h3>
+                  <p class="item-card__subtitle">Maximize per-hit; weakspot &times; crit</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Single-target focused. Pair a high-base-damage spell with
+                <em>+CritChance</em>, <em>+CritDamage</em>, and weakspot
+                hits where possible &mdash; the hard <em>1.5&times;</em>
+                weakspot constant stacks multiplicatively with crit. Acid
+                infusion is the secret sauce; the <code>ResistanceReduction</code>
+                debuff multiplies all subsequent damage.
+              </p>
+              <div class="item-card__badges">
+                <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span>
+                <span class="tag">single-target</span>
+                <span class="tag">boss</span>
+              </div>
+              <h4>Spells</h4>
+              <ul>
+                <li><a href="../spells/rifle.html">Rifle</a> (140 base, low cadence, <code>AimAtHighestHP</code> variant locks onto bosses).</li>
+                <li><a href="../spells/beam.html">Beam</a> (104 base &times; 1.9 FireRate &times; tick stacking on a stationary target).</li>
+                <li><a href="../spells/slash.html">Slash</a> (296 base + <code>IncreaseSizeWhenStandingStill</code> when you can dodge in melee).</li>
+              </ul>
+              <h4>Artifacts</h4>
+              <ul>
+                <li>The Crit-Stacker package (#17, #14, #7).</li>
+                <li>One Acid-infused spell to seed the resistance reduction; the rest can be any element.</li>
+              </ul>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ================== EXAMPLES ================== -->
+        <section id="examples">
+          <h2>5. Worked optimization examples</h2>
+          <p class="prose">
+            Concrete numbers, every multiplier shown. Use these as templates
+            for your own builds &mdash; the structure is the same regardless
+            of spell.
+          </p>
+
+          <!-- EXAMPLE A -->
+          <section id="example-arrow">
+            <h3>Example A &mdash; Arrow with Fire infusion + Damage-per-Armor</h3>
+            <p class="prose">
+              Setup: base <a href="../spells/arrow.html">Arrow</a> (165
+              Damage, FireRate 0.404), 3 epic-tier Damage improvements
+              (let&rsquo;s assume the second and third picks are post-dilution
+              and net +21% bracket each, so &Sigma; Damage% = 87%), one
+              <code>ArrowFire</code> infusion, and you&rsquo;re running
+              <a href="../artifacts/index.html#artifact-13">IncreaseDamagePerArmor</a>
+              + <a href="../artifacts/index.html#artifact-2">AddArmorEqualToLevel</a>
+              with party at 4&times;level&nbsp;20 = 80 Armor.
+            </p>
+            <pre class="formula"><code><span class="f-comment">// Damage bracket assembly</span>
+&Sigma; <span class="f-var">Damage%</span> = <span class="f-num">87</span>      <span class="f-comment">// 3 epic improvements</span>
+            + <span class="f-num">20</span>     <span class="f-comment">// IncreaseDamagePerArmor: 80 armor &times; 0.25 = 20</span>
+            = <span class="f-num">107</span>%
+
+<span class="f-var">spell_damage</span> = <span class="f-num">165</span> <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-num">1.07</span>) = <span class="f-num">165</span> <span class="f-op">&times;</span> <span class="f-num">2.07</span> = <span class="f-num">341.6</span>
+
+<span class="f-comment">// Element strength: Star Mage hero passive +15 + 1 infusion</span>
+<span class="f-var">elem_str</span> = <span class="f-num">1</span> + <span class="f-num">0.15</span> = <span class="f-num">1.15</span>
+
+<span class="f-comment">// No crit, no weakspot (regular trash hit)</span>
+<span class="f-var">final_per_hit</span> = <span class="f-num">341.6</span> <span class="f-op">&times;</span> <span class="f-num">1.15</span> = <span class="f-num">392.8</span></code></pre>
+            <p class="prose u-strong">
+              Final per-arrow damage: <mark>~393</mark>. Plus a Fire burn DOT
+              ticking 3 times after.
+            </p>
+            <p>
+              Note how <strong>FireRate is missing</strong> from the
+              calculation &mdash; Arrow&rsquo;s starting modifier already adds
+              <em>+12</em> FireRate, so its effective cadence is
+              <code>0.404 &times; 1.12 = 0.452 shots/sec</code>, giving a
+              raw DPS of <code>393 &times; 0.452 = 178 DPS</code>. Now layer
+              one <em>+15% FireRate</em> store pick: bracket goes from
+              <em>1.12</em> to <em>1.27</em>, cadence to
+              <em>0.513</em>, DPS to <em>202</em> &mdash; +13.5% from a
+              single pick.
+            </p>
+          </section>
+
+          <!-- EXAMPLE B -->
+          <section id="example-slash">
+            <h3>Example B &mdash; Slash crit build expected DPS</h3>
+            <p class="prose">
+              Setup: base <a href="../spells/slash.html">Slash</a> (296 Damage,
+              FireRate 0.75). Build state: <em>CriticalChance = 30</em>,
+              <em>CriticalDamage = 250</em>, &Sigma; Damage% = 60.
+            </p>
+            <pre class="formula"><code><span class="f-comment">// 1) Base spell damage with additive Damage bracket</span>
+<span class="f-var">spell_damage</span> = <span class="f-num">296</span> <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-num">0.60</span>)
+              = <span class="f-num">296</span> <span class="f-op">&times;</span> <span class="f-num">1.60</span>
+              = <span class="f-num">473.6</span>
+
+<span class="f-comment">// 2) Per-hit expected damage with crits folded in</span>
+<span class="f-var">crit_mult</span> = <span class="f-num">1</span> + <span class="f-num">2.50</span> = <span class="f-num">3.50</span><span class="f-op">&times;</span> <span class="f-comment">// on crit</span>
+
+<span class="f-var">E[hit]</span> = <span class="f-num">473.6</span> <span class="f-op">&times;</span> [(<span class="f-num">1</span> &minus; <span class="f-num">0.30</span>) <span class="f-op">&times;</span> <span class="f-num">1</span> + <span class="f-num">0.30</span> <span class="f-op">&times;</span> <span class="f-num">3.50</span>]
+       = <span class="f-num">473.6</span> <span class="f-op">&times;</span> [<span class="f-num">0.70</span> + <span class="f-num">1.05</span>]
+       = <span class="f-num">473.6</span> <span class="f-op">&times;</span> <span class="f-num">1.75</span>
+       = <span class="f-num">828.8</span>
+
+<span class="f-comment">// 3) DPS at base cadence (Slash starting +12% FireRate is in the bracket)</span>
+<span class="f-var">DPS</span> = <span class="f-num">828.8</span> <span class="f-op">&times;</span> <span class="f-num">0.75</span> = <span class="f-num">621.6</span> per swing per second</code></pre>
+            <p class="prose u-strong">
+              Expected DPS: <mark>~622</mark> &mdash; ignoring weakspot bonus
+              and area multi-hit. Slash&rsquo;s 3m size means it routinely
+              hits 4&ndash;6 enemies per swing in a wave, giving an
+              effective screen-DPS of <code>~2500&ndash;3700</code>.
+            </p>
+            <h4>Crit-chance sensitivity</h4>
+            <div class="stat-table-wrap">
+              <table class="stat-table">
+                <caption>Expected hit multiplier at varying CritChance, CD held at 250</caption>
+                <thead><tr><th class="num">CritChance</th><th class="num">E[mult]</th><th class="num">vs 0% crit</th></tr></thead>
+                <tbody>
+                  <tr><td class="num">10%</td><td class="num">1.25&times;</td><td class="num">+25%</td></tr>
+                  <tr><td class="num">20%</td><td class="num">1.50&times;</td><td class="num">+50%</td></tr>
+                  <tr><td class="num">30%</td><td class="num">1.75&times;</td><td class="num">+75%</td></tr>
+                  <tr><td class="num">40%</td><td class="num">2.00&times;</td><td class="num">+100%</td></tr>
+                  <tr><td class="num">50%</td><td class="num">2.25&times;</td><td class="num">+125%</td></tr>
+                  <tr><td class="num">75%</td><td class="num">2.88&times;</td><td class="num">+188%</td></tr>
+                  <tr><td class="num">100%</td><td class="num">3.50&times;</td><td class="num">+250%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="prose">
+              Notice the linearity &mdash; every <em>+10%</em> CritChance is
+              another <em>+25%</em> expected damage at this CritDamage level.
+              That&rsquo;s why CritChance picks dominate the priority list
+              until they cap.
+            </p>
+          </section>
+
+          <!-- EXAMPLE C -->
+          <section id="example-beam-squid">
+            <h3>Example C &mdash; Beam vs. Squid (185k HP) time-to-kill</h3>
+            <p class="prose">
+              Setup: <a href="../spells/beam.html">Beam</a> (104 Damage, 1.9
+              FireRate, 1 projectile). Build state: &Sigma; Damage% = 80,
+              Critical Chance = 40, Critical Damage = 200, no element-strength
+              bonus, <code>ExtraProjectile</code> variant taken (so 2
+              concurrent beams).
+            </p>
+            <pre class="formula"><code><span class="f-comment">// Per-tick damage of one beam</span>
+<span class="f-var">tick_dmg</span> = <span class="f-num">104</span> <span class="f-op">&times;</span> <span class="f-num">1.80</span> = <span class="f-num">187.2</span>
+<span class="f-var">crit_mult</span> = <span class="f-num">1</span> + <span class="f-num">2.0</span> = <span class="f-num">3.0</span><span class="f-op">&times;</span>
+<span class="f-var">E[tick]</span> = <span class="f-num">187.2</span> <span class="f-op">&times;</span> [<span class="f-num">0.60</span> <span class="f-op">&times;</span> <span class="f-num">1</span> + <span class="f-num">0.40</span> <span class="f-op">&times;</span> <span class="f-num">3.0</span>]
+        = <span class="f-num">187.2</span> <span class="f-op">&times;</span> <span class="f-num">1.80</span>
+        = <span class="f-num">337.0</span>
+
+<span class="f-comment">// Ticks per second per beam = FireRate (Beam treats FR as ticks/sec)</span>
+<span class="f-var">single_DPS</span>  = <span class="f-num">337.0</span> <span class="f-op">&times;</span> <span class="f-num">1.9</span> = <span class="f-num">640.3</span>
+<span class="f-var">dual_DPS</span>    = <span class="f-num">640.3</span> <span class="f-op">&times;</span> <span class="f-num">2</span>   = <span class="f-num">1280.6</span>   <span class="f-comment">// 2 beams</span>
+
+<span class="f-comment">// Squid HP = 185000 (sum of all 3 phases as one health pool)</span>
+<span class="f-var">TTK</span> = <span class="f-num">185000</span> / <span class="f-num">1280.6</span> = <span class="f-num">144.5</span> seconds</code></pre>
+            <p class="prose u-strong">
+              Expected solo TTK on Squid: <mark>~145 seconds</mark> with this
+              build. Cut it to ~36s in a full 4-player party that&rsquo;s all
+              dishing damage; the boss fight is over in two phases.
+            </p>
+            <p>
+              Tweak to compare: replace <code>ExtraProjectile</code> with
+              an Acid infusion stack. Acid&rsquo;s
+              <code>ResistanceReduction</code> debuff is inferred to add a
+              ~25% damage-taken multiplier for the debuff duration. New
+              <code>single_DPS &times; 1.25 = 800.4</code>, TTK = <em>231s</em>
+              &mdash; <strong>worse</strong> than the dual-beam variant.
+              Lesson: variants that multiply your <em>throughput</em>
+              (projectile count, FireRate) almost always beat target-side
+              debuffs on bosses.
+            </p>
+          </section>
+
+          <!-- EXAMPLE D -->
+          <section id="example-shotgun">
+            <h3>Example D &mdash; Shotgun ExtraProjectile vs. raw Damage</h3>
+            <p class="prose">
+              The classic dilemma every Shotgun player faces: the
+              <code>ExtraProjectile</code> variant adds <em>+1</em> to
+              the base 3 (4 total). Is that better than an epic
+              <em>+15%</em> Damage improvement?
+            </p>
+            <pre class="formula"><code><span class="f-comment">// Baseline: 3 projectiles, no extras</span>
+<span class="f-var">baseline_damage_per_volley</span> = <span class="f-num">3</span> <span class="f-op">&times;</span> <span class="f-num">300</span> = <span class="f-num">900</span>
+
+<span class="f-comment">// Option A: ExtraProjectile variant</span>
+<span class="f-var">A</span> = <span class="f-num">4</span> <span class="f-op">&times;</span> <span class="f-num">300</span> = <span class="f-num">1200</span>          <span class="f-comment">// +33.3% vs baseline</span>
+
+<span class="f-comment">// Option B: +15% Damage improvement (assume from 0 bracket)</span>
+<span class="f-var">B</span> = <span class="f-num">3</span> <span class="f-op">&times;</span> <span class="f-num">300</span> <span class="f-op">&times;</span> <span class="f-num">1.15</span> = <span class="f-num">1035</span>   <span class="f-comment">// +15% vs baseline</span>
+
+<span class="f-comment">// At 60% existing bracket: +15% becomes a much smaller bump</span>
+<span class="f-var">B'</span> = <span class="f-num">3</span> <span class="f-op">&times;</span> <span class="f-num">300</span> <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-num">0.75</span>) = <span class="f-num">1575</span>
+<span class="f-var">B''</span> = <span class="f-num">3</span> <span class="f-op">&times;</span> <span class="f-num">300</span> <span class="f-op">&times;</span> (<span class="f-num">1</span> + <span class="f-num">0.60</span>) = <span class="f-num">1440</span>
+<span class="f-var">delta</span> = <span class="f-num">1575</span> &minus; <span class="f-num">1440</span> = <span class="f-num">135</span>     <span class="f-comment">// only +9.4% net</span></code></pre>
+            <p class="prose u-strong">
+              <mark>ExtraProjectile wins decisively</mark> at any non-trivial
+              existing Damage bracket. Variants and Projectile picks are
+              always preferred to additional <em>+%Damage</em> picks once
+              you have ~60% in the bracket.
+            </p>
+          </section>
+        </section>
+
+        <!-- ================== PITFALLS ================== -->
+        <section id="pitfalls">
+          <h2>6. Pitfalls &amp; traps</h2>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Trap: stacking Size past 200%</span>
+            <p>
+              The log curve crushes you. <em>+300%</em> stacked Size only
+              gives <em>+121%</em> effective coverage. Diversify into Damage,
+              FireRate, or Projectiles once your spells visibly cover a
+              comfortable area.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Trap: greedy Damage stacking</span>
+            <p>
+              Going from <em>+0%</em> to <em>+15%</em> Damage adds 15%
+              final damage. Going from <em>+100%</em> to <em>+115%</em>
+              only adds <em>15/200 = 7.5%</em> final. Once you&rsquo;re past
+              the first epic stack, FireRate, Projectiles, and CritChance
+              all outperform another Damage pick per choice.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="danger">
+            <span class="callout__title">Trap: friendly fire 0.25&times;</span>
+            <p>
+              That <em>0.25</em> multiplier still lets a high-DPS Bell
+              or FallingStar erase a downed teammate in a single tick.
+              <strong>Don&rsquo;t drop AOE on top of allies you&rsquo;re
+              trying to revive.</strong> The <code>FriendlyFireHealsInstead</code>
+              variant exists on six spells &mdash; take it in 4-player
+              parties.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Trap: element mismatch on weakness-immune bosses</span>
+            <p>
+              Most bosses don&rsquo;t carry an <code>ElementWeaknessMultiplier</code>
+              of any kind. Picking a damage profile because <em>&ldquo;Squid
+              looks watery, let&rsquo;s do Lightning&rdquo;</em> rarely pays
+              off &mdash; what matters is your <em>own</em>
+              ElementStrengthMultiplier (StatType 30), not the boss&rsquo;s
+              weakness. Element choice is about <em>which DoT / chain
+              effect</em> compounds with your build, not RPS.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Trap: stat snapshot at cast time</span>
+            <p>
+              <code>CriticalChance</code> and <code>CriticalDamage</code>
+              are snapshotted into the <code>PlayerSpellDamageInfo</code>
+              when the spell is cast, not when the projectile lands. This
+              means: standing still to trigger
+              <a href="../artifacts/index.html#artifact-7">CritDamage Standing Still</a>
+              and <em>then</em> casting a slow projectile means the projectile
+              keeps the bonus even if you move while it&rsquo;s in flight.
+              Conversely, a Bell zone&rsquo;s damage uses the stats at
+              <em>each tick</em> (per-tick DamageInfo construction) &mdash;
+              moving in and out of the standing-still bonus matters.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Inferred: stat caps</span>
+            <p>
+              No hard cap is visible in the dump for any damage-relevant
+              stat, but several effects clamp at the implementation level:
+              <code>IceEffect</code>&rsquo;s chill factor caps at
+              <em>0.72</em> (72% slow), and <code>OneShot</code>-style
+              damage hits a hard ceiling around <em>999,999</em>. If your
+              build is producing numbers in that range, you&rsquo;ve already
+              won &mdash; further damage stacking is cosmetic.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== LATE GAME ================== -->
+        <section id="late-game">
+          <h2>7. Late-game scaling</h2>
+
+          <h3>The role of ElementStrengthMultiplier at high upgrade tiers</h3>
+          <p class="prose">
+            At upgrade <a href="../mechanics/upgrades.html">Tier 4</a> and
+            beyond, you&rsquo;ll see Damage picks landing later in the
+            improvement pool while ElementStrengthMultiplier sources stay
+            constant. Because StatType&nbsp;30 is multiplicative outside the
+            additive Damage bracket, its <em>relative</em> contribution
+            <strong>grows</strong> the larger your Damage bracket gets:
+          </p>
+          <pre class="formula"><code><span class="f-comment">// Two scenarios, same +20% ElementStrength addition:</span>
+
+<span class="f-comment">// Low-bracket build: 200 base, &Sigma; Damage = 50</span>
+<span class="f-var">no_elem</span>   = <span class="f-num">200</span> <span class="f-op">&times;</span> <span class="f-num">1.5</span> = <span class="f-num">300</span>
+<span class="f-var">with_20%</span>  = <span class="f-num">200</span> <span class="f-op">&times;</span> <span class="f-num">1.5</span> <span class="f-op">&times;</span> <span class="f-num">1.2</span> = <span class="f-num">360</span>     <span class="f-comment">// +60 damage (+20%)</span>
+
+<span class="f-comment">// High-bracket build: 200 base, &Sigma; Damage = 250</span>
+<span class="f-var">no_elem</span>   = <span class="f-num">200</span> <span class="f-op">&times;</span> <span class="f-num">3.5</span> = <span class="f-num">700</span>
+<span class="f-var">with_20%</span>  = <span class="f-num">200</span> <span class="f-op">&times;</span> <span class="f-num">3.5</span> <span class="f-op">&times;</span> <span class="f-num">1.2</span> = <span class="f-num">840</span>     <span class="f-comment">// +140 damage (+20%)</span></code></pre>
+          <p class="prose">
+            Same <em>+20%</em>, double the absolute damage gained. Late-game,
+            <strong>ElementStrengthMultiplier becomes the highest-leverage
+            damage stat per point</strong>. This is why
+            <a href="../characters/star-mage.html">Star Mage</a>&rsquo;s
+            innate <em>+15</em> compounds so brutally in long runs.
+          </p>
+
+          <h3>The OneShot constant</h3>
+          <p class="prose">
+            Hard-coded at <code>999,999</code>. Once a single hit can clear
+            this number, you instakill any non-boss enemy regardless of
+            armor, resistance, or current HP. With a Slash crit build at
+            <em>+200%</em> Damage and <em>+400%</em> CritDamage, you can
+            cross this threshold on weakspot crits as early as wave 18.
+            Beyond that point, additional damage stacking is purely cosmetic
+            (it does not, in fact, do anything to enemies that were already
+            being one-shot).
+          </p>
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Once you one-shot trash, pivot</span>
+            <p>
+              Stop taking Damage picks. Start taking
+              <strong>FireRate</strong>, <strong>Projectiles</strong>,
+              <strong>Size</strong>, or <strong>defensive</strong> stats.
+              At one-shot threshold, the only enemy that still matters is
+              the boss &mdash; and bosses don&rsquo;t care that you can deal
+              5M damage when only 999,999 lands.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== CHEAT SHEET ================== -->
+        <section id="cheat-sheet">
+          <h2>8. Quick-reference cheat sheet</h2>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>If your goal is X, prioritize Y from Z</caption>
+              <thead>
+                <tr>
+                  <th>If your goal is&hellip;</th>
+                  <th>Stat to chase</th>
+                  <th>Where to find it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>More raw damage per hit, first stack</td>
+                  <td><strong>Damage</strong> (0)</td>
+                  <td>Generic Damage improvement, epic tier; any spell's own +Damage roll.</td>
+                </tr>
+                <tr>
+                  <td>More damage per hit, third+ stack</td>
+                  <td><strong>Projectiles</strong> (20) / variant picks</td>
+                  <td>ExtraProjectile variants on Shotgun, Smg, Meteor, Beam.</td>
+                </tr>
+                <tr>
+                  <td>More damage per second</td>
+                  <td><strong>FireRate</strong> (2)</td>
+                  <td>FireRate improvement; <a href="../artifacts/index.html#artifact-16">#16 FireRate Standing Still</a>.</td>
+                </tr>
+                <tr>
+                  <td>Late-game scaling</td>
+                  <td><strong>ElementStrengthMultiplier</strong> (30)</td>
+                  <td><a href="../artifacts/index.html#artifact-15">#15 ElementalDmg/Infusion</a>; <a href="../characters/star-mage.html">Star Mage</a> innate.</td>
+                </tr>
+                <tr>
+                  <td>Spike damage on bosses</td>
+                  <td><strong>CriticalChance</strong> (12) until 40%</td>
+                  <td>CritChance improvement; <a href="../characters/wizard-king.html">Wizard King</a> innate.</td>
+                </tr>
+                <tr>
+                  <td>Already 40%+ crit chance</td>
+                  <td><strong>CriticalDamage</strong> (13)</td>
+                  <td>CritDamage improvement; artifacts <a href="../artifacts/index.html#artifact-7">#7</a>, <a href="../artifacts/index.html#artifact-14">#14</a>, <a href="../artifacts/index.html#artifact-20">#20</a>.</td>
+                </tr>
+                <tr>
+                  <td>Better AOE coverage</td>
+                  <td><strong>Size</strong> (6), max ~200%</td>
+                  <td>SpellSize improvement; spell starting modifiers.</td>
+                </tr>
+                <tr>
+                  <td>Tank-DPS dual purpose</td>
+                  <td><strong>Armor</strong> (14) into Damage</td>
+                  <td><a href="../artifacts/index.html#artifact-13">#13</a> + <a href="../artifacts/index.html#artifact-2">#2</a> + <a href="../artifacts/index.html#artifact-12">#12</a>; <a href="../characters/ludwig.html">Ludwig</a>.</td>
+                </tr>
+                <tr>
+                  <td>Wave clear DPS</td>
+                  <td><strong>DamageTickRate</strong> (5) + Size</td>
+                  <td>Plant, Bell, EnergyZone starting modifiers; <code>IncreaseSizeAndDamageWithEveryAttack</code> variants.</td>
+                </tr>
+                <tr>
+                  <td>Better shop picks</td>
+                  <td><strong>Luck</strong> (9), early only</td>
+                  <td>Luck improvement; <a href="../artifacts/index.html#artifact-8">#8 Luck Not Rerolling</a>; <a href="../characters/reginald.html">Reginald</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Pick-order reminders</h3>
+          <ul class="stack-sm">
+            <li><strong>Round 1&ndash;3:</strong> grab one Damage epic and one FireRate. Lock in your spell&rsquo;s defining variant. Take Luck if offered.</li>
+            <li><strong>Round 4&ndash;7:</strong> commit to an archetype. Stack Crit (chance first), or infusions, or Armor synergy. Take the relevant artifact the moment it appears in the shop.</li>
+            <li><strong>Round 8+:</strong> stop taking flat Damage. Hunt FireRate, Projectiles, ElementStrength, defensive stats. Avoid Size past <em>+150%</em>.</li>
+            <li><strong>Boss arrival:</strong> if you have spare picks, pre-stand-still for <a href="../artifacts/index.html#artifact-7">#7</a> stacks; verify your CritChance is above 30%.</li>
+          </ul>
+
+          <aside class="callout" data-kind="lore">
+            <span class="callout__title">Final note</span>
+            <p>
+              Damage in The Spell Brigade is a long, multiplicative chain
+              where one weak link &mdash; a missing FireRate, an unused
+              ElementStrength, an over-stacked Size &mdash; quietly halves
+              your effective output. The mid-game players who win consistently
+              aren&rsquo;t the ones with the highest single number; they&rsquo;re
+              the ones whose <em>chain has no zeros</em>.
+            </p>
+          </aside>
+
+          <div class="see-also">
+            <a class="see-also__link" href="spell-tier-list.html">
+              <strong>Spell tier list &rarr;</strong>
+              All 21 spells ranked by how well they ride the formula.
+            </a>
+            <a class="see-also__link" href="artifact-priorities.html">
+              <strong>Artifact priorities &rarr;</strong>
+              Pickup order for the 20 artifacts under each archetype.
+            </a>
+            <a class="see-also__link" href="element-pairing.html">
+              <strong>Element pairing &rarr;</strong>
+              Single, double, dual combos &mdash; what the formula says.
+            </a>
+            <a class="see-also__link" href="../mechanics/index.html">
+              <strong>Mechanics hub &rarr;</strong>
+              The raw rules behind every formula on this page.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. Damage formulas reverse-engineered from
+        game files; values may have minor offsets from in-game numbers.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Five tiers, 120 upgrade levels, and 20 final upgrades.">
+  <title>Upgrades &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" aria-current="page" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+      <a class="top-nav__link" href="../challenges/index.html">Challenges</a>
+    </nav>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Section index">
+  <h2 class="sidebar__title">Mechanics</h2>
+  <ul class="sidebar__nav">
+        <li><a aria-current="page" href="../mechanics/upgrades.html">Upgrades</a></li>
+        <li><a href="../mechanics/curses.html">Curses</a></li>
+        <li><a href="../mechanics/difficulties.html">Difficulties</a></li>
+        <li><a href="../mechanics/modifiers.html">Modifiers</a></li>
+        <li><a href="../mechanics/objectives.html">Objectives</a></li>
+  </ul>
+  <h2 class="sidebar__title">Related</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+  </ul>
+</aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../mechanics/index.html">Mechanics</a></li>
+            <li aria-current="page">Upgrades</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Upgrades</h1>
+          <p class="prose u-muted">
+            The meta-progression system. Spend currency to invest in five tiers; each tier holds four
+            stat upgrades. Investing in every level of a stat unlocks a <strong>Final Upgrade</strong>
+            &mdash; a capstone bonus that changes how that stat behaves.
+          </p>
+          <div class="row">
+            <span class="tag">5 tiers</span>
+            <span class="tag">120 upgrade levels</span>
+            <span class="tag">20 final upgrades</span>
+          </div>
+        </section>
+
+        <section id="tiers">
+          <h2>Tiers</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Upgrade tiers and their unlock requirements</caption>
+              <thead><tr><th data-sort="number" class="num">Tier</th><th data-sort="string">Name</th><th data-sort="number" class="num">Upgrades</th><th data-sort="string">Unlock challenge</th></tr></thead>
+              <tbody>
+              <tr><td class="num">1</td><td>Tier1</td><td class="num">4</td><td><code>Die</code></td></tr>
+              <tr><td class="num">2</td><td>Tier2</td><td class="num">4</td><td><code>UnlockUpgrades1</code></td></tr>
+              <tr><td class="num">3</td><td>Tier3</td><td class="num">4</td><td><code>UnlockUpgrades2</code></td></tr>
+              <tr><td class="num">4</td><td>Tier4</td><td class="num">4</td><td><code>UnlockFinalUpgrades1</code></td></tr>
+              <tr><td class="num">5</td><td>Tier5</td><td class="num">4</td><td><code>UnlockFinalUpgrades2</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="matrix">
+          <h2>Stat &times; Level matrix</h2>
+          <p class="prose">
+            Bonus per level for every upgradable stat. Some stats cap at 5 levels, others at 2 or 3.
+            &#10003; in the &ldquo;Final&rdquo; column means investing all levels unlocks a Final Upgrade.
+          </p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Stat upgrade amount per level</caption>
+              <thead><tr><th data-sort="string">Stat</th><th data-sort="number" class="num">L1</th><th data-sort="number" class="num">L2</th><th data-sort="number" class="num">L3</th><th data-sort="number" class="num">L4</th><th data-sort="number" class="num">L5</th><th data-sort="number" class="num">Total</th><th data-sort="string">Final</th></tr></thead>
+              <tbody>
+              <tr><td>Armor</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">100</td><td>&#10003;</td></tr>
+              <tr><td>Bans</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">5</td><td>&#10003;</td></tr>
+              <tr><td>CritChance</td><td class="num">4</td><td class="num">2</td><td class="num">2</td><td class="num">4</td><td class="num">4</td><td class="num">16</td><td>&#10003;</td></tr>
+              <tr><td>CritDamage</td><td class="num">7</td><td class="num">5</td><td class="num">6</td><td class="num">7</td><td class="num">7</td><td class="num">32</td><td>&#10003;</td></tr>
+              <tr><td>Damage</td><td class="num">7</td><td class="num">5</td><td class="num">3</td><td class="num">5</td><td class="num">5</td><td class="num">25</td><td>&#10003;</td></tr>
+              <tr><td>Dodge</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">20</td><td>&#10003;</td></tr>
+              <tr><td>FireRate</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">15</td><td>&#10003;</td></tr>
+              <tr><td>GoldGain</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">25</td><td>&#10003;</td></tr>
+              <tr><td>HPOnRevive</td><td class="num">10</td><td class="num">10</td><td class="num">10</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">30</td><td>&mdash;</td></tr>
+              <tr><td>HealthRegeneration</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">15</td><td>&#10003;</td></tr>
+              <tr><td>Luck</td><td class="num">4</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">12</td><td>&#10003;</td></tr>
+              <tr><td>MaxHealth</td><td class="num">150</td><td class="num">150</td><td class="num">150</td><td class="num">150</td><td class="num">150</td><td class="num">750</td><td>&#10003;</td></tr>
+              <tr><td>MovementSpeed</td><td class="num">5</td><td class="num">5</td><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">28</td><td>&#10003;</td></tr>
+              <tr><td>PickupRadius</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">20</td><td class="num">100</td><td>&#10003;</td></tr>
+              <tr><td>Pins</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">5</td><td>&#10003;</td></tr>
+              <tr><td>Rerolls</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">5</td><td>&#10003;</td></tr>
+              <tr><td>ReviveSpeed</td><td class="num">10</td><td class="num">6</td><td class="num">9</td><td class="num">10</td><td class="num">10</td><td class="num">45</td><td>&#10003;</td></tr>
+              <tr><td>ReviveZoneSize</td><td class="num">10</td><td class="num">10</td><td class="num">10</td><td class="num">10</td><td class="num">10</td><td class="num">50</td><td>&#10003;</td></tr>
+              <tr><td>Revives</td><td class="num">1</td><td class="num">1</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">2</td><td>&mdash;</td></tr>
+              <tr><td>SpellSize</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">20</td><td>&mdash;</td></tr>
+              <tr><td>XPGain</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">15</td><td>&#10003;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="final">
+          <h2>Final upgrades</h2>
+          <p class="prose">
+            Unlocked by maxing the parent stat. Each Final Upgrade adds a passive ability rather than
+            a flat number bump.
+          </p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Final upgrades and their parameters</caption>
+              <thead><tr><th data-sort="string">Final upgrade</th><th>Parameters</th></tr></thead>
+              <tbody>
+              <tr><td><strong>Armor</strong><br><code class="u-muted">ArmorFinalUpgrade</code></td><td>Invulnerability time = 4; Reset time = 30</td></tr>
+              <tr><td><strong>Bans</strong><br><code class="u-muted">BansFinalUpgrade</code></td><td>&mdash;</td></tr>
+              <tr><td><strong>Critical Chance</strong><br><code class="u-muted">CriticalChanceFinalUpgrade</code></td><td>Health threshold for instakill = 10</td></tr>
+              <tr><td><strong>Critical Damage</strong><br><code class="u-muted">CriticalDamageFinalUpgrade</code></td><td>Critical Damage increase for each attack = 10</td></tr>
+              <tr><td><strong>Damage</strong><br><code class="u-muted">DamageFinalUpgrade</code></td><td>Deal bonus Damage above health% = 0.7; Bonus Damage % = 0.1</td></tr>
+              <tr><td><strong>Dodge</strong><br><code class="u-muted">DodgeFinalUpgrade</code></td><td>&mdash;</td></tr>
+              <tr><td><strong>Fire Rate</strong><br><code class="u-muted">FireRateFinalUpgrade</code></td><td>Low Health Percentage = 0.2; Fire Rate Increase = 20</td></tr>
+              <tr><td><strong>Gold Gain</strong><br><code class="u-muted">GoldGainFinalUpgrade</code></td><td>Gold Bonus per objective completed = 23</td></tr>
+              <tr><td><strong>Health Regeneration</strong><br><code class="u-muted">HealthRegenerationFinalUpgrade</code></td><td>Health added on level up = 50</td></tr>
+              <tr><td><strong>Luck</strong><br><code class="u-muted">LuckFinalUpgrade</code></td><td>&mdash;</td></tr>
+              <tr><td><strong>Max Health</strong><br><code class="u-muted">MaxHealthFinalUpgrade</code></td><td>Amount of Max Health increase when you revive another player = 25</td></tr>
+              <tr><td><strong>Movement Speed</strong><br><code class="u-muted">MovementSpeedFinalUpgrade</code></td><td>Revive beam movement speed multiplier = 1.5</td></tr>
+              <tr><td><strong>Pickup Radius</strong><br><code class="u-muted">PickupRadiusFinalUpgrade</code></td><td>Damage reduction during magnet effect = 0.5</td></tr>
+              <tr><td><strong>Pins</strong><br><code class="u-muted">PinsFinalUpgrade</code></td><td>&mdash;</td></tr>
+              <tr><td><strong>Reroll</strong><br><code class="u-muted">RerollFinalUpgrade</code></td><td>&mdash;</td></tr>
+              <tr><td><strong>Revive</strong><br><code class="u-muted">ReviveFinalUpgrade</code></td><td>Max added health bonus = 500; Linear Decay Rate = 8.333333</td></tr>
+              <tr><td><strong>Revive Speed</strong><br><code class="u-muted">ReviveSpeedFinalUpgrade</code></td><td>Revive token recharge amount when taking damage = 15</td></tr>
+              <tr><td><strong>Revive Zone Size</strong><br><code class="u-muted">ReviveZoneSizeFinalUpgrade</code></td><td>Time between heals = 0.5; Health to add = 5</td></tr>
+              <tr><td><strong>Size</strong><br><code class="u-muted">SizeFinalUpgrade</code></td><td>Chance to increase size = 0.1; Increase size factor = 1.6</td></tr>
+              <tr><td><strong>XP Gain</strong><br><code class="u-muted">XPGainFinalUpgrade</code></td><td>Gain XP when you revive a teammate = 10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="related">
+          <h2>Related</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../challenges/enchantment.html"><strong>Enchantment challenges</strong> Unlock the upgrade tiers.</a>
+            <a class="see-also__link" href="curses.html"><strong>Curses</strong> Stack on top of upgrades.</a>
+            <a class="see-also__link" href="objectives.html"><strong>Objectives</strong> In-run goals that compound with upgrades.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference. Game names &amp; lore belong to their respective owners.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+        <li><a href="../waves/index.html">Waves</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Fan project &middot; no images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

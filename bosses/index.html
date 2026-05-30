@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="All three bosses in The Spell Brigade — Squid, Toad, Hydra. Phase counts, health pools, and strategy quick reference.">
+  <title>Bosses — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro" aria-current="page">Overview</a></li>
+        <li><a href="#cards">Boss cards</a></li>
+        <li><a href="#phase-table">Phase comparison</a></li>
+        <li><a href="#strategy">Strategy quick reference</a></li>
+      </ul>
+      <h2 class="sidebar__title">Per boss</h2>
+      <ul class="sidebar__nav">
+        <li><a href="squid.html">Squid (3 phases)</a></li>
+        <li><a href="hydra.html">Hydra (3 phases)</a></li>
+        <li><a href="toad.html">Toad (2 phases)</a></li>
+      </ul>
+      <h2 class="sidebar__title">Cross-links</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../enemies/index.html">Bestiary</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li aria-current="page">Bosses</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="intro" class="stack">
+          <h1>Bosses</h1>
+          <p class="prose u-muted">
+            The Spell Brigade ships <strong>3 boss encounters</strong>, one per
+            non-Astral world. Each gates the world's 20-wave run with a multi-phase
+            fight, ~165–185k HP, and a 350-damage contact hit. All three scale
+            with party size (<code>scales_with_players = 1</code>) and have
+            <strong>50&thinsp;% slow resistance</strong> — Ice CC is half-effective
+            against them.
+          </p>
+
+          <dl class="meta-dl" style="margin-top: var(--sp-5);">
+            <dt>Total bosses</dt>     <dd>3</dd>
+            <dt>Default boss</dt>     <dd>Squid (Scorched Abyss / Pyrestorm Pit)</dd>
+            <dt>Phase count range</dt><dd>2–3</dd>
+            <dt>Bullet-hell patterns</dt><dd>6 (Squid phases 2 &amp; 3 only)</dd>
+            <dt>Contact damage</dt>   <dd>350 (identical across all three)</dd>
+            <dt>Slow resistance</dt>  <dd>0.5 — Ice slows are halved</dd>
+          </dl>
+        </section>
+
+        <section id="cards">
+          <h2>Boss cards</h2>
+          <div class="grid grid-cards">
+
+            <article class="item-card" data-element="fire" data-kind="boss" data-rarity="legendary">
+              <span class="rarity-ribbon" data-rarity="legendary">Boss</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="squid.html">Squid</a></h3>
+                  <p class="item-card__subtitle">3 phases · Scorched Abyss / Pyrestorm Pit</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">bullet-hell</span>
+                <span class="tag">homing</span>
+                <span class="tag">default</span>
+              </div>
+              <p class="item-card__desc">
+                The flagship encounter: three escalating phases, six unique
+                bullet-hell patterns, homing projectiles in phases 1 and 2.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">185,000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Phases</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">3.0</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">350</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-element="ice" data-kind="boss" data-rarity="legendary">
+              <span class="rarity-ribbon" data-rarity="legendary">Boss</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="hydra.html">Hydra</a></h3>
+                  <p class="item-card__subtitle">3 phases · Frozen Ancients / Astral Planes</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">summoner</span>
+                <span class="tag">regen</span>
+                <span class="tag">priority-add</span>
+              </div>
+              <p class="item-card__desc">
+                Spawns <code>Enemy_Hydra_Healer</code> adds that restore boss HP.
+                Kill priority is always healers first, head second.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">165,000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Phases</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.75</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">350</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-element="acid" data-kind="boss" data-rarity="legendary">
+              <span class="rarity-ribbon" data-rarity="legendary">Boss</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="toad.html">Toad</a></h3>
+                  <p class="item-card__subtitle">2 phases · Verdant Meadows</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">leap</span>
+                <span class="tag">AoE</span>
+                <span class="tag">tutorial</span>
+              </div>
+              <p class="item-card__desc">
+                Slowest and simplest fight; the tutorial boss. Leaves a
+                <code>ToadDeadSplash</code> AoE puddle on phase transition.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Health</span><span class="item-card__stat-value">165,000</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Phases</span><span class="item-card__stat-value">2</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Speed</span><span class="item-card__stat-value">2.25</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Contact</span><span class="item-card__stat-value">350</span></div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section id="phase-table">
+          <h2>Phase comparison</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Three bosses · phases &amp; key telemetry</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Boss</th>
+                  <th data-sort="number" class="num">Health</th>
+                  <th data-sort="number" class="num">Phases</th>
+                  <th data-sort="number" class="num">Speed</th>
+                  <th data-sort="string">Signature ability</th>
+                  <th data-sort="string">World</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><a href="squid.html">Squid</a></td><td class="num">185,000</td><td class="num">3</td><td class="num">3.0</td><td>Bullet-hell rings + homing projectiles</td><td>Pyrestorm Pit (default)</td></tr>
+                <tr><td><a href="hydra.html">Hydra</a></td><td class="num">165,000</td><td class="num">3</td><td class="num">2.75</td><td>Spawns healer adds</td><td>Frozen Ancients / Astral</td></tr>
+                <tr><td><a href="toad.html">Toad</a></td><td class="num">165,000</td><td class="num">2</td><td class="num">2.25</td><td>Leap + corpse splash zone</td><td>Verdant Meadows</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="strategy">
+          <h2>Strategy quick reference</h2>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Universal rules</span>
+            <p>
+              All three bosses share <strong>350 contact damage</strong>,
+              <strong>50&thinsp;% slow resistance</strong>, and
+              <strong>scale with party size</strong>. Stack movement-speed
+              artifacts, run at least one piercing damage source, and bring a
+              spell that hits while you reposition (<a href="../spells/index.html">Beam, Bell, Aura</a>).
+            </p>
+          </aside>
+
+          <div class="grid grid-3">
+            <a class="see-also__link" href="squid.html">
+              <strong>Squid &mdash; bullet-hell dance</strong>
+              Phase 3 reaches 24 projectile waves at 5.5 m/s. Pierce and pre-aim.
+            </a>
+            <a class="see-also__link" href="hydra.html">
+              <strong>Hydra &mdash; add control</strong>
+              Healer adds keep her in stalemate. Bring AoE swap-targets.
+            </a>
+            <a class="see-also__link" href="toad.html">
+              <strong>Toad &mdash; arena denial</strong>
+              The puddle takes ~40&thinsp;% of arena floor. Plan exits early.
+            </a>
+          </div>
+
+          <aside class="callout" data-kind="danger" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Do not</span>
+            <p>
+              Do not engage any boss without a movement spell or dash. The
+              350 contact damage will one-shot most builds at the moment of
+              phase transition when your cooldowns are spent.
+            </p>
+          </aside>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference for <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

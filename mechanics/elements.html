@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The 21 ElementType values in The Spell Brigade — singles, doubles, dual combos — and the per-element side-effects (Burn DOT, Chill, Lightning ricochet, Acid shred, Dark corruption).">
+  <title>Elements — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#singles">Five core elements</a></li>
+        <li><a href="#fire">Fire (DOT)</a></li>
+        <li><a href="#lightning">Lightning (chain)</a></li>
+        <li><a href="#acid">Acid (shred)</a></li>
+        <li><a href="#ice">Ice (chill)</a></li>
+        <li><a href="#dark">Dark (corruption)</a></li>
+        <li><a href="#packing">Single / Double / Dual</a></li>
+        <li><a href="#table">All 21 ElementTypes</a></li>
+        <li><a href="#effectiveness">Effectiveness math</a></li>
+        <li><a href="#corruption">Corruption behaviour</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/elements.html" aria-current="page">Elements</a></li>
+        <li><a href="../mechanics/element-matrix.html">Element matrix</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Elements</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Elements</h1>
+          <p class="prose">
+            The Spell Brigade declares <strong>21</strong> values in the
+            <code>ElementType</code> enum: <code>None</code>, five &ldquo;core&rdquo;
+            elements, five &ldquo;double&rdquo; intensifications, and ten dual combos.
+            Every outgoing <code>DamageInfo</code> carries one packed
+            <code>ElementType</code> that drives both the damage-side multipliers (via
+            <code>ElementEffectivenessCalculator</code>) and the per-element side-effect
+            classes (Burn DOT, Chill, Ricochet, Shred, Corruption).
+          </p>
+
+          <p class="prose">
+            The five base elements:
+          </p>
+
+          <div class="el-badge-row">
+            <a href="#fire"      class="el-badge el-badge--lg" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></a>
+            <a href="#lightning" class="el-badge el-badge--lg" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></a>
+            <a href="#ice"       class="el-badge el-badge--lg" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></a>
+            <a href="#acid"      class="el-badge el-badge--lg" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></a>
+            <a href="#dark"      class="el-badge el-badge--lg" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></a>
+          </div>
+        </section>
+
+        <section id="singles" class="stack">
+          <h2>The five core elements</h2>
+          <p class="prose">
+            Every infusion you commit is either a fresh element (turning
+            <code>None</code> into a single), a double-up of the spell&rsquo;s existing
+            element (intensifies the side-effect), or a different element on top of an
+            existing one (a dual combo where both effects can fire).
+          </p>
+        </section>
+
+        <section id="fire" class="stack">
+          <h2 data-element="fire">Fire — burning DOT</h2>
+          <p class="prose">
+            Single Fire (<code>ElementType.Fire</code>) attaches a
+            <code>FireEffect</code> to the damage event. <code>FireEffect</code> reads
+            its <code>FireEffectConfiguration</code> for three numbers:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>Damage</code></dt>
+            <dd>Damage of each individual burn tick.</dd>
+            <dt><code>NumberOfBurns</code></dt>
+            <dd>How many ticks the burn applies.</dd>
+            <dt><code>SecondsBetweenBurns</code></dt>
+            <dd>Cadence between ticks.</dd>
+            <dt><code>CanCriticalHit</code></dt>
+            <dd>If true, each burn tick can independently roll for crit.</dd>
+          </dl>
+          <p class="prose">
+            <strong>FireDouble</strong> (Fire-on-Fire infusion) intensifies the burn:
+            higher tick damage and/or more ticks, depending on the spell&rsquo;s
+            configuration. Fire&rsquo;s strength is sustained AoE pressure; its
+            weakness is that the initial hit doesn&rsquo;t carry the bonus — only the
+            DOT tail does.
+          </p>
+        </section>
+
+        <section id="lightning" class="stack">
+          <h2 data-element="lightning">Lightning — chain ricochet</h2>
+          <p class="prose">
+            Single Lightning attaches a <code>LightningEffect</code> that bounces extra
+            hits to nearby enemies via <code>LightningEffectConfiguration</code>:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>NumberOfLightningRicochets</code></dt>
+            <dd>How many additional targets the chain finds.</dd>
+            <dt><code>LightningDamageFactor</code></dt>
+            <dd>Multiplier (<code>0.0 – 1.0</code>+) applied to the original damage at each bounce.</dd>
+          </dl>
+          <p class="prose">
+            <strong>LightningDouble</strong> increases ricochets and/or factor.
+            Lightning is the dense-pack clearer: extra effective coverage at no extra
+            cast cost.
+          </p>
+        </section>
+
+        <section id="acid" class="stack">
+          <h2 data-element="acid">Acid — resistance shred</h2>
+          <p class="prose">
+            Acid is the only single-element effect that doesn&rsquo;t deal extra
+            damage — it makes the target take <em>more</em> damage from everything for
+            a duration. <code>AcidEffect</code> applies via
+            <code>AcidEffectConfiguration</code>:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>AcidDuration</code></dt>
+            <dd>How long the resistance debuff lingers.</dd>
+            <dt><code>ResistanceReduction</code></dt>
+            <dd>Subtracted from the target&rsquo;s damage resistance (effectively an amp on incoming damage).</dd>
+          </dl>
+          <p class="prose">
+            <strong>AcidDouble</strong> extends duration or deepens the shred. Acid is
+            a multiplier on your <em>other</em> damage — best paired with a high-DPS
+            primary spell rather than serving as one itself.
+          </p>
+        </section>
+
+        <section id="ice" class="stack">
+          <h2 data-element="ice">Ice — chill / slow</h2>
+          <p class="prose">
+            Single Ice applies <code>IceEffect</code>, which slows the target via
+            <code>IceEffectHandler</code>. Two configuration fields:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>ChillDuration</code></dt>
+            <dd>How long the slow persists per hit.</dd>
+            <dt><code>ChillDamageFactor</code></dt>
+            <dd>How fast chill accumulates from incoming damage.</dd>
+          </dl>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Chill is clamped 0.2 – 0.72</span>
+            <p>
+              The handler uses two constants — <code>MinChillFactor = 0.2</code> and
+              <code>MaxChillFactor = 0.72</code> — so the slow effect saturates between
+              <strong>20%</strong> and <strong>72%</strong> reduction. At hard freeze
+              the target is fully stopped for the duration. Stacking more Ice past the
+              cap only extends time-in-effect, not slow magnitude.
+            </p>
+          </aside>
+
+          <p class="prose">
+            <strong>IceDouble</strong> intensifies the chill ramp / duration. Ice is
+            the survival pick: kited enemies hit for far less.
+          </p>
+        </section>
+
+        <section id="dark" class="stack">
+          <h2 data-element="dark">Dark — corruption</h2>
+          <p class="prose">
+            Dark stands apart. <code>DarkEffect</code> adds corruption points scaling
+            with <code>CorruptionDamageFactor × damage</code>. Once the target&rsquo;s
+            corruption fills, it&rsquo;s <em>turned</em> — the enemy enters
+            <code>CorruptionState.AttackOtherEnemies</code> and fights for you until
+            <code>KillAfterCorruptionExpired</code> removes it.
+          </p>
+          <dl class="meta-dl">
+            <dt><code>CorruptionDamageFactor</code></dt>
+            <dd>Multiplier converting incoming Dark damage into corruption points.</dd>
+            <dt><code>CorruptionElementBehaviour</code></dt>
+            <dd>What element the corrupted enemy&rsquo;s attacks use — see <a href="#corruption">below</a>.</dd>
+          </dl>
+          <p class="prose">
+            Damage dealt by a corrupted enemy comes back through
+            <code>CorruptedPlayerSpellDamageInfo</code>, attributed to the corrupting
+            player so kill credit, XP, and on-kill triggers still fire.
+          </p>
+        </section>
+
+        <section id="packing" class="stack">
+          <h2>Single, Double, and Dual combos</h2>
+          <p class="prose">
+            <code>ElementType</code> packs the spell&rsquo;s elemental identity into a
+            single byte. There are three kinds of packed value:
+          </p>
+
+          <dl class="meta-dl">
+            <dt><strong>Single</strong> (5 values)</dt>
+            <dd>One element infused into a previously-neutral spell. <code>Fire</code>, <code>Lightning</code>, <code>Acid</code>, <code>Ice</code>, <code>Dark</code>.</dd>
+            <dt><strong>Double</strong> (5 values)</dt>
+            <dd>The same element infused a <em>second</em> time. Intensifies the per-element side-effect: stronger DOT, more ricochets, deeper shred, longer chill, more corruption. <code>FireDouble</code>, <code>LightningDouble</code>, <code>AcidDouble</code>, <code>IceDouble</code>, <code>DarkDouble</code>.</dd>
+            <dt><strong>Dual combo</strong> (10 values)</dt>
+            <dd>Two different elements layered. Both element-effect classes fire — a <code>FireLightning</code> spell deals burn ticks <em>and</em> chains ricochet damage. The combo identifier orders the two elements by enum id (Acid &lt; Dark &lt; Fire &lt; Ice &lt; Lightning), so an Acid-then-Fire and a Fire-then-Acid both pack as <code>AcidFire</code>.</dd>
+          </dl>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Detecting components</span>
+            <p>
+              <code>ElementTypeExtensions.IsInfusedWith(ElementType, ElementType)</code>
+              answers &ldquo;does this packed element contain X?&rdquo; That&rsquo;s how
+              the game decides whether to fire the matching <code>IElementEffect</code>
+              when a hit lands. <code>ContainsDark</code> is the convenience wrapper
+              used by the corruption pipeline.
+            </p>
+          </aside>
+        </section>
+
+        <section id="table" class="stack">
+          <h2>All 21 ElementType values</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Complete <code>ElementType</code> enum</caption>
+              <thead>
+                <tr>
+                  <th data-sort="number" class="num">ID</th>
+                  <th data-sort="string">Name</th>
+                  <th data-sort="string">Kind</th>
+                  <th>Components</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">0</td><td id="neutral">None</td><td>neutral</td><td>—</td><td>Skips element-effectiveness multipliers entirely.</td></tr>
+                <tr><td class="num">1</td><td>Fire</td><td>single</td><td>Fire</td><td>Burning DOT.</td></tr>
+                <tr><td class="num">2</td><td>FireDouble</td><td>double</td><td>Fire × 2</td><td>Intensified burn.</td></tr>
+                <tr><td class="num">3</td><td>Lightning</td><td>single</td><td>Lightning</td><td>Ricochet chain.</td></tr>
+                <tr><td class="num">4</td><td>LightningDouble</td><td>double</td><td>Lightning × 2</td><td>More ricochets / higher factor.</td></tr>
+                <tr><td class="num">5</td><td>FireLightning</td><td>dual</td><td>Fire + Lightning</td><td>Burn + ricochet.</td></tr>
+                <tr><td class="num">6</td><td>Acid</td><td>single</td><td>Acid</td><td>Resistance shred.</td></tr>
+                <tr><td class="num">7</td><td>AcidDouble</td><td>double</td><td>Acid × 2</td><td>Longer / deeper shred.</td></tr>
+                <tr><td class="num">8</td><td>AcidFire</td><td>dual</td><td>Acid + Fire</td><td>Shred + burn.</td></tr>
+                <tr><td class="num">9</td><td>AcidLightning</td><td>dual</td><td>Acid + Lightning</td><td>Shred + ricochet.</td></tr>
+                <tr><td class="num">10</td><td>Ice</td><td>single</td><td>Ice</td><td>Chill / slow.</td></tr>
+                <tr><td class="num">11</td><td>IceDouble</td><td>double</td><td>Ice × 2</td><td>Stronger / longer chill.</td></tr>
+                <tr><td class="num">12</td><td>FireIce</td><td>dual</td><td>Fire + Ice</td><td>Burn + chill.</td></tr>
+                <tr><td class="num">13</td><td>AcidIce</td><td>dual</td><td>Acid + Ice</td><td>Shred + chill.</td></tr>
+                <tr><td class="num">14</td><td>IceLightning</td><td>dual</td><td>Ice + Lightning</td><td>Chill + ricochet.</td></tr>
+                <tr><td class="num">15</td><td>Dark</td><td>single</td><td>Dark</td><td>Corruption (turn enemies).</td></tr>
+                <tr><td class="num">16</td><td>DarkDouble</td><td>double</td><td>Dark × 2</td><td>Faster corruption fill.</td></tr>
+                <tr><td class="num">17</td><td>DarkFire</td><td>dual</td><td>Dark + Fire</td><td>Corruption + burn.</td></tr>
+                <tr><td class="num">18</td><td>DarkLightning</td><td>dual</td><td>Dark + Lightning</td><td>Corruption + ricochet.</td></tr>
+                <tr><td class="num">19</td><td>AcidDark</td><td>dual</td><td>Acid + Dark</td><td>Shred + corruption.</td></tr>
+                <tr><td class="num">20</td><td>DarkIce</td><td>dual</td><td>Dark + Ice</td><td>Corruption + chill.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="effectiveness" class="stack">
+          <h2>Effectiveness math</h2>
+          <p class="prose">
+            On the damage number side, elements only do two things via
+            <code>ElementEffectivenessCalculator</code>:
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Skip everything if no element</span>
+if damageInfo.Element == None: return value
+
+<span class="f-comment">// 1. Attacker-side bonus  (StatType 30, PercentAdd)</span>
+value ×= (<span class="f-num">1</span> + attacker.ElementStrengthMultiplier / <span class="f-num">100</span>)
+
+<span class="f-comment">// 2. Target-side bonus    (StatType 27, PercentAdd; only if target has it)</span>
+value ×= (<span class="f-num">1</span> + target.ElementWeaknessMultiplier   / <span class="f-num">100</span>)</code></pre>
+
+          <p class="prose">
+            That&rsquo;s the entire elemental damage scaling. There is no built-in
+            &ldquo;Fire deals +X% to Ice enemies&rdquo; matrix — effectiveness comes
+            from per-player stats. Enemies typically don&rsquo;t carry
+            <code>ElementWeaknessMultiplier</code> at all, so step 2 commonly degenerates
+            to <code>×1.0</code> against trash mobs. Players (under specific curses /
+            traits) and certain bosses are the usual carriers.
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Worked example</span>
+            <p>
+              An attacker with <code>ElementStrengthMultiplier = 80</code> firing a Fire
+              spell against an enemy with <code>ElementWeaknessMultiplier = 0</code>
+              applies <code>×(1 + 0.8) × (1 + 0) = ×1.8</code>. The same attacker against
+              a player teammate carrying <code>ElementWeaknessMultiplier = 25</code> from
+              a curse applies <code>×1.8 × 1.25 = ×2.25</code>. (Friendly-fire
+              <code>×0.25</code> still happens later on the player side.)
+            </p>
+          </aside>
+        </section>
+
+        <section id="corruption" class="stack">
+          <h2>Corruption behaviour</h2>
+          <p class="prose">
+            When Dark fills a target&rsquo;s corruption meter, the resulting enemy
+            attacks other enemies. The element it uses is controlled by
+            <code>CorruptionElementBehaviour</code>:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>UseCoreElement</code></dt>
+            <dd>The corrupted enemy uses the originating spell&rsquo;s core element.</dd>
+            <dt><code>UseNoElement</code></dt>
+            <dd>The corrupted enemy deals non-elemental damage.</dd>
+            <dt><code>UseDarkElement</code></dt>
+            <dd>The corrupted enemy always deals Dark damage (spreads corruption).</dd>
+          </dl>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/element-matrix.html">
+            <strong>Element matrix</strong>
+            21×21 combo lookup grid.
+          </a>
+          <a class="see-also__link" href="../mechanics/damage-system.html#element-effectiveness">
+            <strong>Damage system → element step</strong>
+            Where elements plug into the pipeline.
+          </a>
+          <a class="see-also__link" href="../mechanics/stats.html#elementstrength">
+            <strong>ElementStrengthMultiplier (stat 30)</strong>
+            The attacker-side stat.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

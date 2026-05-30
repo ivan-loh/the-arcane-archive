@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The full StatModifier hierarchy in The Spell Brigade — Static vs Dynamic branches, starting/hidden tags, and every ArtifactStatModifier / SpellVariantStatModifier subclass.">
+  <title>Stat modifiers — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#hierarchy">Class hierarchy</a></li>
+        <li><a href="#aggregation">Aggregation</a></li>
+        <li><a href="#static">Static branch</a></li>
+        <li><a href="#dynamic">Dynamic branch</a></li>
+        <li><a href="#artifact-mods">Artifact modifiers</a></li>
+        <li><a href="#variant-mods">Spell variant modifiers</a></li>
+        <li><a href="#lifecycle">Spell stat lifecycle</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/stat-modifiers.html" aria-current="page">Stat modifiers</a></li>
+        <li><a href="../mechanics/rarity.html">Rarity</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Stat modifiers</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Stat modifiers</h1>
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Not the same as Covenant modifiers</span>
+            <p>
+              This page documents the engine&rsquo;s internal
+              <code>StatModifier</code> class hierarchy — how every <code>+%</code> from
+              every source ends up in a list and gets aggregated. For the run-level
+              <em>Covenant</em> modifiers (Peaceful, Endless, One Less Spell), see
+              <a href="../mechanics/modifiers.html">Covenant modifiers</a>.
+            </p>
+          </aside>
+
+          <p class="prose">
+            Every numeric change in The Spell Brigade — store picks, artifact effects,
+            curse penalties, variant tweaks — eventually shows up as a
+            <code>StatModifier</code> in the target <code>Stat</code>&rsquo;s
+            <code>Modifiers</code> list. The class lives at
+            <code>StatModifier</code> (line 314306, abstract). Two branches descend:
+            <strong>Static</strong> (value set once) and <strong>Dynamic</strong>
+            (value recomputed on every read).
+          </p>
+        </section>
+
+        <section id="hierarchy" class="stack">
+          <h2>Class hierarchy</h2>
+
+<pre class="formula"><code>StatModifier <span class="f-comment">// abstract, implements IDisposable</span>
+├── StaticStatModifier <span class="f-comment">// { StatType, Value }  — set once</span>
+│   ├── StartingStatModifier <span class="f-comment">// tagged as baseline kit</span>
+│   └── HiddenStatModifier   <span class="f-comment">// numeric but not shown in UI</span>
+└── DynamicStatModifier <span class="f-comment">// abstract — GetValue() recomputed on read</span>
+    ├── ArtifactStatModifier_*       <span class="f-comment">// 16 subclasses (see below)</span>
+    └── SpellVariantStatModifier_*   <span class="f-comment">// 6 subclasses</span></code></pre>
+
+          <p class="prose">
+            Every concrete modifier overrides two methods:
+          </p>
+          <dl class="meta-dl">
+            <dt><code>float GetValue()</code></dt>
+            <dd>The current numeric contribution. Static modifiers return their stored <code>Value</code>; dynamic ones compute live from game state.</dd>
+            <dt><code>StatType GetStatType()</code></dt>
+            <dd>Which stat the modifier feeds into. Decides which <code>Stat</code>&rsquo;s list it sits in, and therefore whether <code>StatCalculator</code> treats it as Flat, PercentAdd, or PercentAddLogarithmic.</dd>
+            <dt><code>void Dispose()</code> <span class="tag">virtual</span></dt>
+            <dd>Dynamic modifiers override this to unsubscribe from game events (artifact mods often subscribe to <code>OnPlayerRevived</code>, <code>OnImprovementAdded</code>, …).</dd>
+          </dl>
+        </section>
+
+        <section id="aggregation" class="stack">
+          <h2>How they aggregate</h2>
+          <p class="prose">
+            When something reads a <code>Stat</code>, the aggregation runs <em>every
+            time</em>. Nothing is precomputed, so a dynamic modifier&rsquo;s changing
+            output is reflected on the very next read.
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Stat.GetValue() — runs every read</span>
+<span class="f-fn">Stat</span>.GetValue() {
+    return <span class="f-fn">StatCalculator</span>.Calculate(
+        baseValue,
+        Modifiers,       <span class="f-comment">// List&lt;StatModifier&gt;</span>
+        statCalculationType
+    );
+}
+
+<span class="f-comment">// PercentAdd path</span>
+sum = <span class="f-num">0</span>
+foreach m in Modifiers: sum += m.GetValue()    <span class="f-comment">// dynamic mods recompute here</span>
+return baseValue × (<span class="f-num">1</span> + sum)
+
+<span class="f-comment">// Flat path</span>
+return baseValue + Σ m.GetValue()
+
+<span class="f-comment">// Logarithmic path</span>
+return baseValue × (<span class="f-num">1</span> + Σ m.GetValue()) ^ <span class="f-num">0.5714286</span></code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">What-if previews</span>
+            <p>
+              <code>Stat.GetValueWithExtraModifiers(extras)</code> lets store-UI code
+              compute &ldquo;what would my Damage be if I bought this?&rdquo; without
+              mutating the underlying list. Picking the item later just calls
+              <code>AddModifier</code> with the same payload.
+            </p>
+          </aside>
+        </section>
+
+        <section id="static" class="stack">
+          <h2>Static branch</h2>
+          <dl class="meta-dl">
+            <dt><code>StaticStatModifier</code></dt>
+            <dd>Stores <code>StatType</code> and a fixed <code>Value</code>. Created by improvement-store purchases, infusion data, and curse stacks. Once added, <code>GetValue()</code> is just a field read.</dd>
+
+            <dt><code>StartingStatModifier</code> <span class="tag">extends Static</span></dt>
+            <dd>Same numeric semantics, but tagged so <code>Stat.GetSumOfNonStartingModifiers()</code> can filter it out. The UI uses this split to show &ldquo;what you gained this run&rdquo; separately from baseline kit.</dd>
+
+            <dt><code>HiddenStatModifier</code> <span class="tag">extends Static</span></dt>
+            <dd>Static-numeric modifier the player should never see in any breakdown UI. Used for internal balancing.</dd>
+          </dl>
+        </section>
+
+        <section id="dynamic" class="stack">
+          <h2>Dynamic branch</h2>
+          <p class="prose">
+            <code>DynamicStatModifier</code> stores a <code>List&lt;float&gt; Parameters</code>
+            (constructor-supplied coefficients) and exposes
+            <code>GetModifierType()</code> returning either <code>Character</code> (feeds
+            <code>PlayerStats</code>) or <code>Spell</code> (feeds a particular
+            equipped spell&rsquo;s stat block). The two concrete families:
+          </p>
+
+          <dl class="meta-dl">
+            <dt><code>ArtifactStatModifier_*</code></dt>
+            <dd>Installed when an artifact is equipped. Most subscribe to a game event in their constructor and unsubscribe in <code>Dispose()</code>. <code>GetValue()</code> reads a counter or live game state.</dd>
+            <dt><code>SpellVariantStatModifier_*</code></dt>
+            <dd>Installed when a spell variant unlocks. Six known subclasses, all reactive to player or context state.</dd>
+          </dl>
+        </section>
+
+        <section id="artifact-mods" class="stack">
+          <h2>Artifact modifiers</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>16 known <code>ArtifactStatModifier_*</code> subclasses</caption>
+              <thead>
+                <tr><th>Subclass</th><th>Scope</th><th>Stat</th><th>Trigger</th><th>Artifact</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>AddArmorEqualToPartyLevel</code></td><td>Character</td><td>Armor</td><td>Sum of party member levels × Parameters[0], per frame.</td><td><a href="../artifacts/artifact-2.html">link</a></td></tr>
+                <tr><td><code>BonusExpWhenBelowHealthThreshold</code></td><td>Character</td><td>XPGain</td><td>Parameters[0] while HP &lt; Parameters[1], else 0.</td><td><a href="../artifacts/artifact-3.html">link</a></td></tr>
+                <tr><td><code>IncreaseArmorPerObjectiveCompleted</code></td><td>Character</td><td>Armor</td><td>Counts side objectives; subscribes IAmObjective.</td><td><a href="../artifacts/artifact-12.html">link</a></td></tr>
+                <tr><td><code>IncreaseCriticalDamagePerRevivePerformed</code></td><td>Character</td><td>CriticalDamage</td><td>Counts player revives; subscribes OnPlayerRevived.</td><td><a href="../artifacts/artifact-14.html">link</a></td></tr>
+                <tr><td><code>IncreaseCriticalDamageWhenStandingStill</code></td><td>Character</td><td>CriticalDamage</td><td>Reads PlayerMotor.IsMoving per frame.</td><td><a href="../artifacts/artifact-7.html">link</a></td></tr>
+                <tr><td><code>IncreaseDamagePerArmor</code></td><td>Character</td><td>Damage</td><td>Reads current Armor on each evaluation.</td><td><a href="../artifacts/artifact-13.html">link</a></td></tr>
+                <tr><td><code>DecreaseMovementSpeedPerArmor</code></td><td>Character</td><td>MovementSpeed</td><td>Reads current Armor; usually a negative trade-off.</td><td><a href="../artifacts/artifact-13.html">link</a></td></tr>
+                <tr><td><code>IncreaseDamagePerNearbyPartyMember</code></td><td>Character</td><td>Damage</td><td>Party members within 10m (<code>MaxDistanceForDamageIncrease</code>).</td><td><a href="../artifacts/artifact-5.html">link</a></td></tr>
+                <tr><td><code>IncreaseDamagePerRevivePerformed</code></td><td>Character</td><td>Damage</td><td>Counts revives performed; OnPlayerRevived.</td><td><a href="../artifacts/artifact-11.html">link</a></td></tr>
+                <tr><td><code>IncreaseElementalDamagePerInfusionPerformed</code></td><td>Character</td><td>ElementStrengthMultiplier</td><td>Counts infusions; OnImprovementAdded.</td><td><a href="../artifacts/artifact-15.html">link</a></td></tr>
+                <tr><td><code>IncreaseFireRateWhenStandingStill</code></td><td>Character</td><td>FireRate</td><td>Reads PlayerMotor.IsMoving.</td><td><a href="../artifacts/artifact-16.html">link</a></td></tr>
+                <tr><td><code>IncreaseLuckWhenNotRerolling</code></td><td>Character</td><td>Luck</td><td>Counts shops not rerolled; OnStoreNotRerolled.</td><td><a href="../artifacts/artifact-8.html">link</a></td></tr>
+                <tr><td><code>IncreaseMaxHealthForEachHealthPickup</code></td><td>Character</td><td>MaxHealth</td><td>Counts potions; OnHealthPotionCollected.</td><td><a href="../artifacts/artifact-18.html">link</a></td></tr>
+                <tr><td><code>IncreaseMaxHealthPerRevivePerformed</code></td><td>Character</td><td>MaxHealth</td><td>Counts revives; OnPlayerRevived.</td><td><a href="../artifacts/artifact-10.html">link</a></td></tr>
+                <tr><td><code>LessHPMoreMovementSpeed</code></td><td>Character</td><td>MovementSpeed</td><td>Reads HP ratio (inverse relation).</td><td><a href="../artifacts/artifact-1.html">link</a></td></tr>
+                <tr><td><code>MoreSideObjectivesMoreHealingDone</code></td><td>Character</td><td>HealingMultiplier</td><td>Counts side objectives completed.</td><td><a href="../artifacts/artifact-4.html">link</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="variant-mods" class="stack">
+          <h2>Spell variant modifiers</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>6 known <code>SpellVariantStatModifier_*</code> subclasses</caption>
+              <thead>
+                <tr><th>Subclass</th><th>Scope</th><th>Stat</th><th>Trigger</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>BellZoneGivesArmor</code></td><td>Character</td><td>Armor</td><td>Active while player stands inside a Bell spell&rsquo;s area (<code>IPlayersInBellZoneManager</code>).</td></tr>
+                <tr><td><code>BiggerOnLowerHealth</code></td><td>Spell</td><td>Size</td><td>Reads HP ratio; size inversely scales with HP.</td></tr>
+                <tr><td><code>DealMoreDamageWhenStandingStill</code></td><td>Spell</td><td>Damage</td><td>Reads PlayerMotor; multiplier active while motionless.</td></tr>
+                <tr><td><code>IncreaseDamageWhenStandingStill</code></td><td>Spell</td><td>Damage</td><td>Uses an explicit <code>damageIncrease</code> field; ramps over standing-still duration.</td></tr>
+                <tr><td><code>IncreaseSizeWhenStandingStill</code></td><td>Spell</td><td>Size</td><td>Same standing-still pattern, scales Size.</td></tr>
+                <tr><td><code>ReduceDamageTakenWhenEnemiesInProximity</code></td><td>Character</td><td>Armor</td><td>Active while ProximitySpell counts enemies above threshold.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Why some spell-typed mods write Character stats</span>
+            <p>
+              The split between <code>scope = Spell</code> and <code>scope = Character</code>
+              is about <em>where the modifier is installed</em>, not what it reads. A
+              variant that gives <em>all</em> player damage a +X% buff while inside a
+              Bell zone routes through <code>Character</code> scope so every equipped
+              spell sees it. A variant that only affects <em>its own spell&rsquo;s</em>
+              Size routes through <code>Spell</code>.
+            </p>
+          </aside>
+        </section>
+
+        <section id="lifecycle" class="stack">
+          <h2>Spell stat lifecycle</h2>
+          <p class="prose">
+            Each spell&rsquo;s per-cast <code>Stat</code> block is built by combining
+            multiple modifier sources, in this order:
+          </p>
+
+          <ol>
+            <li><strong>Equip</strong> — <code>SpellConfiguration.Stats</code> (a list of <code>BaseStat</code>) seeds each <code>Stat</code> with its <code>baseValue</code> and canonical calculation type.</li>
+            <li><strong>Starting modifiers</strong> — <code>SpellConfiguration.StartingModifiers</code> get added as <code>StartingStatModifier</code>s. UI can filter these out.</li>
+            <li><strong>Store improvements</strong> — Each chosen <code>ImprovementStoreItemData</code> picks a per-rarity float from its <code>ImprovementValueContainer</code> and adds a new <code>StaticStatModifier</code>.</li>
+            <li><strong>Variants</strong> — Spell variants register <code>SpellVariantStatModifier_*</code> instances (dynamic) and/or static tweaks.</li>
+            <li><strong>Infusions</strong> — <code>AddInfusion(SpellType, ElementType)</code> doesn&rsquo;t add a number; it changes the spell&rsquo;s outgoing <code>ElementType</code>. Doubling intensifies the element-effect class.</li>
+            <li><strong>Artifacts</strong> — Character-scope <code>ArtifactStatModifier_*</code>s go on <code>PlayerStats</code>; spell-scope ones go on the matching <code>SpellAttributes</code>.</li>
+            <li><strong>Curses</strong> — Each curse stack pushes (usually negative) static modifiers, or installs hooks like <code>TakeDamageOnLevelUp</code>.</li>
+            <li><strong>Evaluation</strong> — At read time, <code>Stat.GetValue()</code> routes through <code>StatCalculator</code> using the per-type math.</li>
+          </ol>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/stats.html">
+            <strong>Stats reference</strong>
+            What every modifier ultimately feeds.
+          </a>
+          <a class="see-also__link" href="../mechanics/damage-system.html">
+            <strong>Damage system</strong>
+            How modifier output becomes damage.
+          </a>
+          <a class="see-also__link" href="../artifacts/index.html">
+            <strong>Artifacts</strong>
+            Every artifact in the game.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

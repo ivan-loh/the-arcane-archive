@@ -1,0 +1,75 @@
+======================================================================
+THE SPELL BRIGADE WIKI - PRE-FIX AUDIT REPORT
+======================================================================
+
+Total HTML files (excl. templates): 135
+
+[CRITICAL] Absolute-root path occurrences: 378
+           Files affected: 10
+            36  404.html
+            30  mechanics/armor-dodge.html
+            28  mechanics/critical-hits.html
+            44  mechanics/damage-system.html
+            46  mechanics/element-matrix.html
+            27  mechanics/elements.html
+            63  mechanics/index.html
+            28  mechanics/rarity.html
+            44  mechanics/stat-modifiers.html
+            32  mechanics/stats.html
+
+[CHECK]    External resources (https?:// in src/href, excl. xmlns):
+           NONE (good)
+
+[CHECK]    <img> tags (project is text-only):
+           0 (good)
+
+[CHECK]    Page metadata (title/charset/viewport/description/main.css/components.css/wiki.js/h1):
+           ALL PAGES PASS
+
+[BROKEN]   Missing target FILES: 30 refs to 2 files
+             21x  mechanics/damage-calculation.html
+              9x  artifacts/by-effect.html
+
+[BROKEN]   Missing ANCHORS (file#anchor): 283 refs
+             50x  index.html#contributing
+             34x  mechanics/stats.html#size
+             20x  mechanics/stats.html#lifetime
+             15x  mechanics/stats.html#range
+             14x  artifacts/index.html#15
+             13x  artifacts/index.html#13
+             10x  mechanics/stats.html#criticaldamage
+             10x  artifacts/index.html#7
+              8x  artifacts/index.html#2
+              8x  artifacts/index.html#20
+              7x  artifacts/index.html#16
+              7x  artifacts/index.html#5
+              7x  artifacts/index.html#14
+              7x  artifacts/index.html#12
+              7x  mechanics/stats.html#projectiles
+              6x  artifacts/index.html#1
+              6x  mechanics/stats.html#damagetickrate
+              5x  artifacts/index.html#3
+              5x  artifacts/index.html#17
+              4x  artifacts/index.html#11
+              4x  artifacts/index.html#6
+              4x  artifacts/index.html#8
+              4x  artifacts/index.html#9
+              3x  mechanics/stats.html#elementstrengthmultiplier
+              3x  mechanics/stats.html#healingmultiplier
+              3x  mechanics/stats.html#healondodge
+              3x  mechanics/stats.html#healonlevelup
+              3x  artifacts/index.html#10
+              3x  artifacts/index.html#18
+              3x  artifacts/index.html#19
+              2x  artifacts/index.html#4
+              1x  spells/mine.html#variant-explodeatend
+              1x  spells/orb.html#variant-extratrajectory
+              1x  spells/orb.html#variant-increaseinsize
+              1x  mechanics/elements.html#neutral
+              1x  mechanics/curses.html#strongerenemies
+
+[A11Y]     Vague link text:
+           NONE (good)
+
+[A11Y]     Tables w/o caption or aria-label:
+           0

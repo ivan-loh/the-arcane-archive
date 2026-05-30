@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Enemy event types in The Spell Brigade: Bounce, Convergent, Line and Mob — triggers, behavior and survival tips.">
+  <title>Enemy events — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro" aria-current="page">Overview</a></li>
+        <li><a href="#summary">Summary table</a></li>
+        <li><a href="#event-bounceevent">Bounce</a></li>
+        <li><a href="#event-convergentevent">Convergent</a></li>
+        <li><a href="#event-lineevent">Line</a></li>
+        <li><a href="#event-mobevent">Mob</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bestiary</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="regular.html">Regular</a></li>
+        <li><a href="elites.html">Elites</a></li>
+        <li><a href="../bosses/index.html">Bosses</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bestiary</a></li>
+          <li aria-current="page">Events</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+        <section id="intro" class="stack">
+          <h1>Enemy events</h1>
+          <p class="prose u-muted">
+            Beyond regular wave spawns, the game schedules <strong>4 scripted
+            enemy events</strong> — Bounce, Convergent, Line, and Mob — defined
+            in <code>EnemyEvent</code> assets and triggered from
+            <code>data/meta.json &gt; in_run_events</code>. They are positional
+            hazards, not stat-stick threats: most are killable, but the right
+            answer is usually to <em>move</em>.
+          </p>
+          <p class="prose">
+            Events ramp with the <strong>Stronger Enemies</strong> curse stack
+            and currently appear exclusively on <strong>Hard</strong> difficulty
+            and above (most density on Astral Planes wave 1–18).
+          </p>
+        </section>
+
+        <section id="summary">
+          <h2>Event summary</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>The four enemy events at a glance</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Event</th>
+                  <th data-sort="string">Type</th>
+                  <th data-sort="number" class="num">HP</th>
+                  <th data-sort="number" class="num">Contact</th>
+                  <th data-sort="string">Trigger</th>
+                  <th data-sort="string">Danger</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><a href="#event-bounceevent">Bounce</a></td><td><code>bounce</code></td><td class="num">600</td><td class="num">—</td><td>Astral Planes alt-waves</td><td><span class="tag">medium</span></td></tr>
+                <tr><td><a href="#event-convergentevent">Convergent</a></td><td><code>convergent</code></td><td class="num">500</td><td class="num">200</td><td>Hard, late waves</td><td><span class="tag">high</span></td></tr>
+                <tr><td><a href="#event-lineevent">Line</a></td><td><code>line</code></td><td class="num">500</td><td class="num">325</td><td>Hard, mid-late</td><td><span class="tag">high</span></td></tr>
+                <tr><td><a href="#event-mobevent">Mob</a></td><td><code>mob</code></td><td class="num">500</td><td class="num">325</td><td>Astral alt-wave with Bounce</td><td><span class="tag">medium</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="danger" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Danger</span>
+            <p>
+              <strong>Line</strong> and <strong>Mob</strong> both deal
+              <code>325</code> contact damage — the highest non-boss value in
+              the registry. A single mistimed dash through either event will
+              one-shot most glass-cannon builds.
+            </p>
+          </aside>
+        </section>
+
+        <section id="event-bounceevent" class="stack" style="margin-top: var(--sp-6);">
+          <h2>Bounce Event</h2>
+          <p class="prose u-muted">Event type <code>bounce</code> · enemy_type_id <code>22</code> · enemy_event_id <code>3</code></p>
+
+          <dl class="meta-dl">
+            <dt>Trigger</dt>   <dd>Hard difficulty, every other wave on Astral Planes (2,4,6,8,10,12,16,18) plus extra stacks with the Stronger Enemies curse.</dd>
+            <dt>Behavior</dt>  <dd>A projectile-like hazard bounces around the arena along a deterministic path. Lifespan ~10 seconds. Deals 0 contact damage by design — it is a positioning hazard, not a DPS source. 600 HP, can be destroyed.</dd>
+            <dt>Health</dt>    <dd>600</dd>
+            <dt>Contact</dt>   <dd>—</dd>
+            <dt>XP drop</dt>   <dd>—</dd>
+            <dt>Primary prefab</dt><dd><code>Enemy_BounceEvent.prefab</code></dd>
+            <dt>Danger</dt>    <dd><strong>medium</strong></dd>
+          </dl>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">How to handle</span>
+            <p>Predict the bounce arc and step <em>through</em> it rather than chase. Drop a Bell on the predicted next bounce site to delete it on contact.</p>
+          </aside>
+        </section>
+        <section id="event-convergentevent" class="stack" style="margin-top: var(--sp-6);">
+          <h2>Convergent Event</h2>
+          <p class="prose u-muted">Event type <code>convergent</code> · enemy_type_id <code>18</code> · enemy_event_id <code>n/a</code></p>
+
+          <dl class="meta-dl">
+            <dt>Trigger</dt>   <dd>Hard / Cursed difficulty in late waves.</dd>
+            <dt>Behavior</dt>  <dd>Multiple enemies spawn at arena edge and converge on the player's current position. Each unit has 500 HP and 200 contact damage. The spawn ignores normal probability tables.</dd>
+            <dt>Health</dt>    <dd>500</dd>
+            <dt>Contact</dt>   <dd>200</dd>
+            <dt>XP drop</dt>   <dd>7</dd>
+            <dt>Primary prefab</dt><dd><code>Enemy_ConvergentEvent.prefab</code></dd>
+            <dt>Danger</dt>    <dd><strong>high</strong></dd>
+          </dl>
+
+          <aside class="callout" data-kind="danger">
+            <span class="callout__title">How to survive</span>
+            <p>Move <em>perpendicular</em> to the convergence vector and trail a damage aura (Venom Mist) — they self-funnel through it. Do not stand still to cast.</p>
+          </aside>
+        </section>
+        <section id="event-lineevent" class="stack" style="margin-top: var(--sp-6);">
+          <h2>Line Event</h2>
+          <p class="prose u-muted">Event type <code>line</code> · enemy_type_id <code>16</code> · enemy_event_id <code>n/a</code></p>
+
+          <dl class="meta-dl">
+            <dt>Trigger</dt>   <dd>Hard difficulty; mid-to-late waves.</dd>
+            <dt>Behavior</dt>  <dd>Telegraphed line of enemies / hazard appears across the arena. 500 HP, 325 contact damage — the highest contact damage of any non-boss enemy in the registry.</dd>
+            <dt>Health</dt>    <dd>500</dd>
+            <dt>Contact</dt>   <dd>325</dd>
+            <dt>XP drop</dt>   <dd>4</dd>
+            <dt>Primary prefab</dt><dd><code>Enemy_LineEvent.prefab</code></dd>
+            <dt>Danger</dt>    <dd><strong>high</strong></dd>
+          </dl>
+
+          <aside class="callout" data-kind="danger">
+            <span class="callout__title">How to survive</span>
+            <p>Read the telegraph and side-step <em>before</em> the line resolves; even one tick of contact damage at 325 will gib a glass-cannon build.</p>
+          </aside>
+        </section>
+        <section id="event-mobevent" class="stack" style="margin-top: var(--sp-6);">
+          <h2>Mob Event</h2>
+          <p class="prose u-muted">Event type <code>mob</code> · enemy_type_id <code>17</code> · enemy_event_id <code>n/a</code></p>
+
+          <dl class="meta-dl">
+            <dt>Trigger</dt>   <dd>Hard difficulty; alternates with Bounce on Astral Planes wave schedule.</dd>
+            <dt>Behavior</dt>  <dd>A HiveMind cluster spawns as one logical entity (see <code>Enemy_MobEvent_HiveMind.prefab</code>) but presents as a tight pack of regular enemies. 500 HP per unit, 325 contact damage.</dd>
+            <dt>Health</dt>    <dd>500</dd>
+            <dt>Contact</dt>   <dd>325</dd>
+            <dt>XP drop</dt>   <dd>3</dd>
+            <dt>Primary prefab</dt><dd><code>Enemy_MobEvent.prefab</code></dd>
+            <dt>Danger</dt>    <dd><strong>medium</strong></dd>
+          </dl>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">How to handle</span>
+            <p>Single AoE (Meteor, Bell, Bomb Launcher) often wipes the entire formation because they spawn co-located.</p>
+          </aside>
+        </section>
+
+        <section id="see-also" style="margin-top: var(--sp-6);">
+          <h2>See also</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../mechanics/index.html">
+              <strong>Difficulty &amp; curses</strong>
+              How event density scales with Stronger Enemies stacks.
+            </a>
+            <a class="see-also__link" href="../worlds/index.html">
+              <strong>Worlds</strong>
+              Per-world event schedules — Astral Planes is the showcase.
+            </a>
+            <a class="see-also__link" href="../guides/index.html">
+              <strong>Survival guides</strong>
+              Positioning fundamentals for Hard runs.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference for <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="index.html">Enemies</a></li>
+        <li><a href="../bosses/index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

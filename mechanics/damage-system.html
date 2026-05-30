@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The Spell Brigade damage formula — full pipeline from spell base damage through stat aggregation, crit, element effectiveness, weakspot, armor, friendly fire, and HP removal. Three worked examples.">
+  <title>Damage system — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#pipeline">Damage pipeline</a></li>
+        <li><a href="#master-formula">Master formula</a></li>
+        <li><a href="#percent-add">PercentAdd vs Logarithmic</a></li>
+        <li><a href="#element-effectiveness">Element effectiveness</a></li>
+        <li><a href="#crit">Critical hits</a></li>
+        <li><a href="#weakspot">Weakspots</a></li>
+        <li><a href="#one-shot">One-shot const</a></li>
+        <li><a href="#friendly-fire">Friendly fire</a></li>
+        <li><a href="#worked-examples">Worked examples</a></li>
+        <li><a href="#damage-info">DamageInfo subtypes</a></li>
+        <li><a href="#artifacts">Artifact hooks</a></li>
+        <li><a href="#open-questions">Open questions</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/damage-system.html" aria-current="page">Damage system</a></li>
+        <li><a href="../mechanics/elements.html">Elements</a></li>
+        <li><a href="../mechanics/critical-hits.html">Critical hits</a></li>
+        <li><a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Damage system</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Damage system</h1>
+          <p class="prose">
+            This is the canonical reference for The Spell Brigade&rsquo;s damage
+            pipeline — what happens between &ldquo;a spell goes off&rdquo; and
+            &ldquo;HP is removed.&rdquo; The
+            <a href="damage-system.html">damage calculation guide</a> and
+            every per-spell page links here for the math.
+          </p>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Confidence labels matter on this page</span>
+            <p>
+              The IL2CPP dump exposes class layouts and method <em>signatures</em> but
+              not method <em>bodies</em>. Some steps are reconstructed from named
+              constants (e.g., <code>WeakspotDamageMultiplier = 1.5</code>,
+              <code>FriendlyFireMultiplier = 0.25</code>,
+              <code>StatCalculator.Exponent = 0.5714286</code>) and the structure of
+              call sites. Each step below is tagged <strong>high</strong>,
+              <strong>inferred</strong>, or <strong>guess</strong>.
+            </p>
+          </aside>
+        </section>
+
+        <section id="pipeline" class="stack">
+          <h2>Damage pipeline</h2>
+          <p class="prose">
+            From cast to corpse, ordered by when each operation modifies the damage
+            number:
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// 1. Spell evaluates its own Damage stat at cast time            [high]</span>
+spell_damage = spellBaseDamage × (1 + Σ %Damage modifiers)
+
+<span class="f-comment">// 2. Build DamageInfo, snapshot crit fields from player stats     [high]</span>
+info.Damage         = spell_damage
+info.Element        = spell.currentElementType   <span class="f-comment">// from infusion</span>
+info.CriticalChance = playerStats.CriticalChance
+info.CriticalDamage = playerStats.CriticalDamage
+
+<span class="f-comment">// 3. Hit lands. Spell-specific multipliers (DealsMoreDamageTowardsCenter…)</span>
+raw = info.Damage × spellSpecificMultiplier             <span class="f-comment">// [inferred — varies per spell]</span>
+
+<span class="f-comment">// 4. Weakspot hitbox check                                         [high]</span>
+raw ×= 1.5  if hitbox.Type == Weakspot
+
+<span class="f-comment">// 5. Critical roll                                                 [high roll, inferred curve]</span>
+isCrit = RandomFloat(0, 100) &lt; info.CriticalChance
+raw ×= (1 + info.CriticalDamage / 100)  if isCrit
+
+<span class="f-comment">// 6. Element effectiveness (attacker × target)                     [high — signatures + StatTypes 27/30]</span>
+raw ×= (1 + attacker.ElementStrengthMultiplier / 100)   <span class="f-comment">// only if Element != None</span>
+raw ×= (1 + target.ElementWeaknessMultiplier   / 100)   <span class="f-comment">// only if target carries the stat</span>
+
+<span class="f-comment">// 7. Per-target debuffs &amp; resistances                              [high method names, inferred order]</span>
+raw ×= target.GetDamageAfterMultiplier()                 <span class="f-comment">// IDamageMultiplierProvider stack (acid, dark)</span>
+raw  = target.CalculateDamageAfterResistances(raw)       <span class="f-comment">// DamageResistance subtract</span>
+
+<span class="f-comment">// 8. Player-only defensive layer                                   [inferred — see armor-dodge.html]</span>
+if target is Player:
+    if HasDodged(): return 0                              <span class="f-comment">// fires DodgeAttackEventArgs</span>
+    raw = max(0, raw − Armor)                             <span class="f-comment">// flat subtract</span>
+
+<span class="f-comment">// 9. Friendly fire &amp; corruption multipliers                        [high — explicit consts]</span>
+if attacker is teammate: raw ×= 0.25                      <span class="f-comment">// FriendlyFireMultiplier</span>
+if target.IsCorrupted:   raw ×= damageTakenWhileCorruptedMultiplier
+
+<span class="f-comment">// 10. HP removal — store EffectiveDamageDone for popups/analytics  [high]</span>
+info.EffectiveDamageDone = raw
+target.RemoveHealth(raw, info, isCrit)
+</code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Two ordering caveats</span>
+            <p>
+              Inside <code>HealthContainer.RemoveHealth</code>, the exact order between
+              <code>GetDamageAfterMultiplier</code>, <code>CalculateDamageAfterResistances</code>,
+              <code>CalculateDamageAfterArmor</code>, and the corruption multiplier is not
+              dump-visible. The order above is reconstructed from method-name semantics
+              (resistances are typically applied before flat armor) but isn&rsquo;t verified.
+              For most builds it doesn&rsquo;t matter, but mixing big resistance values
+              with high armor can shift outcomes a few percent.
+            </p>
+          </aside>
+        </section>
+
+        <section id="master-formula" class="stack">
+          <span id="formula"></span>
+          <h2>Master formula (one line)</h2>
+          <p class="prose">
+            Collapsing the pipeline for the common case of a player spell hitting an enemy:
+          </p>
+
+<pre class="formula"><code><span class="f-fn">final</span> = max(0,
+          <span class="f-base">spellBaseDamage</span>
+          × (<span class="f-num">1</span> + <span class="f-var">Σ%Damage</span>)
+          × <span class="f-var">spellSpecificMult</span>
+          × (<span class="f-num">1.5</span> if weakspot else <span class="f-num">1</span>)
+          × (<span class="f-num">1</span> + <span class="f-var">CriticalDamage</span>/<span class="f-num">100</span>)<span class="f-op"> if crit </span>else <span class="f-num">1</span>
+          × (<span class="f-num">1</span> + <span class="f-var">ElementStrength</span>/<span class="f-num">100</span>)
+          × (<span class="f-num">1</span> + <span class="f-var">ElementWeakness</span>/<span class="f-num">100</span>)
+          × <span class="f-var">debuffMult</span>
+          − <span class="f-var">targetArmor</span>
+        )</code></pre>
+        </section>
+
+        <section id="percent-add" class="stack">
+          <h2>PercentAdd vs PercentAddLogarithmic</h2>
+          <p class="prose">
+            Damage uses <strong>PercentAdd</strong>: every <code>+%</code> from items,
+            artifacts, and variants is summed and applied as <code>1 + Σ%</code>. Three
+            <code>+50%</code> picks become <code>1 + 1.50 = 2.50×</code>, not
+            <code>1.5³ = 3.375×</code>. This is the classic Vampire-Survivors-style
+            additive stack: linear, predictable, and easy to reason about.
+          </p>
+
+          <p class="prose">
+            Two stats deliberately escape that linearity:
+            <strong>Range</strong> and <strong>Size</strong> are
+            <strong>PercentAddLogarithmic</strong>. They use the same additive sum but
+            then raise the <code>1 + Σ%</code> factor to the
+            <code>StatCalculator.Exponent = 0.5714286</code> (≈ <code>4/7</code>) power.
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Effective multiplier from total stacked %</span>
+<span class="f-fn">PercentAdd</span>(<span class="f-num">100</span>%)             = <span class="f-num">2.00</span>×
+<span class="f-fn">PercentAddLogarithmic</span>(<span class="f-num">100</span>%)  = <span class="f-num">2.00</span>^<span class="f-num">0.5714</span> ≈ <span class="f-num">1.487</span>×
+<span class="f-fn">PercentAddLogarithmic</span>(<span class="f-num">300</span>%)  = <span class="f-num">4.00</span>^<span class="f-num">0.5714</span> ≈ <span class="f-num">2.21</span>×
+<span class="f-fn">PercentAddLogarithmic</span>(<span class="f-num">600</span>%)  = <span class="f-num">7.00</span>^<span class="f-num">0.5714</span> ≈ <span class="f-num">3.21</span>×</code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Why the curve?</span>
+            <p>
+              Range and Size feed directly into hit-detection geometry — runaway
+              stacking would either make spells unmissable or break the on-screen
+              composition. Damage doesn&rsquo;t have that problem, so it stacks linearly.
+            </p>
+          </aside>
+        </section>
+
+        <section id="element-effectiveness" class="stack">
+          <h2>Element effectiveness</h2>
+          <p class="prose">
+            <code>ElementEffectivenessCalculator.CalculateEffectiveness</code> is the
+            only place elements directly modify a damage <em>number</em> — the rest of
+            the element system (DOT, chill, ricochet, corruption) happens through
+            separate <code>IElementEffect</code> instances on top of normal damage.
+          </p>
+
+          <ol>
+            <li>If <code>damageInfo.Element == None</code>, the calculator returns the value unchanged — no elemental scaling.</li>
+            <li>Otherwise, multiply by <code>1 + attacker.ElementStrengthMultiplier / 100</code> (StatType 30, attacker side).</li>
+            <li>If the target carries it, multiply by <code>1 + target.ElementWeaknessMultiplier / 100</code> (StatType 27, target side; typically only players have this).</li>
+          </ol>
+
+          <p class="prose">
+            Both multipliers are additive within themselves (they&rsquo;re
+            <code>PercentAdd</code> stats), then combined multiplicatively across
+            attacker and target. No element has a built-in advantage against another
+            element — see <a href="../mechanics/element-matrix.html">the matrix</a>.
+          </p>
+        </section>
+
+        <section id="crit" class="stack">
+          <h2>Critical hits</h2>
+          <p class="prose">
+            The roll happens at hit time but the values are <em>snapshotted at cast time</em>:
+          </p>
+          <ol>
+            <li>Spell builds a <code>PlayerSpellDamageInfo</code> and stores the current <code>CriticalChance</code> and <code>CriticalDamage</code> off <code>IPlayerStats</code>.</li>
+            <li>When the projectile or beam lands, <code>Hitbox.IsCriticalDamage(info)</code> rolls <code>GetRandomFloat(0, 100)</code> and compares against <code>info.CriticalChance</code>.</li>
+            <li>On a crit, <code>Hitbox.CalculateCriticalDamage</code> returns <code>damage × (1 + CriticalDamage / 100)</code>.</li>
+          </ol>
+          <p class="prose">
+            See the dedicated <a href="../mechanics/critical-hits.html">Critical hits</a>
+            page for the full snapshot semantics, the Crit Mastery ascension override,
+            and how <code>DamageOverrideData</code> can fake the displayed amount.
+          </p>
+        </section>
+
+        <section id="weakspot" class="stack">
+          <h2>Weakspots</h2>
+          <p class="prose">
+            Hitboxes typed <code>HitboxType.Weakspot</code> apply a hard-coded
+            <strong>×1.5</strong> multiplier — the const
+            <code>Hitbox.WeakspotDamageMultiplier</code>. It stacks
+            <em>multiplicatively</em> with crit, so a weakspot crit at
+            <code>CriticalDamage = 100</code> hits for <code>1.5 × 2.0 = 3.0×</code>.
+          </p>
+        </section>
+
+        <section id="one-shot" class="stack">
+          <h2>One-shot damage</h2>
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title"><code>OneShotDamage = 999999</code></span>
+            <p>
+              The game exposes a <strong>999999</strong> constant used by effects that
+              are supposed to instantly kill a target regardless of HP — Acolyte&rsquo;s
+              ghost detonation, certain boss-arena kill volumes, the
+              <code>OneHitMode</code> curse&rsquo;s self-damage path. Anything that uses
+              this number bypasses normal scaling: even with maximum
+              <code>damageTakenWhileCorruptedMultiplier</code> reductions, the post-Armor
+              value remains far above any reasonable HP pool.
+            </p>
+          </aside>
+        </section>
+
+        <section id="friendly-fire" class="stack">
+          <h2>Friendly fire</h2>
+          <p class="prose">
+            When a player&rsquo;s damage lands on a teammate (most often via explosions
+            and zone effects), the const <code>FriendlyFireMultiplier = 0.25</code> on
+            <code>PlayerHealthContainer</code> is applied. This is a flat
+            <code>×0.25</code> on the post-element / pre-armor value, then armor and
+            dodge still apply on the teammate&rsquo;s side. <code>ExplosionDamageInfo</code>
+            also carries separate <code>DamageOnEnemies</code> and
+            <code>DamageOnPlayers</code> fields so a single explosion can deliver
+            different base numbers to each side before that ×0.25 even fires.
+          </p>
+        </section>
+
+        <section id="worked-examples" class="stack">
+          <h2>Worked examples</h2>
+
+          <h3>Example 1 — Baseline Arrow, no upgrades, normal enemy</h3>
+          <p class="prose">
+            A level-1 Arrow with no improvements, no infusion, no crit, hitting a
+            standard zombie body shot.
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Inputs</span>
+spellBaseDamage          = <span class="f-num">10</span>          <span class="f-comment">// hypothetical Arrow base</span>
+Σ %Damage                = <span class="f-num">0</span>
+spellSpecificMult        = <span class="f-num">1.0</span>
+hitbox                   = Default       <span class="f-comment">// not a weakspot</span>
+crit                     = false
+ElementStrengthMultiplier= <span class="f-num">0</span>           <span class="f-comment">// element = None → skipped entirely</span>
+ElementWeaknessMultiplier= <span class="f-num">0</span>
+debuffMult               = <span class="f-num">1.0</span>
+target Armor             = <span class="f-num">0</span>
+
+<span class="f-comment">// Compute</span>
+step1: <span class="f-num">10</span> × (<span class="f-num">1</span> + <span class="f-num">0</span>)              = <span class="f-num">10</span>
+step3: <span class="f-num">10</span> × <span class="f-num">1.0</span>                    = <span class="f-num">10</span>
+step4: <span class="f-num">10</span> × <span class="f-num">1.0</span>                    = <span class="f-num">10</span>
+step5: no crit                       = <span class="f-num">10</span>
+step6: element None → skipped        = <span class="f-num">10</span>
+step7: <span class="f-num">10</span> × <span class="f-num">1.0</span>                    = <span class="f-num">10</span>
+step8: max(<span class="f-num">0</span>, <span class="f-num">10</span> − <span class="f-num">0</span>)              = <span class="f-num">10</span>
+
+<span class="f-fn">final</span> = <span class="f-num">10</span></code></pre>
+
+          <h3>Example 2 — Arrow with 3 epic Damage picks, IncreaseDamagePerArmor at 10 armor, Fire infusion, Ice-weak enemy</h3>
+          <p class="prose">
+            Same Arrow base, three epic <code>+25% Damage</code> store picks,
+            <a href="../artifacts/artifact-13.html">IncreaseDamagePerArmor</a>
+            (assume <code>Parameters[0] = 0.03</code> per armor point, so 10 armor
+            adds <code>+30% Damage</code> dynamically), Fire infusion, ElementStrength
+            <code>+50%</code> from <em>IncreaseElementalDamagePerInfusionPerformed</em>
+            stacks, and the target has <code>ElementWeaknessMultiplier = 25</code> (it&rsquo;s
+            an Ice-themed enemy taking +25% elemental damage). Normal body shot, no crit.
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Inputs</span>
+spellBaseDamage          = <span class="f-num">10</span>
+Σ %Damage                = <span class="f-num">0.25</span> + <span class="f-num">0.25</span> + <span class="f-num">0.25</span> + <span class="f-num">0.30</span>  = <span class="f-num">1.05</span>   <span class="f-comment">// 3 epic + dynamic from 10 armor</span>
+spellSpecificMult        = <span class="f-num">1.0</span>
+hitbox                   = Default
+crit                     = false
+ElementStrengthMultiplier= <span class="f-num">50</span>                                 <span class="f-comment">// +50% (attacker)</span>
+ElementWeaknessMultiplier= <span class="f-num">25</span>                                 <span class="f-comment">// +25% (target)</span>
+target Armor             = <span class="f-num">0</span>
+
+<span class="f-comment">// Compute</span>
+step1: <span class="f-num">10</span> × (<span class="f-num">1</span> + <span class="f-num">1.05</span>)                              = <span class="f-num">20.5</span>
+step3-5: ×<span class="f-num">1.0</span> ×<span class="f-num">1.0</span> (no crit)                          = <span class="f-num">20.5</span>
+step6a: <span class="f-num">20.5</span> × (<span class="f-num">1</span> + <span class="f-num">0.50</span>)                          = <span class="f-num">30.75</span>
+step6b: <span class="f-num">30.75</span> × (<span class="f-num">1</span> + <span class="f-num">0.25</span>)                         = <span class="f-num">38.44</span>
+step7-8: no debuff, no armor                              = <span class="f-num">38.44</span>
+
+<span class="f-fn">final</span> ≈ <span class="f-num">38</span>   <span class="f-comment">// 3.84× the baseline Arrow</span></code></pre>
+
+          <h3>Example 3 — Crit weakspot with element strength</h3>
+          <p class="prose">
+            Same Arrow, three <code>+25% Damage</code> picks, <code>CriticalChance = 100</code>
+            (guaranteed crit), <code>CriticalDamage = 150</code> (+150%), Fire infusion,
+            <code>ElementStrengthMultiplier = 20</code>, target is a boss
+            (no ElementWeaknessMultiplier on the target), hits a weakspot for
+            <strong>×1.5</strong>. Boss has <code>Armor = 8</code> (enemy-side defensive
+            scaling — for the example we treat it as a flat subtraction even though
+            enemies usually don&rsquo;t expose the Armor stat).
+          </p>
+
+<pre class="formula"><code><span class="f-comment">// Inputs</span>
+spellBaseDamage   = <span class="f-num">10</span>
+Σ %Damage         = <span class="f-num">0.75</span>      <span class="f-comment">// 3 × 25%</span>
+weakspot          = true
+crit              = true
+CriticalDamage    = <span class="f-num">150</span>
+ElementStrength   = <span class="f-num">20</span>
+ElementWeakness   = <span class="f-num">0</span>
+target Armor      = <span class="f-num">8</span>
+
+<span class="f-comment">// Compute</span>
+step1: <span class="f-num">10</span> × (<span class="f-num">1</span> + <span class="f-num">0.75</span>)        = <span class="f-num">17.5</span>
+step3: × <span class="f-num">1.0</span>                  = <span class="f-num">17.5</span>
+step4: × <span class="f-num">1.5</span> (weakspot)        = <span class="f-num">26.25</span>
+step5: × (<span class="f-num">1</span> + <span class="f-num">150</span>/<span class="f-num">100</span>) = ×<span class="f-num">2.5</span> = <span class="f-num">65.625</span>
+step6: × (<span class="f-num">1</span> + <span class="f-num">0.20</span>) = ×<span class="f-num">1.2</span>      = <span class="f-num">78.75</span>
+step7: × <span class="f-num">1.0</span>                  = <span class="f-num">78.75</span>
+step8: max(<span class="f-num">0</span>, <span class="f-num">78.75</span> − <span class="f-num">8</span>)      = <span class="f-num">70.75</span>
+
+<span class="f-fn">final</span> ≈ <span class="f-num">71</span>   <span class="f-comment">// 7.1× the baseline Arrow</span></code></pre>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Order matters — sort of</span>
+            <p>
+              Multiplicative ordering between crit, element strength, and weakspot
+              doesn&rsquo;t change the result (multiplication is commutative). What
+              <em>does</em> change the result is whether a buff is additive (lumped into
+              <code>Σ%Damage</code>) or multiplicative (its own factor). Damage picks add
+              into the same bucket; ElementStrength is its own bucket; weakspot is yet
+              another. Build planning is about figuring out which bucket each source
+              actually feeds.
+            </p>
+          </aside>
+        </section>
+
+        <section id="damage-info" class="stack">
+          <h2>DamageInfo subtypes</h2>
+          <p class="prose">
+            Every damage event carries a <code>DamageInfo</code> object. The base class
+            holds the element, the nominal damage, the optional incoming direction, and
+            the final <code>EffectiveDamageDone</code> the popup reads. Subclasses add
+            attribution and special-case routing.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption><code>DamageInfo</code> subclass hierarchy</caption>
+              <thead>
+                <tr><th>Class</th><th>Extends</th><th>Used for</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>DamageInfo</code></td><td>— (abstract)</td><td>Root: element, damage, direction, effective-damage-done.</td></tr>
+                <tr><td><code>PlayerDamageInfo</code></td><td>DamageInfo</td><td>Any player-owned damage. Adds OwnerClientId + crit snapshot fields.</td></tr>
+                <tr><td><code>PlayerSpellDamageInfo</code></td><td>PlayerDamageInfo</td><td>Default path for player spells. Carries SpellType, SpellId, HealingMultiplier.</td></tr>
+                <tr><td><code>PlayerSpellExplosionDamageInfo</code></td><td>PlayerSpellDamageInfo</td><td>Spell-triggered explosion; clones source data so crit/owner survive.</td></tr>
+                <tr><td><code>PlayerExplosionDamageInfo</code></td><td>ExplosionDamageInfo</td><td>Non-spell player explosion (Ascension revive blast, ExplodeOnDeath).</td></tr>
+                <tr><td><code>PlayerRespawnDamageInfo</code></td><td>PlayerDamageInfo</td><td>Damage from respawn / ghost-explosion mechanics (Acolyte).</td></tr>
+                <tr><td><code>PlayerReturnDamageInfo</code></td><td>PlayerDamageInfo</td><td>Reflected damage from Return-Damage-When-Hit. Carries <code>WasLethal</code>.</td></tr>
+                <tr><td><code>CorruptedPlayerSpellDamageInfo</code></td><td>PlayerSpellDamageInfo</td><td>Damage by a corrupted enemy still credited to the corrupting player.</td></tr>
+                <tr><td><code>EnemyDamageInfo</code></td><td>DamageInfo</td><td>Enemy → player damage. Carries AttackerObjectId, EnemyType.</td></tr>
+                <tr><td><code>EnemyProjectileDamageInfo</code></td><td>EnemyDamageInfo</td><td>Distinguishes ranged hits from contact for dodge/armor logic.</td></tr>
+                <tr><td><code>EnvironmentalDamageInfo</code></td><td>DamageInfo</td><td>World hazards (lava, fall). Respects IgnoreLavaDamage flag.</td></tr>
+                <tr><td><code>ExplosionDamageInfo</code></td><td>DamageInfo</td><td>Generic explosion. Separate DamageOnEnemies / DamageOnPlayers fields.</td></tr>
+                <tr><td><code>HealthRerollDamageInfo</code></td><td>DamageInfo</td><td>Curse-driven HP reroll / reduction.</td></tr>
+                <tr><td><code>TakeDamageOnLevelUpCurseDamageInfo</code></td><td>DamageInfo</td><td>Self-damage from the TakeDamageOnLevelUp curse.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="artifacts" class="stack">
+          <h2>Artifact hooks into the pipeline</h2>
+          <p class="prose">
+            Many artifacts attach as <code>DynamicStatModifier</code>s that feed into
+            specific pipeline steps. Selected highlights:
+          </p>
+
+          <dl class="meta-dl">
+            <dt>Step 1 — <code>Σ %Damage</code></dt>
+            <dd>
+              <a href="../artifacts/artifact-13.html">IncreaseDamagePerArmor</a>,
+              <a href="../artifacts/artifact-5.html">IncreaseDamagePerNearbyPartyMember</a>,
+              <a href="../artifacts/artifact-11.html">IncreaseDamagePerRevivePerformed</a>,
+              <a href="../spells/index.html">DealMoreDamageWhenStandingStill</a> (spell scope).
+            </dd>
+            <dt>Step 5 — <code>CriticalDamage</code> bucket</dt>
+            <dd>
+              <a href="../artifacts/artifact-14.html">IncreaseCriticalDamagePerRevivePerformed</a>,
+              <a href="../artifacts/artifact-7.html">IncreaseCriticalDamageWhenStandingStill</a>.
+            </dd>
+            <dt>Step 6 — <code>ElementStrengthMultiplier</code></dt>
+            <dd>
+              <a href="../artifacts/artifact-15.html">IncreaseElementalDamagePerInfusionPerformed</a> — every infusion you commit during a run pushes this up.
+            </dd>
+            <dt>Step 8 — Armor side</dt>
+            <dd>
+              <a href="../artifacts/artifact-2.html">AddArmorEqualToPartyLevel</a>,
+              <a href="../artifacts/artifact-12.html">IncreaseArmorPerObjectiveCompleted</a>,
+              <a href="../spells/bell.html#variants">BellZoneGivesArmor</a> (variant),
+              <a href="../spells/proximity.html#variants">ReduceDamageTakenWhenEnemiesInProximity</a> (also armor-routed).
+            </dd>
+          </dl>
+        </section>
+
+        <section id="open-questions" class="stack">
+          <h2>Open questions</h2>
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Things the dump doesn&rsquo;t answer</span>
+            <ul>
+              <li>Exact ordering between <code>DamageResistance</code>, the damage-multiplier providers, the corruption multiplier, and Armor inside <code>HealthContainer.RemoveHealth</code>.</li>
+              <li>Whether <code>damageMultiplierProviders</code> sum or product-reduce when more than one effect is active on the same target.</li>
+              <li>Whether <code>GetRandomFloat</code> uses <code>[0, 100)</code> or <code>[0, 100]</code> inclusive on the crit roll. The variable comparison strongly implies the half-open form (so 100% chance is still 100%).</li>
+              <li>Whether negative cursed Damage stats clamp to zero before the <code>(1 + Σ)</code> multiplication. No clamping is visible.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/stats.html">
+            <strong>Stats reference</strong>
+            What every <code>+%</code> on an item feeds into.
+          </a>
+          <a class="see-also__link" href="../mechanics/elements.html">
+            <strong>Elements</strong>
+            Element effects + the infusion combo system.
+          </a>
+          <a class="see-also__link" href="../mechanics/critical-hits.html">
+            <strong>Critical hits</strong>
+            Snapshot semantics, weakspot stacking, OneShot const.
+          </a>
+          <a class="see-also__link" href="../mechanics/armor-dodge.html">
+            <strong>Armor &amp; Dodge</strong>
+            The defensive side of the pipeline.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

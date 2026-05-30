@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="All 20 artifacts in The Spell Brigade — passive effects, parameters, IL2CPP source, synergies.">
+  <title>Artifacts — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body id="top">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" aria-current="page" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle
+            aria-expanded="false" aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Artifacts index">
+      <h2 class="sidebar__title">All 20 Artifacts</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">← Artifacts hub</a></li>
+        <li><a href="artifact-1.html">01 — The Less HP, The More Move Speed</a></li>
+        <li><a href="artifact-2.html">02 — Add Armor Equal To Level</a></li>
+        <li><a href="artifact-3.html">03 — The Less HP, The More XP Gain</a></li>
+        <li><a href="artifact-4.html">04 — Increase Healing Done For Every Objective</a></li>
+        <li><a href="artifact-5.html">05 — Increase Damage For Every Nearby Teammate</a></li>
+        <li><a href="artifact-6.html">06 — Heal On Dodge</a></li>
+        <li><a href="artifact-7.html">07 — Increase Crit Damage While Standing Still</a></li>
+        <li><a href="artifact-8.html">08 — Increase Luck When Not Rerolling</a></li>
+        <li><a href="artifact-9.html">09 — Heal On Level Up</a></li>
+        <li><a href="artifact-10.html">10 — Increase Max Health For Every Revive</a></li>
+        <li><a href="artifact-11.html">11 — Increase Damage For Every Revive</a></li>
+        <li><a href="artifact-12.html">12 — Increase Armor Per Objective Completed</a></li>
+        <li><a href="artifact-13.html">13 — Increase Damage Per Armor</a></li>
+        <li><a href="artifact-14.html">14 — Increase Crit Damage For Every Revive</a></li>
+        <li><a href="artifact-15.html">15 — Increase Elemental Damage For Every Infusion</a></li>
+        <li><a href="artifact-16.html">16 — Increase Fire Rate While Standing Still</a></li>
+        <li><a href="artifact-17.html">17 — Heal On Crit</a></li>
+        <li><a href="artifact-18.html">18 — Increase Max HP For Every Health Pickup</a></li>
+        <li><a href="artifact-19.html">19 — Heal On XP Pickup</a></li>
+        <li><a href="artifact-20.html">20 — Increase Crit Damage For Every Common</a></li>
+      </ul>
+      <h2 class="sidebar__title">Related</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/stats.html">Stats reference</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage calculation</a></li>
+        <li><a href="../mechanics/index.html">Mechanics hub</a></li>
+        <li><a href="../guides/artifact-priorities.html">Artifact priority guide</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li><li aria-current="page">Artifacts</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>20 Artifacts — Passive Effects</h1>
+          <p class="prose u-muted">
+            Artifacts are run-altering passive items. Most use the
+            <a href="../mechanics/stat-modifiers.html">DynamicStatModifier</a>
+            hierarchy — every game frame the artifact re-evaluates a small
+            formula and pushes the resulting bonus into the player's stat pool
+            (e.g.&nbsp;<a href="../mechanics/stats.html#armor">Armor</a> or
+            <a href="../mechanics/stats.html#critdamage">CriticalDamage</a>).
+            A handful (Heal&nbsp;On&nbsp;Crit, Heal&nbsp;On&nbsp;XP&nbsp;Pickup,
+            Crit-Damage&nbsp;On&nbsp;Common) are <strong>event-driven</strong>
+            instead — they react to gameplay events rather than adding a
+            continuous stat modifier. Several artifacts only spawn in multiplayer.
+            See <a href="../mechanics/index.html">Mechanics</a> for the full pipeline.
+          </p>
+
+          <h2>Filter by effect category</h2>
+          <div class="row" id="artifact-filters"><button class="tag" type="button" data-filter="all" aria-pressed="true">All (20)</button><button class="tag" type="button" data-filter="crit">Crit</button> <button class="tag" type="button" data-filter="damage">Damage</button> <button class="tag" type="button" data-filter="defense">Defense</button> <button class="tag" type="button" data-filter="healing">Healing</button> <button class="tag" type="button" data-filter="utility">Utility</button> <button class="tag" type="button" data-filter="conditional">Conditional</button> <button class="tag" type="button" data-filter="reactive">Reactive</button></div>
+        </section>
+
+        <section id="compare">
+          <h2>Quick comparison</h2>
+          <p class="prose">Click any column header to sort.</p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>All 20 artifacts &mdash; stat affected, trigger, spawn rate, parameter count</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Artifact</th>
+                  <th data-sort="string">Stat affected</th>
+                  <th data-sort="string">Trigger condition</th>
+                  <th data-sort="number" class="num">Spawn rate</th>
+                  <th data-sort="number" class="num">Params</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+  <td><a href="#artifact-1">01 The Less HP, The More Move Speed</a></td>
+  <td><a href="../mechanics/stats.html#movementspeed">MovementSpeed</a></td>
+  <td>Continuous; scales with (1 - currentHP/maxHP). Stronger when low on HP.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-2">02 Add Armor Equal To Level</a></td>
+  <td><a href="../mechanics/stats.html#armor">Armor</a></td>
+  <td>Continuous; returns the current party level as the modifier value (no tunable parameters).</td>
+  <td class="num">50</td>
+  <td class="num">0</td>
+</tr>
+<tr>
+  <td><a href="#artifact-3">03 The Less HP, The More XP Gain</a></td>
+  <td><a href="../mechanics/stats.html#xpgain">XPGain</a></td>
+  <td>When current HP &lt; hard-coded threshold (commonly low-HP). Off otherwise.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-4">04 Increase Healing Done For Every Objective</a></td>
+  <td><a href="../mechanics/stats.html#healingmultiplier">HealingMultiplier</a></td>
+  <td>Each successfully completed side objective adds one stack of bonus healing.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-5">05 Increase Damage For Every Nearby Teammate</a></td>
+  <td><a href="../mechanics/stats.html#damage">Damage</a></td>
+  <td>Each ally within 10 units adds one stack of damage bonus.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-6">06 Heal On Dodge</a></td>
+  <td><a href="../mechanics/stats.html#healondodge">HealOnDodge</a></td>
+  <td>Each time the player successfully dodges an incoming attack.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-7">07 Increase Crit Damage While Standing Still</a></td>
+  <td><a href="../mechanics/stats.html#critdamage">CriticalDamage</a></td>
+  <td>Active only while player is stationary (PlayerMotor not moving).</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-8">08 Increase Luck When Not Rerolling</a></td>
+  <td><a href="../mechanics/stats.html#luck">Luck</a></td>
+  <td>Each store visit where the player does NOT use a reroll adds one stack.</td>
+  <td class="num">50</td>
+  <td class="num">2</td>
+</tr>
+<tr>
+  <td><a href="#artifact-9">09 Heal On Level Up</a></td>
+  <td><a href="../mechanics/stats.html#healonlevelup">HealOnLevelUp</a></td>
+  <td>Each party level-up triggers one heal.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-10">10 Increase Max Health For Every Revive</a></td>
+  <td><a href="../mechanics/stats.html#maxhealth">MaxHealth</a></td>
+  <td>Each successful revive performed by this player adds one stack.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-11">11 Increase Damage For Every Revive</a></td>
+  <td><a href="../mechanics/stats.html#damage">Damage</a></td>
+  <td>Each successful revive performed by this player adds one stack.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-12">12 Increase Armor Per Objective Completed</a></td>
+  <td><a href="../mechanics/stats.html#armor">Armor</a></td>
+  <td>Each successfully completed side objective adds one stack of armor.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-13">13 Increase Damage Per Armor</a></td>
+  <td><a href="../mechanics/stats.html#damage">Damage</a></td>
+  <td>Continuous; reads current Armor each evaluation.</td>
+  <td class="num">50</td>
+  <td class="num">2</td>
+</tr>
+<tr>
+  <td><a href="#artifact-14">14 Increase Crit Damage For Every Revive</a></td>
+  <td><a href="../mechanics/stats.html#critdamage">CriticalDamage</a></td>
+  <td>Each successful revive performed by this player adds one stack.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-15">15 Increase Elemental Damage For Every Infusion</a></td>
+  <td><a href="../mechanics/stats.html#elementstrengthmultiplier">ElementStrengthMultiplier</a></td>
+  <td>Each infusion-type ImprovementAdded event adds one stack.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-16">16 Increase Fire Rate While Standing Still</a></td>
+  <td><a href="../mechanics/stats.html#firerate">FireRate</a></td>
+  <td>Active only while player is stationary.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-17">17 Heal On Crit</a></td>
+  <td><span class="u-muted">event-driven</span></td>
+  <td>Event: every critical hit triggers HealOnCrit(critDamage) → heal = 0.3 * critDamage.</td>
+  <td class="num">50</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-18">18 Increase Max HP For Every Health Pickup</a></td>
+  <td><a href="../mechanics/stats.html#maxhealth">MaxHealth</a></td>
+  <td>Each health-potion collected adds one stack of max HP.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+<tr>
+  <td><a href="#artifact-19">19 Heal On XP Pickup</a></td>
+  <td><span class="u-muted">event-driven</span></td>
+  <td>Event: each XP gem pickup rolls a 15% chance to heal for 1 HP.</td>
+  <td class="num">50</td>
+  <td class="num">2</td>
+</tr>
+<tr>
+  <td><a href="#artifact-20">20 Increase Crit Damage For Every Common</a></td>
+  <td><a href="../mechanics/stats.html#critdamage">CriticalDamage</a></td>
+  <td>Each time a store offers Common-rarity items, +1 per Common item shown.</td>
+  <td class="num">100</td>
+  <td class="num">1</td>
+</tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="cards">
+          <h2>All artifacts</h2>
+          <p class="prose">
+            Each card lists the IL2CPP class it derives from, decoded parameters
+            with a confidence label, and the synergy hints surfaced by the
+            extraction pipeline. Deep-link directly with
+            <code>#artifact-N</code>.
+          </p>
+          <div class="grid grid-cards" id="artifact-grid">
+            <article class="item-card" id="artifact-1" data-kind="artifact" data-cats="conditional utility">
+  <span class="rarity-ribbon" data-rarity="rare">#01</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-1.html">The Less HP, The More Move Speed</a></h3>
+      <p class="item-card__subtitle">Artifact_1 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#movementspeed">StatType: MovementSpeed</a>
+    <span class="tag" data-cat="conditional">Conditional</span> <span class="tag" data-cat="utility">Utility</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Continuous; scales with (1 - currentHP/maxHP). Stronger when low on HP.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 21</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Maximum bonus movement speed (in stat points or percent) granted when the player is at minimum health; the bonus scales linearly with missing HP (more missing HP = closer to the full 21 bonus).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-3">Artifact 3</a> (TheLessHPTheMoreXPGain) — both reward low-HP play</span> <span class="tag">Pairs with healing-when-injured spells / lifesteal to stay alive at low HP</span> <span class="tag">Synergises with Dodge / iframe builds that survive low-HP play</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_1.asset</code> · <code>ArtifactStatModifier_LessHPMoreMovementSpeed</code> (dump line 262446)</p>
+</article>
+<article class="item-card" id="artifact-2" data-kind="artifact" data-cats="defense">
+  <span class="rarity-ribbon" data-rarity="rare">#02</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-2.html">Add Armor Equal To Level</a></h3>
+      <p class="item-card__subtitle">Artifact_2 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#armor">StatType: Armor</a>
+    <span class="tag" data-cat="defense">Defense</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Continuous; returns the current party level as the modifier value (no tunable parameters).</em></p>
+  <p class="u-muted"><em>No tunable parameters (hard-coded behaviour).</em></p>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-13">Artifact 13</a> (IncreaseDamagePerArmor) — every armor point becomes damage</span> <span class="tag">Pairs with <a href="#artifact-12">Artifact 12</a> (IncreaseArmorPerObjectiveCompleted) for stacking armor</span> <span class="tag">Useful on long runs where party level scales high</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_2.asset</code> · <code>ArtifactStatModifier_AddArmorEqualToPartyLevel</code> (dump line 262067)</p>
+</article>
+<article class="item-card" id="artifact-3" data-kind="artifact" data-cats="conditional utility">
+  <span class="rarity-ribbon" data-rarity="rare">#03</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-3.html">The Less HP, The More XP Gain</a></h3>
+      <p class="item-card__subtitle">Artifact_3 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#xpgain">StatType: XPGain</a>
+    <span class="tag" data-cat="conditional">Conditional</span> <span class="tag" data-cat="utility">Utility</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>When current HP &lt; hard-coded threshold (commonly low-HP). Off otherwise.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 40</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Bonus XP gain (most likely in percent points added to XPGain stat) granted while the player&#x27;s HP is below an internal health-fraction threshold. Class name &#x27;BonusExpWhenBelowHealthThreshold&#x27; makes this a discrete on/off bonus rather than a linear scale.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-1">Artifact 1</a> (TheLessHPTheMoreMoveSpeed) — both reward low-HP play</span> <span class="tag">Pairs with low-HP / glass-cannon spell builds</span> <span class="tag">Useful in early game to power-level</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_3.asset</code> · <code>ArtifactStatModifier_BonusExpWhenBelowHealthThreshold</code> (dump line 262085)</p>
+</article>
+<article class="item-card" id="artifact-4" data-kind="artifact" data-cats="healing conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#04</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-4.html">Increase Healing Done For Every Objective</a></h3>
+      <p class="item-card__subtitle">Artifact_4 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#healingmultiplier">StatType: HealingMultiplier</a>
+    <span class="tag" data-cat="healing">Healing</span> <span class="tag" data-cat="conditional">Conditional</span>
+    <span class="tag" data-cat="coop">Co-op only</span>
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each successfully completed side objective adds one stack of bonus healing.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 25</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Healing multiplier increase (likely +25% to HealingMultiplier, or +25 stat points) granted per side-objective successfully completed. Stacks every objective.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Multiplayer-only (hide_for_single_player=1) — pair with revive/support builds</span> <span class="tag">Pairs with <a href="#artifact-12">Artifact 12</a> (IncreaseArmorPerObjectiveCompleted) — same trigger source</span> <span class="tag">Synergises with healing spells and revives</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_4.asset</code> · <code>ArtifactStatModifier_MoreSideObjectivesMoreHealingDone</code> (dump line 262469)</p>
+</article>
+<article class="item-card" id="artifact-5" data-kind="artifact" data-cats="damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#05</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-5.html">Increase Damage For Every Nearby Teammate</a></h3>
+      <p class="item-card__subtitle">Artifact_5 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#damage">StatType: Damage</a>
+    <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    <span class="tag" data-cat="coop">Co-op only</span>
+    
+  </div>
+  <p class="item-card__desc"><em>Each ally within 10 units adds one stack of damage bonus.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 20</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Bonus damage (likely +20% per nearby teammate within MaxDistanceForDamageIncrease=10 units). Class enumerates other GameplayPlayers and filters by distance &lt; 10.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Multiplayer-only — encourages stacking with teammates</span> <span class="tag">Pairs with melee/short-range builds that already group up</span> <span class="tag">Anti-synergy with kiting/long-range loadouts</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_5.asset</code> · <code>ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember</code> (dump line 262249)</p>
+</article>
+<article class="item-card" id="artifact-6" data-kind="artifact" data-cats="healing reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#06</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-6.html">Heal On Dodge</a></h3>
+      <p class="item-card__subtitle">Artifact_6 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#healondodge">StatType: HealOnDodge</a>
+    <span class="tag" data-cat="healing">Healing</span> <span class="tag" data-cat="reactive">Reactive</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Each time the player successfully dodges an incoming attack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 20</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Healing amount on each successful dodge — uses the HealOnDodge stat (StatType=22). Likely 20 HP or 20% of max HP healed per dodged hit.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with high-Dodge builds (Dodge stat, Dodge-on-X improvements)</span> <span class="tag">Synergises with crowd / many-projectile waves (more dodge procs)</span> <span class="tag">Pairs with <a href="#artifact-9">Artifact 9</a> (HealOnLevelUp) for layered sustain</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_6.asset</code> · static stat modifier</p>
+</article>
+<article class="item-card" id="artifact-7" data-kind="artifact" data-cats="crit damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#07</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-7.html">Increase Crit Damage While Standing Still</a></h3>
+      <p class="item-card__subtitle">Artifact_7 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#critdamage">StatType: CriticalDamage</a>
+    <span class="tag" data-cat="crit">Crit</span> <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Active only while player is stationary (PlayerMotor not moving).</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 100</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Bonus critical damage (likely +100% / +100 CritDamage stat points) granted while the player is not moving (PlayerMotor velocity = 0).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-16">Artifact 16</a> (IncreaseFireRateWhileStandingStill) — both reward standing still</span> <span class="tag">Pairs with <a href="#artifact-17">Artifact 17</a>/20 (HealOnCrit, IncreaseCritDamageForEveryCommon) for crit stacking</span> <span class="tag">Synergises with turret/orbital spells that don&#x27;t require movement</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_7.asset</code> · <code>ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill</code> (dump line 262163)</p>
+</article>
+<article class="item-card" id="artifact-8" data-kind="artifact" data-cats="utility conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#08</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-8.html">Increase Luck When Not Rerolling</a></h3>
+      <p class="item-card__subtitle">Artifact_8 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#luck">StatType: Luck</a>
+    <span class="tag" data-cat="utility">Utility</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Each store visit where the player does NOT use a reroll adds one stack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 1</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Either the Luck bonus per non-rerolled store (1 Luck stat point per skip) or a per-store increment multiplier; Parameters[0] is multiplied by numberOfStoresNotRerolled.</span></li>
+<li><strong>Parameter[1] = 10</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Maximum cap on the bonus — most likely &#x27;up to 10 Luck&#x27; or &#x27;stacks capped at 10 stores not rerolled&#x27;.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Anti-synergy with Rerolls stat / reroll-spam builds</span> <span class="tag">Pairs with patient / commitment builds that pick first offer</span> <span class="tag">Useful early to bias rarity rolls upward</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_8.asset</code> · <code>ArtifactStatModifier_IncreaseLuckWhenNotRerolling</code> (dump line 262363)</p>
+</article>
+<article class="item-card" id="artifact-9" data-kind="artifact" data-cats="healing reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#09</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-9.html">Heal On Level Up</a></h3>
+      <p class="item-card__subtitle">Artifact_9 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#healonlevelup">StatType: HealOnLevelUp</a>
+    <span class="tag" data-cat="healing">Healing</span> <span class="tag" data-cat="reactive">Reactive</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Each party level-up triggers one heal.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 10</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Healing amount granted each time the party gains a level — uses the HealOnLevelUp stat (StatType=23). Likely 10 HP or 10% max HP per level-up.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with XP-gain artifacts (<a href="#artifact-3">Artifact 3</a> TheLessHPTheMoreXPGain) — more level-ups = more heals</span> <span class="tag">Pairs with <a href="#artifact-6">Artifact 6</a> (HealOnDodge) for stacked sustain</span> <span class="tag">Strong in early game when level-ups are frequent</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_9.asset</code> · static stat modifier</p>
+</article>
+<article class="item-card" id="artifact-10" data-kind="artifact" data-cats="defense reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#10</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-10.html">Increase Max Health For Every Revive</a></h3>
+      <p class="item-card__subtitle">Artifact_10 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#maxhealth">StatType: MaxHealth</a>
+    <span class="tag" data-cat="defense">Defense</span> <span class="tag" data-cat="reactive">Reactive</span>
+    <span class="tag" data-cat="coop">Co-op only</span>
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each successful revive performed by this player adds one stack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 50</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Max-health bonus per revive performed (likely +50 HP per ally revive, or +50% max HP per revive).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Multiplayer-only — pairs with <a href="#artifact-11">Artifact 11</a> (IncreaseDamageForEveryRevive) and <a href="#artifact-14">Artifact 14</a> (IncreaseCritDamageForEveryRevive)</span> <span class="tag">Pairs with ReviveSpeed/ReviveZoneSize stats and support builds</span> <span class="tag">Pairs with <a href="#artifact-18">Artifact 18</a> (IncreaseMaxHPForEveryHealthPickup) for stacking max HP</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_10.asset</code> · <code>ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed</code> (dump line 262417)</p>
+</article>
+<article class="item-card" id="artifact-11" data-kind="artifact" data-cats="damage reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#11</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-11.html">Increase Damage For Every Revive</a></h3>
+      <p class="item-card__subtitle">Artifact_11 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#damage">StatType: Damage</a>
+    <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="reactive">Reactive</span>
+    <span class="tag" data-cat="coop">Co-op only</span>
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each successful revive performed by this player adds one stack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 10</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Damage bonus (likely +10% Damage) per revive performed; stacks each revive.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Multiplayer-only — pairs with <a href="#artifact-10">Artifact 10</a> and <a href="#artifact-14">Artifact 14</a> (revive-trigger set)</span> <span class="tag">Pairs with ReviveSpeed/ReviveZoneSize stat investments</span> <span class="tag">Encourages active revives over leaving teammates down</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_11.asset</code> · <code>ArtifactStatModifier_IncreaseDamagePerRevivePerformed</code> (dump line 262284)</p>
+</article>
+<article class="item-card" id="artifact-12" data-kind="artifact" data-cats="defense conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#12</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-12.html">Increase Armor Per Objective Completed</a></h3>
+      <p class="item-card__subtitle">Artifact_12 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#armor">StatType: Armor</a>
+    <span class="tag" data-cat="defense">Defense</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each successfully completed side objective adds one stack of armor.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 10</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Armor bonus per side-objective successfully completed (likely +10 Armor per objective).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-13">Artifact 13</a> (IncreaseDamagePerArmor) — armor becomes damage</span> <span class="tag">Pairs with <a href="#artifact-2">Artifact 2</a> (AddArmorEqualToLevel) and <a href="#artifact-4">Artifact 4</a> (objective-trigger set)</span> <span class="tag">Synergises with objective-focused playstyles</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_12.asset</code> · <code>ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted</code> (dump line 262108)</p>
+</article>
+<article class="item-card" id="artifact-13" data-kind="artifact" data-cats="damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#13</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-13.html">Increase Damage Per Armor</a></h3>
+      <p class="item-card__subtitle">Artifact_13 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#damage">StatType: Damage</a>
+    <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Continuous; reads current Armor each evaluation.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 1</strong> <span class="rarity-pill" data-rarity="legendary">guess</span><br><span class="prose">Either an armor-cost step (1 armor required per increment) or a flat baseline factor for the damage formula.</span></li>
+<li><strong>Parameter[1] = 0.25</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Damage multiplier per unit of armor — likely 0.25% bonus damage per armor point (i.e. 100 armor = +25% damage), or 0.25 multiplier per Parameters[0] armor.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-2">Artifact 2</a> (AddArmorEqualToLevel) and <a href="#artifact-12">Artifact 12</a> (IncreaseArmorPerObjectiveCompleted)</span> <span class="tag">Pairs with Armor-granting spells/improvements</span> <span class="tag">Beware companion class ArtifactStatModifier_DecreaseMovementSpeedPerArmor exists in code — armor stacking may have an in-game movement-speed downside applied elsewhere</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_13.asset</code> · <code>ArtifactStatModifier_IncreaseDamagePerArmor</code> (dump line 262186)</p>
+</article>
+<article class="item-card" id="artifact-14" data-kind="artifact" data-cats="crit damage reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#14</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-14.html">Increase Crit Damage For Every Revive</a></h3>
+      <p class="item-card__subtitle">Artifact_14 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#critdamage">StatType: CriticalDamage</a>
+    <span class="tag" data-cat="crit">Crit</span> <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="reactive">Reactive</span>
+    <span class="tag" data-cat="coop">Co-op only</span>
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each successful revive performed by this player adds one stack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 35</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Critical-damage bonus per revive performed (likely +35% / +35 CriticalDamage stat per revive).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Multiplayer-only — completes the revive-trigger set with <a href="#artifact-10">Artifact 10</a> + 11</span> <span class="tag">Pairs with <a href="#artifact-7">Artifact 7</a> (IncreaseCritDamageWhileStandingStill), 17 (HealOnCrit), 20 (IncreaseCritDamageForEveryCommon)</span> <span class="tag">Crit-build keystone in coop</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_14.asset</code> · <code>ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed</code> (dump line 262135)</p>
+</article>
+<article class="item-card" id="artifact-15" data-kind="artifact" data-cats="damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#15</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-15.html">Increase Elemental Damage For Every Infusion</a></h3>
+      <p class="item-card__subtitle">Artifact_15 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#elementstrengthmultiplier">StatType: ElementStrengthMultiplier</a>
+    <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Each infusion-type ImprovementAdded event adds one stack.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 10</strong> <span class="rarity-pill" data-rarity="common">inferred</span><br><span class="prose">Elemental-damage bonus (likely +10% ElementStrengthMultiplier) per infusion-type improvement picked up.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with infusion-heavy builds (fire/ice/lightning enchant pickups)</span> <span class="tag">Pairs with element-weakness exploits (StatType=27 ElementWeaknessMultiplier on enemies)</span> <span class="tag">Strong with single-element spell focus</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_15.asset</code> · <code>ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed</code> (dump line 262312)</p>
+</article>
+<article class="item-card" id="artifact-16" data-kind="artifact" data-cats="damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#16</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-16.html">Increase Fire Rate While Standing Still</a></h3>
+      <p class="item-card__subtitle">Artifact_16 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#firerate">StatType: FireRate</a>
+    <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Active only while player is stationary.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 20</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Bonus fire-rate (likely +20% / +20 FireRate stat) granted while the player is not moving.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with <a href="#artifact-7">Artifact 7</a> (IncreaseCritDamageWhileStandingStill) — same stand-still trigger</span> <span class="tag">Pairs with high-projectile / turret loadouts</span> <span class="tag">Anti-synergy with movement-speed / kite builds</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_16.asset</code> · <code>ArtifactStatModifier_IncreaseFireRateWhenStandingStill</code> (dump line 262340)</p>
+</article>
+<article class="item-card" id="artifact-17" data-kind="artifact" data-cats="healing crit reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#17</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-17.html">Heal On Crit</a></h3>
+      <p class="item-card__subtitle">Artifact_17 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <span class="tag">Event-driven (no stat modifier)</span>
+    <span class="tag" data-cat="healing">Healing</span> <span class="tag" data-cat="crit">Crit</span> <span class="tag" data-cat="reactive">Reactive</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Event: every critical hit triggers HealOnCrit(critDamage) → heal = 0.3 * critDamage.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 0.3</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">healPercentage — fraction of critical damage dealt that is converted to healing. 0.3 = heal for 30% of each crit&#x27;s damage.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with crit-stacking artifacts (7, 14, 20) — more crit damage → more healing</span> <span class="tag">Pairs with high-crit-chance builds and big-damage spells</span> <span class="tag">Replaces the need for HealOnDodge in offensive loadouts</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_17.asset</code> · <code>Artifact_HealOnCrit</code> (dump line 262496)</p>
+</article>
+<article class="item-card" id="artifact-18" data-kind="artifact" data-cats="defense reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#18</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-18.html">Increase Max HP For Every Health Pickup</a></h3>
+      <p class="item-card__subtitle">Artifact_18 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#maxhealth">StatType: MaxHealth</a>
+    <span class="tag" data-cat="defense">Defense</span> <span class="tag" data-cat="reactive">Reactive</span>
+    
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each health-potion collected adds one stack of max HP.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 40</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">Max-health bonus per health potion / pickup collected (likely +40 max HP, or +40% per pickup). The field &#x27;healthPotionsCollected&#x27; tracks the stack count.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with HealthPotionAmountMultiplier (StatType=35) and DropChance investments</span> <span class="tag">Pairs with <a href="#artifact-10">Artifact 10</a> (IncreaseMaxHealthForEveryRevive) for max-HP stacking</span> <span class="tag">Encourages routing through potion spawns</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_18.asset</code> · <code>ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup</code> (dump line 262390)</p>
+</article>
+<article class="item-card" id="artifact-19" data-kind="artifact" data-cats="healing reactive">
+  <span class="rarity-ribbon" data-rarity="rare">#19</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-19.html">Heal On XP Pickup</a></h3>
+      <p class="item-card__subtitle">Artifact_19 · spawn rate 50</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <span class="tag">Event-driven (no stat modifier)</span>
+    <span class="tag" data-cat="healing">Healing</span> <span class="tag" data-cat="reactive">Reactive</span>
+    
+    
+  </div>
+  <p class="item-card__desc"><em>Event: each XP gem pickup rolls a 15% chance to heal for 1 HP.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 15</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">chanceToHeal — percentage chance (15%) that an XP pickup triggers a heal. Field order in the class is &#x27;chanceToHeal&#x27; (0x20) then &#x27;healAmount&#x27; (0x24).</span></li>
+<li><strong>Parameter[1] = 1</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">healAmount — heal applied when the chance roll succeeds (1 HP per qualifying XP pickup).</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with PickupRadius (StatType=11) and Luck — collect more XP, trigger more rolls</span> <span class="tag">Pairs with XPGain artifacts (<a href="#artifact-3">Artifact 3</a>) for compounding XP-driven sustain</span> <span class="tag">Weak heal magnitude; best as supplemental sustain layer</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_19.asset</code> · <code>Artifact_HealOnXpPickup</code> (dump line 262514)</p>
+</article>
+<article class="item-card" id="artifact-20" data-kind="artifact" data-cats="crit damage conditional">
+  <span class="rarity-ribbon" data-rarity="rare">#20</span>
+  <header class="item-card__header">
+    <div>
+      <h3 class="item-card__title"><a href="artifact-20.html">Increase Crit Damage For Every Common</a></h3>
+      <p class="item-card__subtitle">Artifact_20 · spawn rate 100</p>
+    </div>
+  </header>
+  <div class="item-card__badges">
+    <a class="tag" href="../mechanics/stats.html#critdamage">StatType: CriticalDamage</a>
+    <span class="tag" data-cat="crit">Crit</span> <span class="tag" data-cat="damage">Damage</span> <span class="tag" data-cat="conditional">Conditional</span>
+    
+    <span class="tag" data-cat="decay">Spawn-rate decays</span>
+  </div>
+  <p class="item-card__desc"><em>Each time a store offers Common-rarity items, +1 per Common item shown.</em></p>
+  <ul class="param-list">
+<li><strong>Parameter[0] = 1</strong> <span class="rarity-pill" data-rarity="rare">high</span><br><span class="prose">increasePerCommonStoreItemEncountered — flat CriticalDamage bonus added per Common-rarity store item encountered (likely +1 CritDamage stat point per Common item seen). Applied through the improvements manager, not as a DynamicStatModifier.</span></li>
+</ul>
+  <h4 class="u-muted">Synergies</h4>
+  <div class="row"><span class="tag">Pairs with the crit-stack family (<a href="#artifact-7">Artifact 7</a>, 14, 17)</span> <span class="tag">Pairs with Bans/Pins stats — fewer rerolls means more Commons seen and counted</span> <span class="tag">Spawn rate decays over time — most useful when picked early</span></div>
+  <p class="u-muted source-line">Source: <code>Artifact_20.asset</code> · <code>Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered</code> (dump line 262558)</p>
+</article>
+          </div>
+        </section>
+
+        <section id="synergies">
+          <h2>Top synergy pairs</h2>
+          <p class="prose">
+            High-impact two-artifact combos drawn from the per-artifact synergy
+            hints. Each pair links back to both cards.
+          </p>
+          <ul class="see-also">
+            <li class="synergy-pair">
+  <a href="#artifact-1"><strong>01 The Less HP, The More Move Speed</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-3"><strong>03 The Less HP, The More XP Gain</strong></a>
+  <br><span class="prose">Low-HP scaling pair: more missing HP boosts both move speed and XP gain.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-2"><strong>02 Add Armor Equal To Level</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-13"><strong>13 Increase Damage Per Armor</strong></a>
+  <br><span class="prose">Armor → damage conversion: every armor point from your level becomes damage.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-12"><strong>12 Increase Armor Per Objective Completed</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-13"><strong>13 Increase Damage Per Armor</strong></a>
+  <br><span class="prose">Objective-armor + damage-per-armor: stack armor from objectives, convert to damage.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-7"><strong>07 Increase Crit Damage While Standing Still</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-16"><strong>16 Increase Fire Rate While Standing Still</strong></a>
+  <br><span class="prose">Stand-still synergy: both reward stationary play (crit damage + fire rate).</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-7"><strong>07 Increase Crit Damage While Standing Still</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-17"><strong>17 Heal On Crit</strong></a>
+  <br><span class="prose">Crit pair: standing-still crit-damage combos with heal-on-crit.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-14"><strong>14 Increase Crit Damage For Every Revive</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-17"><strong>17 Heal On Crit</strong></a>
+  <br><span class="prose">Crit pair: revive-stack crit damage feeds heal-on-crit sustain.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-17"><strong>17 Heal On Crit</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-20"><strong>20 Increase Crit Damage For Every Common</strong></a>
+  <br><span class="prose">Crit pair: per-Common crit-damage stacks fuel heal-on-crit.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-10"><strong>10 Increase Max Health For Every Revive</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-11"><strong>11 Increase Damage For Every Revive</strong></a>
+  <br><span class="prose">Revive trio (1/3): max HP + damage per revive performed.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-10"><strong>10 Increase Max Health For Every Revive</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-14"><strong>14 Increase Crit Damage For Every Revive</strong></a>
+  <br><span class="prose">Revive trio (2/3): max HP + crit damage per revive performed.</span>
+</li>
+<li class="synergy-pair">
+  <a href="#artifact-11"><strong>11 Increase Damage For Every Revive</strong></a>
+  &nbsp;+&nbsp;
+  <a href="#artifact-14"><strong>14 Increase Crit Damage For Every Revive</strong></a>
+  <br><span class="prose">Revive trio (3/3): damage + crit damage per revive performed.</span>
+</li>
+          </ul>
+        </section>
+
+        <section id="related">
+          <h2>Related references</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../mechanics/damage-system.html">
+              <strong>Damage calculation</strong>
+              How artifact stat modifiers feed the master damage formula.
+            </a>
+            <a class="see-also__link" href="../mechanics/stats.html">
+              <strong>All 40 StatTypes</strong>
+              Definitions for every stat an artifact can touch.
+            </a>
+            <a class="see-also__link" href="../characters/index.html">
+              <strong>Characters</strong>
+              Heroes whose kit synergises with specific artifact families.
+            </a>
+            <a class="see-also__link" href="../guides/artifact-priorities.html">
+              <strong>Artifact priority guide</strong>
+              When to pick what.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

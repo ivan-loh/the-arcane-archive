@@ -1,0 +1,4974 @@
+{
+  "_meta": {
+    "extracted_at": "2026-05-30T05:42:52.511119Z",
+    "verified_twice": true,
+    "total_spells": 21,
+    "total_store_items": 254,
+    "notes": "Localized strings live in addressable bundles (StreamingAssets/aa/...) and are not extracted here; only the TitleEntry/DescriptionEntry localization keys are included. Use those keys as the display name fallback. ValueContainer fields (common/rare/epic/legendary) are the per-rarity scaling values for improvements. DynamicStatModifierParameters is a list of floats whose meaning depends on the SpellVariant (e.g. armor amount, size multiplier percentage)."
+  },
+  "stat_type_map": {
+    "0": "Damage",
+    "1": "Range",
+    "2": "FireRate",
+    "3": "Speed",
+    "4": "LifeTime",
+    "5": "DamageTickRate",
+    "6": "Size",
+    "7": "MovementSpeed",
+    "8": "MaxHealth",
+    "9": "Luck",
+    "10": "XPGain",
+    "11": "PickupRadius",
+    "12": "CriticalChance",
+    "13": "CriticalDamage",
+    "14": "Armor",
+    "15": "Dodge",
+    "16": "HealthRegeneration",
+    "17": "Rerolls",
+    "18": "ReviveSpeed",
+    "19": "Revives",
+    "20": "Projectiles",
+    "22": "HealOnDodge",
+    "23": "HealOnLevelUp",
+    "24": "DropChance",
+    "25": "TerrainSpeedMultiplier",
+    "26": "HitboxSizeMultiplier",
+    "27": "ElementWeaknessMultiplier",
+    "30": "ElementStrengthMultiplier",
+    "33": "HealingMultiplier",
+    "34": "XPGainOnDamageTaken",
+    "35": "HealthPotionAmountMultiplier",
+    "36": "ReviveZoneSize",
+    "37": "GoldGain",
+    "38": "HealthPercentageOnRevive",
+    "39": "Bans",
+    "40": "Pins"
+  },
+  "element_type_map": {
+    "0": "None",
+    "1": "Fire",
+    "2": "FireDouble",
+    "3": "Lightning",
+    "4": "LightningDouble",
+    "5": "FireLightning",
+    "6": "Acid",
+    "7": "AcidDouble",
+    "8": "AcidFire",
+    "9": "AcidLightning",
+    "10": "Ice",
+    "11": "IceDouble",
+    "12": "FireIce",
+    "13": "AcidIce",
+    "14": "IceLightning",
+    "15": "Dark",
+    "16": "DarkDouble",
+    "17": "DarkFire",
+    "18": "DarkLightning",
+    "19": "AcidDark",
+    "20": "DarkIce"
+  },
+  "spell_type_map": {
+    "0": "Orb",
+    "1": "Boomerang",
+    "2": "EnergyZone",
+    "3": "Laser",
+    "4": "Proximity",
+    "5": "Shotgun",
+    "6": "Rifle",
+    "7": "Smg",
+    "8": "Trail",
+    "9": "BombLauncher",
+    "10": "FallingStar",
+    "11": "Mine",
+    "12": "Fence",
+    "13": "Beam",
+    "14": "Arrow",
+    "15": "Plant",
+    "16": "Summon",
+    "17": "Slash",
+    "18": "Meteor",
+    "19": "Book",
+    "20": "Bell"
+  },
+  "spell_variant_map": {
+    "0": "Burst",
+    "1": "Split",
+    "2": "AimAtHighestHP",
+    "3": "ExtraProjectileButSmallerSize",
+    "4": "ExtraProjectile",
+    "5": "FriendlyFireHealsInstead",
+    "6": "HigherSizeLowerSpeed",
+    "7": "TrailDoesMoreDamageAtEnd",
+    "8": "DealMoreDamageWhenStandingStill",
+    "9": "ShootBackwards",
+    "10": "SmgRotates",
+    "11": "TrailEndExplodes",
+    "12": "ReduceDamageTakenWhenEnemiesInProximity",
+    "13": "ExplodeAtEnd",
+    "14": "BombLauncherExtraBounce",
+    "15": "BoomerangCriticalDamageOnApex",
+    "16": "BoomerangStayOnApex",
+    "17": "IncreaseInSize",
+    "18": "MoveTowardsEnemies",
+    "19": "BiggerOnLowerHealth",
+    "20": "TrailSpawnsGuaranteedCrits",
+    "21": "ConnectAllFences",
+    "22": "HitExtraEnemy",
+    "23": "FirstHitIsCrit",
+    "24": "IncreaseSizeWhenStandingStill",
+    "25": "IncreaseSizeAndDamageWithEveryAttack",
+    "26": "DealsMoreDamageTowardsCenter",
+    "27": "ExtraTrajectory",
+    "28": "ExtraLine",
+    "29": "LeaveDamageAreaAtEnd",
+    "30": "ThrowAtEnd",
+    "31": "BellZoneGivesArmor",
+    "32": "BellSpawnsGuaranteedCrits"
+  },
+  "spells": {
+    "Arrow": {
+      "spell_type_id": 14,
+      "spell_type": "Arrow",
+      "source_file": "spellconfigurations/ArrowConfiguration.asset",
+      "base_item": {
+        "name": "Arrow",
+        "title_entry": "SpellName_Arrow",
+        "description_entry": "SpellDescription_Arrow",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/arrow/Arrow.asset"
+      },
+      "display_name": "SpellName_Arrow",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 165
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.4036364
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 6.2
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 8
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "ArrowAcid",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/infusions/ArrowAcid.asset"
+        },
+        {
+          "name": "ArrowDark",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/infusions/ArrowDark.asset"
+        },
+        {
+          "name": "ArrowFire",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/infusions/ArrowFire.asset"
+        },
+        {
+          "name": "ArrowIce",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/infusions/ArrowIce.asset"
+        },
+        {
+          "name": "ArrowLightning",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/infusions/ArrowLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Arrow_ExplodeAtEnd",
+          "title_entry": "Variant_Arrow_ExplodeAtEnd",
+          "description_entry": "Variant_Arrow_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/variants/Arrow_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Arrow_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Arrow_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Arrow_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": true,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/variants/Arrow_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Arrow_HitExtraEnemy",
+          "title_entry": "Variant_Arrow_HitExtraEnemy",
+          "description_entry": "Variant_Arrow_HitExtraEnemy_Description",
+          "variant_id": 22,
+          "variant_name": "HitExtraEnemy",
+          "repeat_amount": 2,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/variants/Arrow_HitExtraEnemy.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "ArrowDamage",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/improvements/ArrowDamage.asset"
+        },
+        {
+          "name": "ArrowFireRate",
+          "title_entry": "SpellName_Arrow",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/arrow/improvements/ArrowFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "1e716a4821cc17a419c75a4e477ec583",
+        "Fire": "c3dd5308af7bb8c46b540a38be497a43",
+        "FireDouble": "e962e189efc199c4cbdbbd4e9bdbe97e",
+        "Lightning": "38453a81fa2a0b1408a2c87142b66cc1",
+        "LightningDouble": "b851cd10c5f7e1f41812ba03094ab8f8",
+        "FireLightning": "e5ce33d36d0ff3c43b06e2849f5b4be4",
+        "Acid": "32bb2fbb8bd2e0743a28acdb5e860a2f",
+        "AcidDouble": "04bd8d0d15fc3604a9b0d80d5e4ceb59",
+        "AcidFire": "5a242f683cacc2f41ad602568941ac4c",
+        "AcidLightning": "be119431a8e8cdd48a8b5741c103a1d5",
+        "Ice": "d2d2c7e682d1ee045a32b9d6c90e319c",
+        "IceDouble": "bbcd6145a1f013f48a2e99f6523f0283",
+        "FireIce": "180f7a32b24706a46bd0c8ed5eb42152",
+        "IceLightning": "f6e65fa070786e74e8aa3d72895a5b82",
+        "AcidIce": "9c160f8ef54f45042959e52c481d8d08",
+        "Dark": "cc6ceffa63bb62044a28b42fbea77b9e",
+        "DarkDouble": "f5e17eb521c58ff408955642836c5c81",
+        "DarkFire": "4fd276ce55780404e9f6b0bb20898d19",
+        "DarkLightning": "6ba905dcd579e554783fbf96953e0efa",
+        "AcidDark": "b29aed0d5190ccf488f2de25a906d70b",
+        "DarkIce": "fbf9e903f729a4e42bd02105d12aa775"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 2
+      }
+    },
+    "Beam": {
+      "spell_type_id": 13,
+      "spell_type": "Beam",
+      "source_file": "spellconfigurations/BeamConfiguration.asset",
+      "base_item": {
+        "name": "Beam",
+        "title_entry": "SpellName_Beam",
+        "description_entry": "SpellDescription_Beam",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/beam/Beam.asset"
+      },
+      "display_name": "SpellName_Beam",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 104
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 7.5
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 1.9
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 1
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 8
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 4
+        }
+      ],
+      "infusions": [
+        {
+          "name": "BeamAcid",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/infusions/BeamAcid.asset"
+        },
+        {
+          "name": "BeamDark",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/infusions/BeamDark.asset"
+        },
+        {
+          "name": "BeamFire",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/infusions/BeamFire.asset"
+        },
+        {
+          "name": "BeamIce",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/infusions/BeamIce.asset"
+        },
+        {
+          "name": "BeamLightning",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/infusions/BeamLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Beam_AimAtHighestHP",
+          "title_entry": "Variant_Beam_AimAtHighestHP",
+          "description_entry": "Variant_Beam_AimAtHighestHP_Description",
+          "variant_id": 2,
+          "variant_name": "AimAtHighestHP",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 35
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/variants/Beam_AimAtHighestHP.asset"
+        },
+        {
+          "name": "Beam_ExtraProjectile",
+          "title_entry": "Variant_Beam_ExtraProjectile",
+          "description_entry": "Variant_Beam_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/variants/Beam_ExtraProjectile.asset"
+        },
+        {
+          "name": "Beam_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Beam_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Beam_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": true,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/variants/Beam_FriendlyFireHealsInstead.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "BeamDamage",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/improvements/BeamDamage.asset"
+        },
+        {
+          "name": "BeamFireRate",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/improvements/BeamFireRate.asset"
+        },
+        {
+          "name": "BeamRange",
+          "title_entry": "SpellName_Beam",
+          "description_entry": "SpellUpgrade_Range_Description",
+          "stat_id": 1,
+          "stat_name": "Range",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/beam/improvements/BeamRange.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "7f750b13e35672945a5e53001af55902",
+        "Fire": "d7ccf08992a3e67459456fb05a6b84f3",
+        "FireDouble": "ec3214a85a178f94886b358bc61c3001",
+        "Lightning": "c31f5e32545f26740872ba87acb8882e",
+        "LightningDouble": "e85c41b0f13d8b0408e27c772904cedc",
+        "FireLightning": "2bf41006e69138d4a91e9ae12ebf162c",
+        "Acid": "cbd3326373b04b143b3d8d4e5030561f",
+        "AcidDouble": "abb40e738928b8d48ae36006f37447de",
+        "AcidFire": "a90b94dacf5087c4abc353adde79e44e",
+        "AcidLightning": "0cc5fe539dd5ae24389da4fd15560ef9",
+        "Ice": "01806f36602b57f47bd8fd93b0f534b1",
+        "IceDouble": "c859ee005863beb498c9946f3dc53e2e",
+        "FireIce": "bb2713fbe38f9164eafe658b5a403af7",
+        "IceLightning": "5fb1e5d4636a7da4b9565b18d2e21b3f",
+        "AcidIce": "685414737c0bbc5448581ed535b501aa",
+        "Dark": "2440e9782bfef6f4aa8af9cdf701a13d",
+        "DarkDouble": "5674aa373ffae8c438814cee4a503c63",
+        "DarkFire": "3dff36d62d378f042aa8ddd1a6a151d6",
+        "DarkLightning": "02c23a4314801044aa5518c7a699a8c2",
+        "AcidDark": "662d0a76dee70054e8a4cd048d9b3830",
+        "DarkIce": "d3300d2889b9d964ebb32e595b294372"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Bell": {
+      "spell_type_id": 20,
+      "spell_type": "Bell",
+      "source_file": "spellconfigurations/BellConfiguration.asset",
+      "base_item": {
+        "name": "Bell",
+        "title_entry": "SpellName_Bell",
+        "description_entry": "SpellDescription_Bell",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/bell/Bell.asset"
+      },
+      "display_name": "SpellName_Bell",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 142
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.25
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 6.5
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 4
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 7
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "BellAcid",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/infusions/BellAcid.asset"
+        },
+        {
+          "name": "BellDark",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/infusions/BellDark.asset"
+        },
+        {
+          "name": "BellFire",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/infusions/BellFire.asset"
+        },
+        {
+          "name": "BellIce",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/infusions/BellIce.asset"
+        },
+        {
+          "name": "BellLightning",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/infusions/BellLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Bell_BellSpawnsGuaranteedCrits",
+          "title_entry": "Variant_Bell_BellSpawnsGuaranteedCrits",
+          "description_entry": "Variant_Bell_BellSpawnsGuaranteedCrits_Description",
+          "variant_id": 32,
+          "variant_name": "BellSpawnsGuaranteedCrits",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/variants/Bell_BellSpawnsGuaranteedCrits.asset"
+        },
+        {
+          "name": "Bell_BellZoneGivesArmor",
+          "title_entry": "Variant_Bell_BellZoneGivesArmor",
+          "description_entry": "Variant_Bell_BellZoneGivesArmor_Description",
+          "variant_id": 31,
+          "variant_name": "BellZoneGivesArmor",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [
+            20
+          ],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/variants/Bell_BellZoneGivesArmor.asset"
+        },
+        {
+          "name": "Bell_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Bell_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Bell_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/variants/Bell_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Bell_IncreaseSizeOverLifetime",
+          "title_entry": "Variant_Bell_IncreaseSizeOverLifetime",
+          "description_entry": "Variant_Bell_IncreaseSizeOverLifetime_Description",
+          "variant_id": 17,
+          "variant_name": "IncreaseInSize",
+          "repeat_amount": 2,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/variants/Bell_IncreaseSizeOverLifetime.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "BellDamage",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/improvements/BellDamage.asset"
+        },
+        {
+          "name": "BellFireRate",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/improvements/BellFireRate.asset"
+        },
+        {
+          "name": "BellSize",
+          "title_entry": "SpellName_Bell",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 0,
+            "rare": 17,
+            "epic": 27,
+            "legendary": 38
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bell/improvements/BellSize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "0a52ddb6050e14647be9af4062e7a3bd",
+        "Fire": "2e861e3cd39819f4f883281a621beb3a",
+        "FireDouble": "d77f8ecf6156e75419f3df125571c97e",
+        "Lightning": "0076810fd678d864b8f602f7e4b054a2",
+        "LightningDouble": "120a4f977a2d33042b3c35e8c2a42cab",
+        "FireLightning": "0aee6405eb68016438e71054bd101482",
+        "Acid": "7d587f0708a26e74796e4ac119f8ef99",
+        "AcidDouble": "18da11852d3acd24a895e25651741e73",
+        "AcidFire": "e8e079409ed3d174b852162a8743fe17",
+        "AcidLightning": "018cd07df1e2dee4cbf0db6fbe46d6e0",
+        "Ice": "8bc605c31a7596c479a15f4e2917136e",
+        "IceDouble": "483e0463f0cca5c459242804d1d2e41b",
+        "FireIce": "6b5734bc9349ee843a5e884e8f538aec",
+        "IceLightning": "98cc9203d5623fd41b54cdc83c6e848f",
+        "AcidIce": "76a668f099e4bbb4caa46b9db9397747",
+        "Dark": "4a828a3280eb35d4eb5327f6c116afbb",
+        "DarkDouble": "dd734193e1a86b84abd4ff48db4db4a5",
+        "DarkFire": "d4427faa544c24b4fbcefb82d152a2a1",
+        "DarkLightning": "7835a348b35b3c64680dad25effefee5",
+        "AcidDark": "844ad9ea3b4b532428b8a35c9dc92044",
+        "DarkIce": "8636fee175ff0574bb5480a3857d0d38"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 3
+      }
+    },
+    "BombLauncher": {
+      "spell_type_id": 9,
+      "spell_type": "BombLauncher",
+      "source_file": "spellconfigurations/BombLauncherConfiguration.asset",
+      "base_item": {
+        "name": "BombLauncher",
+        "title_entry": "SpellName_BombLauncher",
+        "description_entry": "SpellDescription_BombLauncher",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/bomblauncher/BombLauncher.asset"
+      },
+      "display_name": "SpellName_BombLauncher",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 149
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.275
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 1.44
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "BombLauncherAcid",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/infusions/BombLauncherAcid.asset"
+        },
+        {
+          "name": "BombLauncherDark",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/infusions/BombLauncherDark.asset"
+        },
+        {
+          "name": "BombLauncherFire",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/infusions/BombLauncherFire.asset"
+        },
+        {
+          "name": "BombLauncherIce",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/infusions/BombLauncherIce.asset"
+        },
+        {
+          "name": "BombLauncherLightning",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/infusions/BombLauncherLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "BombLauncher_AddExtraBounce",
+          "title_entry": "Variant_BombLauncher_AddExtraBounce",
+          "description_entry": "Variant_BombLauncher_AddExtraBounce_Description",
+          "variant_id": 14,
+          "variant_name": "BombLauncherExtraBounce",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/variants/BombLauncher_AddExtraBounce.asset"
+        },
+        {
+          "name": "BombLauncher_FriendlyFireHealsInstead",
+          "title_entry": "Variant_BombLauncher_FriendlyFireHealsInstead",
+          "description_entry": "Variant_BombLauncher_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/variants/BombLauncher_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "BombLauncher_Split",
+          "title_entry": "Variant_BombLauncher_Split",
+          "description_entry": "Variant_BombLauncher_Split_Description",
+          "variant_id": 1,
+          "variant_name": "Split",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/variants/BombLauncher_Split.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "BombLauncherDamage",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/improvements/BombLauncherDamage.asset"
+        },
+        {
+          "name": "BombLauncherFireRate",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/improvements/BombLauncherFireRate.asset"
+        },
+        {
+          "name": "BombLauncherSize",
+          "title_entry": "SpellName_BombLauncher",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/bomblauncher/improvements/BombLauncherSize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "cf71023b1c7a6e742b4f17a2b1a5629b",
+        "Fire": "ac9e2e1268404cc43a9b861902ca2db7",
+        "FireDouble": "f8f8b128d8d6a1a4e84707c11d0f9ac4",
+        "Lightning": "cd87575a18f35b04cbd1f17e503eb1f7",
+        "LightningDouble": "499313bc073e45249a6384df110716af",
+        "FireLightning": "9fb33e46893dfc54b845d1979eaa72dc",
+        "Acid": "49fccd1b697674e418cade364db29522",
+        "AcidDouble": "3a5e9ab27b340004aa8bac3f748856e7",
+        "AcidFire": "6de3b2b6e02505c43bc2aa4f822a2e9a",
+        "AcidLightning": "c9ac7d255881e254784f5939a17489df",
+        "Ice": "3de59bc0556c78840b73d9009745c8b7",
+        "IceDouble": "1cdfb4d819a918149ac2afe14255ed8f",
+        "FireIce": "697790a2b06cbf04fb398c0fe208263f",
+        "IceLightning": "6b0b0d900c0e4294b8b25ede84337bbe",
+        "AcidIce": "afbb4fc8690333a41b022e46e296b7d8",
+        "Dark": "ab04a0cb678f2b246845381e9230fa9e",
+        "DarkDouble": "19caeb8d226e62746958417b741250b0",
+        "DarkFire": "f6d7af721c4acb9428bc430d197ba7b0",
+        "DarkLightning": "86fcc412cdd618b449c999c6f161cda5",
+        "AcidDark": "5112b77902b0f9e4d8be167c29052038",
+        "DarkIce": "ca45d151a790f284b8c8bd69a3661a26"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Book": {
+      "spell_type_id": 19,
+      "spell_type": "Book",
+      "source_file": "spellconfigurations/BookConfiguration.asset",
+      "base_item": {
+        "name": "Book",
+        "title_entry": "SpellName_Book",
+        "description_entry": "SpellDescription_Book",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/book/Book.asset"
+      },
+      "display_name": "SpellName_Book",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 140
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.2
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 3
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 3
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 0.9
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 2.5
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 33
+        }
+      ],
+      "infusions": [
+        {
+          "name": "BookAcid",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/infusions/BookAcid.asset"
+        },
+        {
+          "name": "BookDark",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/infusions/BookDark.asset"
+        },
+        {
+          "name": "BookFire",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/infusions/BookFire.asset"
+        },
+        {
+          "name": "BookIce",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/infusions/BookIce.asset"
+        },
+        {
+          "name": "BookLightning",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/infusions/BookLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Book_Burst",
+          "title_entry": "Variant_Book_Burst",
+          "description_entry": "Variant_Book_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/variants/Book_Burst.asset"
+        },
+        {
+          "name": "Book_ExplodeAtEnd",
+          "title_entry": "Variant_Book_ExplodeAtEnd",
+          "description_entry": "Variant_Book_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/variants/Book_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Book_ExtraProjectile",
+          "title_entry": "Variant_Book_ExtraProjectile",
+          "description_entry": "Variant_Book_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/variants/Book_ExtraProjectile.asset"
+        },
+        {
+          "name": "Book_ThrowAtEnd",
+          "title_entry": "Variant_Book_ThrowAtEnd",
+          "description_entry": "Variant_Book_ThrowAtEnd_Description",
+          "variant_id": 30,
+          "variant_name": "ThrowAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 4,
+              "stat_name": "LifeTime",
+              "value": 50
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/variants/Book_ThrowAtEnd.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "BookDamage",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/improvements/BookDamage.asset"
+        },
+        {
+          "name": "BookFireRate",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/improvements/BookFireRate.asset"
+        },
+        {
+          "name": "BookLifeTime",
+          "title_entry": "SpellName_Book",
+          "description_entry": "SpellUpgrade_LifeTime_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/book/improvements/BookLifeTime.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "2f37c3cf06335cc4db1093918d856226",
+        "Fire": "2cf786bb6a7a65844b5ef14f7f53752b",
+        "FireDouble": "5795d64cd9c8bc54c9d3e028b78baaf9",
+        "Lightning": "7d3ec72a1bc0a9440b148839e96886dd",
+        "LightningDouble": "bb0e01db1052634478517909ef21b86e",
+        "FireLightning": "21890c2e468ddb8469fb289cad7899ca",
+        "Acid": "642a1ed32c52e944e944c7434e50e35e",
+        "AcidDouble": "d381580c7f4ab3d46b07d9c51c88374d",
+        "AcidFire": "d907f3dafe315d24c9ff72d496ecd976",
+        "AcidLightning": "58f4d0dc3c6268b4aabdb57e5015d652",
+        "Ice": "517621bea23c306488c19e8385d17450",
+        "IceDouble": "ea1f755a4fbe2f241a0bf110a60936cc",
+        "FireIce": "bd2bc09bcde57ba44aae4c85314f3309",
+        "IceLightning": "ea877c85679e7a04d879fe64a9a26093",
+        "AcidIce": "8d3db45814319434c8040e0048b5cab0",
+        "Dark": "08e5266fc1a9cf24da392ef639fb4596",
+        "DarkDouble": "360b6a8d16e82e74995d4e248d5a2428",
+        "DarkFire": "b5a0ac2ac559d3a4d8b65c706938d12a",
+        "DarkLightning": "be81dc60732efff4a9d25a075fed88e7",
+        "AcidDark": "d009499db091be944aa55886fd1661d3",
+        "DarkIce": "c715569cdc144bf42822a48ae73f349e"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 3
+      }
+    },
+    "Boomerang": {
+      "spell_type_id": 1,
+      "spell_type": "Boomerang",
+      "source_file": "spellconfigurations/BoomerangConfiguration.asset",
+      "base_item": {
+        "name": "Boomerang",
+        "title_entry": "SpellName_Boomerang",
+        "description_entry": "SpellDescription_Boomerang",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/boomerang/Boomerang.asset"
+      },
+      "display_name": "SpellName_Boomerang",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 57
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 4.85
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.53
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 7.125
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 0.95
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 25
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "BoomerangAcid",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/infusions/BoomerangAcid.asset"
+        },
+        {
+          "name": "BoomerangDark",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/infusions/BoomerangDark.asset"
+        },
+        {
+          "name": "BoomerangFire",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/infusions/BoomerangFire.asset"
+        },
+        {
+          "name": "BoomerangIce",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/infusions/BoomerangIce.asset"
+        },
+        {
+          "name": "BoomerangLightning",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/infusions/BoomerangLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Boomerang_AimAtHighestHP",
+          "title_entry": "Variant_Boomerang_AimAtHighestHP",
+          "description_entry": "Variant_Boomerang_AimAtHighestHP_Description",
+          "variant_id": 2,
+          "variant_name": "AimAtHighestHP",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 35
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/variants/Boomerang_AimAtHighestHP.asset"
+        },
+        {
+          "name": "Boomerang_CriticalDamageOnApex",
+          "title_entry": "Variant_Boomerang_CriticalDamageOnApex",
+          "description_entry": "Variant_Boomerang_CriticalDamageOnApex_Description",
+          "variant_id": 15,
+          "variant_name": "BoomerangCriticalDamageOnApex",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 13,
+              "stat_name": "CriticalDamage",
+              "value": 100
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/variants/Boomerang_CriticalDamageOnApex.asset"
+        },
+        {
+          "name": "Boomerang_ExtraTrajectory",
+          "title_entry": "Variant_Boomerang_ExtraTrajectory",
+          "description_entry": "Variant_Boomerang_ExtraTrajectory_Description",
+          "variant_id": 27,
+          "variant_name": "ExtraTrajectory",
+          "repeat_amount": 2,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/variants/Boomerang_ExtraTrajectory.asset"
+        },
+        {
+          "name": "Boomerang_StayOnApex",
+          "title_entry": "Variant_Boomerang_StayOnApex",
+          "description_entry": "Variant_Boomerang_StayOnApex_Description",
+          "variant_id": 16,
+          "variant_name": "BoomerangStayOnApex",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/variants/Boomerang_StayOnApex.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "BoomerangDamage",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/improvements/BoomerangDamage.asset"
+        },
+        {
+          "name": "BoomerangFireRate",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/improvements/BoomerangFireRate.asset"
+        },
+        {
+          "name": "BoomerangRange",
+          "title_entry": "SpellName_Boomerang",
+          "description_entry": "SpellUpgrade_Range_Description",
+          "stat_id": 1,
+          "stat_name": "Range",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/boomerang/improvements/BoomerangRange.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "19f0582d296bcf744875c2ac067866fd",
+        "Fire": "55d5f37050c5d8f42b4805f549234033",
+        "FireDouble": "0a30ca4a27614ae45b354f8ed2ed6396",
+        "Lightning": "c31119b51b056b64585d0f40874e0ffc",
+        "LightningDouble": "678538e6eafc75a4ca5fa578ace2d592",
+        "FireLightning": "18adacf552023094e81ddfdfe0f64043",
+        "Acid": "a9133639698b6a84eb32eaa910d5d1d0",
+        "AcidDouble": "3598a1ab3d2e3784ea9742eac020638a",
+        "AcidFire": "a716082cb4ba10a4380ffdaeb867507a",
+        "AcidLightning": "85b8bd4c5e8564848ad88af155931df2",
+        "Ice": "a1fdfc41841f38d488802d1dfdaf6c75",
+        "IceDouble": "faf205a1fefcd3d449a260a1a822619e",
+        "FireIce": "8c880e7da97f2384b9d4831dfc4ca5e1",
+        "IceLightning": "3f09cde52cd133d4888837ad69da70fc",
+        "AcidIce": "4157da107994a814885e367c6b7f4afa",
+        "Dark": "90757d407e0a5774e9b3f980a92ec6a1",
+        "DarkDouble": "ddbea72b9e8e27f49962d5889073175b",
+        "DarkFire": "f3e889c09a95e644e85170cc26857443",
+        "DarkLightning": "b931e76e91b1f8542bf63c74fafdf6b0",
+        "AcidDark": "33700818593e36a43978912ede7b4d46",
+        "DarkIce": "4ed7905e0e7220d43877a19e39ad3814"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 3
+      }
+    },
+    "EnergyZone": {
+      "spell_type_id": 2,
+      "spell_type": "EnergyZone",
+      "source_file": "spellconfigurations/EnergyZoneConfiguration.asset",
+      "base_item": {
+        "name": "EnergyZone",
+        "title_entry": "SpellName_EnergyZone",
+        "description_entry": "SpellDescription_EnergyZone",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/energyzone/EnergyZone.asset"
+      },
+      "display_name": "SpellName_EnergyZone",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 40
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 13
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.25
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 1.5
+        },
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 3
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 2
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 1
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "EnergyZoneAcid",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/infusions/EnergyZoneAcid.asset"
+        },
+        {
+          "name": "EnergyZoneDark",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/infusions/EnergyZoneDark.asset"
+        },
+        {
+          "name": "EnergyZoneFire",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/infusions/EnergyZoneFire.asset"
+        },
+        {
+          "name": "EnergyZoneIce",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/infusions/EnergyZoneIce.asset"
+        },
+        {
+          "name": "EnergyZoneLightning",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/infusions/EnergyZoneLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "EnergyZone_ExtraProjectileButSmallerSize",
+          "title_entry": "Variant_EnergyZone_ExtraProjectileButSmallerSize",
+          "description_entry": "Variant_EnergyZone_ExtraProjectileButSmallerSize_Description",
+          "variant_id": 3,
+          "variant_name": "ExtraProjectileButSmallerSize",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/variants/EnergyZone_ExtraProjectileButSmallerSize.asset"
+        },
+        {
+          "name": "EnergyZone_FriendlyFireHealsInstead",
+          "title_entry": "Variant_EnergyZone_FriendlyFireHealsInstead",
+          "description_entry": "Variant_EnergyZone_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/variants/EnergyZone_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "EnergyZone_MoveTowardsEnemies",
+          "title_entry": "Variant_EnergyZone_MoveTowardsEnemies",
+          "description_entry": "Variant_EnergyZone_MoveTowardsEnemies_Description",
+          "variant_id": 18,
+          "variant_name": "MoveTowardsEnemies",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/variants/EnergyZone_MoveTowardsEnemies.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "EnergyZoneDamage",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/improvements/EnergyZoneDamage.asset"
+        },
+        {
+          "name": "EnergyZoneFireRate",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/improvements/EnergyZoneFireRate.asset"
+        },
+        {
+          "name": "EnergyZoneLifeTime",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellUpgrade_LifeTime_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/improvements/EnergyZoneLifeTime.asset"
+        },
+        {
+          "name": "EnergyZoneSize",
+          "title_entry": "SpellName_EnergyZone",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 0,
+            "rare": 17,
+            "epic": 27,
+            "legendary": 38
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/energyzone/improvements/EnergyZoneSize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "43c1ad93ada10044cb867f0b138539a8",
+        "Fire": "aaa5e75378e84da45bb0b9c0f1d41f47",
+        "FireDouble": "f133949a43b376d4485a9ecfaf32b96c",
+        "Lightning": "79ba35cc9e59e4741866048fe9320549",
+        "LightningDouble": "40db43767a7c31442ba622a36700f92a",
+        "FireLightning": "d5ac416003bfae941ad1bdf11f7c142b",
+        "Acid": "a667756d89c1f4646a159fb6bfd381e3",
+        "AcidDouble": "49c58ced56a627741ada6fc243e28aa3",
+        "AcidFire": "daa17ba613a1b49469864ff062f1a3d3",
+        "AcidLightning": "e8169486e263ee24aab8ea8be6d92344",
+        "Ice": "f8e9996403807d641b5f14396d7fd33d",
+        "IceDouble": "c73e8dd92f7abd440aab2d0d582cf130",
+        "FireIce": "ce9a20da10d1e57439e91efa8902d1fc",
+        "IceLightning": "758b806127823d34294aa5dd4fbc83dd",
+        "AcidIce": "710f58d9a486843449be63acaa3e4825",
+        "Dark": "1a1fbdeae94e1cc4a905cf85778cd48b",
+        "DarkDouble": "b3bc7069835a9d24cb7345370b825628",
+        "DarkFire": "29704b80339134d4cbd235002fccfe2c",
+        "DarkLightning": "72f13e9cc38984c40af7a43976ff5aa5",
+        "AcidDark": "f4060dc68897b0c4a9739a9822c48be1",
+        "DarkIce": "003cbae62174efc4c9c79949bfb00969"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 4
+      }
+    },
+    "FallingStar": {
+      "spell_type_id": 10,
+      "spell_type": "FallingStar",
+      "source_file": "spellconfigurations/FallingStarConfiguration.asset",
+      "base_item": {
+        "name": "FallingStar",
+        "title_entry": "SpellName_FallingStar",
+        "description_entry": "SpellDescription_FallingStar",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/fallingstar/FallingStar.asset"
+      },
+      "display_name": "SpellName_FallingStar",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 201
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 13
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.873
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 1
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "FallingStarAcid",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/infusions/FallingStarAcid.asset"
+        },
+        {
+          "name": "FallingStarDark",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/infusions/FallingStarDark.asset"
+        },
+        {
+          "name": "FallingStarFire",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/infusions/FallingStarFire.asset"
+        },
+        {
+          "name": "FallingStarIce",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/infusions/FallingStarIce.asset"
+        },
+        {
+          "name": "FallingStarLightning",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/infusions/FallingStarLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "FallingStar_AimAtHighestHP",
+          "title_entry": "Variant_FallingStar_AimAtHighestHP",
+          "description_entry": "Variant_FallingStar_AimAtHighestHP_Description",
+          "variant_id": 2,
+          "variant_name": "AimAtHighestHP",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 35
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/variants/FallingStar_AimAtHighestHP.asset"
+        },
+        {
+          "name": "FallingStar_ExplodeAtEnd",
+          "title_entry": "Variant_FallingStar_ExplodeAtEnd",
+          "description_entry": "Variant_FallingStar_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/variants/FallingStar_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "FallingStar_ExtraProjectile",
+          "title_entry": "Variant_FallingStar_ExtraProjectile",
+          "description_entry": "Variant_FallingStar_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/variants/FallingStar_ExtraProjectile.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "FallingStarDamage",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/improvements/FallingStarDamage.asset"
+        },
+        {
+          "name": "FallingStarFireRate",
+          "title_entry": "SpellName_FallingStar",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fallingstar/improvements/FallingStarFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "462d69a64a7674548a307909609142dc",
+        "Fire": "8af6e1e64f6670046b1de2ddfc9f73d0",
+        "FireDouble": "553278aef967dd84a9f4b52de1499cbf",
+        "Lightning": "964aa1a2ecdaf0942be0d1e9df99b6ee",
+        "LightningDouble": "001749574aca61f449d7477f9e4212ce",
+        "FireLightning": "8fece90c974c2934088fcb054eb67743",
+        "Acid": "a85cfa55b947db04bafbae53062c3862",
+        "AcidDouble": "e9c15b0346bcba642ade0e375a88e2c4",
+        "AcidFire": "81ccd0d1e91479449a24c32c6d5ed405",
+        "AcidLightning": "56d17f60bad52544aa931300aa7c241c",
+        "Ice": "4f21cca468f410b4195fb81b18fecf02",
+        "IceDouble": "1078dab892e3fa843afa5f5648ca408c",
+        "FireIce": "55afb977a26eef34ba42db6786ff3dda",
+        "IceLightning": "df18734f0f0d2ee4fbe6ac20147444e1",
+        "AcidIce": "cfbbd0873c03708418567c91a43828ac",
+        "Dark": "aba591b19eaae4c42bd66367d6e08277",
+        "DarkDouble": "8df32dcaf6838984d9b34a1d23848cf1",
+        "DarkFire": "92c512d83e4c83743a512fcf44831399",
+        "DarkLightning": "f3baa16d55df34e4fa968f37d72fd4a0",
+        "AcidDark": "c87f63ce30726d044a40286736ecbae0",
+        "DarkIce": "c226b7c85afbb8a469fbaff267c4452c"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 2
+      }
+    },
+    "Fence": {
+      "spell_type_id": 12,
+      "spell_type": "Fence",
+      "source_file": "spellconfigurations/FenceConfiguration.asset",
+      "base_item": {
+        "name": "Fence",
+        "title_entry": "SpellName_Fence",
+        "description_entry": "SpellDescription_Fence",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/fence/Fence.asset"
+      },
+      "display_name": "SpellName_Fence",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 47
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.08
+        },
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 3
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 3
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 6.5
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "FenceAcid",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/infusions/FenceAcid.asset"
+        },
+        {
+          "name": "FenceDark",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/infusions/FenceDark.asset"
+        },
+        {
+          "name": "FenceFire",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/infusions/FenceFire.asset"
+        },
+        {
+          "name": "FenceIce",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/infusions/FenceIce.asset"
+        },
+        {
+          "name": "FenceLightning",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/infusions/FenceLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Fence_ConnectAllFences",
+          "title_entry": "Variant_Fence_ConnectAllFences",
+          "description_entry": "Variant_Fence_ConnectAllFences_Description",
+          "variant_id": 21,
+          "variant_name": "ConnectAllFences",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/variants/Fence_ConnectAllFences.asset"
+        },
+        {
+          "name": "Fence_ExplodeAtEnd",
+          "title_entry": "Variant_Fence_ExplodeAtEnd",
+          "description_entry": "Variant_Fence_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/variants/Fence_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Fence_ExtraProjectile",
+          "title_entry": "Variant_Fence_ExtraProjectile",
+          "description_entry": "Variant_Fence_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 2,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/variants/Fence_ExtraProjectile.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "FenceDamage",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/improvements/FenceDamage.asset"
+        },
+        {
+          "name": "FenceFireRate",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/improvements/FenceFireRate.asset"
+        },
+        {
+          "name": "FenceLifetime",
+          "title_entry": "SpellName_Fence",
+          "description_entry": "SpellUpgrade_LifeTime_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/fence/improvements/FenceLifetime.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "c441ca3b823ce484c84d956bd6285833",
+        "Fire": "1bbfc25c2362e7045979aae85e5eac46",
+        "FireDouble": "c6d27d95e420a55468d6b8cb7f4b0a88",
+        "Lightning": "eb2e21ab03838334e857b85a3d1146f1",
+        "LightningDouble": "91ce7f2d90aded94a82e7426f451537b",
+        "FireLightning": "37dbf6210d339674782a4f7e3eba9753",
+        "Acid": "24686c69996eff447984e8a39be4f175",
+        "AcidDouble": "cb82214b62a53cf468525128d64dc4cb",
+        "AcidFire": "fb67b24874710504386b9acded53d34e",
+        "AcidLightning": "a5995ca4d12539549aeeff82a3433132",
+        "Ice": "6b44c6e13e3d02240b7b1ac8ca3c7e49",
+        "IceDouble": "48d22a20b96bc0c4c847cd7b6e29d22c",
+        "FireIce": "d977124a42ad53d41a934ee110cb2c58",
+        "IceLightning": "48663d1a1e9b1da4db36c4ab101767a6",
+        "AcidIce": "536a96294bb5c7542b621ae9e63836de",
+        "Dark": "dc587676ba04ce34a9ccb11d0d047d04",
+        "DarkDouble": "d2e1abb738a3ad84cb5cbcb850196915",
+        "DarkFire": "b99e1c3859df66346b59edee89f865cd",
+        "DarkLightning": "d3e10f9803a359b468f003a4c0ef5ed1",
+        "AcidDark": "ef035685960644e4faaeab1db78dfa9d",
+        "DarkIce": "99131ce5b804f3d4dbaffdb45638733b"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Laser": {
+      "spell_type_id": 3,
+      "spell_type": "Laser",
+      "source_file": "spellconfigurations/LaserConfiguration.asset",
+      "base_item": {
+        "name": "Laser",
+        "title_entry": "SpellName_Laser",
+        "description_entry": "SpellDescription_Laser",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/laser/Laser.asset"
+      },
+      "display_name": "SpellName_Laser",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 128
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 1.84
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.196
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 120
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 25
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 8
+        }
+      ],
+      "infusions": [
+        {
+          "name": "LaserAcid",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/infusions/LaserAcid.asset"
+        },
+        {
+          "name": "LaserDark",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/infusions/LaserDark.asset"
+        },
+        {
+          "name": "LaserFire",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/infusions/LaserFire.asset"
+        },
+        {
+          "name": "LaserIce",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/infusions/LaserIce.asset"
+        },
+        {
+          "name": "LaserLightning",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/infusions/LaserLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Laser_DealMoreDamageWhenStandingStill",
+          "title_entry": "Variant_Laser_DealMoreDamageWhenStandingStill",
+          "description_entry": "Variant_Laser_DealMoreDamageWhenStandingStill_Description",
+          "variant_id": 8,
+          "variant_name": "DealMoreDamageWhenStandingStill",
+          "repeat_amount": 3,
+          "stat_modifiers": [],
+          "dynamic_parameters": [
+            25
+          ],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/variants/Laser_DealMoreDamageWhenStandingStill.asset"
+        },
+        {
+          "name": "Laser_HigherSizeSlowerSpeed",
+          "title_entry": "Variant_Laser_HigherSizeSlowerSpeed",
+          "description_entry": "Variant_Laser_HigherSizeSlowerSpeed_Description",
+          "variant_id": 6,
+          "variant_name": "HigherSizeLowerSpeed",
+          "repeat_amount": 2,
+          "stat_modifiers": [
+            {
+              "stat_id": 3,
+              "stat_name": "Speed",
+              "value": -25
+            },
+            {
+              "stat_id": 6,
+              "stat_name": "Size",
+              "value": 40
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/variants/Laser_HigherSizeSlowerSpeed.asset"
+        },
+        {
+          "name": "Laser_IncreaseInSize",
+          "title_entry": "Variant_Laser_IncreaseInSize",
+          "description_entry": "Variant_Laser_IncreaseInSize_Description",
+          "variant_id": 17,
+          "variant_name": "IncreaseInSize",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/variants/Laser_IncreaseInSize.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "LaserDamage",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/improvements/LaserDamage.asset"
+        },
+        {
+          "name": "LaserFireRate",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/improvements/LaserFireRate.asset"
+        },
+        {
+          "name": "LaserSize",
+          "title_entry": "SpellName_Laser",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/laser/improvements/LaserSize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "0f8b130aca8b764438dc3741c0636923",
+        "Fire": "2485cfd22ecffce4fa8ab9832782738b",
+        "FireDouble": "e31f416e517a7d34587ea085f182da30",
+        "Lightning": "5f7ea9b20f1c8024b97665a3d95da314",
+        "LightningDouble": "816ae9f4b89d1f24c9039f8b30c2809d",
+        "FireLightning": "2756744b366eb9f4d861e0041807872d",
+        "Acid": "6fcae54209450d1479c40e54a40ccfb9",
+        "AcidDouble": "bd067941c2fd261478b09017028e0d8d",
+        "AcidFire": "04d6290e3e61fc94899482f5673aec79",
+        "AcidLightning": "70e45ee14370b8e4bbd7a9ef0670e2d6",
+        "Ice": "3e4cde9862cf4ca4787d8d2a3cbb3d0a",
+        "IceDouble": "f1edb5a6f3c694642b6b668ff5dbc486",
+        "FireIce": "cda32e05932f5f84ba3f40e8b4e6cd5b",
+        "IceLightning": "90397a59f8e018b4b9fc50d040a0b560",
+        "AcidIce": "415530b8765556e429b48f467662fa38",
+        "Dark": "f55f4be3eea4e55479352d209872e0c0",
+        "DarkDouble": "1782c2f33ec8d7749978eaf939f9c7a0",
+        "DarkFire": "be8ac3fbe7cddff45b78fb5d6875d2bf",
+        "DarkLightning": "b230bc96d1b368a4b8294a61c6f8ced6",
+        "AcidDark": "b7cd2b9e36ada9f469a9c5fdbfcf0f9b",
+        "DarkIce": "ad1dd8e19923b394ababf44dbe7fe26f"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Meteor": {
+      "spell_type_id": 18,
+      "spell_type": "Meteor",
+      "source_file": "spellconfigurations/MeteorConfiguration.asset",
+      "base_item": {
+        "name": "Meteor",
+        "title_entry": "SpellName_Meteor",
+        "description_entry": "SpellDescription_Meteor",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/meteor/Meteor.asset"
+      },
+      "display_name": "SpellName_Meteor",
+      "base_stats": [
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 15
+        },
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 61
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.5335
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 4
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "MeteorAcid",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/infusions/MeteorAcid.asset"
+        },
+        {
+          "name": "MeteorDark",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/infusions/MeteorDark.asset"
+        },
+        {
+          "name": "MeteorFire",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/infusions/MeteorFire.asset"
+        },
+        {
+          "name": "MeteorIce",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/infusions/MeteorIce.asset"
+        },
+        {
+          "name": "MeteorLightning",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/infusions/MeteorLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Meteor_ExtraLine",
+          "title_entry": "Variant_Meteor_ExtraLine",
+          "description_entry": "Variant_Meteor_ExtraLine_Description",
+          "variant_id": 28,
+          "variant_name": "ExtraLine",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/variants/Meteor_ExtraLine.asset"
+        },
+        {
+          "name": "Meteor_ExtraProjectile",
+          "title_entry": "Variant_Meteor_ExtraProjectile",
+          "description_entry": "Variant_Meteor_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/variants/Meteor_ExtraProjectile.asset"
+        },
+        {
+          "name": "Meteor_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Meteor_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Meteor_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/variants/Meteor_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Meteor_LeaveDamageAreaAtEnd",
+          "title_entry": "Variant_Meteor_LeaveDamageAreaAtEnd",
+          "description_entry": "Variant_Meteor_LeaveDamageAreaAtEnd_Description",
+          "variant_id": 29,
+          "variant_name": "LeaveDamageAreaAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/variants/Meteor_LeaveDamageAreaAtEnd.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "MeteorDamage",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/improvements/MeteorDamage.asset"
+        },
+        {
+          "name": "MeteorFireRate",
+          "title_entry": "SpellName_Meteor",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/meteor/improvements/MeteorFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "0d61df9e1c5220440b4762077577d3d4",
+        "Fire": "12483b50f84a32e4abfcb3004a63eba2",
+        "FireDouble": "db82c7550db634341a31681b225ea77f",
+        "Lightning": "c82726b58cb3b3b4db72c4cc7d5c42f1",
+        "LightningDouble": "f597ac358b1c29b49985b9d50e34d537",
+        "FireLightning": "6ee6b9d333ec7074e9df65588c382009",
+        "Acid": "90ea8d82ffa0ce047ab0d4d59a96ae30",
+        "AcidDouble": "93a91c1189a993f48bccce4e78aa9d46",
+        "AcidFire": "b2b0a2bbef591b6428d7878ead385719",
+        "AcidLightning": "e2c2066b2f269fd4382f16a29d4be54e",
+        "Ice": "3a53d3e07b6d0cd47b2c5cb9e0e31c8c",
+        "IceDouble": "ffbf849f18a161f4991af70633df6a30",
+        "FireIce": "792e993cc14a9914a9f60f0f72536339",
+        "IceLightning": "2e753a47653f44042a67adb7b630986f",
+        "AcidIce": "39c316b4b8130c843ad3f3b3a7bd8628",
+        "Dark": "58f600f9523e84d48aae78d9c6afa194",
+        "DarkDouble": "d0603caa3d22ec14e84e0a11b55c8f25",
+        "DarkFire": "6c7cbc46324e2184ebfa36c1dd9b0343",
+        "DarkLightning": "ae1f996343d87d846bc50cc81a8116ef",
+        "AcidDark": "a9816dba545ee4849858e715ec8d99e1",
+        "DarkIce": "d4e7dca1ac1a45f4ebaf3fb98e69bd61"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 2
+      }
+    },
+    "Mine": {
+      "spell_type_id": 11,
+      "spell_type": "Mine",
+      "source_file": "spellconfigurations/MineConfiguration.asset",
+      "base_item": {
+        "name": "Mine",
+        "title_entry": "SpellName_Mine",
+        "description_entry": "SpellDescription_Mine",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/mine/Mine.asset"
+      },
+      "display_name": "SpellName_Mine",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 134
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.6
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 1.7
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 33
+        }
+      ],
+      "infusions": [
+        {
+          "name": "MineAcid",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/infusions/MineAcid.asset"
+        },
+        {
+          "name": "MineDark",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/infusions/MineDark.asset"
+        },
+        {
+          "name": "MineFire",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/infusions/MineFire.asset"
+        },
+        {
+          "name": "MineIce",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/infusions/MineIce.asset"
+        },
+        {
+          "name": "MineLightning",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/infusions/MineLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Mine_Burst",
+          "title_entry": "Variant_Mine_Burst",
+          "description_entry": "Variant_Mine_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/variants/Mine_Burst.asset"
+        },
+        {
+          "name": "Mine_FriendlyFireHealInstead",
+          "title_entry": "Variant_Mine_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Mine_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/variants/Mine_FriendlyFireHealInstead.asset"
+        },
+        {
+          "name": "Mine_MoveTowardsEnemies",
+          "title_entry": "Variant_Mine_MoveTowardsEnemies",
+          "description_entry": "Variant_Mine_MoveTowardsEnemies_Description",
+          "variant_id": 18,
+          "variant_name": "MoveTowardsEnemies",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/variants/Mine_MoveTowardsEnemies.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "MineDamage",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/improvements/MineDamage.asset"
+        },
+        {
+          "name": "MineFireRate",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/improvements/MineFireRate.asset"
+        },
+        {
+          "name": "MineSize",
+          "title_entry": "SpellName_Mine",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/mine/improvements/MineSize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "422f331a091ed174086a18de91121c22",
+        "Fire": "5f09904b821c64f49a291b7de9abe24c",
+        "FireDouble": "d56e2e2a2dc85f24299f29185601c1c3",
+        "Lightning": "eccb7522ee06fd947ab786900d6ae92f",
+        "LightningDouble": "9508bf3b23ac59d49b0c12e2c3385096",
+        "FireLightning": "cf3eec79e48b78c40995682ea80fd0dc",
+        "Acid": "98ded94daa4e351449bf0f0b2a36b6c5",
+        "AcidDouble": "bfc79a0f9594d4144b45bb6c46fb36eb",
+        "AcidFire": "8c2736ff5c5fde34fa1cf1afd495e5b0",
+        "AcidLightning": "9f0b4cfdf54bde94cabfae7cb6fc65f3",
+        "Ice": "1597160cf0140c84db5b57af65f35857",
+        "IceDouble": "224f9e5dc376d9747a031df8e74c9f54",
+        "FireIce": "db6bd61ba27b49d41acda5961c3ceae8",
+        "IceLightning": "afd60fac710e2b742892a734964cbf05",
+        "AcidIce": "fe772aa0d3113cc4ca6e24cd68fcad78",
+        "Dark": "e0db3253a24b84a46971b63a92a0e7a0",
+        "DarkDouble": "387d270e3af00324ab481f39ea7b971e",
+        "DarkFire": "46944d0bfd0fe8c489b220616a0fdbe7",
+        "DarkLightning": "ee719b6b6de06894087ea8ae0419580d",
+        "AcidDark": "5007dcf018be4a74195cd2d5639eff7d",
+        "DarkIce": "a1bfbbcb683a3474b9927d963a674212"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Orb": {
+      "spell_type_id": 0,
+      "spell_type": "Orb",
+      "source_file": "spellconfigurations/OrbConfiguration.asset",
+      "base_item": {
+        "name": "Orb",
+        "title_entry": "SpellName_Orb",
+        "description_entry": "SpellDescription_Orb",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/orb/Orb.asset"
+      },
+      "display_name": "SpellName_Orb",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 170
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 7.5
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 1.150306
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 4.75
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 1.575
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 1
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 25
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "OrbAcid",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/infusions/OrbAcid.asset"
+        },
+        {
+          "name": "OrbDark",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/infusions/OrbDark.asset"
+        },
+        {
+          "name": "OrbFire",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/infusions/OrbFire.asset"
+        },
+        {
+          "name": "OrbIce",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/infusions/OrbIce.asset"
+        },
+        {
+          "name": "OrbLightning",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/infusions/OrbLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Orb_AimAtHighestHP",
+          "title_entry": "Variant_Orb_AimAtHighestHP",
+          "description_entry": "Variant_Orb_AimAtHighestHP_Description",
+          "variant_id": 2,
+          "variant_name": "AimAtHighestHP",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 35
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/variants/Orb_AimAtHighestHP.asset"
+        },
+        {
+          "name": "Orb_Burst",
+          "title_entry": "Variant_Orb_Burst",
+          "description_entry": "Variant_Orb_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/variants/Orb_Burst.asset"
+        },
+        {
+          "name": "Orb_Split",
+          "title_entry": "Variant_Orb_Split",
+          "description_entry": "Variant_Orb_Split_Description",
+          "variant_id": 1,
+          "variant_name": "Split",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/variants/Orb_Split.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "OrbDamage",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/improvements/OrbDamage.asset"
+        },
+        {
+          "name": "OrbFireRate",
+          "title_entry": "SpellName_Orb",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/orb/improvements/OrbFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "fce2eac50c959e64fbaf080252df0c11",
+        "Fire": "24a5fb3a1a786c64e84e4f8c80496422",
+        "FireDouble": "22a7e048947200b43957fbd74ecb9229",
+        "Lightning": "1a669d5a707de8947adee748ee6e135b",
+        "LightningDouble": "6152eb7ed2cdf014e8c2ac82cb267b64",
+        "FireLightning": "b1b3706235fe1a3498d1ba68b9f87c24",
+        "Acid": "11b8754547ce41f4aad73b78a89d846d",
+        "AcidDouble": "b825539b3943a2e41b83e44f1a10429b",
+        "AcidFire": "de8169a0f044f1749a4605a1059b59cd",
+        "AcidLightning": "ef2a31bae379f9e4884b9d528c0ca1e0",
+        "Ice": "a0900e43fd08bb84d90d9324988cc6a9",
+        "IceDouble": "5a519516fed17cf4ab3d081f9d31ab91",
+        "FireIce": "d582b4ea0a2fe6d42ad90197fdd21da7",
+        "IceLightning": "383ba1006397c914aac07be5cfa85424",
+        "AcidIce": "0f47fd97d9c586e46b5cc20c953bde19",
+        "Dark": "a6a28be04490acf4a871ea4793a5ec6c",
+        "DarkDouble": "832d10174a0dcc94cb5b0dba39b54aec",
+        "DarkFire": "eb0f111c0d4e19d47b99d3e668440940",
+        "DarkLightning": "24df86cef00a4834fb6c9010737a31a2",
+        "AcidDark": "a482ee0fce602b945bcfd9d41ceb2911",
+        "DarkIce": "78fc41913eef0ae44afd5b966350ffc5"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 2
+      }
+    },
+    "Plant": {
+      "spell_type_id": 15,
+      "spell_type": "Plant",
+      "source_file": "spellconfigurations/PlantConfiguration.asset",
+      "base_item": {
+        "name": "Plant",
+        "title_entry": "SpellName_Plant",
+        "description_entry": "SpellDescription_Plant",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/plant/Plant.asset"
+      },
+      "display_name": "SpellName_Plant",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 118.5
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.266667
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 3
+        },
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 1.35
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 5
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 25
+        },
+        {
+          "stat_id": 5,
+          "stat_name": "DamageTickRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "PlantAcid",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/infusions/PlantAcid.asset"
+        },
+        {
+          "name": "PlantDark",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/infusions/PlantDark.asset"
+        },
+        {
+          "name": "PlantFire",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/infusions/PlantFire.asset"
+        },
+        {
+          "name": "PlantIce",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/infusions/PlantIce.asset"
+        },
+        {
+          "name": "PlantLightning",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/infusions/PlantLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Plant_ExplodeAtEnd",
+          "title_entry": "Variant_Plant_ExplodeAtEnd",
+          "description_entry": "Variant_Plant_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/variants/Plant_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Plant_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Plant_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Plant_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/variants/Plant_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Plant_IncreaseSizeAndDamageWithEveryAttack",
+          "title_entry": "Variant_Plant_IncreaseSizeAndDamageWithEveryAttack",
+          "description_entry": "Variant_Plant_IncreaseSizeAndDamageWithEveryAttack_Description",
+          "variant_id": 25,
+          "variant_name": "IncreaseSizeAndDamageWithEveryAttack",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/variants/Plant_IncreaseSizeAndDamageWithEveryAttack.asset"
+        },
+        {
+          "name": "Plant_MoveTowardsEnemies",
+          "title_entry": "Variant_Plant_MoveTowardsEnemies",
+          "description_entry": "Variant_Plant_MoveTowardsEnemies_Description",
+          "variant_id": 18,
+          "variant_name": "MoveTowardsEnemies",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/variants/Plant_MoveTowardsEnemies.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "PlantDamage",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/improvements/PlantDamage.asset"
+        },
+        {
+          "name": "PlantFireRate",
+          "title_entry": "SpellName_Plant",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/plant/improvements/PlantFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "f25b319c0ea177744b11d2928e1c2dd6",
+        "Fire": "f4876f4d9df170144b8aff8b86021108",
+        "FireDouble": "3ffdcdded625a624da71a6f7e14448b0",
+        "Lightning": "d24d17e038d11b14da95f086a7918546",
+        "LightningDouble": "9e043ae34500c554dba7119a3ddefa4f",
+        "FireLightning": "8d0bd31391ac5d543960f8a66a6005a7",
+        "Acid": "3791bf2999419034a99d214c2580a769",
+        "AcidDouble": "02cc962cfa24d9c499454df9d2032006",
+        "AcidFire": "7435be51200d01f4d85f1756f8e9e48e",
+        "AcidLightning": "2f8048db18bab9f4f9620cd55b8fbf5f",
+        "Ice": "6b22158aaea32f04096c3aa499831369",
+        "IceDouble": "91cc11e7fd76e504e8cd34d8cc3acaf8",
+        "FireIce": "014858214efc6d84a9936bc68e0dc504",
+        "IceLightning": "f1f64c106f4663944b46740cb83a42d9",
+        "AcidIce": "91f2880550502634d9d683ab1061ad67",
+        "Dark": "0b458f5d81699764ebbfdb8f5cb03701",
+        "DarkDouble": "731ae78db50cb274b89d56de4d7c223a",
+        "DarkFire": "acef43430aae5b54ebd23062d1ca2cfb",
+        "DarkLightning": "0ac4be52ab5fea942ba54192a7a29825",
+        "AcidDark": "288618b3d2ef63243b605d44e1015bc4",
+        "DarkIce": "431dc132120c06440bd8f2640a9a0b58"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 2
+      }
+    },
+    "Proximity": {
+      "spell_type_id": 4,
+      "spell_type": "Proximity",
+      "source_file": "spellconfigurations/ProximityConfiguration.asset",
+      "base_item": {
+        "name": "Proximity",
+        "title_entry": "SpellName_Proximity",
+        "description_entry": "SpellDescription_Proximity",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/proximity/Proximity.asset"
+      },
+      "display_name": "SpellName_Proximity",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 50.73
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 2.225
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 1.7977529
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 33
+        }
+      ],
+      "infusions": [
+        {
+          "name": "ProximityAcid",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/infusions/ProximityAcid.asset"
+        },
+        {
+          "name": "ProximityDark",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/infusions/ProximityDark.asset"
+        },
+        {
+          "name": "ProximityFire",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/infusions/ProximityFire.asset"
+        },
+        {
+          "name": "ProximityIce",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/infusions/ProximityIce.asset"
+        },
+        {
+          "name": "ProximityLightning",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/infusions/ProximityLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Proximity_BiggerOnLowerHealth",
+          "title_entry": "Variant_Proximity_BiggerOnLowerHealth",
+          "description_entry": "Variant_Proximity_BiggerOnLowerHealth_Description",
+          "variant_id": 19,
+          "variant_name": "BiggerOnLowerHealth",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [
+            100
+          ],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/variants/Proximity_BiggerOnLowerHealth.asset"
+        },
+        {
+          "name": "Proximity_DealsMoreDamageTowardsCenter",
+          "title_entry": "Variant_Proximity_DealsMoreDamageTowardsCenter",
+          "description_entry": "Variant_Proximity_DealsMoreDamageTowardsCenter_Description",
+          "variant_id": 26,
+          "variant_name": "DealsMoreDamageTowardsCenter",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/variants/Proximity_DealsMoreDamageTowardsCenter.asset"
+        },
+        {
+          "name": "Proximity_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Proximity_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Proximity_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": true,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/variants/Proximity_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Proximity_ReduceDamageTakenWhenEnemiesInProximity",
+          "title_entry": "Variant_Proximity_ReduceDamageTakenWhenEnemiesInProximity",
+          "description_entry": "Variant_Proximity_ReduceDamageTakenWhenEnemiesInProximity_Description",
+          "variant_id": 12,
+          "variant_name": "ReduceDamageTakenWhenEnemiesInProximity",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [
+            20
+          ],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/variants/Proximity_ReduceDamageTakenWhenEnemiesInProximity.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "ProximityDamage",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/improvements/ProximityDamage.asset"
+        },
+        {
+          "name": "ProximityFireRate",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/improvements/ProximityFireRate.asset"
+        },
+        {
+          "name": "ProximitySize",
+          "title_entry": "SpellName_Proximity",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 0,
+            "rare": 17,
+            "epic": 27,
+            "legendary": 38
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/proximity/improvements/ProximitySize.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "98c09ed2efef0a045b0dca8929abd66b",
+        "Fire": "aa2345998004d464f8186f622bdd155f",
+        "FireDouble": "3d09c4706e65d724fa38958c651448bc",
+        "Lightning": "38692efc3b520804e9f123d09182b39a",
+        "LightningDouble": "04a3b437a7b8d6e4d96c1c5a567b1681",
+        "FireLightning": "9915350023659d848aaac2bdc7466d28",
+        "Acid": "2ad240f0bc0574a43b2cc9138367a68d",
+        "AcidDouble": "2b13348fb34792c4590c321dfe11b135",
+        "AcidFire": "7aad94a5f3d26d847a2f69820db8547a",
+        "AcidLightning": "5ccf6feb264928d4f856340a45bcc0e9",
+        "Ice": "3a078bb46ec294c4899e0bb22f9ad158",
+        "IceDouble": "8d273911db7d2fa48b3dfd2f04719ed0",
+        "FireIce": "92a9eb9312fa6c144bf313fc159503ca",
+        "IceLightning": "b536a425a1beea045956ed50ef10b7e1",
+        "AcidIce": "34c9a380ad9f548479de95d4bdec9452",
+        "Dark": "60212a8fb40b8a54da3c0e9afda7a340",
+        "DarkDouble": "1f337cc60f88f2d439d4920a771ca836",
+        "DarkFire": "3c328c4c50c97174dac43ee5f01b65a6",
+        "DarkLightning": "fe7e59ba2df3b0b45b6768160f8621fa",
+        "AcidDark": "63d7c246e98d05a4bb6bc1b1159a8d87",
+        "DarkIce": "d2acff1cb561f804b93479d92c6bacd5"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 3
+      }
+    },
+    "Rifle": {
+      "spell_type_id": 6,
+      "spell_type": "Rifle",
+      "source_file": "spellconfigurations/RifleConfiguration.asset",
+      "base_item": {
+        "name": "Rifle",
+        "title_entry": "SpellName_Rifle",
+        "description_entry": "SpellDescription_Rifle",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/rifle/Rifle.asset"
+      },
+      "display_name": "SpellName_Rifle",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 140
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 9
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.441
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 7.6
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 0.76
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 0.98
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 20
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 8
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 8
+        }
+      ],
+      "infusions": [
+        {
+          "name": "RifleAcid",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/infusions/RifleAcid.asset"
+        },
+        {
+          "name": "RifleDark",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/infusions/RifleDark.asset"
+        },
+        {
+          "name": "RifleFire",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/infusions/RifleFire.asset"
+        },
+        {
+          "name": "RifleIce",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/infusions/RifleIce.asset"
+        },
+        {
+          "name": "RifleLightning",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/infusions/RifleLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Rifle_AimAtHighestHP",
+          "title_entry": "Variant_Rifle_AimAtHighestHP",
+          "description_entry": "Variant_Rifle_AimAtHighestHP_Description",
+          "variant_id": 2,
+          "variant_name": "AimAtHighestHP",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 4,
+              "stat_name": "LifeTime",
+              "value": 20
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/variants/Rifle_AimAtHighestHP.asset"
+        },
+        {
+          "name": "Rifle_ExplodeAtEnd",
+          "title_entry": "Variant_Rifle_ExplodeAtEnd",
+          "description_entry": "Variant_Rifle_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/variants/Rifle_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Rifle_Split",
+          "title_entry": "Variant_Rifle_Split",
+          "description_entry": "Variant_Rifle_Split_Description",
+          "variant_id": 1,
+          "variant_name": "Split",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/variants/Rifle_Split.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "RifleDamage",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/improvements/RifleDamage.asset"
+        },
+        {
+          "name": "RifleFireRate",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/improvements/RifleFireRate.asset"
+        },
+        {
+          "name": "RifleLifetime",
+          "title_entry": "SpellName_Rifle",
+          "description_entry": "SpellUpgrade_Range_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 0,
+            "rare": 16,
+            "epic": 27,
+            "legendary": 38
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/rifle/improvements/RifleLifetime.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "0688e8d2d00ef13409ab6b7a02a787bd",
+        "Fire": "346e53155b02e854b992ae6f7134ef06",
+        "FireDouble": "cddf3e938089c1b4b9672a04a01edaaa",
+        "Lightning": "cddcdb93695dd9d4fad1e0d022301da6",
+        "LightningDouble": "d6be5d1287a0ba14baac887700c5b57b",
+        "FireLightning": "8e3c6a310b695e14aa794dcd687b286e",
+        "Acid": "b193e806ec7716f4c9335eb407581897",
+        "AcidDouble": "14a5837fb3acd3440887dcb14085167d",
+        "AcidFire": "0718901b84e14d0409a275a4ca3c29d1",
+        "AcidLightning": "1cb18e13641a43e4285219e36d7d1c4f",
+        "Ice": "fb94e1dc90aa64f4ca33b535d0eb0115",
+        "IceDouble": "eb0109d6a8087ef4fa34a256dfd202ba",
+        "FireIce": "cd1d9dea2c235944aa640e7565aa1545",
+        "IceLightning": "c8edaf09c17ac754d80aba97ca747527",
+        "AcidIce": "b469917cf9d019a408573d9249c906d7",
+        "Dark": "24b3f8627097d504cab8555848e70a3e",
+        "DarkDouble": "c7a08fec641def04688713535d77eadd",
+        "DarkFire": "f7108bcb6017e8940b2cfbb0761b857a",
+        "DarkLightning": "3753ba17d4f5b28429418163e3d7e65d",
+        "AcidDark": "97fd68f5a1ccbea4080518e1f88c4dc7",
+        "DarkIce": "592c51d4c0cbbbd4480dd6f1e852c6f4"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Shotgun": {
+      "spell_type_id": 5,
+      "spell_type": "Shotgun",
+      "source_file": "spellconfigurations/ShotgunConfiguration.asset",
+      "base_item": {
+        "name": "Shotgun",
+        "title_entry": "SpellName_Shotgun",
+        "description_entry": "SpellDescription_Shotgun",
+        "is_included_in_demo": true,
+        "disabled": false,
+        "source_file": "storeitems/spells/shotgun/Shotgun.asset"
+      },
+      "display_name": "SpellName_Shotgun",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 300
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.485
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 11.5
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 0.67
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 3
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 0.95
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 25
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "ShotgunAcid",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/infusions/ShotgunAcid.asset"
+        },
+        {
+          "name": "ShotgunDark",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/infusions/ShotgunDark.asset"
+        },
+        {
+          "name": "ShotgunFire",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/infusions/ShotgunFire.asset"
+        },
+        {
+          "name": "ShotgunIce",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/infusions/ShotgunIce.asset"
+        },
+        {
+          "name": "ShotgunLightning",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/infusions/ShotgunLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Shotgun_Burst",
+          "title_entry": "Variant_Shotgun_Burst",
+          "description_entry": "Variant_Shotgun_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/variants/Shotgun_Burst.asset"
+        },
+        {
+          "name": "Shotgun_ExtraProjectile",
+          "title_entry": "Variant_Shotgun_ExtraProjectile",
+          "description_entry": "Variant_Shotgun_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/variants/Shotgun_ExtraProjectile.asset"
+        },
+        {
+          "name": "Shotgun_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Shotgun_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Shotgun_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": true,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/variants/Shotgun_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Shotgun_ShootBackwards",
+          "title_entry": "Variant_Shotgun_Shootbackwards",
+          "description_entry": "Variant_Shotgun_Shootbackwards_Description",
+          "variant_id": 9,
+          "variant_name": "ShootBackwards",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/variants/Shotgun_ShootBackwards.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "ShotgunDamage",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/improvements/ShotgunDamage.asset"
+        },
+        {
+          "name": "ShotgunFireRate",
+          "title_entry": "SpellName_Shotgun",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/shotgun/improvements/ShotgunFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "61c7bb91542fb5a4a96fc93bacebe845",
+        "Fire": "64d8424945fa39244a964d0af9e1ae35",
+        "FireDouble": "d3e445e2c64604f4f9ef8d49350b99df",
+        "Lightning": "f7f16b0f84157534b868f1449dd652c1",
+        "LightningDouble": "6a89c5f8e454c28428ac2a558eeb666b",
+        "FireLightning": "42ac26cf6019a1c44892528381e576af",
+        "Acid": "4d4065f79707ae74e9991e23ee2782c3",
+        "AcidDouble": "67d01fdfa134ed1428eddd0a3d3d27da",
+        "AcidFire": "2743278398d5a284e82ac66967f9b445",
+        "AcidLightning": "9b01f8a57ac59994180adf4cbaf29ee7",
+        "Ice": "7b9f497bcb99d2842a83c37ac9d56a95",
+        "IceDouble": "a681e8607c36a414e80afc76e4fb9d7d",
+        "FireIce": "b55ac56fa8ea8b64998ddbc6aa8e8504",
+        "IceLightning": "f42e2d0b39f138c4bb20ab1f8846115c",
+        "AcidIce": "7fd46b9f9c7c00f48a8847e3e0fd0e37",
+        "Dark": "65bedfbe2fb731448806bca08f6fcad6",
+        "DarkDouble": "af6df1e5608c55a449aadbede8094297",
+        "DarkFire": "42260c7039df12048b84015326b15356",
+        "DarkLightning": "36c6520fd2b5fdc4caaaa0b9a9b19df4",
+        "AcidDark": "ef5061f38944ee441829d908eb0e3491",
+        "DarkIce": "4dd4b208357f89b47adf04c4b818dfe9"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 2
+      }
+    },
+    "Slash": {
+      "spell_type_id": 17,
+      "spell_type": "Slash",
+      "source_file": "spellconfigurations/SlashConfiguration.asset",
+      "base_item": {
+        "name": "Slash",
+        "title_entry": "SpellName_Slash",
+        "description_entry": "SpellDescription_Slash",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/slash/Slash.asset"
+      },
+      "display_name": "SpellName_Slash",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 296
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 2
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.75
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 0.5
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 3
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 35
+        },
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "SlashAcid",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/infusions/SlashAcid.asset"
+        },
+        {
+          "name": "SlashDark",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/infusions/SlashDark.asset"
+        },
+        {
+          "name": "SlashFire",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/infusions/SlashFire.asset"
+        },
+        {
+          "name": "SlashIce",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/infusions/SlashIce.asset"
+        },
+        {
+          "name": "SlashLightning",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/infusions/SlashLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Slash_Burst",
+          "title_entry": "Variant_Slash_Burst",
+          "description_entry": "Variant_Slash_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/variants/Slash_Burst.asset"
+        },
+        {
+          "name": "Slash_FriendlyFireHealsInstead",
+          "title_entry": "Variant_Slash_FriendlyFireHealsInstead",
+          "description_entry": "Variant_Slash_FriendlyFireHealsInstead_Description",
+          "variant_id": 5,
+          "variant_name": "FriendlyFireHealsInstead",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": true,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/variants/Slash_FriendlyFireHealsInstead.asset"
+        },
+        {
+          "name": "Slash_IncreaseSizeWhenStandingStill",
+          "title_entry": "Variant_Slash_IncreaseSizeWhenStandingStill",
+          "description_entry": "Variant_Slash_IncreaseSizeWhenStandingStill_Description",
+          "variant_id": 24,
+          "variant_name": "IncreaseSizeWhenStandingStill",
+          "repeat_amount": 5,
+          "stat_modifiers": [],
+          "dynamic_parameters": [
+            75,
+            20
+          ],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/variants/Slash_IncreaseSizeWhenStandingStill.asset"
+        },
+        {
+          "name": "Slash_SlashBackwards",
+          "title_entry": "Variant_Slash_Slashbackwards",
+          "description_entry": "Variant_Slash_Slashbackwards_Description",
+          "variant_id": 9,
+          "variant_name": "ShootBackwards",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/variants/Slash_SlashBackwards.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "SlashDamage",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/improvements/SlashDamage.asset"
+        },
+        {
+          "name": "SlashFireRate",
+          "title_entry": "SpellName_Slash",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/slash/improvements/SlashFireRate.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "1796a380d9d3478479a5f652ca77da4b",
+        "Fire": "428932f182d4e804c88d089acc98d9b5",
+        "FireDouble": "0e3b138f30c0ff447a73ac3cecc92596",
+        "Lightning": "f45939a351a6094458aa4436dc3825f6",
+        "LightningDouble": "117762511c742084a8d4fa82e6907641",
+        "FireLightning": "2b023bda3a06c0e428af6b09018703bc",
+        "Acid": "f51fc118b387bf243b41d15ca2d4872e",
+        "AcidDouble": "1f9a71a256ff3734ca7c91393bc88a07",
+        "AcidFire": "36776a8b4a19ad945941d7f94d81528d",
+        "AcidLightning": "97c4a8738a9ca524594d1c663c4e75e4",
+        "Ice": "612de9230a338594ebdf9eeff224ab76",
+        "IceDouble": "078ecda4edf87c14f83bbc17b1a5dbbd",
+        "FireIce": "d447be38442bfe34c84d73abe9bd6fc3",
+        "IceLightning": "624e178212e85ad41ac0773b5b74f588",
+        "AcidIce": "d724bd0a60944be4db621553e333319a",
+        "Dark": "08b60d4e43d989546a907ad49624025c",
+        "DarkDouble": "f100f2c788b02974fb08db3f61eb845b",
+        "DarkFire": "37d9a6d5fb2a01a47992b72367ba4d5d",
+        "DarkLightning": "0fa852f169a48d14b81a144431e6a9d3",
+        "AcidDark": "d3d71393b5d3b0d46bd99a39553a1c26",
+        "DarkIce": "ee2402bb2615d6c40a08cb0e95ba11b6"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 4,
+        "improvements": 2
+      }
+    },
+    "Smg": {
+      "spell_type_id": 7,
+      "spell_type": "Smg",
+      "source_file": "spellconfigurations/SmgConfiguration.asset",
+      "base_item": {
+        "name": "Smg",
+        "title_entry": "SpellName_Smg",
+        "description_entry": "SpellDescription_Smg",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/smg/Smg.asset"
+      },
+      "display_name": "SpellName_Smg",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 118
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 1.455
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 5.7
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 0.9215
+        },
+        {
+          "stat_id": 20,
+          "stat_name": "Projectiles",
+          "value": 4
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 0.95
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 20
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 12
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 8
+        }
+      ],
+      "infusions": [
+        {
+          "name": "SmgAcid",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/infusions/SmgAcid.asset"
+        },
+        {
+          "name": "SmgDark",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/infusions/SmgDark.asset"
+        },
+        {
+          "name": "SmgFire",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/infusions/SmgFire.asset"
+        },
+        {
+          "name": "SmgIce",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/infusions/SmgIce.asset"
+        },
+        {
+          "name": "SmgLightning",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/infusions/SmgLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Smg_Burst",
+          "title_entry": "Variant_Smg_Burst",
+          "description_entry": "Variant_Smg_Burst_Description",
+          "variant_id": 0,
+          "variant_name": "Burst",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/variants/Smg_Burst.asset"
+        },
+        {
+          "name": "Smg_ExtraProjectile",
+          "title_entry": "Variant_Smg_ExtraProjectile",
+          "description_entry": "Variant_Smg_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 5,
+          "stat_modifiers": [
+            {
+              "stat_id": 20,
+              "stat_name": "Projectiles",
+              "value": 1
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/variants/Smg_ExtraProjectile.asset"
+        },
+        {
+          "name": "Smg_Rotates",
+          "title_entry": "Variant_Smg_Rotates",
+          "description_entry": "Variant_Smg_Rotates_Description",
+          "variant_id": 10,
+          "variant_name": "SmgRotates",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 2,
+              "stat_name": "FireRate",
+              "value": 15
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/variants/Smg_Rotates.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "SmgDamage",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/improvements/SmgDamage.asset"
+        },
+        {
+          "name": "SmgFireRate",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/improvements/SmgFireRate.asset"
+        },
+        {
+          "name": "SmgLifetime",
+          "title_entry": "SpellName_Smg",
+          "description_entry": "SpellUpgrade_Range_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/smg/improvements/SmgLifetime.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "62a2ed634f2ceb240b2fe0f22edf973b",
+        "Fire": "444c37644e1d222449018009de5fe0ac",
+        "FireDouble": "4d1d686479548c94891c77cf28b8292f",
+        "Lightning": "305f76a765e74a64e9ffa3ac624b46e9",
+        "LightningDouble": "2e498c7ce478ca34dbaad5300c7f9dcc",
+        "FireLightning": "7c24a33a664f1914a872f375b9b9c1ef",
+        "Acid": "2515054c9e7a7284e98894474d646ecf",
+        "AcidDouble": "22f4b5f5a4eecbd4aa835641df423bdb",
+        "AcidFire": "ad7540d7277dde7408a55bdaab5751ca",
+        "AcidLightning": "d1a4c53f23eabb64cae54454702d489f",
+        "Ice": "e5bb99ace46a51b4b96ba4160b347393",
+        "IceDouble": "5e3015ec39b32e2479eb4544ac7e1647",
+        "FireIce": "39ead271f4a363f49a9a35bccbab66f1",
+        "IceLightning": "b89acf459202be64e9a4172b97375863",
+        "AcidIce": "3d82fa1c743103640aa0921290bca438",
+        "Dark": "9fe37e2ad579dbd4da7cba2a215a2d06",
+        "DarkDouble": "5a209cea8ec0a7c4d985aa8e8cb9614e",
+        "DarkFire": "3052fd67f283f194daddc3c6347f5449",
+        "DarkLightning": "519e58dd1f614494f9d7985fc731a07a",
+        "AcidDark": "5d733bbbdbde4024f91ededfa281a36f",
+        "DarkIce": "dec872396aa4bae409777468dac40f8a"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Summon": {
+      "spell_type_id": 16,
+      "spell_type": "Summon",
+      "source_file": "spellconfigurations/SummonConfiguration.asset",
+      "base_item": {
+        "name": "Summon",
+        "title_entry": "SpellName_Summon",
+        "description_entry": "SpellDescription_Summon",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/summon/Summon.asset"
+      },
+      "display_name": "SpellName_Summon",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 107.1932
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 0.2127
+        },
+        {
+          "stat_id": 3,
+          "stat_name": "Speed",
+          "value": 4
+        },
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 4.4
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "value": 12
+        }
+      ],
+      "infusions": [
+        {
+          "name": "SummonAcid",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/infusions/SummonAcid.asset"
+        },
+        {
+          "name": "SummonDark",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/infusions/SummonDark.asset"
+        },
+        {
+          "name": "SummonFire",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/infusions/SummonFire.asset"
+        },
+        {
+          "name": "SummonIce",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/infusions/SummonIce.asset"
+        },
+        {
+          "name": "SummonLightning",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/infusions/SummonLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Summon_ExplodeAtEnd",
+          "title_entry": "Variant_Summon_ExplodeAtEnd",
+          "description_entry": "Variant_Summon_ExplodeAtEnd_Description",
+          "variant_id": 13,
+          "variant_name": "ExplodeAtEnd",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/variants/Summon_ExplodeAtEnd.asset"
+        },
+        {
+          "name": "Summon_ExtraProjectile",
+          "title_entry": "Variant_Summon_ExtraProjectile",
+          "description_entry": "Variant_Summon_ExtraProjectile_Description",
+          "variant_id": 4,
+          "variant_name": "ExtraProjectile",
+          "repeat_amount": 4,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/variants/Summon_ExtraProjectile.asset"
+        },
+        {
+          "name": "Summon_FirstHitIsCrit",
+          "title_entry": "Variant_Summon_FirstHitIsCrit",
+          "description_entry": "Variant_Summon_FirstHitIsCrit_Description",
+          "variant_id": 23,
+          "variant_name": "FirstHitIsCrit",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 13,
+              "stat_name": "CriticalDamage",
+              "value": 100
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/variants/Summon_FirstHitIsCrit.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "SummonDamage",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/improvements/SummonDamage.asset"
+        },
+        {
+          "name": "SummonFireRate",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/improvements/SummonFireRate.asset"
+        },
+        {
+          "name": "SummonLifetime",
+          "title_entry": "SpellName_Summon",
+          "description_entry": "SpellUpgrade_LifeTime_Description",
+          "stat_id": 4,
+          "stat_name": "LifeTime",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/summon/improvements/SummonLifetime.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "4a6d80024639564479bb02449f23fa97",
+        "Fire": "d11ad2fcd677c8d4a908adcd5a40214e",
+        "FireDouble": "82bbc2d6760e4cf47b3388ee856bd815",
+        "Lightning": "47f81b2d413fbfe49af7ace407f23dc7",
+        "LightningDouble": "adf4661567c773444a2ba9c891bcb3ca",
+        "FireLightning": "ee4e8ec805228eb48a2cb646d32b117f",
+        "Acid": "3e00ccf7b85d02648b603fdd7fdb1f19",
+        "AcidDouble": "5f8c2bd59a6fb5e4c984f780dd1d9c69",
+        "AcidFire": "6134631edcc70c64f89d99a8a0e93cd1",
+        "AcidLightning": "eb2da17d23c96f548a45eec7611a0a05",
+        "Ice": "389d039afdaa6c646ba70fb61b236f0f",
+        "IceDouble": "3ead8c7f3b20ec24bbb5ecf82300cf3b",
+        "FireIce": "ac9ce6eb0c05cf242ac2dc06e7ea92a7",
+        "IceLightning": "5d218e9db8fc1a242aaa21ede916c598",
+        "AcidIce": "f68b335020719154fa5dbf8b6210070c",
+        "Dark": "653d08f4afe0aed4aa73256b4b87850f",
+        "DarkDouble": "fb1a6b5f47b87474a88cecbe32e69c9c",
+        "DarkFire": "f6de5c9a2628f3a448a26cf72275611c",
+        "DarkLightning": "bdd4033b856b60546a53159566195544",
+        "AcidDark": "b72a5c325aeaf334db6461ed52a968ae",
+        "DarkIce": "d50830f6ead11bc489416ec1b38d2045"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    },
+    "Trail": {
+      "spell_type_id": 8,
+      "spell_type": "Trail",
+      "source_file": "spellconfigurations/TrailConfiguration.asset",
+      "base_item": {
+        "name": "Trail",
+        "title_entry": "SpellName_Trail",
+        "description_entry": "SpellDescription_Trail",
+        "is_included_in_demo": false,
+        "disabled": false,
+        "source_file": "storeitems/spells/trail/Trail.asset"
+      },
+      "display_name": "SpellName_Trail",
+      "base_stats": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 33.81
+        },
+        {
+          "stat_id": 1,
+          "stat_name": "Range",
+          "value": 0.6325
+        },
+        {
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "value": 2
+        },
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 2.3
+        }
+      ],
+      "starting_modifiers": [
+        {
+          "stat_id": 6,
+          "stat_name": "Size",
+          "value": 33
+        },
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 8
+        }
+      ],
+      "infusions": [
+        {
+          "name": "TrailAcid",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 6,
+          "element_name": "Acid",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/infusions/TrailAcid.asset"
+        },
+        {
+          "name": "TrailDark",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 15,
+          "element_name": "Dark",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/infusions/TrailDark.asset"
+        },
+        {
+          "name": "TrailFire",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 1,
+          "element_name": "Fire",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/infusions/TrailFire.asset"
+        },
+        {
+          "name": "TrailIce",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 10,
+          "element_name": "Ice",
+          "is_included_in_demo": false,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/infusions/TrailIce.asset"
+        },
+        {
+          "name": "TrailLightning",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellInfusion_Description_First",
+          "element_id": 3,
+          "element_name": "Lightning",
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/infusions/TrailLightning.asset"
+        }
+      ],
+      "variants": [
+        {
+          "name": "Trail_TrailDoesMoreDamageAtEnd",
+          "title_entry": "Variant_Trail_TrailDoesMoreDamageAtEnd",
+          "description_entry": "Variant_Trail_TrailDoesMoreDamageAtEnd_Description",
+          "variant_id": 7,
+          "variant_name": "TrailDoesMoreDamageAtEnd",
+          "repeat_amount": 2,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 8
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/variants/Trail_TrailDoesMoreDamageAtEnd.asset"
+        },
+        {
+          "name": "Trail_TrailEndExplodes",
+          "title_entry": "Variant_Trail_TrailEndExplodes",
+          "description_entry": "Variant_Trail_TrailEndExplodes_Description",
+          "variant_id": 11,
+          "variant_name": "TrailEndExplodes",
+          "repeat_amount": 0,
+          "stat_modifiers": [
+            {
+              "stat_id": 0,
+              "stat_name": "Damage",
+              "value": 8
+            }
+          ],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/variants/Trail_TrailEndExplodes.asset"
+        },
+        {
+          "name": "Trail_TrailSpawnsGuaranteedCrits",
+          "title_entry": "Variant_Trail_TrailSpawnsGuaranteedCrits",
+          "description_entry": "Variant_Trail_TrailSpawnsGuaranteedCrits_Description",
+          "variant_id": 20,
+          "variant_name": "TrailSpawnsGuaranteedCrits",
+          "repeat_amount": 0,
+          "stat_modifiers": [],
+          "dynamic_parameters": [],
+          "hide_for_single_player": false,
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/variants/Trail_TrailSpawnsGuaranteedCrits.asset"
+        }
+      ],
+      "improvements": [
+        {
+          "name": "TrailDamage",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellUpgrade_Damage_Description",
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/improvements/TrailDamage.asset"
+        },
+        {
+          "name": "TrailFireRate",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellUpgrade_FireRate_Description",
+          "stat_id": 2,
+          "stat_name": "FireRate",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/improvements/TrailFireRate.asset"
+        },
+        {
+          "name": "TrailSIze",
+          "title_entry": "SpellName_Trail",
+          "description_entry": "SpellUpgrade_Size_Description",
+          "stat_id": 6,
+          "stat_name": "Size",
+          "values_by_rarity": {
+            "common": 10,
+            "rare": 15,
+            "epic": 25,
+            "legendary": 35
+          },
+          "is_included_in_demo": true,
+          "disabled": false,
+          "source_file": "storeitems/spells/trail/improvements/TrailSIze.asset"
+        }
+      ],
+      "prefab_guids_by_element": {
+        "None": "318ff4c7d093b6a4a97743504dc2140a",
+        "Fire": "479b81e9209d9af49a14540adaee065f",
+        "FireDouble": "9bf744e2593e8fe41ac527dd2fe03b00",
+        "Lightning": "46b7a938d99749f47818cf3e7d1741eb",
+        "LightningDouble": "8767b9dd15db7fd48ab66eb7b86bf117",
+        "FireLightning": "62ef8f4f96028bd49b1acc06af6e4852",
+        "Acid": "b1935e7a3fcddbc49be93e8bfb7b1766",
+        "AcidDouble": "b6831b4030953324d807e052ccb1aa36",
+        "AcidFire": "2d288b6d14c29034aac4ebea1268d705",
+        "AcidLightning": "2e1b2c91553d6b641b73d9114ca296cf",
+        "Ice": "6cbba4c161f651f448f426ef83266c43",
+        "IceDouble": "d73d33b95f7a98a46a90e642fe79dffd",
+        "FireIce": "e25ee62f2578eab43b8c3d02853b73c0",
+        "IceLightning": "a55f8ba194f37064084917b75f0a0a6d",
+        "AcidIce": "3e3ea51020c41474eabb757eb7836aaa",
+        "Dark": "0a1cd18d1362bbc4fbf3b80e1d92ae6a",
+        "DarkDouble": "5fac363154ee3464daf39fc57c5737f3",
+        "DarkFire": "c9ec928952c091a4d9f1523b5f5ea2bb",
+        "DarkLightning": "4984c09a1972e8048991ec2d935e608c",
+        "AcidDark": "c6447200cede2bd4995d27b47d1c4d6f",
+        "DarkIce": "67b0f1b73b954734c9bcd5601ad2ad1f"
+      },
+      "counts": {
+        "infusions": 5,
+        "variants": 3,
+        "improvements": 3
+      }
+    }
+  }
+}

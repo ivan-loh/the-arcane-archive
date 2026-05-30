@@ -1,0 +1,4642 @@
+{
+  "_meta": {
+    "source": "TSB2 ExportedProject assets + Il2CppDumper dump.cs",
+    "generated_by": "/tmp/build_characters.py",
+    "notes": [
+      "starting_stats: per-character stat block computed as shared CharacterStatsData base + per-character Modifiers list. Stats not in the shared base (Damage, CriticalChance, XPGain, etc.) are appended with base_value=0.",
+      "shared_base_stats: from Resources/characterstatsdata/CharacterStatsData.asset",
+      "character_specific_improvements is empty for all heroes - the store-item 'characterimprovements' are global hero-agnostic upgrades that apply to whichever wizard is selected. They are listed under global_character_improvements.",
+      "starting_artifact: not present in CharacterResource schema; field kept as null.",
+      "Localization entries (title/description/skin names) are referenced by Key only; the StringTables in ExportedProject are stubs and the actual localized strings are not present in the YAML and were not extracted.",
+      "skin labels: 0/1/2/3 mapped to Base/Alt 1/Alt 2/Alt 3 by convention.",
+      "prefab_guid_verified=true means the skin's GameplayPrefab guid matches an existing GameplayPlayer_*.prefab.meta in Assets/GameObject/.",
+      "challenges_referencing_this_hero: each non-starter hero has a corresponding Unlock<Hero> challenge in Resources/challenges/wizard/. Reginald is the starter (initialCost=0) and has no unlock challenge."
+    ]
+  },
+  "stat_type_map": {
+    "0": "Damage",
+    "1": "Range",
+    "2": "FireRate",
+    "3": "Speed",
+    "4": "LifeTime",
+    "5": "DamageTickRate",
+    "6": "Size",
+    "7": "MovementSpeed",
+    "8": "MaxHealth",
+    "9": "Luck",
+    "10": "XPGain",
+    "11": "PickupRadius",
+    "12": "CriticalChance",
+    "13": "CriticalDamage",
+    "14": "Armor",
+    "15": "Dodge",
+    "16": "HealthRegeneration",
+    "17": "Rerolls",
+    "18": "ReviveSpeed",
+    "19": "Revives",
+    "20": "Projectiles",
+    "22": "HealOnDodge",
+    "23": "HealOnLevelUp",
+    "24": "DropChance",
+    "25": "TerrainSpeedMultiplier",
+    "26": "HitboxSizeMultiplier",
+    "27": "ElementWeaknessMultiplier",
+    "30": "ElementStrengthMultiplier",
+    "33": "HealingMultiplier",
+    "34": "XPGainOnDamageTaken",
+    "35": "HealthPotionAmountMultiplier",
+    "36": "ReviveZoneSize",
+    "37": "GoldGain",
+    "38": "HealthPercentageOnRevive",
+    "39": "Bans",
+    "40": "Pins"
+  },
+  "spell_type_map": {
+    "0": "Orb",
+    "1": "Boomerang",
+    "2": "EnergyZone",
+    "3": "Laser",
+    "4": "Proximity",
+    "5": "Shotgun",
+    "6": "Rifle",
+    "7": "Smg",
+    "8": "Trail",
+    "9": "BombLauncher",
+    "10": "FallingStar",
+    "11": "Mine",
+    "12": "Fence",
+    "13": "Beam",
+    "14": "Arrow",
+    "15": "Plant",
+    "16": "Summon",
+    "17": "Slash",
+    "18": "Meteor",
+    "19": "Book",
+    "20": "Bell"
+  },
+  "character_id_map": {
+    "0": "Reginald",
+    "1": "MoonMage",
+    "2": "SunMage",
+    "3": "KeyMage",
+    "4": "Ludwig",
+    "5": "Campanelli",
+    "6": "Hatty",
+    "7": "WizardKing",
+    "8": "StarMage",
+    "9": "Smithy",
+    "10": "BirdMage",
+    "11": "PlantMage",
+    "12": "FluteMage",
+    "13": "VampireMage",
+    "14": "BellMage",
+    "99999": "TestCharacter"
+  },
+  "unique_modifier_map": {
+    "0": "IgnoresNegativeEffects",
+    "1": "HealthAbsorbingHugeSpawnBeam",
+    "2": "SpellsAndInfusionsGrantedEarlier",
+    "3": "ShowPickupDirectionPointers",
+    "4": "FastObjectiveDirectionPointer",
+    "5": "PickupAllXPOrbsWhenUsingMagnet",
+    "6": "RandomInfusionChance",
+    "7": "LifeStealOnSlashSpell",
+    "8": "CanReviveWhenDown",
+    "9": "ReturnDamageWhenHit",
+    "10": "ExplodeOnDeath",
+    "11": "LifeStealOnSignatureSpell"
+  },
+  "skin_id_map": {
+    "0": "Reginald_0",
+    "1": "Reginald_1",
+    "2": "Reginald_2",
+    "3": "MoonMage_0",
+    "4": "MoonMage_1",
+    "5": "MoonMage_2",
+    "6": "KeyMage_0",
+    "7": "KeyMage_1",
+    "8": "KeyMage_2",
+    "9": "SunMage_0",
+    "10": "SunMage_1",
+    "11": "SunMage_2",
+    "12": "Campanelli_0",
+    "13": "Campanelli_1",
+    "14": "Campanelli_2",
+    "15": "Ludwig_0",
+    "16": "Ludwig_1",
+    "17": "Ludwig_2",
+    "18": "Hatty_0",
+    "19": "Hatty_1",
+    "20": "Hatty_2",
+    "21": "WizardKing_0",
+    "22": "WizardKing_1",
+    "23": "WizardKing_2",
+    "24": "Reginald_Sketchy",
+    "25": "MoonMage_Sketchy",
+    "26": "KeyMage_Sketchy",
+    "27": "SunMage_Sketchy",
+    "28": "Ludwig_Sketchy",
+    "29": "Campanelli_Sketchy",
+    "30": "Hatty_Sketchy",
+    "31": "WizardKing_Sketchy",
+    "32": "StarMage_0",
+    "33": "StarMage_1",
+    "34": "StarMage_2",
+    "35": "Smithy_0",
+    "36": "Smithy_1",
+    "37": "Smithy_2",
+    "38": "SunMage_3",
+    "39": "Hatty_3",
+    "40": "WizardKing_3",
+    "41": "StarMage_3",
+    "42": "BirdMage_0",
+    "43": "BirdMage_1",
+    "44": "BirdMage_2",
+    "45": "StarMage_Sketchy",
+    "46": "Smithy_Sketchy",
+    "47": "BirdMage_Sketchy",
+    "48": "Reginald_Golden",
+    "49": "MoonMage_Golden",
+    "50": "KeyMage_Golden",
+    "51": "SunMage_Golden",
+    "52": "Campanelli_Golden",
+    "53": "Ludwig_Golden",
+    "54": "Hatty_Golden",
+    "55": "WizardKing_Golden",
+    "56": "StarMage_Golden",
+    "57": "Smithy_Golden",
+    "58": "BirdMage_Golden",
+    "59": "PlantMage_0",
+    "60": "PlantMage_1",
+    "61": "PlantMage_2",
+    "62": "FluteMage_0",
+    "63": "FluteMage_1",
+    "64": "FluteMage_2",
+    "65": "VampireMage_0",
+    "66": "VampireMage_1",
+    "67": "VampireMage_2",
+    "68": "Reginald_3",
+    "69": "Smithy_3",
+    "70": "PlantMage_3",
+    "71": "VampireMage_3",
+    "72": "BellMage_0",
+    "73": "BellMage_1",
+    "74": "BellMage_2",
+    "75": "Reginald_Prestige",
+    "76": "MoonMage_Prestige",
+    "77": "KeyMage_Prestige",
+    "78": "SunMage_Prestige",
+    "79": "Campanelli_Prestige",
+    "80": "Ludwig_Prestige",
+    "81": "Hatty_Prestige",
+    "82": "WizardKing_Prestige",
+    "83": "StarMage_Prestige",
+    "84": "Smithy_Prestige",
+    "85": "BirdMage_Prestige",
+    "86": "PlantMage_Prestige",
+    "87": "FluteMage_Prestige",
+    "88": "VampireMage_Prestige",
+    "89": "BellMage_Prestige",
+    "90": "Campanelli_Demon",
+    "91": "Smithy_Demon",
+    "92": "SunMage_Demon",
+    "93": "Ludwig_Demon",
+    "94": "PlantMage_Sketchy",
+    "95": "PlantMage_Golden",
+    "96": "VampireMage_Sketchy",
+    "97": "VampireMage_Golden",
+    "98": "FluteMage_Sketchy",
+    "99": "FluteMage_Golden",
+    "100": "BellMage_Sketchy",
+    "101": "BellMage_Golden",
+    "102": "Reginald_BigHead",
+    "103": "MoonMage_BigHead",
+    "104": "KeyMage_BigHead",
+    "105": "SunMage_BigHead",
+    "106": "Ludwig_BigHead",
+    "107": "Campanelli_BigHead",
+    "108": "Hatty_BigHead",
+    "109": "WizardKing_BigHead",
+    "110": "StarMage_BigHead",
+    "111": "Smithy_BigHead",
+    "112": "BirdMage_BigHead",
+    "113": "PlantMage_BigHead",
+    "114": "VampireMage_BigHead",
+    "115": "FluteMage_BigHead",
+    "116": "BellMage_BigHead"
+  },
+  "shared_base_stats": [
+    {
+      "stat_id": 7,
+      "stat_name": "MovementSpeed",
+      "value": 3.6
+    },
+    {
+      "stat_id": 8,
+      "stat_name": "MaxHealth",
+      "value": 600
+    },
+    {
+      "stat_id": 9,
+      "stat_name": "Luck",
+      "value": 0
+    },
+    {
+      "stat_id": 11,
+      "stat_name": "PickupRadius",
+      "value": 4
+    },
+    {
+      "stat_id": 12,
+      "stat_name": "CriticalChance",
+      "value": 10
+    },
+    {
+      "stat_id": 13,
+      "stat_name": "CriticalDamage",
+      "value": 150
+    },
+    {
+      "stat_id": 14,
+      "stat_name": "Armor",
+      "value": 0
+    },
+    {
+      "stat_id": 15,
+      "stat_name": "Dodge",
+      "value": 0
+    },
+    {
+      "stat_id": 16,
+      "stat_name": "HealthRegeneration",
+      "value": 0
+    },
+    {
+      "stat_id": 17,
+      "stat_name": "Rerolls",
+      "value": 0
+    },
+    {
+      "stat_id": 39,
+      "stat_name": "Bans",
+      "value": 0
+    },
+    {
+      "stat_id": 40,
+      "stat_name": "Pins",
+      "value": 0
+    },
+    {
+      "stat_id": 19,
+      "stat_name": "Revives",
+      "value": 2
+    },
+    {
+      "stat_id": 38,
+      "stat_name": "HealthPercentageOnRevive",
+      "value": 0.5
+    },
+    {
+      "stat_id": 36,
+      "stat_name": "ReviveZoneSize",
+      "value": 6.5
+    }
+  ],
+  "characters": [
+    {
+      "id": "BellMage",
+      "character_id": 14,
+      "display_name": "Bell Mage",
+      "title_entry": "Character_BellMage",
+      "description_entry": "Character_Description_BellMage",
+      "initial_spell": "Bell",
+      "initial_spell_id": 20,
+      "initial_prestige_spell": "Trail",
+      "initial_prestige_spell_id": 8,
+      "starting_artifact": null,
+      "default_skin_id": 72,
+      "default_skin_name": "BellMage_0",
+      "character_selection_order": 15,
+      "initial_cost_gold": 1800,
+      "player_seat_info_height": 2.5,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [],
+      "unique_modifiers": [
+        {
+          "id": 9,
+          "name": "ReturnDamageWhenHit"
+        },
+        {
+          "id": 10,
+          "name": "ExplodeOnDeath"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "7fad24c97d891c14c9e14b758e09c573",
+          "skin_id": 72,
+          "name": "BellMage_0",
+          "asset_name": "CharacterSkin_BellMage_0",
+          "label": "Base",
+          "name_entry": "Skin_BellMage_0",
+          "description_entry": "Skin_Description_BellMage_0",
+          "prefab_guid": "60d3773f812b4bd4cba76008e6680523",
+          "prefab_file": "GameplayPlayer_BellMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c5fedca8d6bb7514ba55d6016b284188",
+          "skin_id": 73,
+          "name": "BellMage_1",
+          "asset_name": "CharacterSkin_BellMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_BellMage_1",
+          "description_entry": "Skin_Description_BellMage_1",
+          "prefab_guid": "2f63d22b3c533b8449b06c3201f86ec4",
+          "prefab_file": "GameplayPlayer_BellMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "453309ae5130de949aa421f1c6a7309a",
+          "skin_id": 74,
+          "name": "BellMage_2",
+          "asset_name": "CharacterSkin_BellMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_BellMage_2",
+          "description_entry": "Skin_Description_BellMage_2",
+          "prefab_guid": "bb1d6894cd5d8c34ba28bf88a0d50d59",
+          "prefab_file": "GameplayPlayer_BellMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "10cd400004101b84e85ff02f13441f81",
+          "skin_id": 89,
+          "name": "BellMage_Prestige",
+          "asset_name": "CharacterSkin_BellMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_BellMage_Prestige",
+          "description_entry": "Skin_Description_BellMage_Prestige",
+          "prefab_guid": "e2f64f01d123dba4cbbcd37ba8e15909",
+          "prefab_file": "GameplayPlayer_BellMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "02c6b8558c7192a4bb53b0e6a5823bd3",
+          "skin_id": 101,
+          "name": "BellMage_Golden",
+          "asset_name": "CharacterSkin_BellMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_BellMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "0693bc684e85fc547a40ee01345de390",
+          "prefab_file": "GameplayPlayer_BellMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "5ff7141edbe901a4a9a627cfd373210a",
+          "skin_id": 100,
+          "name": "BellMage_Sketchy",
+          "asset_name": "CharacterSkin_BellMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_BellMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "4e6fbcba879fcc346b591039d36ed49f",
+          "prefab_file": "GameplayPlayer_BellMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "71bf1066f5ef8b3438d55eb1b8c2c8c3",
+          "skin_id": 116,
+          "name": "BellMage_BigHead",
+          "asset_name": "CharacterSkin_BellMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_BellMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "59645a0dd08fd4f46bef63d8a6a57b73",
+          "prefab_file": "GameplayPlayer_BellMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockBellMage"
+      ],
+      "playstyle_hint": "Starting modifiers: unique: ReturnDamageWhenHit, unique: ExplodeOnDeath.",
+      "notes": null
+    },
+    {
+      "id": "BirdMage",
+      "character_id": 10,
+      "display_name": "Bird Mage",
+      "title_entry": "Character_BirdMage",
+      "description_entry": "Character_Description_BirdMage",
+      "initial_spell": "Arrow",
+      "initial_spell_id": 14,
+      "initial_prestige_spell": "Plant",
+      "initial_prestige_spell_id": 15,
+      "starting_artifact": null,
+      "default_skin_id": 42,
+      "default_skin_name": "BirdMage_0",
+      "character_selection_order": 8,
+      "initial_cost_gold": 1250,
+      "player_seat_info_height": 2.2,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [],
+      "unique_modifiers": [
+        {
+          "id": 4,
+          "name": "FastObjectiveDirectionPointer"
+        },
+        {
+          "id": 3,
+          "name": "ShowPickupDirectionPointers"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "b7df0384e2af6ba4ea9ae35ea93a4d1e",
+          "skin_id": 42,
+          "name": "BirdMage_0",
+          "asset_name": "CharacterSkin_BirdMage_0",
+          "label": "Base",
+          "name_entry": "Skin_BirdMage_0",
+          "description_entry": "Skin_Description_BirdMage_0",
+          "prefab_guid": "c3bf36850b156d246bfee6e1f31b4c3f",
+          "prefab_file": "GameplayPlayer_BirdMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "d34ff4367d5825644a39c73dbb3eb5ca",
+          "skin_id": 43,
+          "name": "BirdMage_1",
+          "asset_name": "CharacterSkin_BirdMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_BirdMage_1",
+          "description_entry": "Skin_Description_BirdMage_1",
+          "prefab_guid": "1850862cccb111d4995d577ace89c918",
+          "prefab_file": "GameplayPlayer_BirdMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "9cb102ff8cae76e45bb0a1dce2725b82",
+          "skin_id": 44,
+          "name": "BirdMage_2",
+          "asset_name": "CharacterSkin_BirdMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_BirdMage_2",
+          "description_entry": "Skin_Description_BirdMage_2",
+          "prefab_guid": "af8f02b50b85cea408f378c5aa58a569",
+          "prefab_file": "GameplayPlayer_BirdMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "fdb17db8908db64499bf49b86f479141",
+          "skin_id": 85,
+          "name": "BirdMage_Prestige",
+          "asset_name": "CharacterSkin_BirdMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_BirdMage_Prestige",
+          "description_entry": "Skin_Description_BirdMage_Prestige",
+          "prefab_guid": "054afb37f29fd2b46b2f5de71b34a1e3",
+          "prefab_file": "GameplayPlayer_BirdMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "7c1e5680d5d7f7542a9692639e37d0f2",
+          "skin_id": 58,
+          "name": "BirdMage_Golden",
+          "asset_name": "CharacterSkin_BirdMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_BirdMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "7453436514dd7714ebe6f6bc188ffd78",
+          "prefab_file": "GameplayPlayer_BirdMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "4ab9cab1f49446a49b6a1a041a6a3109",
+          "skin_id": 47,
+          "name": "BirdMage_Sketchy",
+          "asset_name": "CharacterSkin_BirdMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_BirdMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "0be03e7740aa0d2489800eae60513e86",
+          "prefab_file": "GameplayPlayer_BirdMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "caa92625a4f231b4994e6ea16e260b5a",
+          "skin_id": 112,
+          "name": "BirdMage_BigHead",
+          "asset_name": "CharacterSkin_BirdMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_BirdMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "f354f0e9e2cb9554b936d029927f76de",
+          "prefab_file": "GameplayPlayer_BirdMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockBirdMage"
+      ],
+      "playstyle_hint": "Starting modifiers: unique: FastObjectiveDirectionPointer, unique: ShowPickupDirectionPointers.",
+      "notes": null
+    },
+    {
+      "id": "Campanelli",
+      "character_id": 5,
+      "display_name": "Campanelli",
+      "title_entry": "Character_Campanelli",
+      "description_entry": "Character_Description_Campanelli",
+      "initial_spell": "Shotgun",
+      "initial_spell_id": 5,
+      "initial_prestige_spell": "BombLauncher",
+      "initial_prestige_spell_id": 9,
+      "starting_artifact": null,
+      "default_skin_id": 12,
+      "default_skin_name": "Campanelli_0",
+      "character_selection_order": 13,
+      "initial_cost_gold": 1650,
+      "player_seat_info_height": 2.3,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "value": 10
+        }
+      ],
+      "unique_modifiers": [
+        {
+          "id": 1,
+          "name": "HealthAbsorbingHugeSpawnBeam"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 10,
+          "value": 13.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "129c0f5a0fa119e4e892a13ff1ee9207",
+          "skin_id": 12,
+          "name": "Campanelli_0",
+          "asset_name": "CharacterSkin_Campanelli_0",
+          "label": "Base",
+          "name_entry": "Skin_Campanelli_0",
+          "description_entry": "Skin_Description_Campanelli_0",
+          "prefab_guid": "3a7decd2069a78f41853935b66bb4c4f",
+          "prefab_file": "GameplayPlayer_Campanelli_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "2ec9d5cf502a3bd438b5fe97f9045332",
+          "skin_id": 13,
+          "name": "Campanelli_1",
+          "asset_name": "CharacterSkin_Campanelli_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_Campanelli_1",
+          "description_entry": "Skin_Description_Campanelli_1",
+          "prefab_guid": "a83fd6b0885ef504cb30afb5fac244a3",
+          "prefab_file": "GameplayPlayer_Campanelli_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "b63038edf6d66aa4e980499970049a91",
+          "skin_id": 14,
+          "name": "Campanelli_2",
+          "asset_name": "CharacterSkin_Campanelli_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_Campanelli_2",
+          "description_entry": "Skin_Description_Campanelli_2",
+          "prefab_guid": "013f6756fae8eb9488d706a2c56ae2dd",
+          "prefab_file": "GameplayPlayer_Campanelli_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f227efd4c638ba946b754961e8402e1c",
+          "skin_id": 79,
+          "name": "Campanelli_Prestige",
+          "asset_name": "CharacterSkin_Campanelli_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_Campanelli_Prestige",
+          "description_entry": "Skin_Description_Campanelli_Prestige",
+          "prefab_guid": "52d92ae49f8bfbf4785837eb836dc175",
+          "prefab_file": "GameplayPlayer_Campanelli_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "fb1ac5d2961dea541bb4c038faf3ee27",
+          "skin_id": 90,
+          "name": "Campanelli_Demon",
+          "asset_name": "CharacterSkin_Campanelli_Demon",
+          "label": "Demon",
+          "name_entry": "Skin_Campanelli_Demon",
+          "description_entry": "Skin_Description_Campanelli_Demon",
+          "prefab_guid": "59927a8a7df27024298a21f41687b146",
+          "prefab_file": "GameplayPlayer_Campanelli_SkinDemon.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "6bca1e8916691c449be1a3c90ad0d8f5",
+          "skin_id": 52,
+          "name": "Campanelli_Golden",
+          "asset_name": "CharacterSkin_Campanelli_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Campanelli_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "46ec2821c09d67c4f84ee18bb3f33949",
+          "prefab_file": "GameplayPlayer_Campanelli_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "1ba9ad052f433bb4eb73545ce4df38f2",
+          "skin_id": 29,
+          "name": "Campanelli_Sketchy",
+          "asset_name": "CharacterSkin_Campanelli_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_Campanelli_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "f60ebc18373b92a4a9b968c98a213ae7",
+          "prefab_file": "GameplayPlayer_Campanelli_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "6cc755ee4a43c7d4682cddca6109267f",
+          "skin_id": 107,
+          "name": "Campanelli_BigHead",
+          "asset_name": "CharacterSkin_Campanelli_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_Campanelli_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "844e3da4c0a466a47890a2e06a37375b",
+          "prefab_file": "GameplayPlayer_Campanelli_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockCampanelli"
+      ],
+      "playstyle_hint": "Starting modifiers: +10 MovementSpeed, unique: HealthAbsorbingHugeSpawnBeam.",
+      "notes": null
+    },
+    {
+      "id": "FluteMage",
+      "character_id": 12,
+      "display_name": "Flute Mage",
+      "title_entry": "Character_FluteMage",
+      "description_entry": "Character_Description_FluteMage",
+      "initial_spell": "Summon",
+      "initial_spell_id": 16,
+      "initial_prestige_spell": "Arrow",
+      "initial_prestige_spell_id": 14,
+      "starting_artifact": null,
+      "default_skin_id": 62,
+      "default_skin_name": "FluteMage_0",
+      "character_selection_order": 14,
+      "initial_cost_gold": 1700,
+      "player_seat_info_height": 2.3,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "value": 5
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "value": -3
+        }
+      ],
+      "unique_modifiers": [
+        {
+          "id": 6,
+          "name": "RandomInfusionChance"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": -3,
+          "value": 7
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 5,
+          "value": 155
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "abd5cd75fc0c476488851c6545f5749b",
+          "skin_id": 62,
+          "name": "FluteMage_0",
+          "asset_name": "CharacterSkin_FluteMage_0",
+          "label": "Base",
+          "name_entry": "Skin_FluteMage_0",
+          "description_entry": "Skin_Description_FluteMage_0",
+          "prefab_guid": "aaec29f713341a145aa5456895561009",
+          "prefab_file": "GameplayPlayer_FluteMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "a1fc21289a8f08a45a8ab712bbbc6a17",
+          "skin_id": 63,
+          "name": "FluteMage_1",
+          "asset_name": "CharacterSkin_FluteMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_FluteMage_1",
+          "description_entry": "Skin_Description_FluteMage_1",
+          "prefab_guid": "4146acc143bd7d94caa2e29b8aab79cc",
+          "prefab_file": "GameplayPlayer_FluteMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f126b7aad9ff1bc4ab42eb4b89d104b1",
+          "skin_id": 64,
+          "name": "FluteMage_2",
+          "asset_name": "CharacterSkin_FluteMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_FluteMage_2",
+          "description_entry": "Skin_Description_FluteMage_2",
+          "prefab_guid": "4c5727225998f1c4480fd046f5a5756e",
+          "prefab_file": "GameplayPlayer_FluteMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "1f51af7cb1ce94a428ceb6181510c810",
+          "skin_id": 87,
+          "name": "FluteMage_Prestige",
+          "asset_name": "CharacterSkin_FluteMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_FluteMage_Prestige",
+          "description_entry": "Skin_Description_FluteMage_Prestige",
+          "prefab_guid": "a0a0e0a12fb318547b31cf718cf845e4",
+          "prefab_file": "GameplayPlayer_FluteMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f9de64204c08b76468c5e79eecddb87c",
+          "skin_id": 99,
+          "name": "FluteMage_Golden",
+          "asset_name": "CharacterSkin_FluteMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_FluteMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "86b2ef2b6f7d4db49aef10737ddce957",
+          "prefab_file": "GameplayPlayer_FluteMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "e69e2b9af144e3245aa3c35f9d2e243c",
+          "skin_id": 98,
+          "name": "FluteMage_Sketchy",
+          "asset_name": "CharacterSkin_FluteMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_FluteMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "23077e2abd1078c43ab366e2a62dd34a",
+          "prefab_file": "GameplayPlayer_FluteMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "cfaedda3526663142a0e4ebab16dae25",
+          "skin_id": 115,
+          "name": "FluteMage_BigHead",
+          "asset_name": "CharacterSkin_FluteMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_FluteMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "12e8f26ce9d0ee94f9cb40a372bdb2ef",
+          "prefab_file": "GameplayPlayer_FluteMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockFluteMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +5 CriticalDamage, -3 CriticalChance, unique: RandomInfusionChance.",
+      "notes": null
+    },
+    {
+      "id": "Hatty",
+      "character_id": 6,
+      "display_name": "Hatty",
+      "title_entry": "Character_Hatty",
+      "description_entry": "Character_Description_Hatty",
+      "initial_spell": "Smg",
+      "initial_spell_id": 7,
+      "initial_prestige_spell": "Book",
+      "initial_prestige_spell_id": 19,
+      "starting_artifact": null,
+      "default_skin_id": 18,
+      "default_skin_name": "Hatty_0",
+      "character_selection_order": 9,
+      "initial_cost_gold": 1350,
+      "player_seat_info_height": 2.4,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "value": 6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "value": -300
+        },
+        {
+          "stat_id": 27,
+          "stat_name": "ElementWeaknessMultiplier",
+          "value": 15
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": -300,
+          "value": 300
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 0,
+          "stat_name": "Damage",
+          "base_value": 0,
+          "modifier": 6,
+          "value": 6
+        },
+        {
+          "stat_id": 27,
+          "stat_name": "ElementWeaknessMultiplier",
+          "base_value": 0,
+          "modifier": 15,
+          "value": 15
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "cda194be4be110e4996d218c53a48f72",
+          "skin_id": 18,
+          "name": "Hatty_0",
+          "asset_name": "CharacterSkin_Hatty_0",
+          "label": "Base",
+          "name_entry": "Skin_Hatty_0",
+          "description_entry": "Skin_Description_Hatty_0",
+          "prefab_guid": "a73abdf1ea9c50946aa8880aa83feaf0",
+          "prefab_file": "GameplayPlayer_Hatty_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "3d91878ef972468439749ad357e39b5d",
+          "skin_id": 19,
+          "name": "Hatty_1",
+          "asset_name": "CharacterSkin_Hatty_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_Hatty_1",
+          "description_entry": "Skin_Description_Hatty_1",
+          "prefab_guid": "580dd241955c6354e94d72d1652285bb",
+          "prefab_file": "GameplayPlayer_Hatty_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "ea6842186a99da54fb7ab9951f32f00a",
+          "skin_id": 20,
+          "name": "Hatty_2",
+          "asset_name": "CharacterSkin_Hatty_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_Hatty_2",
+          "description_entry": "Skin_Description_Hatty_2",
+          "prefab_guid": "211f54749a8329f45b70c8b10ed81118",
+          "prefab_file": "GameplayPlayer_Hatty_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "201d85bf385b2e7489da4c5fff65e78e",
+          "skin_id": 39,
+          "name": "Hatty_3",
+          "asset_name": "CharacterSkin_Hatty_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_Hatty_3",
+          "description_entry": "Skin_Description_Hatty_3",
+          "prefab_guid": "17c13d1e09b2d3c4086de8e55f89dd10",
+          "prefab_file": "GameplayPlayer_Hatty_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0708a99581970b94bb0f529f7a6f6e27",
+          "skin_id": 81,
+          "name": "Hatty_Prestige",
+          "asset_name": "CharacterSkin_Hatty_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_Hatty_Prestige",
+          "description_entry": "Skin_Description_Hatty_Prestige",
+          "prefab_guid": "d29e8d8c5cc7a8a4fba42433b761c530",
+          "prefab_file": "GameplayPlayer_Hatty_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "3f5ba9c30c69ff840979f84570e723b0",
+          "skin_id": 54,
+          "name": "Hatty_Golden",
+          "asset_name": "CharacterSkin_Hatty_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Hatty_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "8b4a4ab4c8b44f9449e5f264f8a509a5",
+          "prefab_file": "GameplayPlayer_Hatty_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "76e8f1a2a3baec84594f4a755da86c99",
+          "skin_id": 30,
+          "name": "Hatty_Sketchy",
+          "asset_name": "CharacterSkin_Hatty_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_Hatty_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "b28304f21fae380449e4870ac5260b6f",
+          "prefab_file": "GameplayPlayer_Hatty_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0f719d6430245a947a46f854a367e5f8",
+          "skin_id": 108,
+          "name": "Hatty_BigHead",
+          "asset_name": "CharacterSkin_Hatty_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_Hatty_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "d52d6ed7cfd609f48a1cf7e10ddfdf21",
+          "prefab_file": "GameplayPlayer_Hatty_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockHatty"
+      ],
+      "playstyle_hint": "Starting modifiers: +6 Damage, -300 MaxHealth, +15 ElementWeaknessMultiplier.",
+      "notes": null
+    },
+    {
+      "id": "KeyMage",
+      "character_id": 3,
+      "display_name": "Key Mage",
+      "title_entry": "Character_KeyMage",
+      "description_entry": "Character_Description_KeyMage",
+      "initial_spell": "Trail",
+      "initial_spell_id": 8,
+      "initial_prestige_spell": "EnergyZone",
+      "initial_prestige_spell_id": 2,
+      "starting_artifact": null,
+      "default_skin_id": 6,
+      "default_skin_name": "KeyMage_0",
+      "character_selection_order": 7,
+      "initial_cost_gold": 1150,
+      "player_seat_info_height": 2.2,
+      "is_included_in_demo": true,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 34,
+          "stat_name": "XPGainOnDamageTaken",
+          "value": 0.025
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 34,
+          "stat_name": "XPGainOnDamageTaken",
+          "base_value": 0,
+          "modifier": 0.025,
+          "value": 0.025
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "ed31247a73584cb448a620e56699714b",
+          "skin_id": 6,
+          "name": "KeyMage_0",
+          "asset_name": "CharacterSkin_KeyMage_0",
+          "label": "Base",
+          "name_entry": "Skin_KeyMage_0",
+          "description_entry": "Skin_Description_KeyMage_0",
+          "prefab_guid": "7c5a9dcfeecb1524894a1dc357fa9e45",
+          "prefab_file": "GameplayPlayer_KeyMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": true
+        },
+        {
+          "resource_guid": "fc94f463bdc342a4eaacef1e5bea535e",
+          "skin_id": 7,
+          "name": "KeyMage_1",
+          "asset_name": "CharacterSkin_KeyMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_KeyMage_1",
+          "description_entry": "Skin_Description_KeyMage_1",
+          "prefab_guid": "899219dceaef2f44187dfadff0939656",
+          "prefab_file": "GameplayPlayer_KeyMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0a3d88346f89e494faff64aa5685fa1a",
+          "skin_id": 8,
+          "name": "KeyMage_2",
+          "asset_name": "CharacterSkin_KeyMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_KeyMage_2",
+          "description_entry": "Skin_Description_KeyMage_2",
+          "prefab_guid": "3cd31df471a643746bee592d0d0e42ee",
+          "prefab_file": "GameplayPlayer_KeyMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "83f6b5392ca536846af3a6fbd67e7883",
+          "skin_id": 77,
+          "name": "KeyMage_Prestige",
+          "asset_name": "CharacterSkin_KeyMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_KeyMage_Prestige",
+          "description_entry": "Skin_Description_KeyMage_Prestige",
+          "prefab_guid": "c524bd967c4563c4c970d5fa7c50afa2",
+          "prefab_file": "GameplayPlayer_KeyMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "b9c49ee6ba0ead541ba3b6ab2785bcf7",
+          "skin_id": 50,
+          "name": "KeyMage_Golden",
+          "asset_name": "CharacterSkin_KeyMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_KeyMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "9bcf20ccdbbdc934a80cc04bced262fa",
+          "prefab_file": "GameplayPlayer_KeyMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "2da789e6259bf944ba2a93c2806afe81",
+          "skin_id": 26,
+          "name": "KeyMage_Sketchy",
+          "asset_name": "CharacterSkin_KeyMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_KeyMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "3a205e8509dc38b41a036e0b6fcba4fe",
+          "prefab_file": "GameplayPlayer_KeyMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "2c5d5ba14741e7a499f6ec9b470fd37a",
+          "skin_id": 104,
+          "name": "KeyMage_BigHead",
+          "asset_name": "CharacterSkin_KeyMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_KeyMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "d449b148edcfebe4a873410267b2c4cd",
+          "prefab_file": "GameplayPlayer_KeyMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockKeyMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +0.025 XPGainOnDamageTaken.",
+      "notes": null
+    },
+    {
+      "id": "Ludwig",
+      "character_id": 4,
+      "display_name": "Ludwig",
+      "title_entry": "Character_Ludwig",
+      "description_entry": "Character_Description_Ludwig",
+      "initial_spell": "Laser",
+      "initial_spell_id": 3,
+      "initial_prestige_spell": "Slash",
+      "initial_prestige_spell_id": 17,
+      "starting_artifact": null,
+      "default_skin_id": 15,
+      "default_skin_name": "Ludwig_0",
+      "character_selection_order": 4,
+      "initial_cost_gold": 850,
+      "player_seat_info_height": 2.4,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 26,
+          "stat_name": "HitboxSizeMultiplier",
+          "value": 25
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "value": 12
+        },
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "value": -10
+        }
+      ],
+      "unique_modifiers": [
+        {
+          "id": 0,
+          "name": "IgnoresNegativeEffects"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": -10,
+          "value": -6.4
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 12,
+          "value": 12
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 26,
+          "stat_name": "HitboxSizeMultiplier",
+          "base_value": 0,
+          "modifier": 25,
+          "value": 25
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "18b359733606c5a47aed670cfc800b09",
+          "skin_id": 15,
+          "name": "Ludwig_0",
+          "asset_name": "CharacterSkin_Ludwig_0",
+          "label": "Base",
+          "name_entry": "Skin_Ludwig_0",
+          "description_entry": "Skin_Description_Ludwig_0",
+          "prefab_guid": "f332fa004a0656e42ae1062c79e43b35",
+          "prefab_file": "GameplayPlayer_Ludwig_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "7808d0032eb952346b075b03aa942766",
+          "skin_id": 16,
+          "name": "Ludwig_1",
+          "asset_name": "CharacterSkin_Ludwig_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_Ludwig_1",
+          "description_entry": "Skin_Description_Ludwig_1",
+          "prefab_guid": "c20f11888424d014992ac2a4270f77a7",
+          "prefab_file": "GameplayPlayer_Ludwig_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0cf19f63516b6fa4c90a8a7116aa0dd4",
+          "skin_id": 17,
+          "name": "Ludwig_2",
+          "asset_name": "CharacterSkin_Ludwig_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_Ludwig_2",
+          "description_entry": "Skin_Description_Ludwig_2",
+          "prefab_guid": "c745efdad8dc98740afa007e7e1ccf14",
+          "prefab_file": "GameplayPlayer_Ludwig_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "b6dc4529490d8d54597b9bffdb6d4c20",
+          "skin_id": 80,
+          "name": "Ludwig_Prestige",
+          "asset_name": "CharacterSkin_Ludwig_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_Ludwig_Prestige",
+          "description_entry": "Skin_Description_Ludwig_Prestige",
+          "prefab_guid": "157c9a4d334bf9d47a882a8bfe1878f7",
+          "prefab_file": "GameplayPlayer_Ludwig_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "74797964111700e41aba739c6393e840",
+          "skin_id": 93,
+          "name": "Ludwig_Demon",
+          "asset_name": "CharacterSkin_Ludwig_Demon",
+          "label": "Demon",
+          "name_entry": "Skin_Ludwig_Demon",
+          "description_entry": "Skin_Description_Ludwig_Demon",
+          "prefab_guid": "934d73ff9bc88074cabde0f8ea6d3128",
+          "prefab_file": "GameplayPlayer_Ludwig_SkinDemon.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "4bc5114356f278e4dac58fa2f47e5479",
+          "skin_id": 53,
+          "name": "Ludwig_Golden",
+          "asset_name": "CharacterSkin_Ludwig_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Ludwig_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "99c53cfb90246cd45b0ff0cfa899daf1",
+          "prefab_file": "GameplayPlayer_Ludwig_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "4f329f928becbce43b2d0f93996475bc",
+          "skin_id": 28,
+          "name": "Ludwig_Sketchy",
+          "asset_name": "CharacterSkin_Ludwig_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_Ludwig_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "8b29ec637fbaba842b05a586d0b115c7",
+          "prefab_file": "GameplayPlayer_Ludwig_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "8958890db9d6c9648a4af074b94e9dcf",
+          "skin_id": 106,
+          "name": "Ludwig_BigHead",
+          "asset_name": "CharacterSkin_Ludwig_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_Ludwig_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "7975d8ab606e7a04c9ebdf49e330a7e8",
+          "prefab_file": "GameplayPlayer_Ludwig_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockLudwig"
+      ],
+      "playstyle_hint": "Starting modifiers: +25 HitboxSizeMultiplier, +12 Armor, -10 MovementSpeed, unique: IgnoresNegativeEffects.",
+      "notes": null
+    },
+    {
+      "id": "MoonMage",
+      "character_id": 1,
+      "display_name": "Moon Mage",
+      "title_entry": "Character_MoonMage",
+      "description_entry": "Character_Description_MoonMage",
+      "initial_spell": "Boomerang",
+      "initial_spell_id": 1,
+      "initial_prestige_spell": "Fence",
+      "initial_prestige_spell_id": 12,
+      "starting_artifact": null,
+      "default_skin_id": 3,
+      "default_skin_name": "MoonMage_0",
+      "character_selection_order": 3,
+      "initial_cost_gold": 700,
+      "player_seat_info_height": 2.4,
+      "is_included_in_demo": true,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 10,
+          "stat_name": "XPGain",
+          "value": 3
+        }
+      ],
+      "unique_modifiers": [
+        {
+          "id": 2,
+          "name": "SpellsAndInfusionsGrantedEarlier"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 10,
+          "stat_name": "XPGain",
+          "base_value": 0,
+          "modifier": 3,
+          "value": 3
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "36ea428bbf34c914c9f10f618c9c64c0",
+          "skin_id": 3,
+          "name": "MoonMage_0",
+          "asset_name": "CharacterSkin_MoonMage_0",
+          "label": "Base",
+          "name_entry": "Skin_MoonMage_0",
+          "description_entry": "Skin_Description_MoonMage_0",
+          "prefab_guid": "98fa5e569cb8a95409b05fe48ceea512",
+          "prefab_file": "GameplayPlayer_MoonMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": true
+        },
+        {
+          "resource_guid": "2eafcfdeb3d109345abc5b51cfe85c24",
+          "skin_id": 4,
+          "name": "MoonMage_1",
+          "asset_name": "CharacterSkin_MoonMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_MoonMage_1",
+          "description_entry": "Skin_Description_MoonMage_1",
+          "prefab_guid": "cb6833fd4188a1b498b424b75283b856",
+          "prefab_file": "GameplayPlayer_MoonMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "bee6778118dbe5e43947670125d25035",
+          "skin_id": 5,
+          "name": "MoonMage_2",
+          "asset_name": "CharacterSkin_MoonMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_MoonMage_2",
+          "description_entry": "Skin_Description_MoonMage_2",
+          "prefab_guid": "6180a9c1b2d507e46b4027c12345c302",
+          "prefab_file": "GameplayPlayer_MoonMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "79424b0343cb9df438cc53fee0e3c638",
+          "skin_id": 76,
+          "name": "MoonMage_Prestige",
+          "asset_name": "CharacterSkin_MoonMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_MoonMage_Prestige",
+          "description_entry": "Skin_Description_MoonMage_Prestige",
+          "prefab_guid": "902bfd7e94844b34b828eee9832529c9",
+          "prefab_file": "GameplayPlayer_MoonMageSkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f366c8b15df4dfb4cbf5c9fb52965c49",
+          "skin_id": 49,
+          "name": "MoonMage_Golden",
+          "asset_name": "CharacterSkin_MoonMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_MoonMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "4851df0014afacf4a9977f00cbfa10cd",
+          "prefab_file": "GameplayPlayer_MoonMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c55da4309687cad489ebaa6c3f758ee1",
+          "skin_id": 25,
+          "name": "MoonMage_Sketchy",
+          "asset_name": "CharacterSkin_MoonMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_MoonMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "0431a2ddc24ce5f4c98f3c05ca5e2a94",
+          "prefab_file": "GameplayPlayer_MoonMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "07f9f6327ba6a6e4d852cdf1834c8f45",
+          "skin_id": 103,
+          "name": "MoonMage_BigHead",
+          "asset_name": "CharacterSkin_MoonMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_MoonMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "e69bd02d595050a49a9f1148d12efae5",
+          "prefab_file": "GameplayPlayer_MoonMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockMoonMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +3 XPGain, unique: SpellsAndInfusionsGrantedEarlier.",
+      "notes": null
+    },
+    {
+      "id": "PlantMage",
+      "character_id": 11,
+      "display_name": "Plant Mage",
+      "title_entry": "Character_PlantMage",
+      "description_entry": "Character_Description_PlantMage",
+      "initial_spell": "Plant",
+      "initial_spell_id": 15,
+      "initial_prestige_spell": "Laser",
+      "initial_prestige_spell_id": 3,
+      "starting_artifact": null,
+      "default_skin_id": 59,
+      "default_skin_name": "PlantMage_0",
+      "character_selection_order": 12,
+      "initial_cost_gold": 1600,
+      "player_seat_info_height": 2.1,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 35,
+          "stat_name": "HealthPotionAmountMultiplier",
+          "value": 20
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "value": 20
+        }
+      ],
+      "unique_modifiers": [
+        {
+          "id": 5,
+          "name": "PickupAllXPOrbsWhenUsingMagnet"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 20,
+          "value": 24
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 35,
+          "stat_name": "HealthPotionAmountMultiplier",
+          "base_value": 0,
+          "modifier": 20,
+          "value": 20
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "e95e25d9d8a19d34c978ab65fca86efd",
+          "skin_id": 59,
+          "name": "PlantMage_0",
+          "asset_name": "CharacterSkin_PlantMage_0",
+          "label": "Base",
+          "name_entry": "Skin_PlantMage_0",
+          "description_entry": "Skin_Description_PlantMage_0",
+          "prefab_guid": "5aa85b0cb67844e4b8604394676320ef",
+          "prefab_file": "GameplayPlayer_PlantMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "a8c18637601f7214e8647321035603db",
+          "skin_id": 60,
+          "name": "PlantMage_1",
+          "asset_name": "CharacterSkin_PlantMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_PlantMage_1",
+          "description_entry": "Skin_Description_PlantMage_1",
+          "prefab_guid": "d83405bcba572194c813f6f5337207c0",
+          "prefab_file": "GameplayPlayer_PlantMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "3040928de7c81ae4d9ba19c6c983c947",
+          "skin_id": 61,
+          "name": "PlantMage_2",
+          "asset_name": "CharacterSkin_PlantMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_PlantMage_2",
+          "description_entry": "Skin_Description_PlantMage_2",
+          "prefab_guid": "6f37b5ae196287043bf2d4524a6ec0d6",
+          "prefab_file": "GameplayPlayer_PlantMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "9ced1cfceb01b964a92958c8119b1d2e",
+          "skin_id": 70,
+          "name": "PlantMage_3",
+          "asset_name": "CharacterSkin_PlantMage_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_PlantMage_3",
+          "description_entry": "Skin_Description_PlantMage_3",
+          "prefab_guid": "aab6e3a5dd37702458f2cf14cf1ed8c5",
+          "prefab_file": "GameplayPlayer_PlantMage_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "8a555a021da530c4cb9fb3c1d9c3c17c",
+          "skin_id": 86,
+          "name": "PlantMage_Prestige",
+          "asset_name": "CharacterSkin_PlantMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_PlantMage_Prestige",
+          "description_entry": "Skin_Description_PlantMage_Prestige",
+          "prefab_guid": "fa33b34ae0d1d634fb5cb2cfbff07a88",
+          "prefab_file": "GameplayPlayer_PlantMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c261caf9c7106284fae037566d14e714",
+          "skin_id": 95,
+          "name": "PlantMage_Golden",
+          "asset_name": "CharacterSkin_PlantMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_PlantMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "2485f1497447af44f811146f192ecb3a",
+          "prefab_file": "GameplayPlayer_PlantMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "27b9a60a193ef8949b43e0f32a7215c2",
+          "skin_id": 94,
+          "name": "PlantMage_Sketchy",
+          "asset_name": "CharacterSkin_PlantMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_PlantMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "88753d09e03ebf7459c6f393d24c47bb",
+          "prefab_file": "GameplayPlayer_PlantMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "dc32371a205d92140abc1c9450dc54e7",
+          "skin_id": 113,
+          "name": "PlantMage_BigHead",
+          "asset_name": "CharacterSkin_PlantMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_PlantMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "355aa22ff6688354d8b852455b1a0150",
+          "prefab_file": "GameplayPlayer_PlantMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockPlantMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +20 HealthPotionAmountMultiplier, +20 PickupRadius, unique: PickupAllXPOrbsWhenUsingMagnet.",
+      "notes": null
+    },
+    {
+      "id": "Reginald",
+      "character_id": 0,
+      "display_name": "Reginald",
+      "title_entry": "Character_Reginald",
+      "description_entry": "Character_Description_Reginald",
+      "initial_spell": "Orb",
+      "initial_spell_id": 0,
+      "initial_prestige_spell": "Bell",
+      "initial_prestige_spell_id": 20,
+      "starting_artifact": null,
+      "default_skin_id": 0,
+      "default_skin_name": "Reginald_0",
+      "character_selection_order": 1,
+      "initial_cost_gold": 0,
+      "player_seat_info_height": 2.1,
+      "is_included_in_demo": true,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "value": 2
+        },
+        {
+          "stat_id": 24,
+          "stat_name": "DropChance",
+          "value": 10
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 2,
+          "value": 2
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 24,
+          "stat_name": "DropChance",
+          "base_value": 0,
+          "modifier": 10,
+          "value": 10
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "fb57d63318be0c845a8772c67e1d2c83",
+          "skin_id": 0,
+          "name": "Reginald_0",
+          "asset_name": "CharacterSkin_Reginald_0",
+          "label": "Base",
+          "name_entry": "Skin_Reginald_0",
+          "description_entry": "Skin_Description_Reginald_0",
+          "prefab_guid": "439d4571bcce52f4c9eb11fb0cae9cba",
+          "prefab_file": "GameplayPlayer_Reginald_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": true
+        },
+        {
+          "resource_guid": "5a2e6712c4b5c6b43b0e95c17e3d8802",
+          "skin_id": 1,
+          "name": "Reginald_1",
+          "asset_name": "CharacterSkin_Reginald_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_Reginald_1",
+          "description_entry": "Skin_Description_Reginald_1",
+          "prefab_guid": "4d648a5d2c66b4c429758e6c8c03feaa",
+          "prefab_file": "GameplayPlayer_Reginald_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "3e05f3828ef96df458f782d5d17b7b4a",
+          "skin_id": 2,
+          "name": "Reginald_2",
+          "asset_name": "CharacterSkin_Reginald_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_Reginald_2",
+          "description_entry": "Skin_Description_Reginald_2",
+          "prefab_guid": "7a93df89907d8514bb5948bda8dabbfc",
+          "prefab_file": "GameplayPlayer_Reginald_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "a485b3193f2c2e4468c7ecb9088f7832",
+          "skin_id": 68,
+          "name": "Reginald_3",
+          "asset_name": "CharacterSkin_Reginald_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_Reginald_3",
+          "description_entry": "Skin_Description_Reginald_3",
+          "prefab_guid": "5078c12f5d4e98b42a02541540bc1621",
+          "prefab_file": "GameplayPlayer_Reginald_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c233def1e75871048ae3c06a34d93180",
+          "skin_id": 75,
+          "name": "Reginald_Prestige",
+          "asset_name": "CharacterSkin_Reginald_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_Reginald_Prestige",
+          "description_entry": "Skin_Description_Reginald_Prestige",
+          "prefab_guid": "3080a981d63ef724993dac7b8d91715b",
+          "prefab_file": "GameplayPlayer_ReginaldSkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "19c2dfb391a98144c9b357280f61f90f",
+          "skin_id": 48,
+          "name": "Reginald_Golden",
+          "asset_name": "CharacterSkin_Reginald_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Reginald_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "2b85ed16b36670b40ace09f58ab99379",
+          "prefab_file": "GameplayPlayer_Reginald_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "6ce779c7a7c8ca943a188cb426ecc9c6",
+          "skin_id": 24,
+          "name": "Reginald_Sketchy",
+          "asset_name": "CharacterSkin_Reginald_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_Reginald_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "6038e0ef5dc08814f8df7809843bc5c6",
+          "prefab_file": "GameplayPlayer_Reginald_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "464e8676810db074e985e1bab8f653ba",
+          "skin_id": 102,
+          "name": "Reginald_BigHead",
+          "asset_name": "CharacterSkin_Reginald_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_Reginald_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "3f3e9b97cc5e46545960f3ad3d31d9b4",
+          "prefab_file": "GameplayPlayer_Reginald_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [],
+      "playstyle_hint": "Starting modifiers: +2 Luck, +10 DropChance.",
+      "notes": null
+    },
+    {
+      "id": "Smithy",
+      "character_id": 9,
+      "display_name": "Smithy",
+      "title_entry": "Character_Smithy",
+      "description_entry": "Character_Description_Smithy",
+      "initial_spell": "Beam",
+      "initial_spell_id": 13,
+      "initial_prestige_spell": "Proximity",
+      "initial_prestige_spell_id": 4,
+      "starting_artifact": null,
+      "default_skin_id": 35,
+      "default_skin_name": "Smithy_0",
+      "character_selection_order": 5,
+      "initial_cost_gold": 950,
+      "player_seat_info_height": 2.5,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 18,
+          "stat_name": "ReviveSpeed",
+          "value": 60
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "value": 1
+        },
+        {
+          "stat_id": 33,
+          "stat_name": "HealingMultiplier",
+          "value": 25
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 1,
+          "value": 1
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 18,
+          "stat_name": "ReviveSpeed",
+          "base_value": 0,
+          "modifier": 60,
+          "value": 60
+        },
+        {
+          "stat_id": 33,
+          "stat_name": "HealingMultiplier",
+          "base_value": 0,
+          "modifier": 25,
+          "value": 25
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "677f104add941b64da896ef94fb2837c",
+          "skin_id": 35,
+          "name": "Smithy_0",
+          "asset_name": "CharacterSkin_Smithy_0",
+          "label": "Base",
+          "name_entry": "Skin_Smithy_0",
+          "description_entry": "Skin_Description_Smithy_0",
+          "prefab_guid": "0d562fb2928f0684ab2a67f3325ea6d3",
+          "prefab_file": "GameplayPlayer_Smithy_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "ac0dfa82bbe9e5c43a2a3195cf0205b1",
+          "skin_id": 36,
+          "name": "Smithy_1",
+          "asset_name": "CharacterSkin_Smithy_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_Smithy_1",
+          "description_entry": "Skin_Description_Smithy_1",
+          "prefab_guid": "b78b61ee2da0a9d4f813e81f0fdc3a69",
+          "prefab_file": "GameplayPlayer_Smithy_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "e693a4c1a1aaa744fb9b2b8fee7c0482",
+          "skin_id": 37,
+          "name": "Smithy_2",
+          "asset_name": "CharacterSkin_Smithy_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_Smithy_2",
+          "description_entry": "Skin_Description_Smithy_2",
+          "prefab_guid": "1aeaa03ac9def074aa37ffc2b7453c87",
+          "prefab_file": "GameplayPlayer_Smithy_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "1cd83515aeece81419b082ffc05fa363",
+          "skin_id": 69,
+          "name": "Smithy_3",
+          "asset_name": "CharacterSkin_Smithy_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_Smithy_3",
+          "description_entry": "Skin_Description_Smithy_3",
+          "prefab_guid": "746fb7806c634e742bf08d066e70323e",
+          "prefab_file": "GameplayPlayer_Smithy_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "057f2acb0d3a512488011d7e24d38a59",
+          "skin_id": 84,
+          "name": "Smithy_Prestige",
+          "asset_name": "CharacterSkin_Smithy_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_Smithy_Prestige",
+          "description_entry": "Skin_Description_Smithy_Prestige",
+          "prefab_guid": "e003d8f1d7f29874cb5bf7630e9cb35f",
+          "prefab_file": "GameplayPlayer_Smithy_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "208d67339059b77468553bf18315a69d",
+          "skin_id": 91,
+          "name": "Smithy_Demon",
+          "asset_name": "CharacterSkin_Smithy_Demon",
+          "label": "Demon",
+          "name_entry": "Skin_Smithy_Demon",
+          "description_entry": "Skin_Description_Smithy_Demon",
+          "prefab_guid": "f58f05d5ff7503d4b81b0cb71c1b973b",
+          "prefab_file": "GameplayPlayer_Smithy_SkinDemon.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "4cde12e8b357d1b4e8c2401283c8c162",
+          "skin_id": 57,
+          "name": "Smithy_Golden",
+          "asset_name": "CharacterSkin_Smithy_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Smithy_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "25ba926acc3268f4f9413b18a84a1914",
+          "prefab_file": "GameplayPlayer_Smithy_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f02f668769987f1459a667c0e7af68d6",
+          "skin_id": 46,
+          "name": "Smithy_Sketchy",
+          "asset_name": "CharacterSkin_Smithy_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_Smithy_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "3265766fea160c5479e935187378b60c",
+          "prefab_file": "GameplayPlayer_Smithy_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0d2e6fb71a9796e48a7f93d88b414fe3",
+          "skin_id": 111,
+          "name": "Smithy_BigHead",
+          "asset_name": "CharacterSkin_Smithy_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_Smithy_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "c99f0f392a02a2b4b86176448c2dcd00",
+          "prefab_file": "GameplayPlayer_Smithy_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockSmithy"
+      ],
+      "playstyle_hint": "Starting modifiers: +60 ReviveSpeed, +1 HealthRegeneration, +25 HealingMultiplier.",
+      "notes": null
+    },
+    {
+      "id": "StarMage",
+      "character_id": 8,
+      "display_name": "Star Mage",
+      "title_entry": "Character_StarMage",
+      "description_entry": "Character_Description_StarMage",
+      "initial_spell": "FallingStar",
+      "initial_spell_id": 10,
+      "initial_prestige_spell": "Smg",
+      "initial_prestige_spell_id": 7,
+      "starting_artifact": null,
+      "default_skin_id": 32,
+      "default_skin_name": "StarMage_0",
+      "character_selection_order": 11,
+      "initial_cost_gold": 1500,
+      "player_seat_info_height": 2.3,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 30,
+          "stat_name": "ElementStrengthMultiplier",
+          "value": 15
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 30,
+          "stat_name": "ElementStrengthMultiplier",
+          "base_value": 0,
+          "modifier": 15,
+          "value": 15
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "13f1c5590c37f1a44a042cb2207c9204",
+          "skin_id": 32,
+          "name": "StarMage_0",
+          "asset_name": "CharacterSkin_StarMage_0",
+          "label": "Base",
+          "name_entry": "Skin_StarMage_0",
+          "description_entry": "Skin_Description_StarMage_0",
+          "prefab_guid": "5f4014e668e201e4d80dd5aa6adfdee8",
+          "prefab_file": "GameplayPlayer_StarMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "6ab3506691beea9469b4c6b19b94cffc",
+          "skin_id": 33,
+          "name": "StarMage_1",
+          "asset_name": "CharacterSkin_StarMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_StarMage_1",
+          "description_entry": "Skin_Description_StarMage_1",
+          "prefab_guid": "9a22b5e0bffe3ec4aa54b357b1422b2e",
+          "prefab_file": "GameplayPlayer_StarMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "841d96feb37e7b04ab76a2e4971cc92c",
+          "skin_id": 34,
+          "name": "StarMage_2",
+          "asset_name": "CharacterSkin_StarMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_StarMage_2",
+          "description_entry": "Skin_Description_StarMage_2",
+          "prefab_guid": "103072c3ae755bf478f2211104046df5",
+          "prefab_file": "GameplayPlayer_StarMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "02ba39a2b3fb7234ebfbab90a68c50b9",
+          "skin_id": 41,
+          "name": "StarMage_3",
+          "asset_name": "CharacterSkin_StarMage_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_StarMage_3",
+          "description_entry": "Skin_Description_StarMage_3",
+          "prefab_guid": "b8ce80558fc0b544da2f85aa76767331",
+          "prefab_file": "GameplayPlayer_StarMage_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c0fb4d78f5970dc44a30d5eb7cc2ce32",
+          "skin_id": 83,
+          "name": "StarMage_Prestige",
+          "asset_name": "CharacterSkin_StarMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_StarMage_Prestige",
+          "description_entry": "Skin_Description_StarMage_Prestige",
+          "prefab_guid": "9c4e04ecf0bc7454d8b657456013e9b1",
+          "prefab_file": "GameplayPlayer_StarMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c68d24aadb8d13d40bcbeb8c11c24668",
+          "skin_id": 56,
+          "name": "StarMage_Golden",
+          "asset_name": "CharacterSkin_StarMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_StarMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "5da9d0223b7223c4d9c030975c6512bc",
+          "prefab_file": "GameplayPlayer_StarMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "7fa3a0b1de7dca04c8ed7d883583c00d",
+          "skin_id": 45,
+          "name": "StarMage_Sketchy",
+          "asset_name": "CharacterSkin_StarMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_StarMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "5596d8b226ea9e243a05d7310b293f5f",
+          "prefab_file": "GameplayPlayer_StarMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "39207734cf571614dbd25237709c3deb",
+          "skin_id": 110,
+          "name": "StarMage_BigHead",
+          "asset_name": "CharacterSkin_StarMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_StarMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "d562e768b1592024bb4fa6a09689c16a",
+          "prefab_file": "GameplayPlayer_StarMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockStarMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +15 ElementStrengthMultiplier.",
+      "notes": null
+    },
+    {
+      "id": "SunMage",
+      "character_id": 2,
+      "display_name": "Sun Mage",
+      "title_entry": "Character_SunMage",
+      "description_entry": "Character_Description_SunMage",
+      "initial_spell": "Proximity",
+      "initial_spell_id": 4,
+      "initial_prestige_spell": "Mine",
+      "initial_prestige_spell_id": 11,
+      "starting_artifact": null,
+      "default_skin_id": 9,
+      "default_skin_name": "SunMage_0",
+      "character_selection_order": 2,
+      "initial_cost_gold": 400,
+      "player_seat_info_height": 2.35,
+      "is_included_in_demo": true,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "value": 7
+        },
+        {
+          "stat_id": 25,
+          "stat_name": "TerrainSpeedMultiplier",
+          "value": 7
+        },
+        {
+          "stat_id": 26,
+          "stat_name": "HitboxSizeMultiplier",
+          "value": -25
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 7,
+          "value": 7
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        },
+        {
+          "stat_id": 25,
+          "stat_name": "TerrainSpeedMultiplier",
+          "base_value": 0,
+          "modifier": 7,
+          "value": 7
+        },
+        {
+          "stat_id": 26,
+          "stat_name": "HitboxSizeMultiplier",
+          "base_value": 0,
+          "modifier": -25,
+          "value": -25
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "df89898e89940d14f879ad740f7ac01e",
+          "skin_id": 9,
+          "name": "SunMage_0",
+          "asset_name": "CharacterSkin_SunMage_0",
+          "label": "Base",
+          "name_entry": "Skin_SunMage_0",
+          "description_entry": "Skin_Description_SunMage_0",
+          "prefab_guid": "39c884ddd694fbf468c0185088950c94",
+          "prefab_file": "GameplayPlayer_SunMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": true
+        },
+        {
+          "resource_guid": "727651d669a965f429988ab943c5dd3c",
+          "skin_id": 10,
+          "name": "SunMage_1",
+          "asset_name": "CharacterSkin_SunMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_SunMage_1",
+          "description_entry": "Skin_Description_SunMage_1",
+          "prefab_guid": "526ed1fc4d55adc4f9215036f3eeb54a",
+          "prefab_file": "GameplayPlayer_SunMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "2f6eaf4ec4250bd49bba324afe72834c",
+          "skin_id": 11,
+          "name": "SunMage_2",
+          "asset_name": "CharacterSkin_SunMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_SunMage_2",
+          "description_entry": "Skin_Description_SunMage_2",
+          "prefab_guid": "68f2d01c22df33642b6f043b1b6afe7b",
+          "prefab_file": "GameplayPlayer_SunMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "7520895b81364d44fa9431686030b26c",
+          "skin_id": 38,
+          "name": "SunMage_3",
+          "asset_name": "CharacterSkin_SunMage_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_SunMage_3",
+          "description_entry": "Skin_Description_SunMage_3",
+          "prefab_guid": "4f9baee33ce75b1419ac10d2e72137b6",
+          "prefab_file": "GameplayPlayer_SunMage_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "c45e8e92a2564a24f9976e7f68803434",
+          "skin_id": 78,
+          "name": "SunMage_Prestige",
+          "asset_name": "CharacterSkin_SunMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_SunMage_Prestige",
+          "description_entry": "Skin_Description_SunMage_Prestige",
+          "prefab_guid": "17f951981af058642bc0ed40841d8adf",
+          "prefab_file": "GameplayPlayer_SunMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "10cd2566cfaf7064eaaf6373562c737f",
+          "skin_id": 92,
+          "name": "SunMage_Demon",
+          "asset_name": "CharacterSkin_SunMage_Demon",
+          "label": "Demon",
+          "name_entry": "Skin_SunMage_Demon",
+          "description_entry": "Skin_Description_SunMage_Demon",
+          "prefab_guid": "873c31d46061cbb4b9a2f5748ec79724",
+          "prefab_file": "GameplayPlayer_SunMage_SkinDemon.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "32923fe1e846fb040b450f05e9f55b42",
+          "skin_id": 51,
+          "name": "SunMage_Golden",
+          "asset_name": "CharacterSkin_SunMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_SunMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "33d728f7dce11e1499adaac88bf11382",
+          "prefab_file": "GameplayPlayer_SunMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "57071af29d04a8b44b52ada5ff6322fa",
+          "skin_id": 27,
+          "name": "SunMage_Sketchy",
+          "asset_name": "CharacterSkin_SunMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_SunMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "0885aaafb5e0b4845910a3680588528e",
+          "prefab_file": "GameplayPlayer_SunMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "b0f8fd20d00b3b5449b87e9248333aec",
+          "skin_id": 105,
+          "name": "SunMage_BigHead",
+          "asset_name": "CharacterSkin_SunMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_SunMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "1d20e74409eb49b4fabdf28e7b32eeb0",
+          "prefab_file": "GameplayPlayer_SunMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockSunMage"
+      ],
+      "playstyle_hint": "Starting modifiers: +7 Dodge, +7 TerrainSpeedMultiplier, -25 HitboxSizeMultiplier.",
+      "notes": null
+    },
+    {
+      "id": "TestCharacter",
+      "character_id": 99999,
+      "display_name": "Test Character",
+      "title_entry": "Character_TestCharacter",
+      "description_entry": "Character_Description_TestCharacter",
+      "initial_spell": "Boomerang",
+      "initial_spell_id": 1,
+      "initial_prestige_spell": "Orb",
+      "initial_prestige_spell_id": 0,
+      "starting_artifact": null,
+      "default_skin_id": 48,
+      "default_skin_name": "Reginald_Golden",
+      "character_selection_order": 0,
+      "initial_cost_gold": 0,
+      "player_seat_info_height": 2.1,
+      "is_included_in_demo": true,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "value": -10
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": -10,
+          "value": 0
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "19c2dfb391a98144c9b357280f61f90f",
+          "skin_id": 48,
+          "name": "Reginald_Golden",
+          "asset_name": "CharacterSkin_Reginald_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_Reginald_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "2b85ed16b36670b40ace09f58ab99379",
+          "prefab_file": "GameplayPlayer_Reginald_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [],
+      "playstyle_hint": "Starting modifiers: -10 CriticalChance.",
+      "notes": null
+    },
+    {
+      "id": "VampireMage",
+      "character_id": 13,
+      "display_name": "Vampire Mage",
+      "title_entry": "Character_VampireMage",
+      "description_entry": "Character_Description_VampireMage",
+      "initial_spell": "Slash",
+      "initial_spell_id": 17,
+      "initial_prestige_spell": "Beam",
+      "initial_prestige_spell_id": 13,
+      "starting_artifact": null,
+      "default_skin_id": 65,
+      "default_skin_name": "VampireMage_0",
+      "character_selection_order": 10,
+      "initial_cost_gold": 1450,
+      "player_seat_info_height": 2.3,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [],
+      "unique_modifiers": [
+        {
+          "id": 11,
+          "name": "LifeStealOnSignatureSpell"
+        },
+        {
+          "id": 8,
+          "name": "CanReviveWhenDown"
+        }
+      ],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 0,
+          "value": 10
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "be97e5740740f194db321b15ef77831d",
+          "skin_id": 65,
+          "name": "VampireMage_0",
+          "asset_name": "CharacterSkin_VampireMage_0",
+          "label": "Base",
+          "name_entry": "Skin_VampireMage_0",
+          "description_entry": "Skin_Description_VampireMage_0",
+          "prefab_guid": "e9c8c52a03bd8914684861f3047f03e4",
+          "prefab_file": "GameplayPlayer_VampireMage_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "f25032160cdd73b4fab4c8594c5848eb",
+          "skin_id": 66,
+          "name": "VampireMage_1",
+          "asset_name": "CharacterSkin_VampireMage_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_VampireMage_1",
+          "description_entry": "Skin_Description_VampireMage_1",
+          "prefab_guid": "7800dde4d1772ec469281dd2a652942c",
+          "prefab_file": "GameplayPlayer_VampireMage_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "0b16d1a513f9f8b499c7d6813505939d",
+          "skin_id": 67,
+          "name": "VampireMage_2",
+          "asset_name": "CharacterSkin_VampireMage_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_VampireMage_2",
+          "description_entry": "Skin_Description_VampireMage_2",
+          "prefab_guid": "948c289610b1d634aa2a80c68c39fe9b",
+          "prefab_file": "GameplayPlayer_VampireMage_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "50a8ba083be66fa43b8122be862db8c9",
+          "skin_id": 71,
+          "name": "VampireMage_3",
+          "asset_name": "CharacterSkin_VampireMage_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_VampireMage_3",
+          "description_entry": "Skin_Description_VampireMage_3",
+          "prefab_guid": "2ede3a253f376624fbdcbbe968965649",
+          "prefab_file": "GameplayPlayer_VampireMage_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "71589f671623caa43b9650ddd4265825",
+          "skin_id": 88,
+          "name": "VampireMage_Prestige",
+          "asset_name": "CharacterSkin_VampireMage_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_VampireMage_Prestige",
+          "description_entry": "Skin_Description_VampireMage_Prestige",
+          "prefab_guid": "2a0cbd3048dbb734fa3345d26f4bbf06",
+          "prefab_file": "GameplayPlayer_VampireMage_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "8afcc919454555943a57ee443c3a2158",
+          "skin_id": 97,
+          "name": "VampireMage_Golden",
+          "asset_name": "CharacterSkin_VampireMage_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_VampireMage_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "895fdcd5aed7bd34185c0a12f6d12e45",
+          "prefab_file": "GameplayPlayer_VampireMage_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "6c52b8fe5a646c94d9a1da61be34af6d",
+          "skin_id": 96,
+          "name": "VampireMage_Sketchy",
+          "asset_name": "CharacterSkin_VampireMage_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_VampireMage_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "fc902379fd49a28468c4172b4c82857a",
+          "prefab_file": "GameplayPlayer_VampireMage_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "3d4b43531ef1e2d48aed0af6490a67eb",
+          "skin_id": 114,
+          "name": "VampireMage_BigHead",
+          "asset_name": "CharacterSkin_VampireMage_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_VampireMage_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "a3a48aef52b3e3f44ac21016152e1cb2",
+          "prefab_file": "GameplayPlayer_VampireMage_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockVampireMage"
+      ],
+      "playstyle_hint": "Starting modifiers: unique: LifeStealOnSignatureSpell, unique: CanReviveWhenDown.",
+      "notes": null
+    },
+    {
+      "id": "WizardKing",
+      "character_id": 7,
+      "display_name": "Wizard King",
+      "title_entry": "Character_WizardKing",
+      "description_entry": "Character_Description_WizardKing",
+      "initial_spell": "Rifle",
+      "initial_spell_id": 6,
+      "initial_prestige_spell": "Meteor",
+      "initial_prestige_spell_id": 18,
+      "starting_artifact": null,
+      "default_skin_id": 21,
+      "default_skin_name": "WizardKing_0",
+      "character_selection_order": 6,
+      "initial_cost_gold": 1050,
+      "player_seat_info_height": 2.4,
+      "is_included_in_demo": false,
+      "is_coming_soon": false,
+      "disabled": false,
+      "modifiers": [
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "value": 10
+        }
+      ],
+      "unique_modifiers": [],
+      "starting_stats": [
+        {
+          "stat_id": 7,
+          "stat_name": "MovementSpeed",
+          "base_value": 3.6,
+          "modifier": 0,
+          "value": 3.6
+        },
+        {
+          "stat_id": 8,
+          "stat_name": "MaxHealth",
+          "base_value": 600,
+          "modifier": 0,
+          "value": 600
+        },
+        {
+          "stat_id": 9,
+          "stat_name": "Luck",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 11,
+          "stat_name": "PickupRadius",
+          "base_value": 4,
+          "modifier": 0,
+          "value": 4
+        },
+        {
+          "stat_id": 12,
+          "stat_name": "CriticalChance",
+          "base_value": 10,
+          "modifier": 10,
+          "value": 20
+        },
+        {
+          "stat_id": 13,
+          "stat_name": "CriticalDamage",
+          "base_value": 150,
+          "modifier": 0,
+          "value": 150
+        },
+        {
+          "stat_id": 14,
+          "stat_name": "Armor",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 15,
+          "stat_name": "Dodge",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 16,
+          "stat_name": "HealthRegeneration",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 17,
+          "stat_name": "Rerolls",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 39,
+          "stat_name": "Bans",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 40,
+          "stat_name": "Pins",
+          "base_value": 0,
+          "modifier": 0,
+          "value": 0
+        },
+        {
+          "stat_id": 19,
+          "stat_name": "Revives",
+          "base_value": 2,
+          "modifier": 0,
+          "value": 2
+        },
+        {
+          "stat_id": 38,
+          "stat_name": "HealthPercentageOnRevive",
+          "base_value": 0.5,
+          "modifier": 0,
+          "value": 0.5
+        },
+        {
+          "stat_id": 36,
+          "stat_name": "ReviveZoneSize",
+          "base_value": 6.5,
+          "modifier": 0,
+          "value": 6.5
+        }
+      ],
+      "skins": [
+        {
+          "resource_guid": "27d4f03be4aa5724ba1b500e02ac5fcd",
+          "skin_id": 21,
+          "name": "WizardKing_0",
+          "asset_name": "CharacterSkin_WizardKing_0",
+          "label": "Base",
+          "name_entry": "Skin_WizardKing_0",
+          "description_entry": "Skin_Description_WizardKing_0",
+          "prefab_guid": "402a0debd91ce9b478e2723fe7745938",
+          "prefab_file": "GameplayPlayer_WizardKing_Skin0.prefab",
+          "prefab_guid_verified": true,
+          "is_default": true,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "4dc72a3ba8a824044aeeb3caa487a617",
+          "skin_id": 22,
+          "name": "WizardKing_1",
+          "asset_name": "CharacterSkin_WizardKing_1",
+          "label": "Alt 1",
+          "name_entry": "Skin_WizardKing_1",
+          "description_entry": "Skin_Description_WizardKing_1",
+          "prefab_guid": "5e4a0e6e5984fad4a83b2251dac17f9a",
+          "prefab_file": "GameplayPlayer_WizardKing_Skin1.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "038ac5a76b9fe1e4db9c84bc5eb5e7da",
+          "skin_id": 23,
+          "name": "WizardKing_2",
+          "asset_name": "CharacterSkin_WizardKing_2",
+          "label": "Alt 2",
+          "name_entry": "Skin_WizardKing_2",
+          "description_entry": "Skin_Description_WizardKing_2",
+          "prefab_guid": "b3d07a218eae172449bdd818f9664978",
+          "prefab_file": "GameplayPlayer_WizardKing_Skin2.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "7bb3108619b41964cbdb371576adc912",
+          "skin_id": 40,
+          "name": "WizardKing_3",
+          "asset_name": "CharacterSkin_WizardKing_3",
+          "label": "Alt 3",
+          "name_entry": "Skin_WizardKing_3",
+          "description_entry": "Skin_Description_WizardKing_3",
+          "prefab_guid": "6efe5cd80ab7fab4d9b329d7e9dd5f5d",
+          "prefab_file": "GameplayPlayer_WizardKing_Skin3.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "a5f88dba47a987f44ab4ece49f3a8840",
+          "skin_id": 82,
+          "name": "WizardKing_Prestige",
+          "asset_name": "CharacterSkin_WizardKing_Prestige",
+          "label": "Prestige",
+          "name_entry": "Skin_WizardKing_Prestige",
+          "description_entry": "Skin_Description_WizardKing_Prestige",
+          "prefab_guid": "df34d6f3f839975458bcc2eaf9d41fad",
+          "prefab_file": "GameplayPlayer_WizardKing_SkinPrestige.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "d738d0df11765e244b5c30094f02df55",
+          "skin_id": 55,
+          "name": "WizardKing_Golden",
+          "asset_name": "CharacterSkin_WizardKing_Golden",
+          "label": "Golden",
+          "name_entry": "Skin_WizardKing_Golden",
+          "description_entry": "Skin_Description_Golden",
+          "prefab_guid": "36208b13d82e0854b87ce19caadae6a9",
+          "prefab_file": "GameplayPlayer_WizardKing_SkinGolden.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "27897010b63460e4cbef4ae49b27c691",
+          "skin_id": 31,
+          "name": "WizardKing_Sketchy",
+          "asset_name": "CharacterSkin_WizardKing_Sketchy",
+          "label": "Sketchy",
+          "name_entry": "Skin_WizardKing_Sketchy",
+          "description_entry": "Skin_Description_Sketchy",
+          "prefab_guid": "6b1e942214f8de74cb7313940099e88a",
+          "prefab_file": "GameplayPlayer_WizardKing_SkinSketchy.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        },
+        {
+          "resource_guid": "67b90dc10a55b344ca79a6b56e598202",
+          "skin_id": 109,
+          "name": "WizardKing_BigHead",
+          "asset_name": "CharacterSkin_WizardKing_BigHead",
+          "label": "Big Head",
+          "name_entry": "Skin_WizardKing_BigHead",
+          "description_entry": "Skin_Description_BigHead",
+          "prefab_guid": "7ae20a56636ce8c49a49ce93d1e4178d",
+          "prefab_file": "GameplayPlayer_WizardKing_SkinBigHead.prefab",
+          "prefab_guid_verified": true,
+          "is_default": false,
+          "is_included_in_demo": false
+        }
+      ],
+      "character_specific_improvements": [],
+      "challenges_referencing_this_hero": [
+        "UnlockWizardKing"
+      ],
+      "playstyle_hint": "Starting modifiers: +10 CriticalChance.",
+      "notes": null
+    }
+  ],
+  "global_character_improvements": [
+    {
+      "name": "CharacterArmor",
+      "title_entry": "Store_PlayerUpgrade_Armor",
+      "description_entry": "Store_PlayerUpgrade_Armor_Description",
+      "stat_id": 14,
+      "stat_name": "Armor",
+      "values_by_rarity": {
+        "common": 16,
+        "rare": 26,
+        "epic": 36,
+        "legendary": 50
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterCriticalChance",
+      "title_entry": "Store_PlayerUpgrade_CriticalChance",
+      "description_entry": "Store_PlayerUpgrade_CriticalChance_Description",
+      "stat_id": 12,
+      "stat_name": "CriticalChance",
+      "values_by_rarity": {
+        "common": 4,
+        "rare": 6,
+        "epic": 9,
+        "legendary": 12
+      },
+      "stat_limit_for_offer": 80,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterCriticalDamage",
+      "title_entry": "Store_PlayerUpgrade_CriticalDamage",
+      "description_entry": "Store_PlayerUpgrade_CriticalDamage_Description",
+      "stat_id": 13,
+      "stat_name": "CriticalDamage",
+      "values_by_rarity": {
+        "common": 10,
+        "rare": 20,
+        "epic": 35,
+        "legendary": 50
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterDamage",
+      "title_entry": "Store_PlayerUpgrade_Damage",
+      "description_entry": "Store_PlayerUpgrade_Damage_Description",
+      "stat_id": 0,
+      "stat_name": "Damage",
+      "values_by_rarity": {
+        "common": 5,
+        "rare": 10,
+        "epic": 15,
+        "legendary": 20
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterDodge",
+      "title_entry": "Store_PlayerUpgrade_Dodge",
+      "description_entry": "Store_PlayerUpgrade_Dodge_Description",
+      "stat_id": 15,
+      "stat_name": "Dodge",
+      "values_by_rarity": {
+        "common": 4,
+        "rare": 6,
+        "epic": 9,
+        "legendary": 12
+      },
+      "stat_limit_for_offer": 75,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterFireRate",
+      "title_entry": "Store_PlayerUpgrade_FireRate",
+      "description_entry": "Store_PlayerUpgrade_FireRate_Description",
+      "stat_id": 2,
+      "stat_name": "FireRate",
+      "values_by_rarity": {
+        "common": 6,
+        "rare": 9,
+        "epic": 12,
+        "legendary": 18
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterHealthRegeneration",
+      "title_entry": "Store_PlayerUpgrade_HealthRegeneration",
+      "description_entry": "Store_PlayerUpgrade_HealthRegeneration_Description",
+      "stat_id": 16,
+      "stat_name": "HealthRegeneration",
+      "values_by_rarity": {
+        "common": 1,
+        "rare": 2,
+        "epic": 3,
+        "legendary": 4
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": false,
+      "disabled": false
+    },
+    {
+      "name": "CharacterLuck",
+      "title_entry": "Store_PlayerUpgrade_Luck",
+      "description_entry": "Store_PlayerUpgrade_Luck_Description",
+      "stat_id": 9,
+      "stat_name": "Luck",
+      "values_by_rarity": {
+        "common": 2,
+        "rare": 4,
+        "epic": 6,
+        "legendary": 8
+      },
+      "stat_limit_for_offer": 25,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterMaxHealth",
+      "title_entry": "Store_PlayerUpgrade_MaxHealth",
+      "description_entry": "Store_PlayerUpgrade_MaxHealth_Description",
+      "stat_id": 8,
+      "stat_name": "MaxHealth",
+      "values_by_rarity": {
+        "common": 100,
+        "rare": 200,
+        "epic": 300,
+        "legendary": 400
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterMovementSpeed",
+      "title_entry": "Store_PlayerUpgrade_MovementSpeed",
+      "description_entry": "Store_PlayerUpgrade_MovementSpeed_Description",
+      "stat_id": 7,
+      "stat_name": "MovementSpeed",
+      "values_by_rarity": {
+        "common": 8,
+        "rare": 12,
+        "epic": 18,
+        "legendary": 0
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterPickUpRadius",
+      "title_entry": "Store_PlayerUpgrade_PickupRadius",
+      "description_entry": "Store_PlayerUpgrade_PickupRadius_Description",
+      "stat_id": 11,
+      "stat_name": "PickupRadius",
+      "values_by_rarity": {
+        "common": 8,
+        "rare": 12,
+        "epic": 18,
+        "legendary": 24
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": true,
+      "disabled": false
+    },
+    {
+      "name": "CharacterSize",
+      "title_entry": "Store_PlayerUpgrade_Size",
+      "description_entry": "Store_PlayerUpgrade_Size_Description",
+      "stat_id": 6,
+      "stat_name": "Size",
+      "values_by_rarity": {
+        "common": 0,
+        "rare": 12,
+        "epic": 15,
+        "legendary": 18
+      },
+      "stat_limit_for_offer": -1,
+      "is_included_in_demo": false,
+      "disabled": false
+    },
+    {
+      "name": "CharacterXPGain",
+      "title_entry": "Store_PlayerUpgrade_XPGain",
+      "description_entry": "Store_PlayerUpgrade_XPGain_Description",
+      "stat_id": 10,
+      "stat_name": "XPGain",
+      "values_by_rarity": {
+        "common": 7,
+        "rare": 12,
+        "epic": 17,
+        "legendary": 21
+      },
+      "stat_limit_for_offer": 300,
+      "is_included_in_demo": true,
+      "disabled": false
+    }
+  ],
+  "character_progression": {
+    "prestige_configuration": {
+      "base_minimum_minutes": 10,
+      "base_maximum_minutes": 20,
+      "minimum_minutes_increment_per_prestige": 5,
+      "maximum_minutes_increment_per_prestige": 5,
+      "ranks_per_prestige": 10,
+      "gold_cost_multiplier": 0.6,
+      "estimated_gold_gain_per_minute": 25,
+      "estimated_gold_enchantment_multiplier": 1.1
+    },
+    "curse_level_modifier": {
+      "rank_xp_multiplier_per_curse": 0.1,
+      "gold_multiplier_per_curse": 0.05
+    }
+  }
+}

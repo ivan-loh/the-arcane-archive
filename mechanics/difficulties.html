@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Normal, Hard, and Nightmare scaling tiers.">
+  <title>Difficulties &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" aria-current="page" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+      <a class="top-nav__link" href="../challenges/index.html">Challenges</a>
+    </nav>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Section index">
+  <h2 class="sidebar__title">Mechanics</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../mechanics/upgrades.html">Upgrades</a></li>
+        <li><a href="../mechanics/curses.html">Curses</a></li>
+        <li><a aria-current="page" href="../mechanics/difficulties.html">Difficulties</a></li>
+        <li><a href="../mechanics/modifiers.html">Modifiers</a></li>
+        <li><a href="../mechanics/objectives.html">Objectives</a></li>
+  </ul>
+  <h2 class="sidebar__title">Related</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+  </ul>
+</aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../mechanics/index.html">Mechanics</a></li>
+            <li aria-current="page">Difficulties</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Difficulties</h1>
+          <p class="prose u-muted">
+            Three difficulty tiers gate run challenge level. Each tier is unlocked by clearing every world
+            on the previous tier (see <a href="../challenges/threatlevel.html">threat-level challenges</a>).
+            Difficulty multiplies enemy health and damage, increases elite spawn pressure, and is required to
+            stack <a href="curses.html">curses</a>.
+          </p>
+        </section>
+
+        <section id="list">
+          <h2>Tiers</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Difficulty tiers (lowest to highest)</caption>
+              <thead><tr><th data-sort="string">Name</th><th data-sort="number" class="num">ID</th><th data-sort="string">Internal ID</th><th data-sort="string">In demo</th></tr></thead>
+              <tbody>
+              <tr><td>Normal</td><td class="num">0</td><td><code>difficulty_normal</code></td><td>No</td></tr>
+              <tr><td>Hard</td><td class="num">1</td><td><code>difficulty_hard</code></td><td>No</td></tr>
+              <tr><td>Nightmare</td><td class="num">2</td><td><code>difficulty_nightmare</code></td><td>No</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="scaling">
+          <h2>Scaling notes</h2>
+          <p class="prose">
+            Several enemy-event configurations expose per-difficulty parameters &mdash; for example
+            the line-event gap size: 3.2 m on Normal, 2.5 m on Hard, 2.0 m on Nightmare; the bounce
+            event spawns 9 / 12 / 14 enemies per drop respectively. Bring more clear and more movement
+            on each step up.
+          </p>
+        </section>
+
+        <section id="related">
+          <h2>Related</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="curses.html"><strong>Curses</strong> Stack on top of difficulty for extra modifiers.</a>
+            <a class="see-also__link" href="../challenges/threatlevel.html"><strong>Threat-level challenges</strong> Unlock Hard &amp; Nightmare.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference. Game names &amp; lore belong to their respective owners.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+        <li><a href="../waves/index.html">Waves</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Fan project &middot; no images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Slash: base stats, all infusions, variants, and improvements for The Spell Brigade.">
+  <title>Slash — The Arcane Archive</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <!-- Inline favicon: golden rune glyph, no network request -->
+  <link rel="icon"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+  <!-- include: templates/header.html -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input"
+             id="site-search"
+             type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off"
+             spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+
+    <button class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+
+  <div class="container">
+    <div class="page has-sidebar">
+      <!-- Optional sidebar: builder may omit / replace -->
+      <aside class="sidebar" aria-label="Spells">
+  <h2 class="sidebar__title">Spells</h2>
+  <ul class="sidebar__nav">
+    <li><a href="index.html">All spells</a></li>
+    <li><a href="element-matrix.html">Element matrix</a></li>
+  </ul>
+  <h2 class="sidebar__title">Projectile</h2>
+  <ul class="sidebar__nav">
+    <li><a href="arrow.html">Arrow</a></li>
+    <li><a href="beam.html">Beam</a></li>
+    <li><a href="bomb-launcher.html">Bomb Launcher</a></li>
+    <li><a href="boomerang.html">Boomerang</a></li>
+    <li><a href="laser.html">Laser</a></li>
+    <li><a href="rifle.html">Rifle</a></li>
+    <li><a href="shotgun.html">Shotgun</a></li>
+    <li><a href="smg.html">Smg</a></li>
+  </ul>
+  <h2 class="sidebar__title">Aoe</h2>
+  <ul class="sidebar__nav">
+    <li><a href="bell.html">Bell</a></li>
+    <li><a href="energy-zone.html">Energy Zone</a></li>
+    <li><a href="falling-star.html">Falling Star</a></li>
+    <li><a href="meteor.html">Meteor</a></li>
+    <li><a href="proximity.html">Proximity</a></li>
+  </ul>
+  <h2 class="sidebar__title">Orbital</h2>
+  <ul class="sidebar__nav">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="orb.html">Orb</a></li>
+  </ul>
+  <h2 class="sidebar__title">Melee</h2>
+  <ul class="sidebar__nav">
+    <li><a href="slash.html" aria-current="page">Slash</a></li>
+  </ul>
+  <h2 class="sidebar__title">Summon</h2>
+  <ul class="sidebar__nav">
+    <li><a href="plant.html">Plant</a></li>
+    <li><a href="summon.html">Summon</a></li>
+  </ul>
+  <h2 class="sidebar__title">Utility</h2>
+  <ul class="sidebar__nav">
+    <li><a href="fence.html">Fence</a></li>
+    <li><a href="mine.html">Mine</a></li>
+    <li><a href="trail.html">Trail</a></li>
+  </ul>
+</aside>
+
+      <main id="main-content" tabindex="-1">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html">Spells</a></li>
+            <li aria-current="page">Slash</li>
+          </ol>
+        </nav>
+
+        <article class="content-frame">
+          
+    
+    <header class="page-hero">
+      <p class="page-hero__eyebrow">Spell &middot; SpellType <code>17</code></p>
+      <h1 id="overview">Slash</h1>
+      <p class="page-hero__lede">
+        Slash is a <strong>melee</strong> spell. Its
+        baseline <a href="../mechanics/stats.html#damage">Damage</a>
+        is <strong class="num">296</strong>.
+        Below: every infusion, variant and improvement currently extracted
+        from the game files.
+      </p>
+      <div class="page-hero__badges">
+        <span class="tag">melee</span><span class="tag">arc</span><span class="tag">burst</span>
+      </div>
+    </header>
+
+
+    <section id="base">
+      <h2>Base configuration</h2>
+      <div class="stat-table-wrap">
+        <table class="stat-table sortable">
+          <caption>Base stats &mdash; level 1, no infusion, no improvements</caption>
+          <thead>
+            <tr>
+              <th data-sort="string">Stat</th>
+              <th data-sort="number" class="num">Value</th>
+              <th>Scale</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr><td><a href="../mechanics/stats.html#damage">Damage</a></td><td class="num">296</td><td><span class="stat-bar" data-value="10" data-max="10" aria-label="Damage 296"></span></td></tr>
+          <tr><td><a href="../mechanics/stats.html#range">Range</a></td><td class="num">2</td><td><span class="stat-bar" data-value="1" data-max="10" aria-label="Range 2"></span></td></tr>
+          <tr><td><a href="../mechanics/stats.html#firerate">FireRate</a></td><td class="num">0.75</td><td><span class="stat-bar" data-value="1" data-max="10" aria-label="FireRate 0.75"></span></td></tr>
+          <tr><td><a href="../mechanics/stats.html#lifetime">LifeTime</a></td><td class="num">0.5</td><td><span class="stat-bar" data-value="1" data-max="10" aria-label="LifeTime 0.5"></span></td></tr>
+          <tr><td><a href="../mechanics/stats.html#size">Size</a></td><td class="num">3</td><td><span class="stat-bar" data-value="5" data-max="10" aria-label="Size 3"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <a href="../mechanics/damage-system.html#formula">How these
+        numbers turn into a damage figure &rarr;</a>
+      </p>
+    </section>
+
+    
+    <section id="starting-modifiers">
+      <h2>Starting modifiers</h2>
+      <p>This spell starts with the following innate stat bonuses on top of
+         its base stats.</p>
+      <ul class="meta-list">
+        <li><a href="../mechanics/stats.html#size">Size</a> <strong class="num">+35%</strong></li>
+<li><a href="../mechanics/stats.html#damage">Damage</a> <strong class="num">+12%</strong></li>
+      </ul>
+    </section>
+
+
+    
+    <section id="infusions">
+      <h2>Infusions</h2>
+      <p>Each spell accepts one infusion at a time, drawn from the five
+         single elements. Combining two infusions of different elements
+         produces a combo prefab (see the <a href="element-matrix.html">element matrix</a> for all 21 combinations).</p>
+      <div class="grid grid-cards">
+        
+            <article class="item-card" data-element="fire" id="infusion-fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Slash &middot; Fire</h3>
+                  <p class="item-card__subtitle"><code>SlashFire</code></p>
+                </div>
+                <div class="item-card__badges">
+                  <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+                  <span class="tag">demo</span>
+                </div>
+              </header>
+              <p class="item-card__desc">First infusion of this element. See <a href="../mechanics/elements.html#fire">Fire element</a> for matchup multipliers.</p>
+            </article>
+            <article class="item-card" data-element="lightning" id="infusion-lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Slash &middot; Lightning</h3>
+                  <p class="item-card__subtitle"><code>SlashLightning</code></p>
+                </div>
+                <div class="item-card__badges">
+                  <span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span>
+                  <span class="tag">demo</span>
+                </div>
+              </header>
+              <p class="item-card__desc">First infusion of this element. See <a href="../mechanics/elements.html#lightning">Lightning element</a> for matchup multipliers.</p>
+            </article>
+            <article class="item-card" data-element="ice" id="infusion-ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Slash &middot; Ice</h3>
+                  <p class="item-card__subtitle"><code>SlashIce</code></p>
+                </div>
+                <div class="item-card__badges">
+                  <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span>
+                  
+                </div>
+              </header>
+              <p class="item-card__desc">First infusion of this element. See <a href="../mechanics/elements.html#ice">Ice element</a> for matchup multipliers.</p>
+            </article>
+            <article class="item-card" data-element="acid" id="infusion-acid">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Slash &middot; Acid</h3>
+                  <p class="item-card__subtitle"><code>SlashAcid</code></p>
+                </div>
+                <div class="item-card__badges">
+                  <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span>
+                  
+                </div>
+              </header>
+              <p class="item-card__desc">First infusion of this element. See <a href="../mechanics/elements.html#acid">Acid element</a> for matchup multipliers.</p>
+            </article>
+            <article class="item-card" data-element="dark" id="infusion-dark">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">Slash &middot; Dark</h3>
+                  <p class="item-card__subtitle"><code>SlashDark</code></p>
+                </div>
+                <div class="item-card__badges">
+                  <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span>
+                  
+                </div>
+              </header>
+              <p class="item-card__desc">First infusion of this element. See <a href="../mechanics/elements.html#dark">Dark element</a> for matchup multipliers.</p>
+            </article>
+      </div>
+    </section>
+
+
+    
+    <section id="variants">
+      <h2>Variants</h2>
+      <p>Mutually-exclusive on-pickup choices that reshape how the spell
+         behaves. <code>repeat_amount</code> indicates how many extra times
+         the variant can stack.</p>
+      <div class="grid grid-cards">
+        
+        <article class="item-card" data-kind="variant" id="variant-burst">
+          <header class="item-card__header">
+            <div>
+              <h3 class="item-card__title">Burst</h3>
+              <p class="item-card__subtitle"><code>Slash_Burst</code></p>
+            </div>
+          </header>
+          <p class="item-card__desc">Burst <span class="u-muted">(in-game description not available in this build).</span></p>
+          
+          
+          
+        </article>
+
+        <article class="item-card" data-kind="variant" id="variant-friendlyfirehealsinstead">
+          <header class="item-card__header">
+            <div>
+              <h3 class="item-card__title">Friendly Fire Heals Instead</h3>
+              <p class="item-card__subtitle"><code>Slash_FriendlyFireHealsInstead</code></p>
+            </div>
+          </header>
+          <p class="item-card__desc">Friendly Fire Heals Instead <span class="u-muted">(in-game description not available in this build).</span></p>
+          
+          
+          
+              <aside class="callout" data-kind="warn">
+                <span class="callout__title">Co-op only</span>
+                <p>Hidden in single-player runs (<code>HideForSinglePlayer = true</code>).</p>
+              </aside>
+        </article>
+
+        <article class="item-card" data-kind="variant" id="variant-increasesizewhenstandingstill">
+          <header class="item-card__header">
+            <div>
+              <h3 class="item-card__title">Increase Size When Standing Still</h3>
+              <p class="item-card__subtitle"><code>Slash_IncreaseSizeWhenStandingStill</code></p>
+            </div>
+          </header>
+          <p class="item-card__desc">Increase Size When Standing Still <span class="u-muted">(in-game description not available in this build).</span></p>
+          <div class="item-card__badges"><span class="tag">stackable &times;5</span></div>
+          <div class="meta-dl"><dt>Dynamic parameters</dt><dd><ul class="meta-list"><li><code>75</code> &mdash; <span class="u-muted">Max size bonus %</span></li><li><code>20</code> &mdash; <span class="u-muted">Time to reach max (s)</span></li></ul></dd></div>
+          
+        </article>
+
+        <article class="item-card" data-kind="variant" id="variant-shootbackwards">
+          <header class="item-card__header">
+            <div>
+              <h3 class="item-card__title">Shoot Backwards</h3>
+              <p class="item-card__subtitle"><code>Slash_SlashBackwards</code></p>
+            </div>
+          </header>
+          <p class="item-card__desc">Shoot Backwards <span class="u-muted">(in-game description not available in this build).</span></p>
+          
+          
+          
+        </article>
+      </div>
+    </section>
+
+
+    
+    <section id="improvements">
+      <h2>Improvements</h2>
+      <p>Per-rarity stat upgrades that drop during a run. Values are
+         additive percentages applied to the spell's base stat.</p>
+      <div class="stat-table-wrap">
+        <table class="stat-table sortable">
+          <caption>Rarity scaling for each improvement</caption>
+          <thead>
+            <tr>
+              <th data-sort="string">Stat</th>
+              <th class="num"><span class="rarity-pill" data-rarity="common">Common</span></th>
+              <th class="num"><span class="rarity-pill" data-rarity="rare">Rare</span></th>
+              <th class="num"><span class="rarity-pill" data-rarity="epic">Epic</span></th>
+              <th class="num"><span class="rarity-pill" data-rarity="legendary">Legendary</span></th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr id="improvement-1"><td><a href="../mechanics/stats.html#damage">Damage</a></td><td class="num">+10%</td><td class="num">+15%</td><td class="num">+25%</td><td class="num">+35%</td></tr>
+          <tr id="improvement-2"><td><a href="../mechanics/stats.html#firerate">FireRate</a></td><td class="num">+10%</td><td class="num">+15%</td><td class="num">+25%</td><td class="num">+35%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    
+    <section id="synergies">
+      <h2>Synergies</h2>
+      <ul class="meta-list">
+        <li><a href="#variant-increasesizewhenstandingstill">IncreaseSizeWhenStandingStill variant</a> &mdash; Reward for holding ground — huge late arcs.</li>
+        <li><a href="#improvements">FireRate improvements</a> &mdash; Slash is melee; faster swings are pure DPS gain.</li>
+        <li><a href="../mechanics/elements.html#dark">Dark infusion</a> &mdash; Cursed slashes pair well with sustained close combat.</li>
+      </ul>
+    </section>
+
+
+    
+    <section id="related">
+      <h2>See also</h2>
+      <div class="see-also">
+        
+        <a class="see-also__link" href="../mechanics/damage-system.html">
+          <strong>Damage calculation</strong>
+          The master formula that turns base damage into a final hit number.
+        </a>
+        <a class="see-also__link" href="../mechanics/stats.html">
+          <strong>Stat reference</strong>
+          Every stat the spell touches, with stacking rules.
+        </a>
+        <a class="see-also__link" href="../mechanics/elements.html">
+          <strong>Element matchups</strong>
+          Strength/weakness multipliers for each infusion.
+        </a>
+        <a class="see-also__link" href="index.html">
+          <strong>All spells</strong>
+          Back to the spell index.
+        </a>
+      </div>
+    </section>
+
+
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <!-- include: templates/footer.html -->
+  <footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+
+  <script src="../js/wiki.js" defer></script>
+</body>
+</html>

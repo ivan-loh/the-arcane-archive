@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Critical hit pipeline in The Spell Brigade — cast-time snapshot, hit-time roll, weakspot ×1.5 stacking, OneShotDamage const, and the friendly-fire interaction.">
+  <title>Critical hits — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#snapshot">Cast-time snapshot</a></li>
+        <li><a href="#roll">Hit-time roll</a></li>
+        <li><a href="#multiplier">Crit damage formula</a></li>
+        <li><a href="#weakspot">Weakspot stacking</a></li>
+        <li><a href="#one-shot">OneShotDamage</a></li>
+        <li><a href="#override">DamageOverrideData</a></li>
+        <li><a href="#examples">Worked examples</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/critical-hits.html" aria-current="page">Critical hits</a></li>
+        <li><a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Critical hits</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Critical hits</h1>
+          <p class="prose">
+            Crits in The Spell Brigade are governed by two
+            <a href="../mechanics/stats.html">Flat stats</a> — <code>CriticalChance</code>
+            (id 12) and <code>CriticalDamage</code> (id 13). The defining trick: the
+            stat <em>values</em> are snapshotted at <em>cast</em> time (when the spell
+            constructs its <code>PlayerSpellDamageInfo</code>), but the
+            <em>roll</em> happens at <em>hit</em> time on the
+            <code>Hitbox</code>. So mid-flight stat changes don&rsquo;t affect a
+            projectile that&rsquo;s already in the air.
+          </p>
+        </section>
+
+        <section id="snapshot" class="stack">
+          <h2>Cast-time snapshot</h2>
+          <p class="prose">
+            When a spell creates its damage info:
+          </p>
+
+<pre class="formula"><code>info = new PlayerSpellDamageInfo(ownerClientId, spellType, playerStats)
+
+<span class="f-comment">// At construction, the constructor reads PlayerStats and copies:</span>
+info.CriticalChance = playerStats.CriticalChance.GetValue()
+info.CriticalDamage = playerStats.CriticalDamage.GetValue()</code></pre>
+
+          <p class="prose">
+            From then on, <code>info.CriticalChance</code> and
+            <code>info.CriticalDamage</code> are frozen for the lifetime of that
+            specific hit event — even if the projectile flies for two seconds and you
+            equip a +Crit artifact mid-flight, the in-flight projectile uses the
+            snapshot.
+          </p>
+        </section>
+
+        <section id="roll" class="stack">
+          <h2>Hit-time roll</h2>
+          <p class="prose">
+            On a successful hit, <code>Hitbox.IsCriticalDamage(info)</code> rolls
+            against <code>GetRandomFloat(0, 100)</code>:
+          </p>
+
+<pre class="formula"><code><span class="f-fn">Hitbox</span>.IsCriticalDamage(info) {
+    return <span class="f-fn">GetRandomFloat</span>(<span class="f-num">0</span>, <span class="f-num">100</span>) &lt; info.CriticalChance
+}</code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Roll scale</span>
+            <p>
+              The comparison is against <code>CriticalChance</code> on its UI scale
+              (i.e., a player seeing <code>35%</code> compares against the value
+              <code>35.0</code>, not <code>0.35</code>). Whether the upper bound is
+              inclusive or exclusive isn&rsquo;t dump-visible, but for any realistic
+              non-100 value it doesn&rsquo;t matter. With
+              <code>CriticalChance &gt;= 100</code>, every hit crits.
+            </p>
+          </aside>
+        </section>
+
+        <section id="multiplier" class="stack">
+          <h2>Crit damage formula</h2>
+
+<pre class="formula"><code><span class="f-fn">Hitbox</span>.CalculateCriticalDamage(damage, source) {
+    return damage × (<span class="f-num">1</span> + source.CriticalDamage / <span class="f-num">100</span>)
+}</code></pre>
+
+          <p class="prose">
+            <code>CriticalDamage</code> is an <em>additive</em> percent — at
+            <code>0</code> a crit deals <code>×1.0</code> (no bonus), at
+            <code>100</code> a crit deals <code>×2.0</code>, at <code>250</code> a crit
+            deals <code>×3.5</code>. Stacking three <code>+50%</code> picks gives
+            <code>CriticalDamage = 150</code> → crit multiplier <code>×2.5</code>.
+          </p>
+        </section>
+
+        <section id="weakspot" class="stack">
+          <h2>Weakspot stacking</h2>
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title"><code>WeakspotDamageMultiplier = 1.5</code></span>
+            <p>
+              Hitboxes typed <code>HitboxType.Weakspot</code> apply a hard-coded
+              <strong>×1.5</strong> multiplier from the const
+              <code>Hitbox.WeakspotDamageMultiplier</code>. This <em>stacks
+              multiplicatively</em> with the crit multiplier — they don&rsquo;t share a
+              bucket. A weakspot crit at <code>CriticalDamage = 150</code> hits for
+              <code>1.5 × 2.5 = 3.75×</code> on top of all the normal damage
+              scaling.
+            </p>
+          </aside>
+
+          <p class="prose">
+            Weakspot detection is purely hitbox-driven — the spell has nothing to do
+            with it. A boss&rsquo;s exposed crystal is a <code>Weakspot</code> hitbox;
+            any projectile that hits it eats the ×1.5. Auras and zone damage that
+            don&rsquo;t go through a directional hitbox don&rsquo;t get the bonus.
+          </p>
+        </section>
+
+        <section id="one-shot" class="stack">
+          <h2>OneShotDamage</h2>
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title"><code>OneShotDamage = 999999</code></span>
+            <p>
+              The engine carries a flat <strong>999999</strong> constant used by effects
+              meant to instantly delete a target regardless of HP — the
+              <code>OneHitMode</code> curse&rsquo;s self-damage path, Acolyte&rsquo;s
+              ghost-explosion mechanic, and certain boss-arena kill volumes. Anything
+              using this number skips normal scaling considerations. Even at maximum
+              corrupted-damage reduction, the post-Armor value remains far above any
+              reasonable HP pool.
+            </p>
+          </aside>
+
+          <p class="prose">
+            A one-shot is not a crit. The two systems are independent: a one-shot
+            <em>doesn&rsquo;t need</em> a crit roll, and a crit doesn&rsquo;t become a
+            one-shot just because it&rsquo;s big. The constant is a separate sentinel.
+          </p>
+        </section>
+
+        <section id="override" class="stack">
+          <h2>DamageOverrideData</h2>
+          <p class="prose">
+            After the crit roll, <code>HealthContainer.GetDamageOverrideForDamage</code>
+            takes <code>isCriticalHit</code> as input and can return a
+            <code>DamageOverrideData</code> that <em>overrides</em> the displayed
+            number. This is how the <strong>Critical Mastery</strong> ascension
+            converts excess <code>CriticalChance</code> (above 100%) into bonus
+            <code>CriticalDamage</code> at hit-resolution time, and how custom
+            interactions can rewrite the damage popup independently of the underlying
+            HP removal.
+          </p>
+        </section>
+
+        <section id="examples" class="stack">
+          <h2>Worked examples</h2>
+
+          <h3>1. Plain crit, no weakspot</h3>
+<pre class="formula"><code>base       = <span class="f-num">100</span>
+CritChance = <span class="f-num">35</span>
+CritDamage = <span class="f-num">80</span>
+
+roll       = RandomFloat(<span class="f-num">0</span>,<span class="f-num">100</span>) = <span class="f-num">22.4</span>   <span class="f-comment">// 22.4 &lt; 35 → crit</span>
+result     = <span class="f-num">100</span> × (<span class="f-num">1</span> + <span class="f-num">80</span>/<span class="f-num">100</span>) = <span class="f-num">180</span></code></pre>
+
+          <h3>2. Weakspot non-crit</h3>
+<pre class="formula"><code>base       = <span class="f-num">100</span>
+CritChance = <span class="f-num">35</span>
+CritDamage = <span class="f-num">80</span>
+weakspot   = true
+
+roll       = RandomFloat(<span class="f-num">0</span>,<span class="f-num">100</span>) = <span class="f-num">71.3</span>   <span class="f-comment">// 71.3 &lt; 35 false → no crit</span>
+result     = <span class="f-num">100</span> × <span class="f-num">1.5</span>             = <span class="f-num">150</span></code></pre>
+
+          <h3>3. Weakspot crit (the spike)</h3>
+<pre class="formula"><code>base       = <span class="f-num">100</span>
+CritChance = <span class="f-num">100</span>            <span class="f-comment">// guaranteed crit</span>
+CritDamage = <span class="f-num">200</span>            <span class="f-comment">// big crit modifier</span>
+weakspot   = true
+
+result     = <span class="f-num">100</span> × <span class="f-num">1.5</span> × (<span class="f-num">1</span> + <span class="f-num">200</span>/<span class="f-num">100</span>)
+           = <span class="f-num">100</span> × <span class="f-num">1.5</span> × <span class="f-num">3.0</span>
+           = <span class="f-num">450</span>          <span class="f-comment">// 4.5× base — and the ×1.5 doesn't pool into +%Damage</span></code></pre>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Why &ldquo;crit&rdquo; and &ldquo;weakspot&rdquo; aren&rsquo;t one bucket</span>
+            <p>
+              Both effects are <em>multiplicative</em> with their own factor. If they
+              shared an additive bucket (like Damage picks do), <code>×1.5</code> +
+              <code>+200%</code> crit would only sum to <code>3.5×</code> total.
+              Keeping them as separate multiplications gives the <code>4.5×</code>
+              spike you see in example 3 — small numbers, big results.
+            </p>
+          </aside>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/damage-system.html">
+            <strong>Damage system</strong>
+            Where crit fits in the full pipeline.
+          </a>
+          <a class="see-also__link" href="../mechanics/stats.html#critchance">
+            <strong>CriticalChance &amp; CriticalDamage</strong>
+            The two driving stats.
+          </a>
+          <a class="see-also__link" href="../mechanics/armor-dodge.html">
+            <strong>Armor &amp; Dodge</strong>
+            The defensive side of the same hit.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

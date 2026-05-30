@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The Spell Brigade mechanics reference — stats, damage pipeline, elements, modifiers, rarity, critical hits, armor, and dodge. The physics manual of the game.">
+  <title>Mechanics — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+            aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html" aria-current="page">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html" aria-current="page">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats reference</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/elements.html">Elements</a></li>
+        <li><a href="../mechanics/element-matrix.html">Element matrix</a></li>
+        <li><a href="../mechanics/stat-modifiers.html">Stat modifiers</a></li>
+        <li><a href="../mechanics/rarity.html">Rarity</a></li>
+        <li><a href="../mechanics/critical-hits.html">Critical hits</a></li>
+        <li><a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a></li>
+      </ul>
+      <h2 class="sidebar__title">Related</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li aria-current="page">Mechanics</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Game mechanics</h1>
+          <p class="prose">
+            This is the &ldquo;physics manual&rdquo; of The Spell Brigade. Every page in this
+            section is a direct reference to game systems extracted from the IL2CPP dump:
+            the 36-entry <a href="../mechanics/stats.html">stat enum</a>, the
+            <a href="../mechanics/damage-system.html">damage pipeline</a>, the
+            <a href="../mechanics/elements.html">21 element types</a>, the
+            <a href="../mechanics/stat-modifiers.html">static / dynamic modifier hierarchy</a>,
+            and the defensive math.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Start here</span>
+            <p>
+              New to the game? Read <a href="../mechanics/stats.html">Stats</a> first to
+              understand what every <code>+25%</code> on an item actually feeds, then jump to
+              <a href="../mechanics/damage-system.html">Damage system</a> for the full pipeline.
+              Advanced players doing math should bookmark
+              <a href="../mechanics/damage-system.html#worked-examples">worked examples</a>.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Confidence labels</span>
+            <p>
+              Game method <em>signatures</em> are extracted directly from the binary, but
+              method <em>bodies</em> are not. Each formula is labelled
+              <strong>high</strong> (the dump leaves only one reasonable interpretation),
+              <strong>inferred</strong> (signatures plus a constant strongly imply this),
+              or <strong>guess</strong> (genre convention). Where confidence is below
+              high, the page says so in a callout — please don&rsquo;t quote inferred numbers
+              as gospel.
+            </p>
+          </aside>
+        </section>
+
+        <section id="reference" class="stack">
+          <h2>Reference pages</h2>
+
+          <div class="card-grid">
+            <article class="item-card" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/stats.html">Stats reference</a></h3>
+                  <p class="item-card__subtitle">36 StatType entries · 3 calculation modes</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Every numeric stat the game tracks — Damage, FireRate, Armor, Luck,
+                ElementStrengthMultiplier, and 31 more — with calculation type, display
+                format, and a worked example of how modifiers aggregate.
+              </p>
+            </article>
+
+            <article class="item-card" data-element="fire" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/damage-system.html">Damage system</a></h3>
+                  <p class="item-card__subtitle">The definitive damage pipeline</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Full damage formula from <code>spell.base_damage</code> to HP removal:
+                stat aggregation, crit, element effectiveness, weakspot, armor, friendly
+                fire. Three worked numerical examples.
+              </p>
+            </article>
+
+            <article class="item-card" data-element="ice" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/elements.html">Elements</a></h3>
+                  <p class="item-card__subtitle">21 ElementType values</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Fire, Lightning, Acid, Ice, Dark — single, double, and dual combo
+                infusions. Per-element side-effects (Burn DOT, Chill 0.2–0.72, ricochet,
+                resistance shred, corruption).
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/element-matrix.html">Element matrix</a></h3>
+                  <p class="item-card__subtitle">Combo lookup grid</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                21×21 lookup showing which infusion paths produce which packed
+                ElementType, and why most cells are unreachable.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/stat-modifiers.html">Stat modifiers</a></h3>
+                  <p class="item-card__subtitle">Static vs Dynamic</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                The full <code>StatModifier</code> hierarchy: static improvements,
+                hidden modifiers, starting modifiers, and the 22 dynamic modifier
+                subclasses that recompute every frame. Not to be confused with
+                <a href="../mechanics/modifiers.html">Covenant modifiers</a>.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/rarity.html">Rarity</a></h3>
+                  <p class="item-card__subtitle">4 tiers · ImprovementValueContainer</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Common / Rare / Epic / Legendary. How each store item carries four
+                pre-baked values, and how Luck biases the rarity roll.
+              </p>
+            </article>
+
+            <article class="item-card" data-element="lightning" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/critical-hits.html">Critical hits</a></h3>
+                  <p class="item-card__subtitle">Snapshot, roll, weakspot, OneShot</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Crit chance snapshot at cast, weakspot ×1.5 stacking, the
+                <code>OneShotDamage = 999999</code> constant, and how excess crit-chance
+                converts to damage in the Critical Mastery ascension.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="mechanic">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../mechanics/armor-dodge.html">Armor &amp; Dodge</a></h3>
+                  <p class="item-card__subtitle">Defensive pipeline</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Flat-subtraction armor model, dodge roll, friendly-fire multiplier
+                0.25, HealOnDodge artifact hook, and how the corrupted-multiplier
+                stacks with everything else.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="meta" class="stack">
+          <h2>Companion sections</h2>
+          <p class="prose">
+            Curses, difficulties, objectives, upgrades, and meta-progression live in
+            <a href="../challenges/index.html">Challenges</a> and the
+            <a href="../guides/index.html">Guides</a> hub. The
+            <a href="../mechanics/damage-system.html">damage page</a> is the canonical
+            reference linked from the in-depth
+            <a href="damage-system.html">damage calculation guide</a>.
+          </p>
+
+          <div class="see-also">
+            <a class="see-also__link" href="../mechanics/damage-system.html">
+              <strong>Damage system</strong>
+              The full pipeline, with worked numerical examples.
+            </a>
+            <a class="see-also__link" href="../mechanics/stats.html">
+              <strong>Stats reference</strong>
+              Sortable table of all 36 stat types.
+            </a>
+            <a class="see-also__link" href="../mechanics/elements.html">
+              <strong>Elements</strong>
+              Element effects + infusion combos.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

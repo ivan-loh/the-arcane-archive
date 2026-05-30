@@ -1,0 +1,1191 @@
+{
+  "_meta": {
+    "verified_twice": true,
+    "total_enemies": 36,
+    "source": "EnemyPrefabRegistry + Enemy_*.prefab MonoBehaviour fields",
+    "notes": "movement_speed from NavMeshAgent.m_Speed in *_Navigator.prefab. contact_damage from Enemy.contactDamage. health from EnemyHealthContainer.maxHealth. xp_drop from numberOfExperience. Some prefabs have no Navigator (HuntTarget, LineEvent, etc.) so movement_speed is null."
+  },
+  "enemy_type_map": {
+    "0": "Crabling",
+    "1": "FleshCrab",
+    "2": "Tripod",
+    "3": "Snipjaw",
+    "4": "TeethyWorm",
+    "5": "ShieldCrab",
+    "6": "ExplodingTick",
+    "7": "Crablodon",
+    "8": "Spitter",
+    "9": "Buffer",
+    "10": "Squid",
+    "11": "SneakyBug",
+    "12": "HuntTarget",
+    "13": "TeethyWorm_Baby",
+    "14": "FlyingManta",
+    "15": "Mole",
+    "16": "LineEvent",
+    "17": "MobEvent",
+    "18": "ConvergentEvent",
+    "19": "Toad",
+    "20": "Stinkbug",
+    "21": "StaticShooter",
+    "22": "BounceEvent",
+    "23": "Spawner",
+    "24": "SpawnerEgg",
+    "25": "SpawnerHatchling",
+    "26": "EliteTeethyWorm",
+    "27": "EliteExplodingTick",
+    "28": "EliteBuffer",
+    "29": "Hydra",
+    "30": "ExplodingTickFast",
+    "31": "BufferFast",
+    "32": "SpitterSpread",
+    "33": "TeethyWormFast",
+    "34": "TeethyWorm_BabyFast",
+    "35": "Hoarder"
+  },
+  "enemies": [
+    {
+      "enemy_type_id": 0,
+      "enemy_type": "Crabling",
+      "primary_prefab": "Enemy_Crabling.prefab",
+      "prefab_files": [
+        "Enemy_Crabling.prefab"
+      ],
+      "navigator_prefab": "Enemy_FleshCrab_Navigator.prefab",
+      "registry_guid": "ba0b8ae862c1d6b47b58e40b8db68ad3",
+      "stats": {
+        "health": 154,
+        "contact_damage": 135,
+        "movement_speed": 2.52,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.4,
+        "xp_drop": 1,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 1,
+      "enemy_type": "FleshCrab",
+      "primary_prefab": "Enemy_FleshCrab.prefab",
+      "prefab_files": [
+        "Enemy_FleshCrab.prefab",
+        "Enemy_FleshCrab_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_FleshCrab_Navigator.prefab",
+      "registry_guid": "255b4273717f9574cb8635ca536d82c5",
+      "stats": {
+        "health": 275,
+        "contact_damage": 135,
+        "movement_speed": 2.52,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.4,
+        "xp_drop": 2,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 2,
+      "enemy_type": "Tripod",
+      "primary_prefab": "Enemy_Tripod.prefab",
+      "prefab_files": [
+        "Enemy_Tripod.prefab"
+      ],
+      "navigator_prefab": "Enemy_FleshCrab_Navigator.prefab",
+      "registry_guid": "7ad37d7805fcf4a4eb79c2ef0b5a83fb",
+      "stats": {
+        "health": 500,
+        "contact_damage": 135,
+        "movement_speed": 2.52,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.9,
+        "size_max": 1,
+        "navigation_radius": 0.4,
+        "xp_drop": 3,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 3,
+      "enemy_type": "Snipjaw",
+      "primary_prefab": "Enemy_Snipjaw.prefab",
+      "prefab_files": [
+        "Enemy_Snipjaw.prefab"
+      ],
+      "navigator_prefab": "Enemy_FleshCrab_Navigator.prefab",
+      "registry_guid": "82ee42cd60c193446a3ca94dbbcd5554",
+      "stats": {
+        "health": 700,
+        "contact_damage": 135,
+        "movement_speed": 2.52,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 1.05,
+        "size_max": 1.15,
+        "navigation_radius": 0.4,
+        "xp_drop": 5,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 4,
+      "enemy_type": "TeethyWorm",
+      "primary_prefab": "Enemy_TeethyWorm.prefab",
+      "prefab_files": [
+        "Enemy_TeethyWorm.prefab",
+        "Enemy_TeethyWorm_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_TeethyWorm_Navigator.prefab",
+      "registry_guid": "6e8a2aa005ff9df40995ebeba07e589a",
+      "stats": {
+        "health": 900,
+        "contact_damage": 135,
+        "movement_speed": 2.1,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.45,
+        "xp_drop": null,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": [
+        "xp_drop"
+      ]
+    },
+    {
+      "enemy_type_id": 5,
+      "enemy_type": "ShieldCrab",
+      "primary_prefab": "Enemy_ShieldCrab.prefab",
+      "prefab_files": [
+        "Enemy_ShieldCrab.prefab",
+        "Enemy_ShieldCrab_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_ShieldCrab_Navigator.prefab",
+      "registry_guid": "7f43c78fc9a33e84f848e0c88a8e607c",
+      "stats": {
+        "health": 3500,
+        "contact_damage": 225,
+        "movement_speed": 1.8,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.75,
+        "xp_drop": 24,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 6,
+      "enemy_type": "ExplodingTick",
+      "primary_prefab": "Enemy_ExplodingTick.prefab",
+      "prefab_files": [
+        "Enemy_ExplodingTick.prefab",
+        "Enemy_ExplodingTick_Navigator.prefab",
+        "Enemy_ExplodingTickExplosion.prefab"
+      ],
+      "navigator_prefab": "Enemy_ExplodingTick_Navigator.prefab",
+      "registry_guid": "69520fbd0fc0ea146bf3c5b072039e02",
+      "stats": {
+        "health": 600,
+        "contact_damage": 150,
+        "movement_speed": 2,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 5,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "explosive"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 7,
+      "enemy_type": "Crablodon",
+      "primary_prefab": "Enemy_Crablodon.prefab",
+      "prefab_files": [
+        "Enemy_Crablodon.prefab",
+        "Enemy_Crablodon_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_Crablodon_Navigator.prefab",
+      "registry_guid": "55ea9c6de4854f147a08ad80b0027eed",
+      "stats": {
+        "health": 4500,
+        "contact_damage": 315,
+        "movement_speed": 0.9,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 1.5,
+        "xp_drop": 32,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "melee"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 8,
+      "enemy_type": "Spitter",
+      "primary_prefab": "Enemy_Spitter.prefab",
+      "prefab_files": [
+        "Enemy_Spitter.prefab",
+        "Enemy_Spitter_Navigator.prefab",
+        "Enemy_Spitter_Projectile.prefab"
+      ],
+      "navigator_prefab": "Enemy_Spitter_Navigator.prefab",
+      "registry_guid": "ae1e4165010820b488db5c90c0676991",
+      "stats": {
+        "health": 280,
+        "contact_damage": 135,
+        "movement_speed": 1.6,
+        "acceleration": 360,
+        "angular_speed": 720,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 1,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "ranged"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 9,
+      "enemy_type": "Buffer",
+      "primary_prefab": "Enemy_Buffer.prefab",
+      "prefab_files": [
+        "Enemy_Buffer.prefab",
+        "Enemy_Buffer_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_Buffer_Navigator.prefab",
+      "registry_guid": "7e678a30cc9b5b14782200389037a144",
+      "stats": {
+        "health": 3000,
+        "contact_damage": 35,
+        "movement_speed": 2.6,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 15,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "support"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 10,
+      "enemy_type": "Squid",
+      "primary_prefab": "Enemy_Squid.prefab",
+      "prefab_files": [
+        "Enemy_Squid.prefab",
+        "Enemy_Squid_Navigator.prefab",
+        "Enemy_SquidAttack.prefab",
+        "Enemy_SquidDeadSplash.prefab",
+        "Enemy_Squid_BulletHellProjectile_Phase2.prefab",
+        "Enemy_Squid_BulletHellProjectile_Phase3.prefab",
+        "Enemy_Squid_HomingProjectile_Hit.prefab",
+        "Enemy_Squid_HomingProjectile_Phase1.prefab",
+        "Enemy_Squid_HomingProjectile_Phase2.prefab"
+      ],
+      "navigator_prefab": "Enemy_Squid_Navigator.prefab",
+      "registry_guid": "72588f1c4ee98a041908885b8e1bb9dd",
+      "stats": {
+        "health": 185000,
+        "contact_damage": 350,
+        "movement_speed": 3,
+        "acceleration": 8,
+        "angular_speed": 120,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 2,
+        "xp_drop": 99,
+        "slow_resistance": 0.5,
+        "is_boss": 1,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "boss"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 11,
+      "enemy_type": "SneakyBug",
+      "primary_prefab": "Enemy_SneakyBug.prefab",
+      "prefab_files": [
+        "Enemy_SneakyBug.prefab",
+        "Enemy_SneakyBug_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_SneakyBug_Navigator.prefab",
+      "registry_guid": "854757db01f229947913387649163120",
+      "stats": {
+        "health": 2000,
+        "contact_damage": 200,
+        "movement_speed": 4,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.6,
+        "xp_drop": 10,
+        "slow_resistance": 0.5,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "ambush"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 12,
+      "enemy_type": "HuntTarget",
+      "primary_prefab": "Enemy_HuntTarget.prefab",
+      "prefab_files": [
+        "Enemy_HuntTarget.prefab"
+      ],
+      "navigator_prefab": null,
+      "registry_guid": "9eb6f66c06e377d4cbd3a9dd10f835b5",
+      "stats": {
+        "health": 1250,
+        "contact_damage": 150,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": null,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 1,
+        "scales_with_progression": 1,
+        "ignores_difficulty_params": 1
+      },
+      "behavior_tags": [
+        "objective"
+      ],
+      "missing_stat_fields": [
+        "movement_speed",
+        "xp_drop"
+      ]
+    },
+    {
+      "enemy_type_id": 13,
+      "enemy_type": "TeethyWorm_Baby",
+      "primary_prefab": "Enemy_BabyWorm.prefab",
+      "prefab_files": [
+        "Enemy_BabyWorm.prefab",
+        "Enemy_BabyWorm_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_BabyWorm_Navigator.prefab",
+      "registry_guid": "0151b3b8807256e4a8f5ad4f1c96fe66",
+      "stats": {
+        "health": 135,
+        "contact_damage": 30,
+        "movement_speed": 3.1,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.35,
+        "xp_drop": 2,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 14,
+      "enemy_type": "FlyingManta",
+      "primary_prefab": "Enemy_FlyingManta.prefab",
+      "prefab_files": [
+        "Enemy_FlyingManta.prefab",
+        "Enemy_FlyingManta_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_FlyingManta_Navigator.prefab",
+      "registry_guid": "12b0c620dbedf91479ba01128528192b",
+      "stats": {
+        "health": 2000,
+        "contact_damage": 200,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 16,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "flying"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 15,
+      "enemy_type": "Mole",
+      "primary_prefab": "Enemy_Mole.prefab",
+      "prefab_files": [
+        "Enemy_Mole.prefab",
+        "Enemy_Mole_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_Mole_Navigator.prefab",
+      "registry_guid": "909f4c52f9119b440af67b394fd70468",
+      "stats": {
+        "health": 1500,
+        "contact_damage": 120,
+        "movement_speed": 2,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.4,
+        "xp_drop": 10,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "ambush"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 16,
+      "enemy_type": "LineEvent",
+      "primary_prefab": "Enemy_LineEvent.prefab",
+      "prefab_files": [
+        "Enemy_LineEvent.prefab"
+      ],
+      "navigator_prefab": null,
+      "registry_guid": "afa06f726d6cadb48b6eafd40e25a2b1",
+      "stats": {
+        "health": 500,
+        "contact_damage": 325,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 4,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "event"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 17,
+      "enemy_type": "MobEvent",
+      "primary_prefab": "Enemy_MobEvent.prefab",
+      "prefab_files": [
+        "Enemy_MobEvent.prefab",
+        "Enemy_MobEvent_Navigator.prefab",
+        "Enemy_MobEvent_HiveMind.prefab"
+      ],
+      "navigator_prefab": "Enemy_MobEvent_Navigator.prefab",
+      "registry_guid": "99e4ccb4d0a1e46479002d550bc83148",
+      "stats": {
+        "health": 500,
+        "contact_damage": 325,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 3,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "event"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 18,
+      "enemy_type": "ConvergentEvent",
+      "primary_prefab": "Enemy_ConvergentEvent.prefab",
+      "prefab_files": [
+        "Enemy_ConvergentEvent.prefab"
+      ],
+      "navigator_prefab": "ConvergentEventEnemyNavigator.prefab",
+      "registry_guid": "945d2ecd854a00e4bba41c1629b6e783",
+      "stats": {
+        "health": 500,
+        "contact_damage": 200,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 7,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 1,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "event"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 19,
+      "enemy_type": "Toad",
+      "primary_prefab": "Enemy_Toad.prefab",
+      "prefab_files": [
+        "Enemy_Toad.prefab",
+        "Enemy_Toad_Navigator.prefab",
+        "Enemy_ToadDeadSplash.prefab"
+      ],
+      "navigator_prefab": "Enemy_Toad_Navigator.prefab",
+      "registry_guid": "b3814e4c2a1706747956e949645d74fd",
+      "stats": {
+        "health": 165000,
+        "contact_damage": 350,
+        "movement_speed": 2.25,
+        "acceleration": 8,
+        "angular_speed": 120,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 1.5,
+        "xp_drop": 99,
+        "slow_resistance": 0.5,
+        "is_boss": 1,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "boss"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 20,
+      "enemy_type": "Stinkbug",
+      "primary_prefab": "Enemy_Stinkbug.prefab",
+      "prefab_files": [
+        "Enemy_Stinkbug.prefab",
+        "Enemy_Stinkbug_Navigator.prefab",
+        "Enemy_Stinkbug_DamageZone.prefab"
+      ],
+      "navigator_prefab": "Enemy_Stinkbug_Navigator.prefab",
+      "registry_guid": "b04c01c6143c82444998c3b4ea0de918",
+      "stats": {
+        "health": 1000,
+        "contact_damage": 125,
+        "movement_speed": 2.5,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.75,
+        "xp_drop": 12,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 21,
+      "enemy_type": "StaticShooter",
+      "primary_prefab": "Enemy_StaticShooter.prefab",
+      "prefab_files": [
+        "Enemy_StaticShooter.prefab",
+        "Enemy_StaticShooter_Projectile.prefab"
+      ],
+      "navigator_prefab": null,
+      "registry_guid": "27457f93a174ec84a9fd81d898998d6a",
+      "stats": {
+        "health": 2000,
+        "contact_damage": 150,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 7,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "ranged"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 22,
+      "enemy_type": "BounceEvent",
+      "primary_prefab": "Enemy_BounceEvent.prefab",
+      "prefab_files": [
+        "Enemy_BounceEvent.prefab"
+      ],
+      "navigator_prefab": null,
+      "registry_guid": "9b8bbb6a554ff0a46b0f7af80a04ff1f",
+      "stats": {
+        "health": 600,
+        "contact_damage": null,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": null,
+        "size_max": null,
+        "navigation_radius": null,
+        "xp_drop": null,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "event"
+      ],
+      "missing_stat_fields": [
+        "contact_damage",
+        "movement_speed",
+        "xp_drop"
+      ]
+    },
+    {
+      "enemy_type_id": 23,
+      "enemy_type": "Spawner",
+      "primary_prefab": "Enemy_Spawner.prefab",
+      "prefab_files": [
+        "Enemy_Spawner.prefab",
+        "Enemy_Spawner_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_Spawner_Navigator.prefab",
+      "registry_guid": "172ae93fdfd55fb46955a97a893bff8f",
+      "stats": {
+        "health": 3500,
+        "contact_damage": 200,
+        "movement_speed": 1.2,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 2.5,
+        "xp_drop": 17,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "spawner"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 24,
+      "enemy_type": "SpawnerEgg",
+      "primary_prefab": "Enemy_SpawnerEgg.prefab",
+      "prefab_files": [
+        "Enemy_SpawnerEgg.prefab"
+      ],
+      "navigator_prefab": null,
+      "registry_guid": "a410eb0f225c24c4b89d49249da52c5a",
+      "stats": {
+        "health": 200,
+        "contact_damage": 35,
+        "movement_speed": null,
+        "acceleration": null,
+        "angular_speed": null,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": null,
+        "xp_drop": 1,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "spawner"
+      ],
+      "missing_stat_fields": [
+        "movement_speed"
+      ]
+    },
+    {
+      "enemy_type_id": 25,
+      "enemy_type": "SpawnerHatchling",
+      "primary_prefab": "Enemy_SpawnerHatchling.prefab",
+      "prefab_files": [
+        "Enemy_SpawnerHatchling.prefab",
+        "Enemy_SpawnerHatchling_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_SpawnerHatchling_Navigator.prefab",
+      "registry_guid": "53ab0d2e35224894cbf26d13416f1b86",
+      "stats": {
+        "health": 500,
+        "contact_damage": 250,
+        "movement_speed": 5,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.6,
+        "xp_drop": 1,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "spawner"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 26,
+      "enemy_type": "EliteTeethyWorm",
+      "primary_prefab": "Enemy_TeethyWormElite.prefab",
+      "prefab_files": [
+        "Enemy_TeethyWormElite.prefab",
+        "Enemy_TeethyWormElite_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_TeethyWormElite_Navigator.prefab",
+      "registry_guid": "4e667b14189802f45abdd592875b659c",
+      "stats": {
+        "health": 5000,
+        "contact_damage": 270,
+        "movement_speed": 1.8,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.9,
+        "xp_drop": 0,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "elite"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 27,
+      "enemy_type": "EliteExplodingTick",
+      "primary_prefab": "Enemy_ExplodingTickElite.prefab",
+      "prefab_files": [
+        "Enemy_ExplodingTickElite.prefab",
+        "Enemy_ExplodingTickElite_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_ExplodingTickElite_Navigator.prefab",
+      "registry_guid": "0fab7a33a8335ae46b233d8734d63b41",
+      "stats": {
+        "health": 6000,
+        "contact_damage": 300,
+        "movement_speed": 1.75,
+        "acceleration": 360,
+        "angular_speed": 180,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 1.3,
+        "xp_drop": 15,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "elite",
+        "explosive"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 28,
+      "enemy_type": "EliteBuffer",
+      "primary_prefab": "Enemy_BufferElite.prefab",
+      "prefab_files": [
+        "Enemy_BufferElite.prefab",
+        "Enemy_BufferElite_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_BufferElite_Navigator.prefab",
+      "registry_guid": "6bd03f4e121d4914f851d3e47c83bf96",
+      "stats": {
+        "health": 6000,
+        "contact_damage": 70,
+        "movement_speed": 2.3,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 20,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "elite",
+        "support"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 29,
+      "enemy_type": "Hydra",
+      "primary_prefab": "Enemy_Hydra.prefab",
+      "prefab_files": [
+        "Enemy_Hydra.prefab",
+        "Enemy_Hydra_Navigator.prefab",
+        "Enemy_Hydra_Healer.prefab",
+        "Enemy_HydraDeadSplash.prefab"
+      ],
+      "navigator_prefab": "Enemy_Hydra_Navigator.prefab",
+      "registry_guid": "6c0b94635e7579045bb88b448c282085",
+      "stats": {
+        "health": 165000,
+        "contact_damage": 350,
+        "movement_speed": 2.75,
+        "acceleration": 8,
+        "angular_speed": 120,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 1.5,
+        "xp_drop": 99,
+        "slow_resistance": 0.5,
+        "is_boss": 1,
+        "scales_with_players": 1,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "boss"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 30,
+      "enemy_type": "ExplodingTickFast",
+      "primary_prefab": "Enemy_ExplodingTickFast.prefab",
+      "prefab_files": [
+        "Enemy_ExplodingTickFast.prefab",
+        "Enemy_ExplodingTickFast_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_ExplodingTickFast_Navigator.prefab",
+      "registry_guid": "994d943056b687a4bb5b79e4c5678316",
+      "stats": {
+        "health": 650,
+        "contact_damage": 125,
+        "movement_speed": 2.85,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 5,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "fast",
+        "explosive"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 31,
+      "enemy_type": "BufferFast",
+      "primary_prefab": "Enemy_BufferFast.prefab",
+      "prefab_files": [
+        "Enemy_BufferFast.prefab",
+        "Enemy_BufferFast_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_BufferFast_Navigator.prefab",
+      "registry_guid": "6c61fadc99996554ebb51583886d7728",
+      "stats": {
+        "health": 3200,
+        "contact_damage": 35,
+        "movement_speed": 3,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 15,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "fast",
+        "support"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 32,
+      "enemy_type": "SpitterSpread",
+      "primary_prefab": "Enemy_SpitterSpread.prefab",
+      "prefab_files": [
+        "Enemy_SpitterSpread.prefab",
+        "Enemy_SpitterSpread_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_SpitterSpread_Navigator.prefab",
+      "registry_guid": "e2b1477e87cb5f24fb1d76c6ce4b0eca",
+      "stats": {
+        "health": 280,
+        "contact_damage": 135,
+        "movement_speed": 1.6,
+        "acceleration": 360,
+        "angular_speed": 720,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.5,
+        "xp_drop": 1,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "ranged"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 33,
+      "enemy_type": "TeethyWormFast",
+      "primary_prefab": "Enemy_TeethyWormFast.prefab",
+      "prefab_files": [
+        "Enemy_TeethyWormFast.prefab",
+        "Enemy_TeethyWormFast_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_TeethyWormFast_Navigator.prefab",
+      "registry_guid": "c95e99827391e1f49b7d09c65ca099e5",
+      "stats": {
+        "health": 900,
+        "contact_damage": 140,
+        "movement_speed": 2.1,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.45,
+        "xp_drop": null,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "fast"
+      ],
+      "missing_stat_fields": [
+        "xp_drop"
+      ]
+    },
+    {
+      "enemy_type_id": 34,
+      "enemy_type": "TeethyWorm_BabyFast",
+      "primary_prefab": "Enemy_BabyWormFast.prefab",
+      "prefab_files": [
+        "Enemy_BabyWormFast.prefab",
+        "Enemy_BabyWormFast_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_BabyWormFast_Navigator.prefab",
+      "registry_guid": "2aa95052ec44534468d17f0a911a7d6b",
+      "stats": {
+        "health": 250,
+        "contact_damage": 40,
+        "movement_speed": 4,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.35,
+        "xp_drop": 2,
+        "slow_resistance": 0,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [
+        "fast"
+      ],
+      "missing_stat_fields": []
+    },
+    {
+      "enemy_type_id": 35,
+      "enemy_type": "Hoarder",
+      "primary_prefab": "Enemy_Hoarder.prefab",
+      "prefab_files": [
+        "Enemy_Hoarder.prefab",
+        "Enemy_Hoarder_Navigator.prefab"
+      ],
+      "navigator_prefab": "Enemy_Hoarder_Navigator.prefab",
+      "registry_guid": "f0cec6c02249bb54c813c602df59abd9",
+      "stats": {
+        "health": 5250,
+        "contact_damage": 135,
+        "movement_speed": 2.5,
+        "acceleration": 360,
+        "angular_speed": 360,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "navigation_radius": 0.4,
+        "xp_drop": 15,
+        "slow_resistance": 0.5,
+        "is_boss": 0,
+        "scales_with_players": 0,
+        "scales_with_progression": 0,
+        "ignores_difficulty_params": 0
+      },
+      "behavior_tags": [],
+      "missing_stat_fields": []
+    }
+  ]
+}

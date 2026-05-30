@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Star Mage: Element specialist who shines on favoured matchups. Starter spell Falling Star, prestige Smg. Stats, unique modifiers, skins and synergies.">
+  <title>Star Mage — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#x2736;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../index.html">Home</a>
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" aria-current="page" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">&#x2315;</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+            aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Characters">
+      <h2 class="sidebar__title">Roster</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">All characters</a></li>
+        <li><a href="bell-mage.html">Bell Mage</a></li><li><a href="bird-mage.html">Bird Mage</a></li><li><a href="campanelli.html">Campanelli</a></li><li><a href="flute-mage.html">Flute Mage</a></li><li><a href="hatty.html">Hatty</a></li><li><a href="key-mage.html">Key Mage</a></li><li><a href="ludwig.html">Ludwig</a></li><li><a href="moon-mage.html">Moon Mage</a></li><li><a href="plant-mage.html">Plant Mage</a></li><li><a href="reginald.html">Reginald</a></li><li><a href="smithy.html">Smithy</a></li><li><a href="star-mage.html" aria-current="page">Star Mage</a></li><li><a href="sun-mage.html">Sun Mage</a></li><li><a href="test-character.html" class="u-muted">Test Character</a></li><li><a href="vampire-mage.html">Vampire Mage</a></li><li><a href="wizard-king.html">Wizard King</a></li>
+      </ul>
+      <h2 class="sidebar__title">Related</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/character-improvements.html">Hero improvements</a></li>
+        <li><a href="../mechanics/stats.html">All stats</a></li>
+        <li><a href="../spells/index.html">All spells</a></li>
+        <li><a href="../challenges/wizard.html">Unlock challenges</a></li>
+      </ul>
+    </aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Characters</a></li><li aria-current="page">Star Mage</li></ol></nav>
+      <article class="content-frame">
+        <section id="overview" class="stack">
+          <h1>Star Mage</h1>
+          <p class="prose u-muted" style="font-size: var(--fs-lg);">Element specialist who shines on favoured matchups.</p>
+          <div class="row">
+            <span class="rarity-pill" data-rarity="epic">Elemental</span>
+            <span class="tag">Elemental</span>
+          </div>
+          
+          <dl class="meta-dl">
+            <dt>Internal ID</dt>     <dd><code>StarMage</code></dd>
+            <dt>Character ID</dt>    <dd>8</dd>
+            <dt>Selection order</dt> <dd>11</dd>
+            <dt>Starter spell</dt>   <dd><a href="../spells/falling-star.html">Falling Star</a></dd>
+            <dt>Prestige spell</dt>  <dd><a href="../spells/smg.html">Smg</a></dd>
+            <dt>Unlock cost</dt>     <dd>1500 gold</dd>
+            <dt>Skins available</dt> <dd>8</dd>
+          </dl>
+        </section>
+
+        <section id="kit" class="stack">
+          <h2>Base stats</h2>
+          <p class="prose">All wizards inherit the shared <a href="../mechanics/stats.html">CharacterStatsData</a> baseline (600 HP, 3.6 Move, 10% Crit, etc.). The right column shows Star Mage&rsquo;s starting numbers after their personal <code>modifiers</code> are applied at run-start. Stat values mid-run scale further from upgrades, artifacts and infusions — see <a href="../mechanics/damage-system.html">damage calculation</a>.</p>
+          <div class="stat-table-wrap">
+  <table class="stat-table">
+    <caption class="u-sr-only">Base stats and post-modifier values for Star Mage</caption>
+    <thead><tr><th scope="col">Stat</th><th scope="col" class="num">Shared base</th><th scope="col" class="num">After modifiers</th></tr></thead>
+    <tbody><tr><td>Movement Speed</td><td class="num">3.6</td><td class="num"><strong>3.6</strong> </td></tr><tr><td>Max Health</td><td class="num">600</td><td class="num"><strong>600</strong> </td></tr><tr><td>Luck</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Pickup Radius</td><td class="num">4</td><td class="num"><strong>4</strong> </td></tr><tr><td>Crit Chance</td><td class="num">10%</td><td class="num"><strong>10%</strong> </td></tr><tr><td>Crit Damage</td><td class="num">150%</td><td class="num"><strong>150%</strong> </td></tr><tr><td>Armor</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Dodge</td><td class="num">0%</td><td class="num"><strong>0%</strong> </td></tr><tr><td>Health Regen</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Rerolls</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Bans</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Pins</td><td class="num">0</td><td class="num"><strong>0</strong> </td></tr><tr><td>Revives</td><td class="num">2</td><td class="num"><strong>2</strong> </td></tr><tr><td>HP % on Revive</td><td class="num">50%</td><td class="num"><strong>50%</strong> </td></tr><tr><td>Revive Zone Size</td><td class="num">6.5</td><td class="num"><strong>6.5</strong> </td></tr><tr class="is-modified"><td>Element Strength Mult.</td><td class="num u-muted">—</td><td class="num"><strong>+15%</strong> <span class="u-muted">(modifier only)</span></td></tr></tbody>
+  </table>
+</div>
+        </section>
+
+        <section id="starter-spell" class="stack">
+          <h2>Starting loadout</h2>
+          <ul class="meta-dl" style="grid-template-columns:1fr; gap: var(--sp-2);"><li><strong>Starting spell:</strong> <a href="../spells/falling-star.html">Falling Star</a></li><li><strong>Prestige spell:</strong> <a href="../spells/smg.html">Smg</a> <span class="u-muted">(unlocked after first prestige)</span></li><li><strong>Starting artifact:</strong> <span class="u-muted">none (run starts artifact-free)</span></li><li><strong>Unlock cost:</strong> 1500 gold</li></ul>
+        </section>
+
+        <section id="improvements" class="stack">
+          <h2>Unique abilities</h2>
+          <p class="prose">Effects defined in <code>UniqueModifiers</code> on this character&rsquo;s <code>CharacterResource</code>. They apply automatically at run-start and stack with global character improvements.</p>
+          <p class="u-muted">No unique modifiers. This character is defined entirely by their stat block and starting loadout.</p>
+        </section>
+
+        <section id="skins" class="stack">
+          <h2>Skins (8)</h2>
+          <p class="prose">Cosmetic variants unlocked via the shop or by completing per-character challenges. Rarity tier is inferred from the skin label.</p>
+          <div class="grid grid-cards"><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Base</h4>
+    <div class="item-card__subtitle"><code>StarMage_0</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="common">Common</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Alt</h4>
+    <div class="item-card__subtitle"><code>StarMage_1</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="common">Common</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Alt</h4>
+    <div class="item-card__subtitle"><code>StarMage_2</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="common">Common</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Alt</h4>
+    <div class="item-card__subtitle"><code>StarMage_3</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="common">Common</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Prestige</h4>
+    <div class="item-card__subtitle"><code>StarMage_Prestige</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="legendary">Legendary</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Golden</h4>
+    <div class="item-card__subtitle"><code>StarMage_Golden</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="epic">Epic</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Sketchy</h4>
+    <div class="item-card__subtitle"><code>StarMage_Sketchy</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="rare">Rare</span>
+  </div>
+</div><div class="item-card">
+  <header class="item-card__header">
+    <h4 class="item-card__title">Big Head</h4>
+    <div class="item-card__subtitle"><code>StarMage_BigHead</code></div>
+  </header>
+  <div class="item-card__badges">
+    <span class="rarity-pill" data-rarity="rare">Rare</span>
+  </div>
+</div></div>
+        </section>
+
+        <section id="unlock" class="stack">
+          <h2>Related challenges</h2>
+          <p class="prose">All achievements whose ID references this character — unlocks, skin completions and prestige milestones.</p>
+          <h3>Outfits</h3><ul class="stack"><li><strong>CastManyFallingStarsAsStarMage</strong><br><span class="u-muted">type=Increase; target=9001</span><br><span class="u-muted">Reward: <code>Reward_Type_Cosmetic -&gt; Skin_StarMage_2</code></span></li><li><strong>FightSquidInRiverAsStarMage</strong><br><span class="u-muted">type=Increase; target=1</span><br><span class="u-muted">Reward: <code>Reward_Type_Cosmetic -&gt; Skin_StarMage_1</code></span></li></ul><h3>Prestige</h3><ul class="stack"><li><strong>ReachPrestige1AsStarMage</strong><br><span class="u-muted">type=Increase; target=1</span><br><span class="u-muted">Reward: <code>Reward_Type_Cosmetic -&gt; Skin_StarMage_Prestige</code></span></li></ul><h3>Wizards</h3><ul class="stack"><li><strong>UnlockStarMage</strong><br><span class="u-muted">type=Increase; target=1</span><br><span class="u-muted">Reward: <code>Reward_Type_Character -&gt; Character_StarMage</code></span></li></ul>
+        </section>
+
+        <section id="titles" class="stack">
+          <h2>Player titles</h2>
+          <p class="prose">Cosmetic player-name titles awarded for rank and prestige progress on this character.</p>
+          <ul class="stack"><li><code>StarMage1</code> <span class="tag">Rank 2</span> <span class="u-muted">Reach rank 2 on character #8</span></li><li><code>StarMage2</code> <span class="tag">Rank 5</span> <span class="u-muted">Reach rank 5 on character #8</span></li><li><code>StarMage3</code> <span class="tag">Rank 9</span> <span class="u-muted">Reach rank 9 on character #8</span></li><li><code>StarMage4</code> <span class="tag">Prestige 1</span><span class="tag">Rank 5</span> <span class="u-muted">Reach rank 5 prestige 1 on character #8</span></li><li><code>StarMage5</code> <span class="tag">Prestige 2</span><span class="tag">Rank 5</span> <span class="u-muted">Reach rank 5 prestige 2 on character #8</span></li><li><code>StarMage6</code> <span class="tag">Prestige 3</span><span class="tag">Rank 1</span> <span class="u-muted">Reach rank 1 prestige 3 on character #8</span></li><li><code>StarMage7</code> <span class="tag">Prestige 4</span><span class="tag">Rank 1</span> <span class="u-muted">Reach rank 1 prestige 4 on character #8</span></li><li><code>StarMage8</code> <span class="tag">Prestige 5</span><span class="tag">Rank 1</span> <span class="u-muted">Reach rank 1 prestige 5 on character #8</span></li></ul>
+        </section>
+
+        <section id="synergies" class="stack">
+          <h2>Playstyle &amp; synergy</h2>
+          <p class="prose">+15 ElementStrengthMultiplier rewards committing to one element across the kit. <strong>Falling Star</strong> with a single dominant infusion outperforms scattered builds.</p><p class="prose">Pick spells with strong elemental infusions (Bomb Launcher, Meteor) and let the multiplier compound. Element matrix matters more for him than for any other hero.</p>
+        </section>
+
+        <section id="related" class="stack">
+          <h2>Related</h2>
+          <div class="grid grid-3">
+            <a class="see-also__link" href="index.html"><strong>All characters</strong>Back to the roster overview.</a>
+            <a class="see-also__link" href="../spells/falling-star.html"><strong>Falling Star</strong>This character&rsquo;s signature spell.</a>
+            <a class="see-also__link" href="../mechanics/character-improvements.html"><strong>Global upgrades</strong>13 hero-agnostic shop upgrades that stack with this kit.</a>
+            <a class="see-also__link" href="../mechanics/stats.html"><strong>Stat reference</strong>Definitions and stacking rules for every stat.</a>
+            <a class="see-also__link" href="../challenges/wizard.html"><strong>Wizard challenges</strong>How to unlock every other hero.</a>
+            <a class="see-also__link" href="../guides/best-spells-per-hero.html"><strong>Best spells per hero</strong>Curated build pairings (guide).</a>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; <a href="#main-content">Back to top</a>
+  </div>
+</footer>
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

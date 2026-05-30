@@ -1,0 +1,850 @@
+/* ============================================================================
+ * The Spell Brigade Wiki — components.css
+ * ----------------------------------------------------------------------------
+ * Reusable component styles. Relies on custom properties from main.css.
+ *
+ * TABLE OF CONTENTS
+ *   1. Element badge + glyph map
+ *   2. Rarity pill + ribbon
+ *   3. Item card
+ *   4. Stat bar (text-block bars)
+ *   5. Stat / comparison table
+ *   6. Spell-element matrix
+ *   7. Tier list block
+ *   8. Damage formula display (CSS-only syntax tint)
+ *   9. Search bar + dropdown results
+ *  10. Callout / admonition boxes
+ *  11. <kbd>, key-cap, inline highlight
+ *  12. Tag chip, meta dl, definition grid
+ *  13. Tabs (no-JS friendly via :target / radio)
+ *  14. Buttons & button groups
+ *  15. Pagination & "see also" strip
+ * ========================================================================== */
+
+
+/* ----------------------------------------------------------------------------
+ * 1. ELEMENT BADGE
+ * --------------------------------------------------------------------------
+ * Usage:
+ *   <span class="el-badge" data-element="fire">
+ *     <span class="el-badge__glyph" aria-hidden="true"></span>
+ *     <span class="el-badge__label">Fire</span>
+ *   </span>
+ * Glyphs are inserted via CSS so authors only set data-element.
+ * -------------------------------------------------------------------------- */
+.el-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.15em 0.7em 0.18em;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  border: 1px solid;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.el-badge__glyph {
+  font-family: var(--ff-serif);
+  font-size: 1em;
+  line-height: 1;
+}
+.el-badge__glyph::before { content: attr(data-glyph); }
+
+/* Default fallback */
+.el-badge {
+  color: var(--c-neutral);
+  background: var(--c-neutral-glow);
+  border-color: var(--c-neutral);
+}
+.el-badge[data-element="neutral"] .el-badge__glyph::before { content: "✦"; }
+
+.el-badge[data-element="fire"] {
+  color: var(--c-fire);
+  background: var(--c-fire-glow);
+  border-color: var(--c-fire);
+}
+.el-badge[data-element="fire"] .el-badge__glyph::before { content: "▲"; }
+
+.el-badge[data-element="lightning"] {
+  color: var(--c-lightning);
+  background: var(--c-lightning-glow);
+  border-color: var(--c-lightning);
+}
+.el-badge[data-element="lightning"] .el-badge__glyph::before { content: "ϟ"; }
+
+.el-badge[data-element="ice"] {
+  color: var(--c-ice);
+  background: var(--c-ice-glow);
+  border-color: var(--c-ice);
+}
+.el-badge[data-element="ice"] .el-badge__glyph::before { content: "❖"; }
+
+.el-badge[data-element="acid"] {
+  color: var(--c-acid);
+  background: var(--c-acid-glow);
+  border-color: var(--c-acid);
+}
+.el-badge[data-element="acid"] .el-badge__glyph::before { content: "⬢"; }
+
+.el-badge[data-element="dark"] {
+  color: #c69cf2;            /* lift for AA on dark bg */
+  background: var(--c-dark-glow);
+  border-color: var(--c-dark);
+}
+.el-badge[data-element="dark"] .el-badge__glyph::before { content: "✶"; }
+
+.el-badge--lg { font-size: var(--fs-sm); padding: 0.25em 0.9em; }
+
+
+/* ----------------------------------------------------------------------------
+ * 2. RARITY — pill (inline) & ribbon (card corner)
+ * -------------------------------------------------------------------------- */
+.rarity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.1em 0.6em;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  background: rgba(255,255,255,0.03);
+}
+.rarity-pill::before {
+  content: "◆";
+  font-size: 0.7em;
+  line-height: 1;
+}
+
+.rarity-pill[data-rarity="common"]   { color: var(--c-rare-common); }
+.rarity-pill[data-rarity="rare"]     { color: var(--c-rare-rare); }
+.rarity-pill[data-rarity="epic"]     { color: var(--c-rare-epic); }
+.rarity-pill[data-rarity="legendary"]{ color: var(--c-rare-legendary); }
+
+/* Ribbon: anchor on a positioned parent (e.g., .item-card) */
+.rarity-ribbon {
+  position: absolute;
+  top: 0; right: 0;
+  padding: 0.2em 0.7em;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-bg);
+  background: var(--c-rare-common);
+  border-bottom-left-radius: var(--r-md);
+  border-top-right-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+  z-index: 2;
+}
+.rarity-ribbon[data-rarity="common"]   { background: var(--c-rare-common); }
+.rarity-ribbon[data-rarity="rare"]     { background: var(--c-rare-rare); }
+.rarity-ribbon[data-rarity="epic"]     { background: var(--c-rare-epic); }
+.rarity-ribbon[data-rarity="legendary"]{ background: var(--c-rare-legendary); color: #2a1a00; }
+
+
+/* ----------------------------------------------------------------------------
+ * 3. ITEM CARD
+ * -------------------------------------------------------------------------- */
+.item-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4);
+  background: var(--c-bg-elev-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+.item-card:hover {
+  border-color: var(--c-border-gold);
+  box-shadow: var(--sh-glow-gold);
+}
+
+/* Element tint via left bar */
+.item-card[data-element]::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--c-neutral);
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+}
+.item-card[data-element="fire"]::before     { background: var(--c-fire); }
+.item-card[data-element="lightning"]::before{ background: var(--c-lightning); }
+.item-card[data-element="ice"]::before      { background: var(--c-ice); }
+.item-card[data-element="acid"]::before     { background: var(--c-acid); }
+.item-card[data-element="dark"]::before     { background: var(--c-dark); }
+
+.item-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding-right: 5rem;   /* leave room for ribbon */
+}
+.item-card__title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-lg);
+  color: var(--c-text-strong);
+  margin: 0;
+}
+.item-card__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+}
+.item-card__title a:hover {
+  color: var(--c-gold-bright);
+  border-bottom-color: var(--c-gold-dim);
+}
+.item-card__subtitle {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.item-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.item-card__desc {
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  margin: 0;
+}
+
+/* Stat grid inside card */
+.item-card__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--sp-2) var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--c-rule);
+  font-size: var(--fs-sm);
+}
+.item-card__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+.item-card__stat-label { color: var(--c-text-muted); }
+.item-card__stat-value {
+  font-family: var(--ff-mono);
+  color: var(--c-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 4. STAT BAR — text glyph bars
+ * --------------------------------------------------------------------------
+ * Usage:
+ *   <span class="stat-bar" data-value="6" data-max="10" role="meter"
+ *         aria-valuenow="6" aria-valuemin="0" aria-valuemax="10"
+ *         aria-label="Damage 6 of 10"></span>
+ * JS (wiki.js) fills the inner glyphs based on data-value/data-max.
+ * -------------------------------------------------------------------------- */
+.stat-bar {
+  display: inline-grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5em;
+  align-items: center;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.stat-bar__glyphs {
+  color: var(--c-text-dim);
+  letter-spacing: 0;
+}
+.stat-bar__glyphs .on { color: var(--c-gold); }
+.stat-bar__num {
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-strong);
+  font-size: 0.95em;
+}
+
+/* Element-tinted bars */
+.stat-bar[data-element="fire"]      .stat-bar__glyphs .on { color: var(--c-fire); }
+.stat-bar[data-element="lightning"] .stat-bar__glyphs .on { color: var(--c-lightning); }
+.stat-bar[data-element="ice"]       .stat-bar__glyphs .on { color: var(--c-ice); }
+.stat-bar[data-element="acid"]      .stat-bar__glyphs .on { color: var(--c-acid); }
+.stat-bar[data-element="dark"]      .stat-bar__glyphs .on { color: #c69cf2; }
+
+
+/* ----------------------------------------------------------------------------
+ * 5. STAT / COMPARISON TABLE
+ * -------------------------------------------------------------------------- */
+.stat-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  background: var(--c-bg-elev-2);
+}
+
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.stat-table caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--c-text-muted);
+  font-family: var(--ff-serif);
+  font-style: italic;
+  border-bottom: 1px solid var(--c-rule);
+}
+
+.stat-table th,
+.stat-table td {
+  padding: var(--sp-2) var(--sp-3);
+  text-align: left;
+  border-bottom: 1px solid var(--c-rule);
+  vertical-align: middle;
+}
+.stat-table th {
+  background: var(--c-bg-elev-3);
+  color: var(--c-gold);
+  font-weight: 600;
+  font-family: var(--ff-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-xs);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  white-space: nowrap;
+}
+.stat-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+.stat-table tbody tr:hover           { background: var(--c-bg-elev-3); }
+.stat-table tbody tr:last-child td   { border-bottom: 0; }
+
+/* Numeric / monospaced cells */
+.stat-table .num,
+.stat-table td.num {
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--c-text-strong);
+}
+
+/* Sortable header indicator */
+.stat-table th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+}
+.stat-table th[data-sort]::after {
+  content: "  ↕";
+  color: var(--c-text-dim);
+  font-size: 0.85em;
+}
+.stat-table th[data-sort][aria-sort="ascending"]::after  { content: "  ▲"; color: var(--c-gold-bright); }
+.stat-table th[data-sort][aria-sort="descending"]::after { content: "  ▼"; color: var(--c-gold-bright); }
+
+
+/* ----------------------------------------------------------------------------
+ * 6. SPELL-ELEMENT MATRIX
+ * -------------------------------------------------------------------------- */
+.element-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--c-bg-elev-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+}
+.element-matrix__cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-3);
+  background: var(--c-bg-inset);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  color: var(--c-text);
+  transition: border-color var(--dur-fast) var(--ease),
+              background-color var(--dur-fast) var(--ease);
+}
+.element-matrix__cell:hover {
+  border-color: var(--c-border-gold);
+  background: var(--c-bg-elev-3);
+}
+.element-matrix__cell-name {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-md);
+  color: var(--c-text-strong);
+}
+.element-matrix__cell-meta {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--ff-mono);
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 7. TIER LIST
+ * -------------------------------------------------------------------------- */
+.tier-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--c-border);  /* shows as 2px gaps */
+}
+.tier-row {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0;
+  background: var(--c-bg-elev-1);
+  min-height: 4.5rem;
+}
+.tier-row__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-serif);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--c-bg);
+  letter-spacing: 0.04em;
+}
+.tier-row__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  align-items: center;
+}
+
+.tier-row[data-tier="SSS"] .tier-row__label { background: #ff3b3b; color: #1a0000; }
+.tier-row[data-tier="S"]   .tier-row__label { background: #ff9500; color: #1a0e00; }
+.tier-row[data-tier="A"]   .tier-row__label { background: #ffd23f; color: #1a1500; }
+.tier-row[data-tier="B"]   .tier-row__label { background: #9bc53d; color: #0f1a00; }
+.tier-row[data-tier="C"]   .tier-row__label { background: #4ecdc4; color: #001a18; }
+.tier-row[data-tier="D"]   .tier-row__label { background: #9b9b9b; color: #111;    }
+
+.tier-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--c-bg-elev-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  color: var(--c-text);
+  text-decoration: none;
+  font-family: var(--ff-serif);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.tier-chip:hover { border-color: var(--c-border-gold); color: var(--c-gold-bright); }
+
+
+/* ----------------------------------------------------------------------------
+ * 8. DAMAGE FORMULA DISPLAY
+ * --------------------------------------------------------------------------
+ * Pure-CSS "syntax tint" via semantic spans authors write by hand.
+ *   <pre class="formula"><code>
+ *     <span class="f-fn">damage</span>(<span class="f-var">L</span>)
+ *       = <span class="f-base">12</span>
+ *       + <span class="f-num">3.5</span> * <span class="f-var">L</span>
+ *       <span class="f-op">×</span>
+ *       <span class="f-el" data-element="fire">[fire]</span>
+ *   </code></pre>
+ * -------------------------------------------------------------------------- */
+.formula {
+  background: var(--c-bg-inset);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-gold);
+  border-radius: var(--r-md);
+  padding: var(--sp-4);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  overflow-x: auto;
+}
+.formula .f-fn     { color: var(--c-gold-bright); font-weight: 600; }
+.formula .f-var    { color: var(--c-rare-rare); font-style: italic; }
+.formula .f-num,
+.formula .f-base   { color: var(--c-acid); }
+.formula .f-op     { color: var(--c-text-muted); }
+.formula .f-comment{ color: var(--c-text-dim); font-style: italic; }
+.formula .f-el[data-element="fire"]      { color: var(--c-fire); }
+.formula .f-el[data-element="lightning"] { color: var(--c-lightning); }
+.formula .f-el[data-element="ice"]       { color: var(--c-ice); }
+.formula .f-el[data-element="acid"]      { color: var(--c-acid); }
+.formula .f-el[data-element="dark"]      { color: #c69cf2; }
+
+
+/* ----------------------------------------------------------------------------
+ * 9. SEARCH
+ * -------------------------------------------------------------------------- */
+.search {
+  position: relative;
+  flex: 1 1 14rem;
+  max-width: 24rem;
+}
+.search__input {
+  width: 100%;
+  background: var(--c-bg-inset);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 2.2rem;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  transition: border-color var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
+}
+.search__input::placeholder { color: var(--c-text-dim); }
+.search__input:focus {
+  outline: none;
+  border-color: var(--c-gold-bright);
+  box-shadow: 0 0 0 2px rgba(201,169,97,0.25);
+}
+.search__icon {
+  position: absolute;
+  left: var(--sp-2);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-text-muted);
+  pointer-events: none;
+  font-size: var(--fs-md);
+}
+.search__results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: var(--c-bg-elev-1);
+  border: 1px solid var(--c-border-gold);
+  border-radius: var(--r-md);
+  max-height: 24rem;
+  overflow-y: auto;
+  box-shadow: var(--sh-2);
+  z-index: 30;
+  padding: var(--sp-1);
+}
+.search__results[hidden] { display: none; }
+
+.search__result {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  color: var(--c-text);
+  text-decoration: none;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+}
+.search__result:hover,
+.search__result[aria-selected="true"] {
+  background: var(--c-bg-elev-3);
+  color: var(--c-gold-bright);
+}
+.search__result-title { display: block; font-weight: 600; }
+.search__result-meta {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  margin-top: 0.1em;
+}
+.search__empty {
+  padding: var(--sp-3);
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  font-style: italic;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 10. CALLOUT BOXES
+ * --------------------------------------------------------------------------
+ * <aside class="callout" data-kind="tip">…</aside>
+ * -------------------------------------------------------------------------- */
+.callout {
+  position: relative;
+  background: var(--c-bg-elev-2);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-gold);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-5);
+  margin: var(--sp-4) 0;
+  font-size: var(--fs-sm);
+}
+.callout__title {
+  display: block;
+  font-family: var(--ff-serif);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  color: var(--c-gold-bright);
+  margin: 0 0 var(--sp-1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.callout__title::before {
+  content: "❖ ";
+  color: inherit;
+  margin-right: 0.2em;
+}
+.callout > p:last-child { margin-bottom: 0; }
+
+.callout[data-kind="tip"]     { border-left-color: var(--c-success); }
+.callout[data-kind="tip"]     .callout__title { color: var(--c-success); }
+.callout[data-kind="tip"]     .callout__title::before { content: "✦ "; }
+
+.callout[data-kind="warn"]    { border-left-color: var(--c-warn); }
+.callout[data-kind="warn"]    .callout__title { color: var(--c-warn); }
+.callout[data-kind="warn"]    .callout__title::before { content: "⚠ "; }
+
+.callout[data-kind="danger"]  { border-left-color: var(--c-danger); }
+.callout[data-kind="danger"]  .callout__title { color: var(--c-danger); }
+.callout[data-kind="danger"]  .callout__title::before { content: "✕ "; }
+
+.callout[data-kind="lore"]    { border-left-color: var(--c-dark); font-family: var(--ff-serif); font-style: italic; }
+.callout[data-kind="lore"]    .callout__title { color: #c69cf2; font-style: normal; }
+.callout[data-kind="lore"]    .callout__title::before { content: "✶ "; }
+
+
+/* ----------------------------------------------------------------------------
+ * 11. KBD, KEY-CAP, INLINE HIGHLIGHT
+ * -------------------------------------------------------------------------- */
+kbd {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: var(--c-bg-elev-3);
+  color: var(--c-text-strong);
+  border: 1px solid var(--c-border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+  font-family: var(--ff-mono);
+  font-size: 0.85em;
+  line-height: 1;
+  vertical-align: baseline;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+
+mark, .highlight {
+  background: rgba(255, 210, 63, 0.22);
+  color: var(--c-text-strong);
+  padding: 0 0.2em;
+  border-radius: var(--r-sm);
+}
+
+.keyword {
+  font-family: var(--ff-mono);
+  font-size: 0.95em;
+  color: var(--c-gold-bright);
+  background: rgba(201,169,97,0.08);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-sm);
+  padding: 0 0.35em;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 12. TAG CHIP, META DL, DEFINITION GRID
+ * -------------------------------------------------------------------------- */
+.tag {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  background: var(--c-bg-elev-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-pill);
+  text-decoration: none;
+}
+.tag:hover { color: var(--c-gold-bright); border-color: var(--c-border-gold); }
+
+.meta-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  margin: 0;
+}
+.meta-dl dt {
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--fs-xs);
+  margin: 0;
+  align-self: center;
+}
+.meta-dl dd {
+  margin: 0;
+  color: var(--c-text-strong);
+  font-family: var(--ff-mono);
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 13. TABS (no-JS friendly via radio inputs)
+ * --------------------------------------------------------------------------
+ * Pattern:
+ *   <div class="tabs">
+ *     <input type="radio" name="t1" id="t1-a" checked>
+ *     <input type="radio" name="t1" id="t1-b">
+ *     <div class="tabs__bar">
+ *       <label for="t1-a">Overview</label>
+ *       <label for="t1-b">Stats</label>
+ *     </div>
+ *     <div class="tabs__panels">
+ *       <section class="tabs__panel" data-for="t1-a">...</section>
+ *       <section class="tabs__panel" data-for="t1-b">...</section>
+ *     </div>
+ *   </div>
+ * -------------------------------------------------------------------------- */
+.tabs { position: relative; }
+.tabs > input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.tabs__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--c-border-gold);
+  margin-bottom: var(--sp-4);
+}
+.tabs__bar label {
+  padding: var(--sp-2) var(--sp-4);
+  font-family: var(--ff-serif);
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  margin-bottom: -1px;
+}
+.tabs__bar label:hover { color: var(--c-text-strong); }
+.tabs__panel { display: none; }
+
+/* Generic mapping for first 4 inputs ↔ first 4 panels */
+.tabs > input:nth-of-type(1):checked ~ .tabs__bar label:nth-of-type(1),
+.tabs > input:nth-of-type(2):checked ~ .tabs__bar label:nth-of-type(2),
+.tabs > input:nth-of-type(3):checked ~ .tabs__bar label:nth-of-type(3),
+.tabs > input:nth-of-type(4):checked ~ .tabs__bar label:nth-of-type(4) {
+  color: var(--c-gold-bright);
+  background: var(--c-bg-elev-2);
+  border-color: var(--c-border-gold);
+  border-bottom-color: var(--c-bg-elev-2);
+}
+.tabs > input:nth-of-type(1):checked ~ .tabs__panels .tabs__panel:nth-of-type(1),
+.tabs > input:nth-of-type(2):checked ~ .tabs__panels .tabs__panel:nth-of-type(2),
+.tabs > input:nth-of-type(3):checked ~ .tabs__panels .tabs__panel:nth-of-type(3),
+.tabs > input:nth-of-type(4):checked ~ .tabs__panels .tabs__panel:nth-of-type(4) {
+  display: block;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 14. BUTTONS
+ * -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--c-bg-elev-2);
+  color: var(--c-text);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-md);
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
+  transition: background-color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease);
+}
+.btn:hover {
+  background: var(--c-bg-elev-3);
+  border-color: var(--c-border-gold);
+  color: var(--c-gold-bright);
+}
+.btn[aria-pressed="true"],
+.btn.is-active {
+  background: var(--c-gold-dim);
+  border-color: var(--c-gold);
+  color: var(--c-bg);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: var(--c-border);
+}
+.btn--primary {
+  background: var(--c-gold);
+  color: var(--c-bg);
+  border-color: var(--c-gold-bright);
+}
+.btn--primary:hover {
+  background: var(--c-gold-bright);
+  color: var(--c-bg);
+}
+
+.btn-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+}
+
+
+/* ----------------------------------------------------------------------------
+ * 15. PAGINATION & "SEE ALSO" STRIP
+ * -------------------------------------------------------------------------- */
+.see-also {
+  display: grid;
+  gap: var(--sp-3);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--c-rule);
+}
+.see-also__link {
+  display: block;
+  padding: var(--sp-3);
+  background: var(--c-bg-elev-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  color: var(--c-text);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+}
+.see-also__link:hover {
+  border-color: var(--c-border-gold);
+  color: var(--c-gold-bright);
+}
+.see-also__link strong {
+  display: block;
+  font-family: var(--ff-serif);
+  color: var(--c-text-strong);
+  margin-bottom: 0.2em;
+}

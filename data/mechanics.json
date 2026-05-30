@@ -1,0 +1,514 @@
+{
+  "_meta": {
+    "title": "The Spell Brigade — Mechanics Specification",
+    "purpose": "Foundational reference describing the stat aggregation system, damage pipeline, element effectiveness, modifier hierarchy, and combat resolution. All other gameplay docs (damage-calculation guide, spell, artifact, infusion docs) depend on the definitions here.",
+    "source_dump": "/home/ivan/tools/Il2CppDumper/out_tsb/dump.cs",
+    "extraction_approach": "Class signatures and field offsets were extracted directly from the IL2CPP dump. Method bodies are not present in the dump (only signatures + RVA), so any documented arithmetic is inferred from method names, the single embedded constant `StatCalculator.Exponent = 0.5714286` (~= 4/7), the modifier class hierarchy, and the calls visible in IPlayerStats / HealthContainer / Hitbox. Each inferred formula is tagged with a confidence level (high | inferred | guess).",
+    "stat_count": 36,
+    "verification_notes": [
+      "Re-grepped `enum StatType` → unique hit at line 314327.",
+      "Re-grepped `enum ElementType` → unique hit at line 272226; 21 entries including None (so 20 \"real\" elements).",
+      "Re-grepped `class StatCalculator` → static class at line 314227 with three private aggregation methods + the embedded Exponent constant.",
+      "Counted StatType members: 0–20 (21 entries) + 22,23,24,25,26,27,30,33,34,35,36,37,38,39,40 (15 entries) = 36 declared. Gaps at 21, 28, 29, 31, 32."
+    ]
+  },
+
+  "stat_types": [
+    { "id": 0,  "name": "Damage",                          "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Per-spell damage multiplier. Aggregated as a `1 + Σ%` factor against the spell base damage." },
+    { "id": 1,  "name": "Range",                           "calculation_type": "PercentAddLogarithmic", "display_type": "ModifierPercent", "description": "Projectile / area range. Logarithmic falloff prevents stacking from running away." },
+    { "id": 2,  "name": "FireRate",                        "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Spell cadence (shots per unit time, or 1 / interval)." },
+    { "id": 3,  "name": "Speed",                           "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Projectile travel speed." },
+    { "id": 4,  "name": "LifeTime",                        "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Duration that a spell / projectile / zone persists." },
+    { "id": 5,  "name": "DamageTickRate",                  "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "How often a sustained spell ticks damage on overlapping enemies." },
+    { "id": 6,  "name": "Size",                            "calculation_type": "PercentAddLogarithmic", "display_type": "ModifierPercent", "description": "Spell scale (radius, beam width, etc.). Logarithmic — strongly diminishing returns." },
+    { "id": 7,  "name": "MovementSpeed",                   "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Player walking speed multiplier." },
+    { "id": 8,  "name": "MaxHealth",                       "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Player max-HP multiplier (applied to character base MaxHealth)." },
+    { "id": 9,  "name": "Luck",                            "calculation_type": "Flat",                  "display_type": "Value",           "description": "Flat luck stat. Influences rarity rolls (drops, store items)." },
+    { "id": 10, "name": "XPGain",                          "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "XP gained from enemy kills." },
+    { "id": 11, "name": "PickupRadius",                    "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Radius at which XP orbs and pickups are attracted." },
+    { "id": 12, "name": "CriticalChance",                  "calculation_type": "Flat",                  "display_type": "ValuePercent",    "description": "Percent chance to crit (0–100). Compared against a random roll per hit (see PlayerSpellDamageInfo)." },
+    { "id": 13, "name": "CriticalDamage",                  "calculation_type": "Flat",                  "display_type": "ValuePercent",    "description": "Crit damage bonus (additive percent). On a crit, damage is multiplied by (1 + CriticalDamage/100)." },
+    { "id": 14, "name": "Armor",                           "calculation_type": "Flat",                  "display_type": "Value",           "description": "Flat damage reduction. Used by PlayerHealthContainer.CalculateDamageAfterArmor." },
+    { "id": 15, "name": "Dodge",                           "calculation_type": "Flat",                  "display_type": "ValuePercent",    "description": "Percent chance to ignore an incoming hit (PlayerHealthContainer.HasDodged)." },
+    { "id": 16, "name": "HealthRegeneration",              "calculation_type": "Flat",                  "display_type": "Value",           "description": "HP regenerated every 3s (TimeBetweenHealthRegenerations const on PlayerHealthContainer)." },
+    { "id": 17, "name": "Rerolls",                         "calculation_type": "Flat",                  "display_type": "Value",           "description": "Number of store-reroll uses available per shop." },
+    { "id": 18, "name": "ReviveSpeed",                     "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Multiplier on how fast a downed teammate is revived." },
+    { "id": 19, "name": "Revives",                         "calculation_type": "Flat",                  "display_type": "Value",           "description": "Number of self-revives remaining." },
+    { "id": 20, "name": "Projectiles",                     "calculation_type": "Flat",                  "display_type": "Value",           "description": "Flat additional projectiles per cast." },
+    { "id": 22, "name": "HealOnDodge",                     "calculation_type": "Flat",                  "display_type": "Value",           "description": "HP healed each time the player dodges (PlayerHealthContainer.CheckHealOnDodgeArtifactEffect)." },
+    { "id": 23, "name": "HealOnLevelUp",                   "calculation_type": "Flat",                  "display_type": "Value",           "description": "HP healed each time the player levels up." },
+    { "id": 24, "name": "DropChance",                      "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Multiplier on enemy drop probability." },
+    { "id": 25, "name": "TerrainSpeedMultiplier",          "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Movement-speed multiplier while on terrain modifiers (e.g., mud, water)." },
+    { "id": 26, "name": "HitboxSizeMultiplier",            "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Scales the player hitbox; usually pushed by negative curses or specific artifacts." },
+    { "id": 27, "name": "ElementWeaknessMultiplier",       "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Bonus damage taken from elemental hits (applied target-side). Used by ElementEffectivenessCalculator.GetElementWeaknessMultiplier." },
+    { "id": 30, "name": "ElementStrengthMultiplier",       "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Bonus damage dealt with elemental (non-None) spells (applied attacker-side). Used by ElementEffectivenessCalculator.GetElementStrengthMultiplier." },
+    { "id": 33, "name": "HealingMultiplier",               "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Multiplier on all outgoing/incoming healing (PlayerSpellDamageInfo carries this for heal-on-damage variants)." },
+    { "id": 34, "name": "XPGainOnDamageTaken",             "calculation_type": "Flat",                  "display_type": "Value",           "description": "XP awarded as a function of damage absorbed (some curse-balancing artifacts)." },
+    { "id": 35, "name": "HealthPotionAmountMultiplier",    "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Multiplier on HP restored by collected potions." },
+    { "id": 36, "name": "ReviveZoneSize",                  "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Radius of the zone in which a player can revive a teammate." },
+    { "id": 37, "name": "GoldGain",                        "calculation_type": "PercentAdd",            "display_type": "ModifierPercent", "description": "Multiplier on gold gained from any source." },
+    { "id": 38, "name": "HealthPercentageOnRevive",        "calculation_type": "Flat",                  "display_type": "ValuePercent",    "description": "Percent of MaxHealth restored on revive (used both by Self-Revive and Revive-by-teammate)." },
+    { "id": 39, "name": "Bans",                            "calculation_type": "Flat",                  "display_type": "Value",           "description": "Bans available per shop (permanently remove an item from this run's store rolls)." },
+    { "id": 40, "name": "Pins",                            "calculation_type": "Flat",                  "display_type": "Value",           "description": "Pins available per shop (keep an item for the next visit)." }
+  ],
+  "stat_type_gaps": {
+    "missing_ids": [21, 28, 29, 31, 32],
+    "interpretation": "Likely deprecated/cut stats; the enum reserves the numeric slots so save data stays stable. Treat as unused."
+  },
+  "stat_display_types": [
+    { "id": 0, "name": "ModifierPercent", "description": "Shown as a `+X%` modifier (e.g., +25% Damage). Used for almost all PercentAdd/Logarithmic stats." },
+    { "id": 1, "name": "Value",            "description": "Shown as a plain integer/float (e.g., Armor: 4). Used for Flat stats whose unit is a count." },
+    { "id": 2, "name": "ValuePercent",     "description": "Shown as `X%` where the number IS a percentage (CriticalChance 35%)." }
+  ],
+  "stat_calculation_types": [
+    {
+      "id": 0,
+      "name": "PercentAdd",
+      "il2cpp_class_refs": [{ "class": "StatCalculator.CalculatePercentAddValue", "line_in_dump": 314238, "rva": "0x25AB740" }],
+      "formula": "value = baseValue * (1 + Σ modifier.GetValue())",
+      "explanation": "All matching modifiers are summed as additive percentages, then applied multiplicatively to base. A Damage modifier of `0.25` and one of `0.5` yield `base * (1 + 0.75) = 1.75x`.",
+      "confidence": "high",
+      "evidence": "Method name + lambda `<CalculatePercentAddValue>b__2_0(StatModifier modifier) => modifier.GetValue()` shows a plain sum of GetValue() across the list, then arithmetic with baseValue. This is the canonical Vampire-Survivors-style `1 + sum%` aggregation."
+    },
+    {
+      "id": 1,
+      "name": "Flat",
+      "il2cpp_class_refs": [{ "class": "StatCalculator.CalculateFlatValue", "line_in_dump": 314241, "rva": "0x25AB4E0" }],
+      "formula": "value = baseValue + Σ modifier.GetValue()",
+      "explanation": "All matching modifiers are summed, then added to the base value. Used for absolute-count stats (CriticalChance%, Armor points, Rerolls, Projectiles, HealOnDodge…).",
+      "confidence": "high",
+      "evidence": "Method name + lambda `<CalculateFlatValue>b__3_0(StatModifier modifier) => modifier.GetValue()`. Distinct method from PercentAdd, and the modifier list reduction is summing."
+    },
+    {
+      "id": 2,
+      "name": "PercentAddLogarithmic",
+      "il2cpp_class_refs": [
+        { "class": "StatCalculator.CalculatePercentAddLogarithmicValue", "line_in_dump": 314244, "rva": "0x25AB600" },
+        { "class": "StatCalculator (Exponent const)",                    "line_in_dump": 314230, "rva": "n/a" }
+      ],
+      "formula_inferred": "value = baseValue * (1 + Σ modifier.GetValue()) ^ 0.5714286",
+      "explanation": "Same additive sum as PercentAdd but the resulting (1+Σ) factor is raised to an Exponent of `0.5714286` (≈ 4/7) BEFORE being multiplied by base. So 100% of nominal Size modifiers yields `base * 2^0.5714 ≈ 1.487x`, 300% yields `base * 4^0.5714 ≈ 2.21x`. This is the classic concave-falloff curve.",
+      "alternative_formula_candidate": "value = baseValue * (1 + (Σ modifier.GetValue()) ^ 0.5714286). Less likely because raising the entire `1+Σ` factor matches Risk-of-Rain-style stacking which the existing const value `0.5714286` cleanly mirrors.",
+      "confidence": "inferred",
+      "evidence": "The class contains exactly one float constant — `Exponent = 0.5714286` — and only one method that differs from CalculatePercentAddValue is `CalculatePercentAddLogarithmicValue`. The decompiler-visible lambda (`<CalculatePercentAddLogarithmicValue>b__4_0`) sums modifier values identically to PercentAdd, so the difference must be the post-sum exponentiation against the documented constant.",
+      "implication_for_balance": "Stats wired to PercentAddLogarithmic (Range, Size) deliberately diminish: a player stacking 600% Size still only gets ~7x scale, not 7x. Designers chose this for stats whose runaway stacking would break the moment-to-moment game loop."
+    }
+  ],
+
+  "element_types": [
+    { "id": 0,  "name": "None",            "kind": "neutral",     "components": [],                        "description": "Raw/non-elemental. ElementEffectivenessCalculator skips strength/weakness multipliers for None." },
+    { "id": 1,  "name": "Fire",            "kind": "single",      "components": ["Fire"],                  "description": "Single-element Fire infusion. Applies FireEffect → burning DOT (FireEffectConfiguration: Damage, NumberOfBurns, SecondsBetweenBurns)." },
+    { "id": 2,  "name": "FireDouble",      "kind": "double",      "components": ["Fire", "Fire"],          "description": "Double Fire infusion (Fire infused into a Fire spell)." },
+    { "id": 3,  "name": "Lightning",       "kind": "single",      "components": ["Lightning"],             "description": "Single Lightning infusion. LightningEffect chains via NumberOfLightningRicochets dealing LightningDamageFactor of base damage." },
+    { "id": 4,  "name": "LightningDouble", "kind": "double",      "components": ["Lightning", "Lightning"],"description": "Double Lightning infusion." },
+    { "id": 5,  "name": "FireLightning",   "kind": "dual_combo",  "components": ["Fire", "Lightning"],     "description": "Hybrid of Fire + Lightning effects." },
+    { "id": 6,  "name": "Acid",            "kind": "single",      "components": ["Acid"],                  "description": "Single Acid infusion. AcidEffect applies ResistanceReduction (target takes more damage) for AcidDuration seconds." },
+    { "id": 7,  "name": "AcidDouble",      "kind": "double",      "components": ["Acid", "Acid"],          "description": "Double Acid infusion." },
+    { "id": 8,  "name": "AcidFire",        "kind": "dual_combo",  "components": ["Acid", "Fire"],          "description": "Hybrid Acid + Fire." },
+    { "id": 9,  "name": "AcidLightning",   "kind": "dual_combo",  "components": ["Acid", "Lightning"],     "description": "Hybrid Acid + Lightning." },
+    { "id": 10, "name": "Ice",             "kind": "single",      "components": ["Ice"],                   "description": "Single Ice infusion. IceEffect applies a chill/slow scaled by ChillDamageFactor over ChillDuration." },
+    { "id": 11, "name": "IceDouble",       "kind": "double",      "components": ["Ice", "Ice"],            "description": "Double Ice infusion." },
+    { "id": 12, "name": "FireIce",         "kind": "dual_combo",  "components": ["Fire", "Ice"],           "description": "Hybrid Fire + Ice." },
+    { "id": 13, "name": "AcidIce",         "kind": "dual_combo",  "components": ["Acid", "Ice"],           "description": "Hybrid Acid + Ice." },
+    { "id": 14, "name": "IceLightning",    "kind": "dual_combo",  "components": ["Ice", "Lightning"],      "description": "Hybrid Ice + Lightning." },
+    { "id": 15, "name": "Dark",            "kind": "single",      "components": ["Dark"],                  "description": "Single Dark infusion. DarkEffect applies corruption per DarkEffectConfiguration (CorruptionDamageFactor + CorruptionElementBehaviour)." },
+    { "id": 16, "name": "DarkDouble",      "kind": "double",      "components": ["Dark", "Dark"],          "description": "Double Dark infusion." },
+    { "id": 17, "name": "DarkFire",        "kind": "dual_combo",  "components": ["Dark", "Fire"],          "description": "Hybrid Dark + Fire." },
+    { "id": 18, "name": "DarkLightning",   "kind": "dual_combo",  "components": ["Dark", "Lightning"],     "description": "Hybrid Dark + Lightning." },
+    { "id": 19, "name": "AcidDark",        "kind": "dual_combo",  "components": ["Acid", "Dark"],          "description": "Hybrid Acid + Dark." },
+    { "id": 20, "name": "DarkIce",         "kind": "dual_combo",  "components": ["Dark", "Ice"],           "description": "Hybrid Dark + Ice." }
+  ],
+  "element_encoding_notes": {
+    "single_set": ["Fire", "Lightning", "Acid", "Ice", "Dark"],
+    "double_meaning": "An '<Element>Double' value means the spell was infused with the same element a second time (e.g., a Fire-infused Fire spell). This typically intensifies the element's per-hit effect (stronger DOT, more ricochets, longer chill).",
+    "dual_combo_meaning": "A two-element name (alphabetically Acid < Dark < Fire < Ice < Lightning in the enum, with the lower-id element listed first when forming a combo identifier) means the spell's pure element was infused with a different element. Both element effects can fire.",
+    "extension_method": "ElementTypeExtensions.IsInfusedWith(ElementType element, ElementType elementToCheck) — line 272261 — answers whether a packed ElementType contains a given component element."
+  },
+
+  "rarity_types": [
+    { "id": 0, "name": "Common",    "color_convention": "white",  "description": "Default tier. Lowest store-item value via ImprovementValueContainer.GetValue." },
+    { "id": 1, "name": "Rare",      "color_convention": "blue",   "description": "Medium tier." },
+    { "id": 2, "name": "Epic",      "color_convention": "purple", "description": "High tier." },
+    { "id": 3, "name": "Legendary", "color_convention": "gold",   "description": "Top tier." }
+  ],
+
+  "damage_info_hierarchy": {
+    "root": {
+      "class": "DamageInfo",
+      "abstract": true,
+      "line_in_dump": 269757,
+      "fields": [
+        { "name": "Element",              "type": "ElementType",       "offset": "0x10", "description": "Element of the damage event (None for non-elemental sources like environment, falls)." },
+        { "name": "Damage",               "type": "float",             "offset": "0x14", "description": "Nominal damage before target-side adjustments. Set when the DamageInfo is created at the cast site." },
+        { "name": "Direction",            "type": "Nullable<Vector3>", "offset": "0x18", "description": "Optional incoming direction (used for hit-feedback, directional pop-ups, knock-backs)." },
+        { "name": "EffectiveDamageDone",  "type": "float",             "offset": "0x28", "description": "Final damage that actually got removed from the target — populated after armor/dodge/crit/element resolution. Read by damage-popup, analytics, and damage-dealt events." }
+      ],
+      "methods": [
+        { "name": "ShallowClone",  "kind": "abstract" },
+        { "name": "IsFromEnemy",   "kind": "abstract" },
+        { "name": "ContainsDark",  "kind": "concrete", "description": "Convenience: true if the packed Element contains Dark (Dark/DarkDouble/DarkFire/DarkLightning/AcidDark/DarkIce)." }
+      ]
+    },
+    "subclasses": [
+      {
+        "class": "PlayerDamageInfo",
+        "line_in_dump": 310653,
+        "extends": "DamageInfo",
+        "implements": ["IPlayerDamageInfo"],
+        "fields": [
+          { "name": "OwnerClientId",         "type": "ulong", "offset": "0x30", "description": "Who dealt the damage (network client id)." },
+          { "name": "CriticalChance",        "type": "float", "offset": "0x38", "description": "Snapshot of the attacker's CriticalChance stat at hit time." },
+          { "name": "CriticalDamage",        "type": "float", "offset": "0x3C", "description": "Snapshot of the attacker's CriticalDamage stat at hit time." },
+          { "name": "WillHealBecauseOfVariant","type":"bool","offset": "0x40", "description": "Pre-flagged when a spell variant converts damage to healing (e.g., a healing-on-hit infusion)." }
+        ],
+        "usage": "Created whenever a player-owned source produces damage. The crit roll and conversion logic uses the snapshotted fields, not live stats — so mid-flight, cached stats are used."
+      },
+      {
+        "class": "PlayerSpellDamageInfo",
+        "line_in_dump": 313139,
+        "extends": "PlayerDamageInfo",
+        "fields": [
+          { "name": "Spell",             "type": "SpellType", "offset": "0x48", "description": "Which spell produced this hit (used for per-spell analytics + Variant routing)." },
+          { "name": "HealingMultiplier", "type": "float",     "offset": "0x4C", "description": "Outgoing healing scale if the damage gets converted to healing." },
+          { "name": "SpellId",           "type": "Guid",      "offset": "0x50", "description": "Per-cast identity so e.g. Damage-Tick spells don't double-credit per-hit triggers." }
+        ],
+        "methods_of_note": ["ConvertDamageToHealing() — returns float of healing produced from this damage event"],
+        "usage": "The default damage path for player spells (orb, boomerang, beam, summon, etc.)."
+      },
+      { "class": "PlayerSpellExplosionDamageInfo",        "line_in_dump": 313193, "extends": "PlayerSpellDamageInfo", "fields": [], "usage": "Used when a spell explodes; constructed from a source PlayerSpellDamageInfo to preserve crit/spell/owner data." },
+      { "class": "PlayerExplosionDamageInfo",             "line_in_dump": 310795, "extends": "ExplosionDamageInfo",   "fields": [{"name": "OwnerClientId","type": "ulong","offset":"0x40","description":"Attributing player"}], "usage": "Damage from player-triggered explosions that aren't spell instances (e.g., Ascension explode-on-revive, ExplodeOnDeath trait)." },
+      { "class": "PlayerRespawnDamageInfo",               "line_in_dump": 311831, "extends": "PlayerDamageInfo", "fields": [], "usage": "Damage dealt at respawn (Acolyte ghost explosion / I-frames trigger)." },
+      { "class": "PlayerReturnDamageInfo",                "line_in_dump": 312063, "extends": "PlayerDamageInfo", "fields": [{"name":"WasLethal","type":"bool","offset":"0x48","description":"True if the return-damage kill the attacker"}], "usage": "Reflected damage when a player has Return-Damage-When-Hit trait." },
+      { "class": "CorruptedPlayerSpellDamageInfo",        "line_in_dump": 269647, "extends": "PlayerSpellDamageInfo", "fields": [], "usage": "Damage dealt by a corrupted enemy that's been turned to attack other enemies (Dark element corruption). Attributed back to the corrupting player." },
+      { "class": "EnemyDamageInfo",                       "line_in_dump": 281171, "extends": "DamageInfo", "fields": [{"name":"AttackerObjectId","type":"ulong","offset":"0x30"},{"name":"EnemyType","type":"EnemyType","offset":"0x38"}], "usage": "Damage dealt by an enemy to a player." },
+      { "class": "EnemyProjectileDamageInfo",             "line_in_dump": 281896, "extends": "EnemyDamageInfo", "fields": [], "usage": "Damage dealt by a fired enemy projectile (used to distinguish from contact damage in dodge / armor logic)." },
+      { "class": "EnvironmentalDamageInfo",               "line_in_dump": 288118, "extends": "DamageInfo", "fields": [{"name":"EnvironmentType","type":"EnvironmentType","offset":"0x30"}], "usage": "Damage from world hazards (lava, fall, etc.). Honors HealthContainer.IgnoreLavaDamage and similar." },
+      { "class": "ExplosionDamageInfo",                   "line_in_dump": 288380, "extends": "DamageInfo", "fields": [{"name":"ExplosionSource","type":"ExplosionSource","offset":"0x30"},{"name":"DamageOnEnemies","type":"float","offset":"0x34"},{"name":"DamageOnPlayers","type":"float","offset":"0x38"}], "usage": "Generic explosion damage, with separate scalars for enemies and players (so the same explosion can be friendly-fired with FriendlyFireMultiplier = 0.25)." },
+      { "class": "HealthRerollDamageInfo",                "line_in_dump": 293811, "extends": "DamageInfo", "fields": [], "usage": "Special damage type generated when a curse rerolls / reduces player HP." },
+      { "class": "TakeDamageOnLevelUpCurseDamageInfo",    "line_in_dump": 344218, "extends": "DamageInfo", "fields": [], "usage": "Self-damage event triggered by the `TakeDamageOnLevelUp` curse on each level-up." }
+    ]
+  },
+
+  "modifier_hierarchy": {
+    "root": {
+      "class": "StatModifier",
+      "line_in_dump": 314306,
+      "abstract": true,
+      "implements": ["IDisposable"],
+      "methods": [
+        { "name": "GetValue",     "kind": "abstract", "returns": "float",     "description": "Current numeric contribution. Dynamic modifiers can return different values across frames." },
+        { "name": "GetStatType",  "kind": "abstract", "returns": "StatType",  "description": "Which Stat this modifier feeds into." },
+        { "name": "Dispose",      "kind": "virtual",  "description": "Override to unhook event listeners (DynamicStatModifier subclasses subscribe to game events)." },
+        { "name": "ToString",     "kind": "override" }
+      ]
+    },
+    "static_branch": {
+      "class": "StaticStatModifier",
+      "line_in_dump": 314394,
+      "extends": "StatModifier",
+      "fields": [
+        { "name": "StatType", "type": "StatType", "offset": "0x10" },
+        { "name": "Value",    "type": "float",    "offset": "0x14" }
+      ],
+      "subclasses": [
+        {
+          "class": "StartingStatModifier",
+          "line_in_dump": 314069,
+          "extends": "StaticStatModifier",
+          "description": "Marks modifiers applied at character/spell equip time. Stat.GetSumOfNonStartingModifiers() filters these out, so in-game UI can show 'what you gained this run' separately from baseline kit."
+        },
+        {
+          "class": "HiddenStatModifier",
+          "line_in_dump": 313253,
+          "extends": "StaticStatModifier",
+          "description": "Same numeric semantics as StaticStatModifier but not shown in any UI breakdown. Used by internal balancing modifiers the player shouldn't see."
+        }
+      ],
+      "usage": "Created by data-driven content: SpellConfiguration.StartingModifiers, ImprovementStoreItemData (improvement store purchases), Infusion data, curse stack data. Once added, the Value never recomputes."
+    },
+    "dynamic_branch": {
+      "class": "DynamicStatModifier",
+      "line_in_dump": 271932,
+      "extends": "StatModifier",
+      "abstract": true,
+      "fields": [
+        { "name": "Parameters", "type": "List<float>", "offset": "0x10", "description": "Constructor-supplied coefficients. Subclass decides how to interpret each index (typically [0] = scalar per stack, [1] = cap, etc.)." }
+      ],
+      "methods": [
+        { "name": "GetModifierType", "kind": "abstract", "returns": "DynamicStatModifierType", "description": "Character (applied to PlayerStats) or Spell (applied to a single equipped SpellAttributes block)." }
+      ],
+      "modifier_type_enum": [
+        { "id": 0, "name": "Character" },
+        { "id": 1, "name": "Spell" }
+      ],
+      "artifact_subclasses": [
+        { "class": "ArtifactStatModifier_AddArmorEqualToPartyLevel",                  "line_in_dump": 262067, "scope": "Character", "stat": "Armor",         "trigger": "Per-frame: returns current sum of party member levels × Parameters[0]." },
+        { "class": "ArtifactStatModifier_BonusExpWhenBelowHealthThreshold",          "line_in_dump": 262085, "scope": "Character", "stat": "XPGain",        "trigger": "Conditional: returns Parameters[0] when PlayerHealthContainer.CurrentHealth < Parameters[1] threshold else 0." },
+        { "class": "ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted",        "line_in_dump": 262108, "scope": "Character", "stat": "Armor",         "trigger": "Counts side objectives completed; Dispose unsubscribes IAmObjective callback." },
+        { "class": "ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed", "line_in_dump": 262135, "scope": "Character", "stat": "CriticalDamage","trigger": "Counts player revives performed; subscribes OnPlayerRevived." },
+        { "class": "ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill",  "line_in_dump": 262163, "scope": "Character", "stat": "CriticalDamage","trigger": "Reads PlayerMotor for movement state each frame." },
+        { "class": "ArtifactStatModifier_IncreaseDamagePerArmor",                    "line_in_dump": 262186, "scope": "Character", "stat": "Damage",        "trigger": "Reads current Armor stat each evaluation." },
+        { "class": "ArtifactStatModifier_DecreaseMovementSpeedPerArmor",            "line_in_dump": 262207, "scope": "Character", "stat": "MovementSpeed", "trigger": "Reads current Armor; usually negative trade-off." },
+        { "class": "ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember",       "line_in_dump": 262249, "scope": "Character", "stat": "Damage",        "trigger": "Counts party members within MaxDistanceForDamageIncrease = 10m." },
+        { "class": "ArtifactStatModifier_IncreaseDamagePerRevivePerformed",          "line_in_dump": 262284, "scope": "Character", "stat": "Damage",        "trigger": "Counts revives performed; subscribes OnPlayerRevived." },
+        { "class": "ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed","line_in_dump":262312, "scope": "Character", "stat": "ElementStrengthMultiplier", "trigger": "Counts infusions performed by the player; OnImprovementAdded hook." },
+        { "class": "ArtifactStatModifier_IncreaseFireRateWhenStandingStill",        "line_in_dump": 262340, "scope": "Character", "stat": "FireRate",      "trigger": "Reads PlayerMotor for movement state." },
+        { "class": "ArtifactStatModifier_IncreaseLuckWhenNotRerolling",             "line_in_dump": 262363, "scope": "Character", "stat": "Luck",          "trigger": "Counts shops not rerolled; subscribes OnStoreNotRerolled." },
+        { "class": "ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup",     "line_in_dump": 262390, "scope": "Character", "stat": "MaxHealth",     "trigger": "Counts collected potions; subscribes OnHealthPotionCollected." },
+        { "class": "ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed",      "line_in_dump": 262417, "scope": "Character", "stat": "MaxHealth",     "trigger": "Counts revives performed; subscribes OnPlayerRevived." },
+        { "class": "ArtifactStatModifier_LessHPMoreMovementSpeed",                  "line_in_dump": 262446, "scope": "Character", "stat": "MovementSpeed", "trigger": "Reads current HP ratio each evaluation (inverse relationship)." },
+        { "class": "ArtifactStatModifier_MoreSideObjectivesMoreHealingDone",        "line_in_dump": 262469, "scope": "Character", "stat": "HealingMultiplier","trigger": "Counts side objectives completed." }
+      ],
+      "spell_variant_subclasses": [
+        { "class": "SpellVariantStatModifier_BellZoneGivesArmor",                       "line_in_dump": 330886, "scope": "Character", "stat": "Armor",       "trigger": "True while player stands in a Bell spell's area (IPlayersInBellZoneManager)." },
+        { "class": "SpellVariantStatModifier_BiggerOnLowerHealth",                      "line_in_dump": 336691, "scope": "Spell",     "stat": "Size",        "trigger": "Reads PlayerHealthContainer current HP ratio; inverse relation." },
+        { "class": "SpellVariantStatModifier_DealMoreDamageWhenStandingStill",          "line_in_dump": 336714, "scope": "Spell",     "stat": "Damage",      "trigger": "Reads PlayerMotor; multiplier active while motionless." },
+        { "class": "SpellVariantStatModifier_IncreaseDamageWhenStandingStill",          "line_in_dump": 336737, "scope": "Spell",     "stat": "Damage",      "trigger": "Like above but uses an explicit damageIncrease field; ramps over the standing-still duration." },
+        { "class": "SpellVariantStatModifier_IncreaseSizeWhenStandingStill",            "line_in_dump": 336761, "scope": "Spell",     "stat": "Size",        "trigger": "Same standing-still pattern, scales Size." },
+        { "class": "SpellVariantStatModifier_ReduceDamageTakenWhenEnemiesInProximity",  "line_in_dump": 336785, "scope": "Character", "stat": "Armor",       "trigger": "Effective only while ProximitySpell counts enemies above its threshold." }
+      ],
+      "addition_notes": "Some `Spell`-typed modifiers above declare GetStatType slot 7 pointing at the same RVA as the simple Damage getter (0x679900) — meaning multiple modifiers reuse a tiny accessor function. This is normal IL2CPP function-deduplication, not a bug."
+    }
+  },
+
+  "element_effectiveness": {
+    "calculator_class": "ElementEffectivenessCalculator",
+    "il2cpp_class_refs": [
+      { "class": "ElementEffectivenessCalculator", "line_in_dump": 273348, "rva": "0x26D8C90 (ApplyAttackerElementStrength), 0x26D8D80 (ApplyTargetElementWeakness), 0x26D8E60 (CalculateEffectiveness)" },
+      { "class": "IElementEffectivenessCalculator",      "line_in_dump": 274000 }
+    ],
+    "public_method": {
+      "name": "CalculateEffectiveness",
+      "signature": "float CalculateEffectiveness(float value, DamageInfo damageInfo, HealthContainer targetHealthContainer)",
+      "formula_inferred": "value' = value * GetElementStrengthMultiplier(damageInfo.OwnerClientId, damageInfo.Element) * GetElementWeaknessMultiplier(target's player owner, damageInfo.Element)",
+      "logic_path": [
+        "1) If damageInfo.Element == None → return value unchanged (no elemental scaling).",
+        "2) ApplyAttackerElementStrength: looks up the attacker's ElementStrengthMultiplier stat (StatType 30) via the player manager and multiplies.",
+        "3) ApplyTargetElementWeakness: if target is a player (i.e., has a player-owning HealthContainer) looks up its ElementWeaknessMultiplier (StatType 27) and multiplies. Enemies generally don't carry these stats."
+      ],
+      "confidence": "inferred"
+    },
+    "per_element_effect_classes": [
+      { "class": "FireEffect",      "line_in_dump": 273375, "config_fields": ["Damage", "NumberOfBurns", "SecondsBetweenBurns", "CanCriticalHit", "Theme"], "effect_summary": "Applies a Burn DoT: NumberOfBurns ticks of Damage every SecondsBetweenBurns seconds. Each burn tick can roll a critical if CanCriticalHit." },
+      { "class": "IceEffect",       "line_in_dump": 274193, "config_fields": ["ChillDuration", "ChillDamageFactor"], "effect_summary": "Applies chill/slow via IceEffectHandler. Chill factor is clamped between MinChillFactor=0.2 and MaxChillFactor=0.72 (i.e. up to 72% slow). At hard freeze the target is fully stopped for the duration." },
+      { "class": "LightningEffect", "line_in_dump": 274615, "config_fields": ["LightningDamageFactor", "NumberOfLightningRicochets"], "effect_summary": "Chains ricochet damage to nearby enemies, each ricochet doing LightningDamageFactor × original damage. Configured by LightningEffectConfiguration." },
+      { "class": "AcidEffect",      "line_in_dump": 272265, "config_fields": ["AcidDuration", "ResistanceReduction"], "effect_summary": "Applies a debuff that reduces target damage resistance for AcidDuration seconds (effectively a damage-taken increase amplifier). Also wires a 'weakening' flag for in-area sustain modifiers." },
+      { "class": "DarkEffect",      "line_in_dump": 272860, "config_fields": ["CorruptionDamageFactor", "CorruptionElementBehaviour"], "effect_summary": "Adds corruption points scaling with CorruptionDamageFactor × damage. When corruption fills, the enemy becomes hostile to other enemies (CorruptionState.AttackOtherEnemies); see HealthContainer.InstantlyCorruptRpc + KillAfterCorruptionExpired." }
+    ],
+    "interface": {
+      "name": "IElementEffect",
+      "line_in_dump": 273947,
+      "method": "void Execute(IElementEffectHandlers handlers, float damage, DamageInfo damageInfo, HealthContainer target)"
+    }
+  },
+
+  "critical_hit_system": {
+    "summary": "Critical hits are rolled at hit resolution against the attacker's snapshotted CriticalChance, then the base damage is multiplied by (1 + CriticalDamage/100). Snapshot taken when the PlayerDamageInfo is built — not when the projectile lands.",
+    "il2cpp_class_refs": [
+      { "class": "Hitbox.IsCriticalDamage",       "line_in_dump": 294069, "rva": "0x276DC40" },
+      { "class": "Hitbox.CalculateCriticalDamage","line_in_dump": 294072, "rva": "0x276D1B0" },
+      { "class": "Hitbox.GetRandomFloat",         "line_in_dump": 294078, "rva": "0x276D4C0" },
+      { "class": "PlayerDamageInfo",              "line_in_dump": 310653 },
+      { "class": "DamageOverrideData",            "line_in_dump": 269811 }
+    ],
+    "step_by_step": [
+      "1) Spell builds a PlayerSpellDamageInfo passing IPlayerStats — snapshots CriticalChance + CriticalDamage from PlayerStats into the DamageInfo.",
+      "2) Hitbox.IsCriticalDamage(playerDamageInfo) rolls GetRandomFloat(0,100) and compares < playerDamageInfo.CriticalChance.",
+      "3) If yes, Hitbox.CalculateCriticalDamage(damage, source) returns damage × (1 + CriticalDamage/100).",
+      "4) HealthContainer.GetDamageOverrideForDamage receives isCriticalHit and can override the displayed amount via DamageOverrideData (also used to fake the Critical-Chance-Mastery ascension that converts excess crit-chance into damage)."
+    ],
+    "weakspot_bonus": "Hitboxes typed as HitboxType.Weakspot apply a hard-coded 1.5× multiplier (Hitbox.WeakspotDamageMultiplier const at line 294027). This stacks multiplicatively with crit.",
+    "confidence": "high"
+  },
+
+  "armor_system": {
+    "summary": "Armor is a flat post-everything-else damage reduction applied by PlayerHealthContainer.CalculateDamageAfterArmor before HP removal.",
+    "il2cpp_class_refs": [
+      { "class": "PlayerHealthContainer.CalculateDamageAfterArmor", "line_in_dump": 311033, "rva": "0x25812B0" },
+      { "class": "PlayerHealthContainer.CalculateDamageAfterDefensiveUpgrades", "line_in_dump": 311012, "rva": "0x2581340" },
+      { "class": "HealthContainer.CalculateDamageAfterResistances", "line_in_dump": 293622, "rva": "0x2757A80" }
+    ],
+    "formula_inferred": "damage_after_armor = max(0, incoming_damage − Armor_stat_value)",
+    "alternative_formula_candidate": "damage_after_armor = incoming_damage × baseValue / (baseValue + Armor). The flat-subtraction model is more likely because: (a) Armor is a Flat-calc stat (id 14); (b) the artifact `IncreaseDamagePerArmor` exists to convert armor stacks into damage — that trade-off only makes sense if armor's diminishing returns aren't already baked in; (c) similar Vampire-Survivors-derived games use flat subtraction.",
+    "confidence": "inferred",
+    "notes": [
+      "Armor is applied AFTER element effectiveness and corruption math (those happen inside HealthContainer.RemoveHealth flow, ahead of PerformHealthRemoval).",
+      "Friendly-fire damage is pre-multiplied by const FriendlyFireMultiplier = 0.25 (line 310960) on PlayerHealthContainer.",
+      "Damage taken while corrupted is further multiplied by damageTakenWhileCorruptedMultiplier (serialized field on PlayerHealthContainer).",
+      "EnemyHealthContainer.CalculateDamageAfterDefensiveUpgrades exists at line 281718 (RVA 0x202D120) but no enemy 'armor' Stat is exposed — likely a hook for boss-specific resistance scripts."
+    ]
+  },
+
+  "dodge_system": {
+    "summary": "Each incoming hit on a player rolls against Dodge%; if it passes, the hit is completely ignored (zero HP loss) and the PlayerDodgePopup is shown.",
+    "il2cpp_class_refs": [
+      { "class": "PlayerHealthContainer.HasDodged",                  "line_in_dump": 311039, "rva": "0x2581A80" },
+      { "class": "PlayerHealthContainer.CheckHealOnDodgeArtifactEffect","line_in_dump": 311104, "rva": "0x2581600" },
+      { "class": "PlayerDodgePopup",                                 "line_in_dump": 310783 },
+      { "class": "DodgeAttackEventArgs",                             "line_in_dump": 289389 }
+    ],
+    "formula_inferred": "if GetRandomFloat(0,100) < Dodge: ignore damage, fire DodgeAttackEventArgs, heal HealOnDodge HP (if > 0).",
+    "confidence": "inferred",
+    "notes": ["Dodge is a Flat-calc stat (StatType 15) capped only by content design (no hard ceiling visible in calculator)."]
+  },
+
+  "spell_stat_lifecycle": {
+    "summary": "Each spell has a per-cast Stat block built by combining a SpellConfiguration's BaseStats, the spell's StartingModifiers, any character-/spell-improvements picked up, any infusion/variant DynamicStatModifiers, and any artifact DynamicStatModifiers that target Spell scope. The Stat object aggregates by StatCalculationType.",
+    "il2cpp_class_refs": [
+      { "class": "SpellConfiguration", "line_in_dump": 335333 },
+      { "class": "BaseStat",           "line_in_dump": 313206 },
+      { "class": "Stat",               "line_in_dump": 314115 },
+      { "class": "Stat.AddModifier",   "line_in_dump": 314157, "rva": "0x25AC310" },
+      { "class": "Stat.GetValue",      "line_in_dump": 314160, "rva": "0x25ACD90" },
+      { "class": "Stat.GetValueWithExtraModifiers", "line_in_dump": 314163, "rva": "0x25ACCD0" },
+      { "class": "Stat.GetSumOfModifiers",          "line_in_dump": 314178, "rva": "0x25AC9B0" },
+      { "class": "Stat.GetSumOfNonStartingModifiers","line_in_dump": 314181, "rva": "0x25ACAD0" },
+      { "class": "IPlayerStats",       "line_in_dump": 294907 }
+    ],
+    "ordered_pipeline": [
+      "1) Equip: SpellConfiguration.Stats (List<BaseStat>) → each BaseStat.CreateCalculator() returns a Stat seeded with `baseValue` and the StatType's default StatCalculationType (via StatTypeExtensions.GetCalculationType).",
+      "2) SpellConfiguration.StartingModifiers (List<StartingStatModifier>) → IPlayerStats.AddSpellModifier for each — they sit in Stat.Modifiers tagged so GetSumOfNonStartingModifiers can skip them.",
+      "3) Improvements picked up in store: ImprovementStoreItemData has a StatType + ImprovementValueContainer that gives a per-rarity float; the chosen value becomes a new StaticStatModifier added via IPlayerStats.AddCharacterImprovement / AddSpellImprovement (StatModifiersType.Static).",
+      "4) SpellVariants: each variant unlocks SpellVariantStatModifier_* (dynamic) and/or static stat tweaks; these run AddSpellModifier when the variant is taken.",
+      "5) Infusions: AddInfusion(SpellType, ElementType) — does NOT add stat numbers per se; it changes the ElementType on the spell's outgoing DamageInfo. Doubling the same element ('FireDouble') is what intensifies the IElementEffect.",
+      "6) Artifacts: equipping an artifact registers its ArtifactStatModifier_* instances. Character-scope ones go on PlayerStats; Spell-scope ones go on the relevant SpellAttributes.",
+      "7) Curses: each Curse stack pushes (typically negative) StaticStatModifiers on character-level stats (e.g., StrongerEnemies bumps an enemy global), or installs hooks that take damage (TakeDamageOnLevelUp).",
+      "8) At evaluation time, Stat.GetValue() calls StatCalculator.Calculate(baseValue, Modifiers, statCalculationType) — see stat_calculation_types for the per-type math."
+    ],
+    "value_with_extra_modifiers": "Stat.GetValueWithExtraModifiers(extras) lets callers do a what-if computation (e.g., store preview: 'what would Damage be if I bought this item?') without mutating the Stat.",
+    "confidence": "high"
+  },
+
+  "damage_formula_end_to_end": {
+    "summary": "Synthesized chain from spell-cast to HP-removal, combining StatCalculator, ElementEffectivenessCalculator, Hitbox crit logic, and PlayerHealthContainer reductions.",
+    "pseudo_code": [
+      "# 1. Spell evaluates its current Damage stat at cast time",
+      "spell_damage = StatCalculator.Calculate(spellBaseDamage, spellStat.Modifiers, PercentAdd)",
+      "             = spellBaseDamage * (1 + sum(% Damage modifiers from improvements + artifacts + variant + character-damage))",
+      "",
+      "# 2. Construct the DamageInfo, snapshotting crit fields",
+      "info = new PlayerSpellDamageInfo(ownerClientId, spellType, playerStats)",
+      "info.Damage = spell_damage",
+      "info.Element = currentElementType  # set by infusion",
+      "info.CriticalChance = StatCalculator.Calculate(0, charStats.CriticalChance.Modifiers, Flat)",
+      "info.CriticalDamage = StatCalculator.Calculate(0, charStats.CriticalDamage.Modifiers, Flat)",
+      "",
+      "# 3. Hit lands. Spell-specific multipliers (e.g., DealsMoreDamageTowardsCenter, weakspot)",
+      "raw = info.Damage * spellSpecificMultiplier",
+      "raw *= 1.5 if hitbox.type == Weakspot else 1.0",
+      "",
+      "# 4. Crit roll",
+      "isCrit = GetRandomFloat(0,100) < info.CriticalChance",
+      "raw = raw * (1 + info.CriticalDamage / 100) if isCrit else raw",
+      "",
+      "# 5. Element effectiveness (attacker strength × target weakness)",
+      "raw = ElementEffectivenessCalculator.CalculateEffectiveness(raw, info, targetHealthContainer)",
+      "",
+      "# 6. Per-element damage multipliers from per-target debuffs (acid resistance reduction, dark corruption mod)",
+      "raw *= HealthContainer.GetDamageAfterMultiplier(raw)  # applies stacked IDamageMultiplierProviders",
+      "raw *= HealthContainer.CalculateDamageAfterResistances(raw)  # subtracts DamageResistance",
+      "",
+      "# 7. Target-specific defensive math (armor / dodge for players, contextual scaling for enemies)",
+      "if target is PlayerHealthContainer:",
+      "    if HasDodged(): return 0   # popup + dodge event",
+      "    raw = CalculateDamageAfterArmor(raw)        # max(0, raw - Armor)",
+      "raw = target.CalculateDamageAfterDefensiveUpgrades(raw)  # virtual; subclass-specific",
+      "",
+      "# 8. Friendly-fire / corruption modifiers",
+      "if attacker is teammate: raw *= 0.25  # FriendlyFireMultiplier",
+      "if target.IsCorrupted:    raw *= damageTakenWhileCorruptedMultiplier",
+      "",
+      "# 9. HP removal",
+      "info.EffectiveDamageDone = raw",
+      "target.RemoveHealth(raw, info, isCrit)"
+    ],
+    "step_confidences": [
+      { "step": 1, "what": "spell damage = base * (1 + Σ%)",                 "confidence": "high",      "evidence": "StatCalculator.CalculatePercentAddValue + Damage stat is PercentAdd." },
+      { "step": 2, "what": "Crit values snapshot into DamageInfo at creation","confidence": "high",      "evidence": "PlayerDamageInfo fields CriticalChance/CriticalDamage exist and are set by .ctor(ulong ownerClientId, SpellType, IPlayerStats)." },
+      { "step": 3, "what": "Weakspot ×1.5",                                   "confidence": "high",      "evidence": "Hitbox.WeakspotDamageMultiplier const = 1.5." },
+      { "step": 4, "what": "Crit multiplies by (1 + CriticalDamage/100)",     "confidence": "inferred",  "evidence": "Hitbox.CalculateCriticalDamage exists with PlayerDamageInfo source; the only crit field on source is CriticalDamage; ValuePercent display type implies %." },
+      { "step": 5, "what": "Element strength (attacker) × weakness (target)", "confidence": "high",      "evidence": "ElementEffectivenessCalculator has those two named helpers and they read StatType 27/30." },
+      { "step": 6, "what": "DamageMultiplier providers + Resistances",         "confidence": "high",      "evidence": "HealthContainer.GetDamageAfterMultiplier + CalculateDamageAfterResistances are both concrete methods invoked in the removal pipeline." },
+      { "step": 7, "what": "Armor = flat subtraction; Dodge = chance",         "confidence": "inferred",  "evidence": "See armor_system, dodge_system rationale; matches Vampire-Survivors-style genre." },
+      { "step": 8, "what": "Friendly fire ×0.25, corrupted multiplier",        "confidence": "high",      "evidence": "Explicit consts on PlayerHealthContainer." },
+      { "step": 9, "what": "Final HP removal stores EffectiveDamageDone",      "confidence": "high",      "evidence": "DamageInfo.EffectiveDamageDone field + DamageDealtEventArgs.DamageDealt." }
+    ],
+    "open_questions": [
+      "Order of operations between target's DamageResistance vs Armor vs corruption multiplier — only the existence of each method is dump-visible, not the call ordering inside RemoveHealth.",
+      "Whether the `damageMultiplierProviders` list (per-HealthContainer IDamageMultiplierProvider references) is summed multiplicatively or just product-reduced.",
+      "Whether the crit roll uses a uniform 0..100 or a 0..1 scale; the helper Hitbox.GetRandomFloat(min,max) is generic. Comparing against `CriticalChance` (which is stored as the same number players see in UI) strongly implies 0..100.",
+      "Whether StatCalculator preserves NaN / negative bases (e.g., do negative cursed Damage stats clamp to zero before multiplication?). No clamping is visible in the dump."
+    ]
+  },
+
+  "curse_system": {
+    "summary": "Curses are stackable difficulty modifiers applied at run start. Each Curse has a CurseIdentifier and NumberOfStacks. A CurseConfiguration holds a list of CurseStackConfigurations; each stack pushes its own StatModifier(s) onto the player/world.",
+    "il2cpp_class_refs": [
+      { "class": "Curse",                            "line_in_dump": 298094 },
+      { "class": "CurseConfiguration",               "line_in_dump": 298162 },
+      { "class": "CurseIdentifier",                  "line_in_dump": 298236 },
+      { "class": "TakeDamageOnLevelUpCurseDamageInfo","line_in_dump": 344218 },
+      { "class": "ICanManageImprovements.AddCurses", "line_in_dump": 294150 }
+    ],
+    "curse_identifiers": [
+      { "id": 0, "name": "EnemiesDropLessXP",      "description": "Multiplier on XP from enemy kills (negative XPGain or world-side bias)." },
+      { "id": 1, "name": "NoEnchantments",         "description": "Disables enchantment store items / picks." },
+      { "id": 2, "name": "OneHitMode",             "description": "Any damage taken depletes HP (PlayerHealthContainer.HasOneHitModeCurse → forces lethal)." },
+      { "id": 3, "name": "OneLessStoreItem",       "description": "Stocks one fewer item per shop." },
+      { "id": 4, "name": "ReduceAllHealing",       "description": "Multiplier on incoming healing (PlayerHealthContainer.HasReduceAllHealingCurse + GetReduceAllHealingDecreasePercent)." },
+      { "id": 5, "name": "StrongerEnemies",        "description": "Bumps EnemyDifficultyParameters; flows into EnemyHealthContainer.CalculateMaxHealthMultiplier." },
+      { "id": 6, "name": "TakeDamageOnLevelUp",    "description": "Each level-up deals self-damage via TakeDamageOnLevelUpCurseDamageInfo." }
+    ],
+    "stacking_model": "Curse is a struct-like data {Id, NumberOfStacks}. CurseConfiguration.GetCurseLevelForStack(int stackNumber) picks the correct CurseStackConfiguration; that stack's payload (added through ICanManageImprovements.AddCurses → typically AddStatModifiers) layers on top of whatever's already there."
+  },
+
+  "rarity_value_system": {
+    "summary": "Improvement store items carry an ImprovementValueContainer with four serialized floats (common / rare / epic / legendary). The chosen rarity selects which float becomes the Value of the StaticStatModifier added to the player.",
+    "il2cpp_class_refs": [
+      { "class": "ImprovementValueContainer",       "line_in_dump": 342897 },
+      { "class": "ImprovementStoreItemData",        "line_in_dump": 342884 },
+      { "class": "ImprovementItem",                 "line_in_dump": 342383 },
+      { "class": "RandomRarityPicker",              "line_in_dump": 340002 }
+    ],
+    "method": "ImprovementValueContainer.GetValue(RarityType) at line 342913 returns the chosen tier's float.",
+    "luck_influence_hypothesis": "RandomRarityPicker implements ICanPickARarity (line 340002); the player's Luck stat (Flat, id 9) is the most likely input that biases its rarity-distribution roll, though the dump doesn't expose the exact weighting curve."
+  },
+
+  "upgrade_tier_system": {
+    "summary": "Upgrade tiers represent the player's permanent meta-progression (Spells / Artifacts / Characters all unlock and reach higher tiers across runs). The in-run improvement system above is orthogonal — it only stacks within a single run.",
+    "in_dump_anchors": [
+      { "class": "SpellConfiguration.IsLockedByProgression", "line_in_dump": 335346 },
+      { "class": "StoreItemData.IsContentAvailable",         "line_in_dump": 342877 }
+    ],
+    "notes": [
+      "Per-content unlock gating is via challenges (SpellToChallengeMap on SpellConfiguration; ChallengeId on CurseConfiguration.GetUnlockedStacks).",
+      "ImprovementStoreItemData / its subclasses host the per-rarity values (see rarity_value_system); the same item type can drop at different rarities, the value is interpolated at pick time."
+    ]
+  },
+
+  "supporting_enums": {
+    "DynamicStatModifierType": [
+      { "id": 0, "name": "Character", "description": "Modifier feeds the player-level Stat list (e.g., character-wide Damage)." },
+      { "id": 1, "name": "Spell",     "description": "Modifier feeds a particular equipped spell's Stat list." }
+    ],
+    "StatModifiersType": [
+      { "id": 0, "name": "Static",   "description": "Standard improvement: StaticStatModifier created at pick time." },
+      { "id": 1, "name": "Starting", "description": "Tagged as character/spell baseline so it can be filtered out of post-run displays." }
+    ],
+    "ExplosionSource": [
+      { "id": 0, "name": "ExplodingTickExplosion" },
+      { "id": 1, "name": "PushableExplosion" },
+      { "id": 2, "name": "BossSpawnBeam" },
+      { "id": 3, "name": "ExplodeOnDeathTrait" }
+    ],
+    "CorruptionElementBehaviour": [
+      { "id": 0, "name": "UseCoreElement", "description": "Corrupted enemy attacks use the originating spell's core element." },
+      { "id": 1, "name": "UseNoElement",   "description": "Corrupted enemy attacks deal non-elemental damage." },
+      { "id": 2, "name": "UseDarkElement", "description": "Corrupted enemy attacks always deal Dark damage." }
+    ],
+    "HitboxType": [
+      { "id": 0, "name": "Default" },
+      { "id": 1, "name": "Weakspot", "multiplier": 1.5, "constant_in_dump": "Hitbox.WeakspotDamageMultiplier (line 294027)" }
+    ]
+  }
+}

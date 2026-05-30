@@ -1,0 +1,221 @@
+{
+  "_meta": {
+    "verified_twice": true,
+    "total_bosses": 3
+  },
+  "bosses": [
+    {
+      "id": "Squid",
+      "boss_type": 0,
+      "is_default": true,
+      "is_demo": false,
+      "is_coming_soon": false,
+      "defeated_text_entry": "Boss_Defeated_Squid",
+      "boss_prefab_file": "Enemy_Squid.prefab",
+      "intro_sequence_prefab_file": "SquidBossIntroSequence.prefab",
+      "navigator_prefab": "Enemy_Squid_Navigator.prefab",
+      "phase_names": [
+        "Enemy_Squid",
+        "Enemy_Squid_Phase_2",
+        "Enemy_Squid_Phase_3"
+      ],
+      "phase_count": 3,
+      "related_prefabs": [
+        "Enemy_Squid.prefab",
+        "Enemy_SquidAttack.prefab",
+        "Enemy_SquidDeadSplash.prefab",
+        "Enemy_Squid_BulletHellProjectile_Phase2.prefab",
+        "Enemy_Squid_BulletHellProjectile_Phase3.prefab",
+        "Enemy_Squid_HomingProjectile_Hit.prefab",
+        "Enemy_Squid_HomingProjectile_Phase1.prefab",
+        "Enemy_Squid_HomingProjectile_Phase2.prefab",
+        "Enemy_Squid_Navigator.prefab"
+      ],
+      "stats": {
+        "health": 185000,
+        "contact_damage": 350,
+        "movement_speed": 3,
+        "acceleration": 8,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "is_boss": 1
+      },
+      "phase_data": [
+        {
+          "phase": 1,
+          "ability_prefabs": [
+            "Enemy_Squid_HomingProjectile_Phase1.prefab"
+          ]
+        },
+        {
+          "phase": 2,
+          "ability_prefabs": [
+            "Enemy_Squid_BulletHellProjectile_Phase2.prefab",
+            "Enemy_Squid_HomingProjectile_Phase2.prefab"
+          ]
+        },
+        {
+          "phase": 3,
+          "ability_prefabs": [
+            "Enemy_Squid_BulletHellProjectile_Phase3.prefab"
+          ]
+        }
+      ],
+      "world_appearance": "Pyrestorm Pit (default)"
+    },
+    {
+      "id": "Toad",
+      "boss_type": 1,
+      "is_default": false,
+      "is_demo": false,
+      "is_coming_soon": false,
+      "defeated_text_entry": "Boss_Defeated_Toad",
+      "boss_prefab_file": "Enemy_Toad.prefab",
+      "intro_sequence_prefab_file": "ToadBossIntroSequence.prefab",
+      "navigator_prefab": "Enemy_Toad_Navigator.prefab",
+      "phase_names": [
+        "Enemy_Toad",
+        "Enemy_Toad_Phase_2",
+        "Enemy_Toad_Phase_2"
+      ],
+      "phase_count": 2,
+      "related_prefabs": [
+        "Enemy_Toad.prefab",
+        "Enemy_ToadDeadSplash.prefab",
+        "Enemy_Toad_Navigator.prefab"
+      ],
+      "stats": {
+        "health": 165000,
+        "contact_damage": 350,
+        "movement_speed": 2.25,
+        "acceleration": 8,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "is_boss": 1
+      },
+      "phase_data": [],
+      "world_appearance": "Verdant Meadows"
+    },
+    {
+      "id": "Hydra",
+      "boss_type": 2,
+      "is_default": false,
+      "is_demo": false,
+      "is_coming_soon": false,
+      "defeated_text_entry": "Boss_Defeated_Hydra",
+      "boss_prefab_file": "Enemy_Hydra.prefab",
+      "intro_sequence_prefab_file": "HydraBossIntroSequence.prefab",
+      "navigator_prefab": "Enemy_Hydra_Navigator.prefab",
+      "phase_names": [
+        "Enemy_Hydra",
+        "Enemy_Hydra_Phase_2",
+        "Enemy_Hydra_Phase_3"
+      ],
+      "phase_count": 3,
+      "related_prefabs": [
+        "Enemy_Hydra.prefab",
+        "Enemy_HydraDeadSplash.prefab",
+        "Enemy_Hydra_Healer.prefab",
+        "Enemy_Hydra_Navigator.prefab"
+      ],
+      "stats": {
+        "health": 165000,
+        "contact_damage": 350,
+        "movement_speed": 2.75,
+        "acceleration": 8,
+        "size_min": 0.95,
+        "size_max": 1.05,
+        "is_boss": 1
+      },
+      "phase_data": [],
+      "world_appearance": "Frozen Ancients / Astral Planes"
+    }
+  ],
+  "bullet_hell_patterns": [
+    {
+      "id": "Phase2_NoRotationDoubleBurst",
+      "fields": {
+        "speed": 4.5,
+        "lifeTime": 5,
+        "damage": 100,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 2,
+        "AmountOfProjectilesPerWave": 24,
+        "DelayBetweenWaves": 0.6,
+        "RotationSpeed": 0
+      }
+    },
+    {
+      "id": "Phase2_RotateClockwise",
+      "fields": {
+        "speed": 4.5,
+        "lifeTime": 5,
+        "damage": 100,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 18,
+        "AmountOfProjectilesPerWave": 6,
+        "DelayBetweenWaves": 0.45,
+        "RotationSpeed": 6
+      }
+    },
+    {
+      "id": "Phase2_RotateCounterClockwise",
+      "fields": {
+        "speed": 4.5,
+        "lifeTime": 5,
+        "damage": 100,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 18,
+        "AmountOfProjectilesPerWave": 6,
+        "DelayBetweenWaves": 0.45,
+        "RotationSpeed": -6
+      }
+    },
+    {
+      "id": "Phase3_RotateClockwise",
+      "fields": {
+        "speed": 5.5,
+        "lifeTime": 6.5,
+        "damage": 150,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 24,
+        "AmountOfProjectilesPerWave": 6,
+        "DelayBetweenWaves": 0.35,
+        "RotationSpeed": 20
+      }
+    },
+    {
+      "id": "Phase3_RotateCounterClockwise",
+      "fields": {
+        "speed": 5.5,
+        "lifeTime": 6.5,
+        "damage": 150,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 24,
+        "AmountOfProjectilesPerWave": 6,
+        "DelayBetweenWaves": 0.35,
+        "RotationSpeed": -20
+      }
+    },
+    {
+      "id": "Phase3_Wavey",
+      "fields": {
+        "speed": 5.5,
+        "lifeTime": 6.5,
+        "damage": 150,
+        "radius": 0.45,
+        "m_Bits": 9,
+        "AmountOfWaves": 24,
+        "AmountOfProjectilesPerWave": 4,
+        "DelayBetweenWaves": 0.14,
+        "SineFrequency": 2,
+        "SineAmplitude": 45
+      }
+    }
+  ]
+}

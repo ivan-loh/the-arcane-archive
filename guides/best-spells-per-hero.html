@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The Spell Brigade — synthesized spell pairings for each of the 15 heroes, derived from their starting stat blocks and unique modifiers. Three companion spells and one anti-synergy per hero.">
+  <title>Best Spells Per Hero — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">&#8981;</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search&hellip;" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">&equiv;</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="On this page">
+      <h2 class="sidebar__title">Heroes</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#reginald">Reginald</a></li>
+        <li><a href="#sun-mage">Sun Mage</a></li>
+        <li><a href="#moon-mage">Moon Mage</a></li>
+        <li><a href="#ludwig">Ludwig</a></li>
+        <li><a href="#smithy">Smithy</a></li>
+        <li><a href="#wizard-king">Wizard King</a></li>
+        <li><a href="#key-mage">Key Mage</a></li>
+        <li><a href="#bird-mage">Bird Mage</a></li>
+        <li><a href="#hatty">Hatty</a></li>
+        <li><a href="#campanelli">Campanelli</a></li>
+        <li><a href="#star-mage">Star Mage</a></li>
+        <li><a href="#vampire-mage">Vampire Mage</a></li>
+        <li><a href="#plant-mage">Plant Mage</a></li>
+        <li><a href="#flute-mage">Flute Mage</a></li>
+        <li><a href="#bell-mage">Bell Mage</a></li>
+      </ul>
+      <h2 class="sidebar__title">Other guides</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Guides hub</a></li>
+        <li><a href="damage-optimization.html">Damage optimization</a></li>
+        <li><a href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a href="element-pairing.html">Element pairing</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Guides</a></li>
+          <li aria-current="page">Best Spells Per Hero</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <!-- ================== INTRO ================== -->
+        <section id="intro" class="stack">
+          <h1>Best Spells Per Hero &mdash; build recommendations</h1>
+          <p class="prose u-muted">
+            A pairings guide. Every wizard starts with a fixed signature
+            spell and a unique stat block; the question this guide answers
+            is <em>"what three companion spells most reward those starting
+            conditions?"</em> Reasoning is synthesized from each hero&rsquo;s
+            modifiers and unique abilities &mdash; not from official meta
+            data.
+          </p>
+
+          <aside class="callout" data-kind="info">
+            <span class="callout__title">How to read each card</span>
+            <p>
+              <strong>Starting spell</strong> is fixed and always your
+              first slot. <strong>Companion picks</strong> are three spells
+              the in-run shop will eventually offer; the reasoning column
+              explains why they amplify the hero&rsquo;s opening
+              modifiers. <strong>Avoid</strong> is one spell that
+              actively works against the hero&rsquo;s baseline &mdash; not
+              forbidden, just sub-optimal.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Caveat</span>
+            <p>
+              These are <em>synthesized</em> recommendations, not data-mined
+              optimal-play results. The actual meta will shift as the
+              developer rebalances stats. Use the cards as starting
+              hypotheses; trust your own runs over this guide.
+            </p>
+          </aside>
+
+          <p class="prose">
+            For the underlying math, see
+            <a href="damage-optimization.html">damage optimization</a>. For
+            stat definitions and rarity values, see
+            <a href="../mechanics/stats.html">stats</a> and
+            <a href="../mechanics/character-improvements.html">character improvements</a>.
+          </p>
+        </section>
+
+        <!-- ================== HERO CARDS ================== -->
+        <section id="cards" class="stack">
+          <h2>The fifteen heroes</h2>
+          <p class="prose">
+            Heroes are ordered by their in-game unlock cost, low-to-high.
+            The first three are entry-level wizards; the last five are
+            unlock-late heavy hitters.
+          </p>
+
+          <div class="grid grid-2 stack-lg">
+
+            <!-- ============ REGINALD ============ -->
+            <article class="item-card" id="reginald" data-element="neutral">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/reginald.html">Reginald</a></h3>
+                  <p class="item-card__subtitle">The starter &mdash; rarity-bias generalist</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">generalist</span>
+                <span class="tag">loot-bias</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +2 Luck, +10 DropChance, signature
+                <a href="../spells/orb.html">Orb</a> (170 base damage,
+                FireRate 1.15, 1m size). The Luck pushes shop rolls into
+                higher rarities, so Reginald rewards spells with strong
+                upgrade trees more than spells with high base numbers.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/shotgun.html">Shotgun</a> &mdash; 300 base damage, 3 projectiles, gains the most from a single Epic/Legendary upgrade roll.</li>
+                <li><a href="../spells/arrow.html">Arrow</a> &mdash; 165 base + element-friendly; Luck-biased rolls hit the spell&rsquo;s rich variant pool.</li>
+                <li><a href="../spells/meteor.html">Meteor</a> &mdash; 4 base projectiles, scales hard on the rare-tier ExtraProjectile variant.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/fence.html">Fence</a> &mdash; weak base numbers, thin upgrade tree; Reginald&rsquo;s Luck has nothing to pull on.</p>
+            </article>
+
+            <!-- ============ SUN MAGE ============ -->
+            <article class="item-card" id="sun-mage" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/sun-mage.html">Sun Mage</a></h3>
+                  <p class="item-card__subtitle">Small-target evasion bruiser</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">melee</span>
+                <span class="tag">dodge</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +7 Dodge, +7 TerrainSpeedMultiplier,
+                <strong>&minus;25 HitboxSizeMultiplier</strong>, signature
+                <a href="../spells/proximity.html">Proximity</a> (51 base,
+                FireRate 1.80, 2.2m size). Smaller hitbox + dodge means
+                Sun Mage can sit deep inside enemy packs &mdash; pair with
+                close-range spells that reward being in the middle of the
+                fight.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base damage, 2m range; melee danger doesn&rsquo;t apply when you can&rsquo;t be hit.</li>
+                <li><a href="../spells/energy-zone.html">EnergyZone</a> &mdash; persistent area, 2m base size; you&rsquo;ll stand in it indefinitely.</li>
+                <li><a href="../spells/trail.html">Trail</a> &mdash; 33.81 dmg ticks but FireRate 2; rewards kiting circles around dense packs.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/rifle.html">Rifle</a> &mdash; long-range single-target play wastes the small-hitbox advantage entirely.</p>
+            </article>
+
+            <!-- ============ MOON MAGE ============ -->
+            <article class="item-card" id="moon-mage" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/moon-mage.html">Moon Mage</a></h3>
+                  <p class="item-card__subtitle">Early-infusion versatility</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">infusion</span>
+                <span class="tag">xp</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +3 XPGain, unique
+                <em>SpellsAndInfusionsGrantedEarlier</em>, signature
+                <a href="../spells/boomerang.html">Boomerang</a> (57 base,
+                0.53 FireRate). Earlier infusion access is the keystone
+                &mdash; pair with spells that fundamentally change behaviour
+                on infusion (Fire DoT, Lightning chain, Acid debuff).
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/plant.html">Plant</a> &mdash; persistent area + early Fire infusion turns the zone into a DoT carpet.</li>
+                <li><a href="../spells/summon.html">Summon</a> &mdash; infused minions inherit the element; gets the buff one shop sooner.</li>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; high-FireRate vehicle for whichever infusion you commit to first.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/fence.html">Fence</a> &mdash; doesn&rsquo;t benefit from earlier infusion timing; flat-damage spells waste the unique modifier.</p>
+            </article>
+
+            <!-- ============ LUDWIG ============ -->
+            <article class="item-card" id="ludwig" data-element="neutral">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/ludwig.html">Ludwig</a></h3>
+                  <p class="item-card__subtitle">Tank-DPS, walking armor stack</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">tank</span>
+                <span class="tag">armor</span>
+                <span class="tag">slow</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +25 HitboxSizeMultiplier, +12 Armor,
+                <strong>&minus;10 MovementSpeed</strong>, unique
+                <em>IgnoresNegativeEffects</em>, signature
+                <a href="../spells/laser.html">Laser</a> (128 base, 0.196
+                FireRate, 1.84m size). Slow but immune to debuffs &mdash;
+                pair with stationary or short-range spells that don&rsquo;t
+                need movement.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/beam.html">Beam</a> &mdash; 104 base + 1.9 FireRate; channels best while standing still, which Ludwig does naturally.</li>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; persistent zone where you live; the BellZoneGivesArmor variant feeds the Damage-per-Armor rail.</li>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base; <em>IgnoresNegativeEffects</em> makes melee chip damage trivially safe.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/boomerang.html">Boomerang</a> &mdash; rewards mobility to retrieve apex hits; Ludwig&rsquo;s &minus;10 MS misses too many.</p>
+            </article>
+
+            <!-- ============ SMITHY ============ -->
+            <article class="item-card" id="smithy" data-element="plant">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/smithy.html">Smithy</a></h3>
+                  <p class="item-card__subtitle">Healer / sustain support</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">sustain</span>
+                <span class="tag">support</span>
+                <span class="tag">coop</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +60 ReviveSpeed, +1 HealthRegeneration,
+                +25 HealingMultiplier, signature
+                <a href="../spells/beam.html">Beam</a> (104 base, 1.9
+                FireRate). Designed for co-op &mdash; the regen + healing
+                modifiers reward staying alive through long fights.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; healing aura variants and persistent zone synergise with the heal multiplier.</li>
+                <li><a href="../spells/plant.html">Plant</a> &mdash; planted zones to stand in while channelling; pairs with HealthRegen uptime.</li>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; reliable autonomous damage while you focus on positioning teammates.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/proximity.html">Proximity</a> &mdash; close-range play exposes you; Smithy&rsquo;s value is staying alive, not pushing forward.</p>
+            </article>
+
+            <!-- ============ WIZARD KING ============ -->
+            <article class="item-card" id="wizard-king" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/wizard-king.html">Wizard King</a></h3>
+                  <p class="item-card__subtitle">Crit-stacker single-target king</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">crit</span>
+                <span class="tag">single-target</span>
+                <span class="tag">boss</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +10 CriticalChance (so 20 baseline), signature
+                <a href="../spells/rifle.html">Rifle</a> (140 base, 0.441
+                FireRate). Built for the Crit Stacker archetype &mdash;
+                pair with high base-damage, low-cadence spells where each
+                hit is worth crit-amplifying.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base damage; the FrontEdge variant&rsquo;s 1.5&times; multiplier stacks multiplicatively with crit.</li>
+                <li><a href="../spells/shotgun.html">Shotgun</a> &mdash; 300 base per pellet; one Wizard King crit volley deletes most enemies.</li>
+                <li><a href="../spells/boomerang.html">Boomerang</a> &mdash; the BoomerangCriticalDamageOnApex variant is essentially free +CritDamage on every apex.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/trail.html">Trail</a> &mdash; 33.81 base per tick; crits on a 34-damage tick add little, the value goes elsewhere.</p>
+            </article>
+
+            <!-- ============ KEY MAGE ============ -->
+            <article class="item-card" id="key-mage" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/key-mage.html">Key Mage</a></h3>
+                  <p class="item-card__subtitle">XP-on-damage trail-runner</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">xp</span>
+                <span class="tag">risk</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +0.025 XPGainOnDamageTaken, signature
+                <a href="../spells/trail.html">Trail</a> (33.81 base, 2.0
+                FireRate, 2.3m size). Rewards intentionally bleeding &mdash;
+                pair with kite-friendly spells so you can spend HP for XP
+                without dying.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; autonomous damage while you focus on dodging-but-not-dodging-everything.</li>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; persistent zone with armor-grant variants to soften the HP loss.</li>
+                <li><a href="../spells/proximity.html">Proximity</a> &mdash; 1.80 FireRate close-range; rewards staying near enemies (where damage flows both ways).</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/rifle.html">Rifle</a> &mdash; long-range single-target play keeps you safe, which defeats Key Mage&rsquo;s entire XPGainOnDamageTaken kit.</p>
+            </article>
+
+            <!-- ============ BIRD MAGE ============ -->
+            <article class="item-card" id="bird-mage" data-element="acid">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/bird-mage.html">Bird Mage</a></h3>
+                  <p class="item-card__subtitle">Pickup &amp; objective scout</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">scout</span>
+                <span class="tag">objective</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: unique <em>FastObjectiveDirectionPointer</em>
+                + <em>ShowPickupDirectionPointers</em>, signature
+                <a href="../spells/arrow.html">Arrow</a> (165 base, 0.404
+                FireRate). Tells you where everything is, which makes
+                mobility-based spells far more efficient &mdash; you never
+                walk the wrong way.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/boomerang.html">Boomerang</a> &mdash; 57 base + 0.53 FireRate; you can pre-position throws toward objective markers.</li>
+                <li><a href="../spells/falling-star.html">FallingStar</a> &mdash; 201 base + huge area; cue it on objective spawns you can pre-see.</li>
+                <li><a href="../spells/trail.html">Trail</a> &mdash; rewards moving through objectives in straight lines, which Bird Mage knows where to draw.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/fence.html">Fence</a> &mdash; stationary deployment doesn&rsquo;t benefit from scouting; the unique modifiers go to waste.</p>
+            </article>
+
+            <!-- ============ HATTY ============ -->
+            <article class="item-card" id="hatty" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/hatty.html">Hatty</a></h3>
+                  <p class="item-card__subtitle">Glass-cannon flat-Damage carrier</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">risk</span>
+                <span class="tag">scaling</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: <strong>+6 Damage</strong>,
+                <strong>&minus;300 MaxHealth</strong> (300 total), +15
+                ElementWeaknessMultiplier (self-debuff), signature
+                <a href="../spells/smg.html">Smg</a> (118 base, 1.455
+                FireRate). The +6 Damage is flat in the bracket &mdash; pair
+                with fast-cadence spells to maximise hit count.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/arrow.html">Arrow</a> &mdash; 165 base + element friendly; rapid cadence stacks the +6 Damage on every shot.</li>
+                <li><a href="../spells/proximity.html">Proximity</a> &mdash; 1.80 FireRate is the highest in the game; +6 Damage applies per-tick.</li>
+                <li><a href="../spells/trail.html">Trail</a> &mdash; 2.0 FireRate with persistent zone; constant tick coverage benefits the flat bonus.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/falling-star.html">FallingStar</a> &mdash; slow cadence (0.87 FireRate) wastes the +6-per-hit advantage, and Hatty&rsquo;s 300 HP dies to a single mistake when she stands still aiming.</p>
+            </article>
+
+            <!-- ============ CAMPANELLI ============ -->
+            <article class="item-card" id="campanelli" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/campanelli.html">Campanelli</a></h3>
+                  <p class="item-card__subtitle">Mobility cannon, beam-on-spawn</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">mobility</span>
+                <span class="tag">aoe</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: <strong>+10 MovementSpeed</strong> (so 13.6
+                vs default 3.6), unique
+                <em>HealthAbsorbingHugeSpawnBeam</em>, signature
+                <a href="../spells/shotgun.html">Shotgun</a> (300 base, 3
+                projectiles). Extreme MS rewards spells that depend on
+                positioning &mdash; you can deliver any cone or melee spell
+                where it matters most.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/boomerang.html">Boomerang</a> &mdash; you can outrun the return arc and re-throw early; apex hits land more often.</li>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base, 2m range; the speed gets you into melee on demand and out before retaliation.</li>
+                <li><a href="../spells/trail.html">Trail</a> &mdash; persistent path; high MS draws long damage lines across maps.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/fence.html">Fence</a> &mdash; stationary terrain spell; the mobility advantage is wasted standing next to it.</p>
+            </article>
+
+            <!-- ============ STAR MAGE ============ -->
+            <article class="item-card" id="star-mage" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/star-mage.html">Star Mage</a></h3>
+                  <p class="item-card__subtitle">Element-specialist multiplier</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">element</span>
+                <span class="tag">scaling</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: <strong>+15 ElementStrengthMultiplier</strong>,
+                signature <a href="../spells/falling-star.html">FallingStar</a>
+                (201 base, 0.87 FireRate, 13m area). The +15% is a true
+                multiplier outside the Damage bracket &mdash; commit to a
+                single element across every spell to compound it.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/arrow.html">Arrow</a> &mdash; 165 base, well-supported variant tree across Fire / Lightning / Ice infusions.</li>
+                <li><a href="../spells/shotgun.html">Shotgun</a> &mdash; 300 base; each infused pellet doubles the elemental trigger count.</li>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; 170 base + 1.15 FireRate; reliable elemental application rate.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/fence.html">Fence</a> &mdash; the spell&rsquo;s shipped behaviour leans toward neutral / physical; element multipliers find less to grab.</p>
+            </article>
+
+            <!-- ============ VAMPIRE MAGE ============ -->
+            <article class="item-card" id="vampire-mage" data-element="dark">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/vampire-mage.html">Vampire Mage</a></h3>
+                  <p class="item-card__subtitle">Self-sustaining bruiser</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">sustain</span>
+                <span class="tag">melee</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: unique <em>LifeStealOnSignatureSpell</em> +
+                <em>CanReviveWhenDown</em>, signature
+                <a href="../spells/slash.html">Slash</a> (296 base, 0.75
+                FireRate, 3m size). Lifesteal procs only on Slash &mdash;
+                so the signature does the sustaining, and companions cover
+                everything Slash can&rsquo;t (range, swarm).
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; covers the long range Slash misses while you stay in melee.</li>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; persistent zone keeps swarm pressure off so Slash uptime stays high.</li>
+                <li><a href="../spells/rifle.html">Rifle</a> &mdash; deletes priority targets (elites, casters) before they break your sustain loop.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/trail.html">Trail</a> &mdash; pulls you into mobile kite play, which competes with Slash uptime and breaks the lifesteal rhythm.</p>
+            </article>
+
+            <!-- ============ PLANT MAGE ============ -->
+            <article class="item-card" id="plant-mage" data-element="plant">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/plant-mage.html">Plant Mage</a></h3>
+                  <p class="item-card__subtitle">Pickup-radius AOE specialist</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">aoe</span>
+                <span class="tag">pickup</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +20 HealthPotionAmountMultiplier,
+                <strong>+20 PickupRadius</strong> (so 24 vs default 4),
+                unique <em>PickupAllXPOrbsWhenUsingMagnet</em>, signature
+                <a href="../spells/plant.html">Plant</a> (118.5 base, 0.27
+                FireRate, 3m base size). Huge pickup radius lets Plant Mage
+                rotate between zones &mdash; pair with other persistent-area
+                spells.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/bell.html">Bell</a> &mdash; 142 base, 4m size; second persistent zone to chain between.</li>
+                <li><a href="../spells/energy-zone.html">EnergyZone</a> &mdash; pure DamageTickRate spell built to be camped in.</li>
+                <li><a href="../spells/meteor.html">Meteor</a> &mdash; 4 projectiles + AOE; carpets the area between your standing zones.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/rifle.html">Rifle</a> &mdash; single-target sniping is the opposite of zone-camping carpet damage; the pickup radius advantage is wasted.</p>
+            </article>
+
+            <!-- ============ FLUTE MAGE ============ -->
+            <article class="item-card" id="flute-mage" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/flute-mage.html">Flute Mage</a></h3>
+                  <p class="item-card__subtitle">Random-infusion summoner</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">summon</span>
+                <span class="tag">variance</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: +5 CriticalDamage, <strong>&minus;3
+                CriticalChance</strong> (7 baseline), unique
+                <em>RandomInfusionChance</em>, signature
+                <a href="../spells/summon.html">Summon</a> (107 base, 0.21
+                FireRate). The random infusion is great on multi-spell
+                payloads &mdash; more spells means more chances per shop to
+                roll the element you want.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/arrow.html">Arrow</a> &mdash; element-flexible; rolls well with whichever infusion the unique grants.</li>
+                <li><a href="../spells/orb.html">Orb</a> &mdash; 1.15 FireRate triggers per-hit elemental effects often; variance averages out.</li>
+                <li><a href="../spells/meteor.html">Meteor</a> &mdash; multiple projectiles let elemental procs land on the same target multiple times.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/rifle.html">Rifle</a> &mdash; low cadence means few elemental rolls; Flute Mage&rsquo;s &minus;3 CritChance hurts low-shot-count play even more.</p>
+            </article>
+
+            <!-- ============ BELL MAGE ============ -->
+            <article class="item-card" id="bell-mage" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="../characters/bell-mage.html">Bell Mage</a></h3>
+                  <p class="item-card__subtitle">Return-damage close-quarters brawler</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">melee</span>
+                <span class="tag">aoe</span>
+                <span class="tag">return-damage</span>
+              </div>
+              <p class="item-card__desc">
+                Starting kit: unique <em>ReturnDamageWhenHit</em> +
+                <em>ExplodeOnDeath</em>, signature
+                <a href="../spells/bell.html">Bell</a> (142 base, 0.25
+                FireRate, 4m size, persistent). Return-damage proc only
+                fires at melee distance &mdash; pair with short-range spells
+                that keep enemies close.
+              </p>
+              <h4>Companion picks</h4>
+              <ul>
+                <li><a href="../spells/slash.html">Slash</a> &mdash; 296 base, 2m range; baits melee swings into your return-damage radius.</li>
+                <li><a href="../spells/energy-zone.html">EnergyZone</a> &mdash; persistent area you stand in; gathers enemies in punching range.</li>
+                <li><a href="../spells/proximity.html">Proximity</a> &mdash; the name says it; 2.2m base size + 1.80 FireRate while enemies pile in.</li>
+              </ul>
+              <h4>Avoid</h4>
+              <p><a href="../spells/falling-star.html">FallingStar</a> &mdash; pushes you into long-range play, which silences the ReturnDamageWhenHit kit.</p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ================== SUMMARY TABLE ================== -->
+        <section id="summary" class="stack">
+          <h2>At-a-glance pairing matrix</h2>
+          <p class="prose">
+            Cross-reference: hero &times; signature &times; top companion.
+            Use this when you&rsquo;ve already picked a hero and need to
+            commit to a first shop offer.
+          </p>
+          <div class="stat-table-wrap">
+            <table class="stat-table" data-sortable>
+              <caption>Hero &rarr; top companion pick at a glance</caption>
+              <thead>
+                <tr>
+                  <th>Hero</th>
+                  <th>Signature</th>
+                  <th>Top companion</th>
+                  <th>Playstyle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><a href="../characters/reginald.html">Reginald</a></td><td><a href="../spells/orb.html">Orb</a></td><td><a href="../spells/shotgun.html">Shotgun</a></td><td>Generalist, loot-bias</td></tr>
+                <tr><td><a href="../characters/sun-mage.html">Sun Mage</a></td><td><a href="../spells/proximity.html">Proximity</a></td><td><a href="../spells/slash.html">Slash</a></td><td>Melee evasion</td></tr>
+                <tr><td><a href="../characters/moon-mage.html">Moon Mage</a></td><td><a href="../spells/boomerang.html">Boomerang</a></td><td><a href="../spells/plant.html">Plant</a></td><td>Early infusion</td></tr>
+                <tr><td><a href="../characters/ludwig.html">Ludwig</a></td><td><a href="../spells/laser.html">Laser</a></td><td><a href="../spells/beam.html">Beam</a></td><td>Tank-DPS</td></tr>
+                <tr><td><a href="../characters/smithy.html">Smithy</a></td><td><a href="../spells/beam.html">Beam</a></td><td><a href="../spells/bell.html">Bell</a></td><td>Sustain support</td></tr>
+                <tr><td><a href="../characters/wizard-king.html">Wizard King</a></td><td><a href="../spells/rifle.html">Rifle</a></td><td><a href="../spells/slash.html">Slash</a></td><td>Crit stacker</td></tr>
+                <tr><td><a href="../characters/key-mage.html">Key Mage</a></td><td><a href="../spells/trail.html">Trail</a></td><td><a href="../spells/orb.html">Orb</a></td><td>XP-on-damage</td></tr>
+                <tr><td><a href="../characters/bird-mage.html">Bird Mage</a></td><td><a href="../spells/arrow.html">Arrow</a></td><td><a href="../spells/boomerang.html">Boomerang</a></td><td>Scout / objective</td></tr>
+                <tr><td><a href="../characters/hatty.html">Hatty</a></td><td><a href="../spells/smg.html">Smg</a></td><td><a href="../spells/arrow.html">Arrow</a></td><td>Glass cannon</td></tr>
+                <tr><td><a href="../characters/campanelli.html">Campanelli</a></td><td><a href="../spells/shotgun.html">Shotgun</a></td><td><a href="../spells/boomerang.html">Boomerang</a></td><td>Mobility cannon</td></tr>
+                <tr><td><a href="../characters/star-mage.html">Star Mage</a></td><td><a href="../spells/falling-star.html">FallingStar</a></td><td><a href="../spells/arrow.html">Arrow</a></td><td>Element specialist</td></tr>
+                <tr><td><a href="../characters/vampire-mage.html">Vampire Mage</a></td><td><a href="../spells/slash.html">Slash</a></td><td><a href="../spells/orb.html">Orb</a></td><td>Self-sustain bruiser</td></tr>
+                <tr><td><a href="../characters/plant-mage.html">Plant Mage</a></td><td><a href="../spells/plant.html">Plant</a></td><td><a href="../spells/bell.html">Bell</a></td><td>AOE specialist</td></tr>
+                <tr><td><a href="../characters/flute-mage.html">Flute Mage</a></td><td><a href="../spells/summon.html">Summon</a></td><td><a href="../spells/arrow.html">Arrow</a></td><td>Random infusion</td></tr>
+                <tr><td><a href="../characters/bell-mage.html">Bell Mage</a></td><td><a href="../spells/bell.html">Bell</a></td><td><a href="../spells/slash.html">Slash</a></td><td>Return-damage brawler</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================== SEE ALSO ================== -->
+        <section class="stack">
+          <h2>See also</h2>
+          <div class="see-also grid grid-3">
+            <a class="see-also__link" href="index.html"><strong>Guides hub</strong>All wiki guides; pick another after this one.</a>
+            <a class="see-also__link" href="damage-optimization.html"><strong>Damage optimization</strong>The full formula behind the pairings on this page.</a>
+            <a class="see-also__link" href="spell-tier-list.html"><strong>Spell tier list</strong>Spell rankings independent of hero.</a>
+            <a class="see-also__link" href="element-pairing.html"><strong>Element pairing</strong>Which infusions reinforce each other.</a>
+            <a class="see-also__link" href="../characters/index.html"><strong>Characters</strong>All 15 heroes with full starting stats.</a>
+            <a class="see-also__link" href="../spells/index.html"><strong>Spells</strong>All 21 spells, base stats and variants.</a>
+            <a class="see-also__link" href="../mechanics/character-improvements.html"><strong>Character improvements</strong>The 13 hero-agnostic store upgrades that shape every run.</a>
+            <a class="see-also__link" href="../mechanics/stats.html"><strong>Stats reference</strong>The 36 StatType IDs referenced throughout.</a>
+            <a class="see-also__link" href="../mechanics/elements.html"><strong>Elements</strong>Infusion effects and element interactions.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../index.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;&middot;&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

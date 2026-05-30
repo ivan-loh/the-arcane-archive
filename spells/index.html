@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Catalogue of all 21 spell types in The Spell Brigade, with base stats, infusions, variants and improvements.">
+  <title>Spells — The Arcane Archive</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <!-- Inline favicon: golden rune glyph, no network request -->
+  <link rel="icon"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+  <!-- include: templates/header.html -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input"
+             id="site-search"
+             type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off"
+             spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+
+    <button class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+
+  <div class="container">
+    <div class="page has-sidebar">
+      <!-- Optional sidebar: builder may omit / replace -->
+      <aside class="sidebar" aria-label="Spells">
+  <h2 class="sidebar__title">Spells</h2>
+  <ul class="sidebar__nav">
+    <li><a href="index.html">All spells</a></li>
+    <li><a href="element-matrix.html">Element matrix</a></li>
+  </ul>
+  <h2 class="sidebar__title">Projectile</h2>
+  <ul class="sidebar__nav">
+    <li><a href="arrow.html">Arrow</a></li>
+    <li><a href="beam.html">Beam</a></li>
+    <li><a href="bomb-launcher.html">Bomb Launcher</a></li>
+    <li><a href="boomerang.html">Boomerang</a></li>
+    <li><a href="laser.html">Laser</a></li>
+    <li><a href="rifle.html">Rifle</a></li>
+    <li><a href="shotgun.html">Shotgun</a></li>
+    <li><a href="smg.html">Smg</a></li>
+  </ul>
+  <h2 class="sidebar__title">Aoe</h2>
+  <ul class="sidebar__nav">
+    <li><a href="bell.html">Bell</a></li>
+    <li><a href="energy-zone.html">Energy Zone</a></li>
+    <li><a href="falling-star.html">Falling Star</a></li>
+    <li><a href="meteor.html">Meteor</a></li>
+    <li><a href="proximity.html">Proximity</a></li>
+  </ul>
+  <h2 class="sidebar__title">Orbital</h2>
+  <ul class="sidebar__nav">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="orb.html">Orb</a></li>
+  </ul>
+  <h2 class="sidebar__title">Melee</h2>
+  <ul class="sidebar__nav">
+    <li><a href="slash.html">Slash</a></li>
+  </ul>
+  <h2 class="sidebar__title">Summon</h2>
+  <ul class="sidebar__nav">
+    <li><a href="plant.html">Plant</a></li>
+    <li><a href="summon.html">Summon</a></li>
+  </ul>
+  <h2 class="sidebar__title">Utility</h2>
+  <ul class="sidebar__nav">
+    <li><a href="fence.html">Fence</a></li>
+    <li><a href="mine.html">Mine</a></li>
+    <li><a href="trail.html">Trail</a></li>
+  </ul>
+</aside>
+
+      <main id="main-content" tabindex="-1">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li aria-current="page">Spells</li>
+          </ol>
+        </nav>
+
+        <article class="content-frame">
+          
+    <header class="page-hero">
+      <p class="page-hero__eyebrow">Section hub</p>
+      <h1>Spells</h1>
+      <p class="page-hero__lede">
+        All 21 spell types in The Spell Brigade. Pick a spell
+        for its full breakdown &mdash; base stats, every infusion, every
+        variant, and per-rarity improvements. The
+        <a href="element-matrix.html">element matrix</a> shows which
+        prefab exists for each (spell, element) pair.
+      </p>
+    </header>
+
+    <section id="filters" aria-labelledby="filters-h">
+      <h2 id="filters-h">Filters</h2>
+      <p>Click a chip to highlight matching cards. Filters are visual aids;
+         the page works without JavaScript.</p>
+      <div class="meta-dl">
+        <dt>By element availability</dt>
+        <dd><button class="tier-chip" type="button" data-facet="element" data-value="fire">Fire</button><button class="tier-chip" type="button" data-facet="element" data-value="lightning">Lightning</button><button class="tier-chip" type="button" data-facet="element" data-value="ice">Ice</button><button class="tier-chip" type="button" data-facet="element" data-value="acid">Acid</button><button class="tier-chip" type="button" data-facet="element" data-value="dark">Dark</button></dd>
+        <dt>By archetype</dt>
+        <dd><button class="tier-chip" type="button" data-facet="archetype" data-value="aoe">Aoe</button><button class="tier-chip" type="button" data-facet="archetype" data-value="melee">Melee</button><button class="tier-chip" type="button" data-facet="archetype" data-value="orbital">Orbital</button><button class="tier-chip" type="button" data-facet="archetype" data-value="projectile">Projectile</button><button class="tier-chip" type="button" data-facet="archetype" data-value="summon">Summon</button><button class="tier-chip" type="button" data-facet="archetype" data-value="utility">Utility</button></dd>
+      </div>
+    </section>
+
+    <section id="grid" aria-labelledby="grid-h">
+      <h2 id="grid-h">All spells</h2>
+      <div class="grid grid-cards" data-spell-grid>
+        
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Arrow">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="arrow.html">Arrow</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>14</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">homing</span><span class="tag">single-target</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">165</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Beam">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="beam.html">Beam</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>13</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">piercing</span><span class="tag">channeled</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">104</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="aoe"
+                     data-spell="Bell">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="bell.html">Bell</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>20</code> &middot; aoe</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">aoe</span><span class="tag">zone</span><span class="tag">summon</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">142</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="BombLauncher">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="bomb-launcher.html">Bomb Launcher</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>9</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">aoe</span><span class="tag">bouncing</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">149</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="orbital"
+                     data-spell="Book">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="book.html">Book</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>19</code> &middot; orbital</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">orbital</span><span class="tag">persistent</span><span class="tag">melee-range</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">140</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Boomerang">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="boomerang.html">Boomerang</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>1</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">returning</span><span class="tag">multi-hit</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">57</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="aoe"
+                     data-spell="EnergyZone">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="energy-zone.html">Energy Zone</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>2</code> &middot; aoe</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">aoe</span><span class="tag">zone</span><span class="tag">self-centred</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">40</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">4</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="aoe"
+                     data-spell="FallingStar">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="falling-star.html">Falling Star</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>10</code> &middot; aoe</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">aoe</span><span class="tag">from-above</span><span class="tag">burst</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">201</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="utility"
+                     data-spell="Fence">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="fence.html">Fence</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>12</code> &middot; utility</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">utility</span><span class="tag">placed</span><span class="tag">wall</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">47</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Laser">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="laser.html">Laser</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>3</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">piercing</span><span class="tag">channeled</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">128</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="aoe"
+                     data-spell="Meteor">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="meteor.html">Meteor</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>18</code> &middot; aoe</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">aoe</span><span class="tag">from-above</span><span class="tag">burst</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">61</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="utility"
+                     data-spell="Mine">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="mine.html">Mine</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>11</code> &middot; utility</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">utility</span><span class="tag">placed</span><span class="tag">trap</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">134</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="orbital"
+                     data-spell="Orb">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="orb.html">Orb</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>0</code> &middot; orbital</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">orbital</span><span class="tag">persistent</span><span class="tag">melee-range</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">170</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="summon"
+                     data-spell="Plant">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="plant.html">Plant</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>15</code> &middot; summon</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">summon</span><span class="tag">placed</span><span class="tag">stationary</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">118.5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="aoe"
+                     data-spell="Proximity">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="proximity.html">Proximity</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>4</code> &middot; aoe</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">aoe</span><span class="tag">self-centred</span><span class="tag">passive</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">50.73</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Rifle">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="rifle.html">Rifle</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>6</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">single-target</span><span class="tag">long-range</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">140</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Shotgun">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="shotgun.html">Shotgun</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>5</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">spread</span><span class="tag">short-range</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">300</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="melee"
+                     data-spell="Slash">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="slash.html">Slash</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>17</code> &middot; melee</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">melee</span><span class="tag">arc</span><span class="tag">burst</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">296</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">4</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">2</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="projectile"
+                     data-spell="Smg">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="smg.html">Smg</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>7</code> &middot; projectile</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">projectile</span><span class="tag">rapid-fire</span><span class="tag">spread</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">118</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="summon"
+                     data-spell="Summon">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="summon.html">Summon</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>16</code> &middot; summon</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">summon</span><span class="tag">minion</span><span class="tag">autonomous</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">107.193</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+            <article class="item-card" data-kind="spell"
+                     data-archetype="utility"
+                     data-spell="Trail">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="trail.html">Trail</a></h3>
+                  <p class="item-card__subtitle">SpellType <code>8</code> &middot; utility</p>
+                </div>
+              </header>
+              <div class="item-card__badges"><span class="tag">utility</span><span class="tag">dot</span><span class="tag">trail</span></div>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Damage</span><span class="item-card__stat-value">33.81</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Infusions</span><span class="item-card__stat-value">5</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Variants</span><span class="item-card__stat-value">3</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Improvements</span><span class="item-card__stat-value">3</span></div>
+              </div>
+            </article>
+      </div>
+    </section>
+
+    <section id="comparison" aria-labelledby="cmp-h">
+      <h2 id="cmp-h">Comparison table</h2>
+      <p>Sortable by any column; default sort is by spell name.</p>
+      <div class="stat-table-wrap">
+        <table class="stat-table sortable">
+          <caption>All 21 spells &mdash; baseline values for the four most-used stats</caption>
+          <thead>
+            <tr>
+              <th data-sort="string">Spell</th>
+              <th data-sort="string">Archetype</th>
+              <th data-sort="number" class="num">Damage</th>
+              <th data-sort="number" class="num">FireRate</th>
+              <th data-sort="number" class="num">Speed</th>
+              <th data-sort="number" class="num">Range</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr><td><a href="arrow.html">Arrow</a></td><td>projectile</td><td class="num">165</td><td class="num">0.403636</td><td class="num">6.2</td><td class="num">8</td></tr>
+          <tr><td><a href="beam.html">Beam</a></td><td>projectile</td><td class="num">104</td><td class="num">1.9</td><td class="num u-muted">&mdash;</td><td class="num">7.5</td></tr>
+          <tr><td><a href="bell.html">Bell</a></td><td>aoe</td><td class="num">142</td><td class="num">0.25</td><td class="num u-muted">&mdash;</td><td class="num">7</td></tr>
+          <tr><td><a href="bomb-launcher.html">Bomb Launcher</a></td><td>projectile</td><td class="num">149</td><td class="num">0.275</td><td class="num u-muted">&mdash;</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="book.html">Book</a></td><td>orbital</td><td class="num">140</td><td class="num">0.2</td><td class="num">3</td><td class="num">2.5</td></tr>
+          <tr><td><a href="boomerang.html">Boomerang</a></td><td>projectile</td><td class="num">57</td><td class="num">0.53</td><td class="num">7.125</td><td class="num">4.85</td></tr>
+          <tr><td><a href="energy-zone.html">Energy Zone</a></td><td>aoe</td><td class="num">40</td><td class="num">0.25</td><td class="num u-muted">&mdash;</td><td class="num">13</td></tr>
+          <tr><td><a href="falling-star.html">Falling Star</a></td><td>aoe</td><td class="num">201</td><td class="num">0.873</td><td class="num u-muted">&mdash;</td><td class="num">13</td></tr>
+          <tr><td><a href="fence.html">Fence</a></td><td>utility</td><td class="num">47</td><td class="num">0.08</td><td class="num u-muted">&mdash;</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="laser.html">Laser</a></td><td>projectile</td><td class="num">128</td><td class="num">0.196</td><td class="num">120</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="meteor.html">Meteor</a></td><td>aoe</td><td class="num">61</td><td class="num">0.5335</td><td class="num u-muted">&mdash;</td><td class="num">15</td></tr>
+          <tr><td><a href="mine.html">Mine</a></td><td>utility</td><td class="num">134</td><td class="num">0.6</td><td class="num u-muted">&mdash;</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="orb.html">Orb</a></td><td>orbital</td><td class="num">170</td><td class="num">1.15031</td><td class="num">4.75</td><td class="num">7.5</td></tr>
+          <tr><td><a href="plant.html">Plant</a></td><td>summon</td><td class="num">118.5</td><td class="num">0.266667</td><td class="num u-muted">&mdash;</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="proximity.html">Proximity</a></td><td>aoe</td><td class="num">50.73</td><td class="num">1.79775</td><td class="num u-muted">&mdash;</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="rifle.html">Rifle</a></td><td>projectile</td><td class="num">140</td><td class="num">0.441</td><td class="num">7.6</td><td class="num">9</td></tr>
+          <tr><td><a href="shotgun.html">Shotgun</a></td><td>projectile</td><td class="num">300</td><td class="num">0.485</td><td class="num">11.5</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="slash.html">Slash</a></td><td>melee</td><td class="num">296</td><td class="num">0.75</td><td class="num u-muted">&mdash;</td><td class="num">2</td></tr>
+          <tr><td><a href="smg.html">Smg</a></td><td>projectile</td><td class="num">118</td><td class="num">1.455</td><td class="num">5.7</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="summon.html">Summon</a></td><td>summon</td><td class="num">107.193</td><td class="num">0.2127</td><td class="num">4</td><td class="num u-muted">&mdash;</td></tr>
+          <tr><td><a href="trail.html">Trail</a></td><td>utility</td><td class="num">33.81</td><td class="num">2</td><td class="num u-muted">&mdash;</td><td class="num">0.6325</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="related">
+      <h2>See also</h2>
+      <div class="see-also">
+        <a class="see-also__link" href="element-matrix.html">
+          <strong>Spell &times; element matrix</strong>
+          All 21 spells across all 21 element combinations &mdash; one chip per prefab.
+        </a>
+        <a class="see-also__link" href="../mechanics/elements.html">
+          <strong>Element reference</strong>
+          Damage type matchups, immunities, and combo rules.
+        </a>
+        <a class="see-also__link" href="../mechanics/damage-system.html">
+          <strong>Damage calculation</strong>
+          How a base-stat number becomes a hit number.
+        </a>
+        <a class="see-also__link" href="../guides/index.html">
+          <strong>Build guides</strong>
+          Curated combinations of spells, infusions, and artifacts.
+        </a>
+      </div>
+    </section>
+
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <!-- include: templates/footer.html -->
+  <footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+
+  <script src="../js/wiki.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Squid boss strategy: 3 phases, 185k HP, 6 bullet-hell patterns. Pierce-build counter, positioning and artifact recommendations.">
+  <title>Squid (boss) — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#hero" aria-current="page">Overview</a></li>
+        <li><a href="#stats">Stat block</a></li>
+        <li><a href="#phases">Phases</a></li>
+        <li><a href="#bullet-hell">Bullet-hell patterns</a></li>
+        <li><a href="#spawn">When she appears</a></li>
+        <li><a href="#strategy">Strategy guide</a></li>
+        <li><a href="#see-also">See also</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bosses</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="squid.html" aria-current="page">Squid</a></li>
+        <li><a href="hydra.html">Hydra</a></li>
+        <li><a href="toad.html">Toad</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bosses</a></li>
+          <li aria-current="page">Squid</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="hero" class="stack">
+          <h1>Squid</h1>
+          <p class="prose u-muted">
+            <strong>BossType <code>0</code></strong> &middot; the default boss and
+            the only one with explicit bullet-hell patterns. Appears in
+            <a href="../worlds/index.html">Pyrestorm Pit (default)</a>.
+            Three escalating phases of homing projectiles into rotating
+            walls of fire.
+          </p>
+          <div class="row">
+            <span class="tag">boss</span>
+            <span class="tag">bullet-hell</span>
+            <span class="tag">homing</span>
+            <span class="tag">3 phases</span>
+            <span class="tag">default</span>
+          </div>
+        </section>
+
+        <section id="stats">
+          <h2>Stat block</h2>
+          <dl class="meta-dl">
+            <dt>Health</dt>             <dd><strong>185,000</strong> HP (scales with party size)</dd>
+            <dt>Contact damage</dt>     <dd>350</dd>
+            <dt>Movement speed</dt>     <dd>3 m/s</dd>
+            <dt>Acceleration</dt>       <dd>8</dd>
+            <dt>Phase count</dt>        <dd>3</dd>
+            <dt>Primary prefab</dt>     <dd><code>Enemy_Squid.prefab</code></dd>
+            <dt>Intro sequence</dt>     <dd><code>SquidBossIntroSequence.prefab</code></dd>
+            <dt>Slow resistance</dt>    <dd>50&thinsp;%</dd>
+          </dl>
+        </section>
+
+        <section id="phases">
+          <h2>Phases</h2>
+          <p class="prose">
+            Squid transitions on health thresholds rather than timers — at
+            roughly two-thirds and one-third HP. Each transition is preceded by
+            a brief stagger animation; bank movement cooldowns for it.
+          </p>
+          <div class="grid grid-cards">
+          <article class="item-card" id="phase-1">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 1</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Squid</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Walking phase. Squid pursues at 3.0 m/s and lobs a single homing projectile from <code>Enemy_Squid_HomingProjectile_Phase1.prefab</code> every few seconds. Use this phase to chunk roughly the first third of the 185k HP bar — there is no bullet hell yet, just dodging the homing telegraph.</p>
+            <details>
+              <summary><strong>Ability prefabs</strong></summary>
+              <ul><li><code>Enemy_Squid_HomingProjectile_Phase1.prefab</code></li></ul>
+            </details>
+          </article>
+          <article class="item-card" id="phase-2">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 2</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Squid_Phase_2</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Bullet-hell debut. Three patterns roll on a loop: NoRotationDoubleBurst (24 projectiles × 2 waves), RotateClockwise and RotateCounterClockwise (18 waves of 6 projectiles each). Projectile speed is 4.5 m/s, damage 100. Homing projectiles still spawn between patterns.</p>
+            <details>
+              <summary><strong>Ability prefabs</strong></summary>
+              <ul><li><code>Enemy_Squid_BulletHellProjectile_Phase2.prefab</code></li><li><code>Enemy_Squid_HomingProjectile_Phase2.prefab</code></li></ul>
+            </details>
+          </article>
+          <article class="item-card" id="phase-3">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 3</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Squid_Phase_3</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Lethal phase. Pattern damage jumps to 150 and speed to 5.5 m/s. RotateClockwise and RotateCounterClockwise stretch to 24 waves at ~3× the rotation rate; the new Wavey pattern fires 24 waves of 4 projectiles each at 0.14s intervals on a sine path. No more homing — pure bullet hell.</p>
+            <details>
+              <summary><strong>Ability prefabs</strong></summary>
+              <ul><li><code>Enemy_Squid_BulletHellProjectile_Phase3.prefab</code></li></ul>
+            </details>
+          </article>
+          </div>
+        </section>
+
+        <section id="bullet-hell">
+          <h2>Bullet-hell patterns</h2>
+          <p class="prose">
+            All six patterns come from <code>data/bosses.json &gt; bullet_hell_patterns</code>.
+            Damage values are flat (do not scale with progression); the
+            <em>RotationSpeed</em> column shows the angular sweep — negative
+            values rotate counter-clockwise. <em>SineFrequency</em> replaces
+            it for the Phase 3 Wavey pattern.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Six bullet-hell patterns (Phase 2 &amp; 3)</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Pattern</th>
+                  <th data-sort="number" class="num">Speed</th>
+                  <th data-sort="number" class="num">Damage</th>
+                  <th data-sort="number" class="num">Waves</th>
+                  <th data-sort="number" class="num">Per wave</th>
+                  <th data-sort="number" class="num">Delay (s)</th>
+                  <th data-sort="number" class="num">Rotation / Sine</th>
+                  <th data-sort="number" class="num">Lifetime (s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Phase2_NoRotationDoubleBurst</code></td>
+                  <td class="num">4.5</td>
+                  <td class="num">100</td>
+                  <td class="num">2</td>
+                  <td class="num">24</td>
+                  <td class="num">0.6</td>
+                  <td class="num">0</td>
+                  <td class="num">5</td>
+                </tr>
+                <tr>
+                  <td><code>Phase2_RotateClockwise</code></td>
+                  <td class="num">4.5</td>
+                  <td class="num">100</td>
+                  <td class="num">18</td>
+                  <td class="num">6</td>
+                  <td class="num">0.45</td>
+                  <td class="num">6</td>
+                  <td class="num">5</td>
+                </tr>
+                <tr>
+                  <td><code>Phase2_RotateCounterClockwise</code></td>
+                  <td class="num">4.5</td>
+                  <td class="num">100</td>
+                  <td class="num">18</td>
+                  <td class="num">6</td>
+                  <td class="num">0.45</td>
+                  <td class="num">-6</td>
+                  <td class="num">5</td>
+                </tr>
+                <tr>
+                  <td><code>Phase3_RotateClockwise</code></td>
+                  <td class="num">5.5</td>
+                  <td class="num">150</td>
+                  <td class="num">24</td>
+                  <td class="num">6</td>
+                  <td class="num">0.35</td>
+                  <td class="num">20</td>
+                  <td class="num">6.5</td>
+                </tr>
+                <tr>
+                  <td><code>Phase3_RotateCounterClockwise</code></td>
+                  <td class="num">5.5</td>
+                  <td class="num">150</td>
+                  <td class="num">24</td>
+                  <td class="num">6</td>
+                  <td class="num">0.35</td>
+                  <td class="num">-20</td>
+                  <td class="num">6.5</td>
+                </tr>
+                <tr>
+                  <td><code>Phase3_Wavey</code></td>
+                  <td class="num">5.5</td>
+                  <td class="num">150</td>
+                  <td class="num">24</td>
+                  <td class="num">4</td>
+                  <td class="num">0.14</td>
+                  <td class="num">2</td>
+                  <td class="num">6.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="warn" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Phase 3 math</span>
+            <p>
+              At 24 waves &times; 6 projectiles &times; 150 damage each, a
+              single fully-resolved RotateClockwise burst represents
+              <strong>21,600 potential damage</strong>. Even a 10&thinsp;%
+              hit-rate on you is lethal — pierce these spells with strafing
+              motion, never absorb them.
+            </p>
+          </aside>
+        </section>
+
+        <section id="spawn">
+          <h2>When she appears</h2>
+          <p class="prose">
+            Squid is the <strong>default boss</strong> spawned at the run's
+            terminal wave when no other world override applies. Cross-referencing
+            <code>data/meta.json &gt; worlds</code>, she anchors
+            <a href="../worlds/index.html">Pyrestorm Pit / Scorched Abyss</a> at
+            wave 20 (run duration ~1200 s).
+          </p>
+          <p class="prose">
+            The intro sequence (<code>SquidBossIntroSequence.prefab</code>) is
+            long; you have <em>time</em> to pop a heal artifact, re-position to
+            the arena center, and queue your highest-damage spell before her
+            iframe drops.
+          </p>
+        </section>
+
+        <section id="strategy">
+          <h2>Strategy guide</h2>
+
+          <h3>1. Positioning &amp; mobility</h3>
+          <p class="prose">
+            Squid wants you in the arena <em>center</em>. Her bullet-hell
+            patterns are nearly all radial — sitting on the edge gives you only
+            one direction to dodge (inward), and the wall caps your strafe. From
+            mid-arena you can pierce a pattern at its widest gap, then
+            counter-rotate against her next ring. Move continuously; never
+            stop to cast even for one tick.
+          </p>
+
+          <h3>2. Spell types that excel</h3>
+          <p class="prose">
+            Squid has 185k HP and 50&thinsp;% slow resistance — favour
+            <strong>raw single-target burst</strong> over crowd control.
+            <a href="../spells/index.html">Void Lance</a> and
+            <a href="../spells/index.html">Glacial Shard</a> excel
+            because both pierce and travel fast enough to hit her while you
+            strafe. <a href="../spells/index.html">Beam</a> works once you can
+            lock-on past her bullet curtains. Avoid pure-DoT builds: the fight
+            ends before stacks mature.
+          </p>
+
+          <h3>3. Recommended artifacts</h3>
+          <p class="prose">
+            Sustain artifacts beat pure DPS here. <em>HealOnCrit</em> turns the
+            10-minute fight into a self-leech exchange when paired with a high
+            crit spell. <em>IncreaseDamagePerArmor</em> rewards stacking armor
+            into the 350-contact phase. <a href="../artifacts/index.html">Grim Pact</a>
+            is a damage trap in this fight — Squid's ambient damage already
+            taxes survivability past comfort.
+          </p>
+
+          <h3>4. Phase transition tells</h3>
+          <p class="prose">
+            Squid plays a short stagger animation at ~66&thinsp;% and ~33&thinsp;%
+            HP. The instant her body recoils, she resets all bullet-hell
+            cooldowns — meaning the <em>next</em> pattern will fire immediately
+            after the animation. Pre-strafe to the side <em>during</em> the
+            stagger so you are already moving when the ring deploys.
+          </p>
+
+          <h3>5. Co-op roles</h3>
+          <p class="prose">
+            In a 4-player lobby, designate one player to <strong>tank homing
+            projectiles</strong> by deliberately drawing them away from the
+            damage core. Phase-2 homing projectiles will chase the closest
+            target; a dedicated kiter halves DPS pressure on the rest of the
+            team.
+          </p>
+
+          <aside class="callout" data-kind="tip" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Pro tip</span>
+            <p>
+              The <em>Phase3_Wavey</em> pattern is sine-modulated — its
+              projectiles oscillate &plusmn;45&deg; from the firing axis at
+              2 Hz. Step <em>through</em> a node (zero-crossing) rather than
+              try to outrun the wave envelope.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="danger" style="margin-top: var(--sp-3);">
+            <span class="callout__title">Do not</span>
+            <p>
+              Do not hug Squid. Her 350 contact damage plus a bullet-hell tick
+              is an instant downstate at most armor values. Stay 6+ meters out
+              even during burn windows.
+            </p>
+          </aside>
+        </section>
+
+        <section id="see-also">
+          <h2>See also</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../worlds/index.html">
+              <strong>Pyrestorm Pit / Scorched Abyss</strong>
+              The boss world layout and pre-fight wave pool.
+            </a>
+            <a class="see-also__link" href="hydra.html">
+              <strong>Hydra (next boss)</strong>
+              How the difficulty curve continues after Squid.
+            </a>
+            <a class="see-also__link" href="../challenges/index.html">
+              <strong>Challenges</strong>
+              Squid-related encounter modifiers and curses.
+            </a>
+            <a class="see-also__link" href="../enemies/index.html">
+              <strong>Bestiary</strong>
+              Pre-boss wave enemies you need to clear first.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference for <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

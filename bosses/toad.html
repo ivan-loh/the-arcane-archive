@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Toad boss strategy: 2 phases, 165k HP, leap + corpse-splash. Tutorial boss positioning and arena-denial counterplay.">
+  <title>Toad (boss) — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search spells, items, enemies…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="index.html">Bosses</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#hero" aria-current="page">Overview</a></li>
+        <li><a href="#stats">Stat block</a></li>
+        <li><a href="#phases">Phases</a></li>
+        <li><a href="#bullet-hell">Bullet-hell patterns</a></li>
+        <li><a href="#spawn">When he appears</a></li>
+        <li><a href="#strategy">Strategy guide</a></li>
+        <li><a href="#see-also">See also</a></li>
+      </ul>
+      <h2 class="sidebar__title">Bosses</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Hub</a></li>
+        <li><a href="squid.html">Squid</a></li>
+        <li><a href="hydra.html">Hydra</a></li>
+        <li><a href="toad.html" aria-current="page">Toad</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Bosses</a></li>
+          <li aria-current="page">Toad</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="hero" class="stack">
+          <h1>Toad</h1>
+          <p class="prose u-muted">
+            <strong>BossType <code>1</code></strong> &middot; the tutorial boss.
+            Appears in <a href="../worlds/index.html">Verdant Meadows</a>.
+            Slowest of the three bosses by a wide margin (2.25 m/s) — but
+            leaves a persistent <code>Enemy_ToadDeadSplash</code> puddle that
+            denies area for the rest of the encounter.
+          </p>
+          <div class="row">
+            <span class="tag">boss</span>
+            <span class="tag">leap</span>
+            <span class="tag">AoE-denial</span>
+            <span class="tag">2 phases</span>
+            <span class="tag">tutorial</span>
+          </div>
+        </section>
+
+        <section id="stats">
+          <h2>Stat block</h2>
+          <dl class="meta-dl">
+            <dt>Health</dt>             <dd><strong>165,000</strong> HP (scales with party size)</dd>
+            <dt>Contact damage</dt>     <dd>350</dd>
+            <dt>Movement speed</dt>     <dd>2.25 m/s (slowest boss)</dd>
+            <dt>Acceleration</dt>       <dd>8</dd>
+            <dt>Phase count</dt>        <dd>2</dd>
+            <dt>Primary prefab</dt>     <dd><code>Enemy_Toad.prefab</code></dd>
+            <dt>Death effect</dt>       <dd><code>Enemy_ToadDeadSplash.prefab</code> &mdash; persistent puddle</dd>
+            <dt>Slow resistance</dt>    <dd>50&thinsp;%</dd>
+          </dl>
+
+          <aside class="callout" data-kind="warn" style="margin-top: var(--sp-4);">
+            <span class="callout__title">Naming quirk</span>
+            <p>
+              <code>data/bosses.json</code> lists three entries in
+              <code>phase_names</code> for Toad but <code>phase_count: 2</code>.
+              The third entry duplicates <code>Enemy_Toad_Phase_2</code> &mdash;
+              treat the fight as two phases.
+            </p>
+          </aside>
+        </section>
+
+        <section id="phases">
+          <h2>Phases</h2>
+          <p class="prose">
+            Toad transitions at ~50&thinsp;% HP. His per-phase ability prefab
+            table is empty in <code>bosses.json</code>; descriptions below are
+            derived from in-game observation and the <code>ToadDeadSplash</code>
+            prefab.
+          </p>
+          <div class="grid grid-cards">
+          <article class="item-card" id="phase-1">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 1</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Toad</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Walking phase. Toad (<code>Enemy_Toad.prefab</code>) pursues at 2.25 m/s — the slowest boss in the game. Lobs short-range tongue strikes and occasional leaps. Phase ends at ~50&thinsp;% HP.</p>
+          </article>
+          <article class="item-card" id="phase-2">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title">Phase 2</h3>
+                <p class="item-card__subtitle">Prefab <code>Enemy_Toad_Phase_2</code></p>
+              </div>
+            </header>
+            <p class="item-card__desc">Enraged phase. Toad speeds up his leap cadence and his attacks gain area-of-effect splash. On death he leaves <code>Enemy_ToadDeadSplash.prefab</code> — a large persistent damage puddle covering roughly 40&thinsp;% of the arena floor.</p>
+          </article>
+          </div>
+        </section>
+
+        <section id="bullet-hell">
+          <h2>Bullet-hell patterns</h2>
+          <p class="prose">
+            Toad has <strong>no entries</strong> in
+            <code>bullet_hell_patterns</code>. His ranged threat is melee
+            tongue strikes and short leap-stomps; positional play, not dodging.
+          </p>
+        </section>
+
+        <section id="spawn">
+          <h2>When he appears</h2>
+          <p class="prose">
+            Toad anchors <a href="../worlds/index.html">Verdant Meadows</a> at
+            the final wave of its 20-wave run. As the starting world, this is
+            the first boss most players encounter — and the only one shipped
+            in the playable demo (<code>is_included_in_demo: true</code>).
+          </p>
+        </section>
+
+        <section id="strategy">
+          <h2>Strategy guide</h2>
+
+          <h3>1. Use his slowness against him</h3>
+          <p class="prose">
+            At 2.25 m/s Toad is slower than nearly every player movement spell.
+            You can pull him in a straight line indefinitely, drop a damage
+            field behind you, and let him walk through it. Build the fight
+            around kiting, not stand-still DPS.
+          </p>
+
+          <h3>2. Plan the puddle exit</h3>
+          <p class="prose">
+            On death Toad spawns a wide <code>ToadDeadSplash</code> puddle
+            roughly centered on the killing-blow location. <strong>Pre-bait
+            the kill toward an arena edge</strong> so the puddle covers ground
+            you do not need for the post-fight XP collection. Killing him in
+            the dead center is a positioning loss even if you survive it.
+          </p>
+
+          <h3>3. Recommended spells &amp; artifacts</h3>
+          <p class="prose">
+            Any kiteable damage source works: <a href="../spells/index.html">Venom Mist</a>
+            (trail aura), Bell drops, BombLauncher arc. Avoid spells that
+            require you to face the target while standing — Toad's leap will
+            close the gap and one-shot you on the cast. Artifact-wise,
+            <em>HealOnCrit</em> and <em>movement-speed</em> trinkets carry the
+            fight; <em>Grim Pact</em> is over-tuned for this difficulty curve.
+          </p>
+
+          <h3>4. Phase transition tells</h3>
+          <p class="prose">
+            At ~50&thinsp;% HP Toad performs an audible croak and pauses for a
+            short cast. This is the only safe window to top off armor or
+            close on him for a burst. After phase 2 his leap range and
+            cadence both increase by roughly 50&thinsp;%.
+          </p>
+
+          <h3>5. Co-op &amp; tutorial value</h3>
+          <p class="prose">
+            Toad is deliberately the gentlest boss in the rotation; use the
+            fight to onboard new players to <em>positioning over DPS</em>.
+            The lessons (kite slow boss, do not stand in the puddle,
+            pre-bait the kill) transfer directly to Hydra and Squid.
+          </p>
+
+          <aside class="callout" data-kind="tip" style="margin-top: var(--sp-5);">
+            <span class="callout__title">Pro tip</span>
+            <p>
+              A piercing line spell like
+              <a href="../spells/index.html">Glacial Shard</a> can hit
+              Toad on his leap arc <em>and</em> chill him for the half-effective
+              30&thinsp;% slow (50&thinsp;% slow resistance). Two casts during
+              the leap stagger his approach noticeably.
+            </p>
+          </aside>
+
+          <aside class="callout" data-kind="danger" style="margin-top: var(--sp-3);">
+            <span class="callout__title">Do not</span>
+            <p>
+              Do <strong>not</strong> melee Toad. His 350 contact damage plus
+              leap collision will gib a low-armor build instantly, and the
+              corpse-puddle will deny you the rezzing space your teammates
+              need.
+            </p>
+          </aside>
+        </section>
+
+        <section id="see-also">
+          <h2>See also</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../worlds/index.html">
+              <strong>Verdant Meadows</strong>
+              The starting world and Toad's arena.
+            </a>
+            <a class="see-also__link" href="squid.html">
+              <strong>Squid (next boss)</strong>
+              The bullet-hell step up after the tutorial.
+            </a>
+            <a class="see-also__link" href="../guides/index.html">
+              <strong>Beginner's primer</strong>
+              Foundational positioning that Toad teaches.
+            </a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference for <em>The Spell Brigade</em>.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="index.html">Bosses</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

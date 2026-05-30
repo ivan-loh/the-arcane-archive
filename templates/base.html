@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="{{DESCRIPTION}}">
+  <title>{{TITLE}} — The Arcane Archive</title>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+
+  <!-- Inline favicon: golden rune glyph, no network request -->
+  <link rel="icon"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+  <!-- include: templates/header.html -->
+  {{HEADER}}
+
+  <div class="container">
+    <div class="page {{PAGE_MODIFIERS}}">
+      <!-- Optional sidebar: builder may omit / replace -->
+      {{SIDEBAR}}
+
+      <main id="main-content" tabindex="-1">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            {{BREADCRUMBS}}
+          </ol>
+        </nav>
+
+        <article class="content-frame">
+          {{CONTENT}}
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <!-- include: templates/footer.html -->
+  {{FOOTER}}
+
+  <script src="/js/wiki.js" defer></script>
+</body>
+</html>

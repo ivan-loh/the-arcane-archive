@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Armor and Dodge in The Spell Brigade — flat-subtract armor model, dodge roll, HealOnDodge artifact hook, friendly-fire ×0.25, and corruption multiplier.">
+  <title>Armor &amp; Dodge — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#armor">Armor</a></li>
+        <li><a href="#armor-curve">Why flat subtract</a></li>
+        <li><a href="#dodge">Dodge</a></li>
+        <li><a href="#heal-on-dodge">HealOnDodge</a></li>
+        <li><a href="#friendly-fire">Friendly fire</a></li>
+        <li><a href="#corruption">Corruption multiplier</a></li>
+        <li><a href="#examples">Worked examples</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/damage-system.html">Damage system</a></li>
+        <li><a href="../mechanics/critical-hits.html">Critical hits</a></li>
+        <li><a href="../mechanics/armor-dodge.html" aria-current="page">Armor &amp; Dodge</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Armor &amp; Dodge</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Armor &amp; Dodge</h1>
+          <p class="prose">
+            The defensive layer for a player. After all attacker-side scaling (base
+            damage, crit, element strength, debuffs), the hit lands on
+            <code>PlayerHealthContainer.RemoveHealth</code>, which applies — in
+            order — dodge (binary), armor (flat subtract), friendly-fire scaling,
+            and the corruption multiplier. Then HP is removed.
+          </p>
+        </section>
+
+        <section id="armor" class="stack">
+          <h2>Armor</h2>
+          <p class="prose">
+            <code>Armor</code> (<a href="../mechanics/stats.html#armor">stat 14, Flat</a>)
+            is applied by <code>PlayerHealthContainer.CalculateDamageAfterArmor</code>.
+            The dump only exposes the method signature, but the most likely formula —
+            and the one consistent with the rest of the system&rsquo;s design — is a
+            flat subtraction:
+          </p>
+
+<pre class="formula"><code><span class="f-fn">CalculateDamageAfterArmor</span>(incoming) {
+    return max(<span class="f-num">0</span>, incoming − Armor)
+}</code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Confidence: inferred</span>
+            <p>
+              The alternative is the percentage model <code>incoming × base / (base + Armor)</code>
+              (used in some ARPGs). Three things point at flat subtraction instead:
+              (a) Armor is a <em>Flat</em>-calc stat, not a percent; (b) the artifact
+              <code>IncreaseDamagePerArmor</code> only makes economic sense if armor
+              <em>doesn&rsquo;t</em> have built-in diminishing returns to fight against;
+              (c) the Vampire-Survivors-derived genre defaults to flat subtraction.
+            </p>
+          </aside>
+        </section>
+
+        <section id="armor-curve" class="stack">
+          <h2>Why a flat-subtract model matters</h2>
+          <p class="prose">
+            A flat-subtract model has two non-obvious properties:
+          </p>
+          <ol>
+            <li><strong>It can clamp to zero.</strong> If an enemy&rsquo;s smallest tick is &lt; Armor, that enemy effectively can&rsquo;t hurt you. Pile enough armor and trash mobs become harmless.</li>
+            <li><strong>It scales linearly — never diminishes.</strong> Every additional armor point is exactly as good as the last (provided incoming damage is still above zero). That&rsquo;s why <code>IncreaseDamagePerArmor</code> exists: high armor stacks <em>without</em> built-in falloff, so the design needs an explicit conversion option.</li>
+          </ol>
+        </section>
+
+        <section id="dodge" class="stack">
+          <h2>Dodge</h2>
+          <p class="prose">
+            <code>Dodge</code> (<a href="../mechanics/stats.html#dodge">stat 15, Flat,
+            displayed as %</a>) is a binary roll <em>before</em> the armor step. If it
+            succeeds, the hit is ignored entirely — zero HP loss, no popup-side
+            number, and the <code>PlayerDodgePopup</code> shows instead.
+          </p>
+
+<pre class="formula"><code><span class="f-fn">PlayerHealthContainer</span>.HasDodged() {
+    return <span class="f-fn">GetRandomFloat</span>(<span class="f-num">0</span>, <span class="f-num">100</span>) &lt; Dodge
+}
+
+<span class="f-comment">// Inside RemoveHealth:</span>
+if (HasDodged()) {
+    fire DodgeAttackEventArgs
+    <span class="f-fn">CheckHealOnDodgeArtifactEffect</span>()
+    return <span class="f-num">0</span>      <span class="f-comment">// hit fully nullified</span>
+}</code></pre>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">No hard cap visible</span>
+            <p>
+              Nothing in <code>StatCalculator</code> or the dodge method clamps the
+              value. A stat at or above <code>100</code> rolls a guaranteed dodge on
+              every incoming hit. Content design (item availability, curses) keeps
+              players away from that ceiling in practice.
+            </p>
+          </aside>
+        </section>
+
+        <section id="heal-on-dodge" class="stack">
+          <h2>HealOnDodge artifact hook</h2>
+          <p class="prose">
+            <code>PlayerHealthContainer.CheckHealOnDodgeArtifactEffect</code> reads the
+            <a href="../mechanics/stats.html"><code>HealOnDodge</code> stat (id 22, Flat)</a>
+            after every successful dodge and heals that many HP. The stat aggregates
+            with any modifier that targets it. Result: dodge-stacking builds heal
+            <em>every time they avoid a hit</em>, turning Dodge into a soft healing
+            engine.
+          </p>
+        </section>
+
+        <section id="friendly-fire" class="stack">
+          <h2>Friendly fire</h2>
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title"><code>FriendlyFireMultiplier = 0.25</code></span>
+            <p>
+              When the attacker resolves to a teammate (most often through area /
+              explosion damage), <code>PlayerHealthContainer</code> applies a hard
+              ×0.25 multiplier from the const <code>FriendlyFireMultiplier</code>
+              (line 310960). This sits between the attacker-side scaling and the
+              recipient&rsquo;s own dodge / armor — so teammates still get to dodge a
+              25%-strength friendly-fire hit, and armor still subtracts from it.
+            </p>
+          </aside>
+
+          <p class="prose">
+            <code>ExplosionDamageInfo</code> additionally carries separate
+            <code>DamageOnEnemies</code> and <code>DamageOnPlayers</code> fields, so an
+            explosion can deal entirely different base numbers to each side
+            <em>before</em> the ×0.25 is applied. Designers use this to make some AoEs
+            ally-safe even at maximum stacking.
+          </p>
+        </section>
+
+        <section id="corruption" class="stack">
+          <h2>Corruption multiplier</h2>
+          <p class="prose">
+            Damage taken while the player is corrupted multiplies by the serialized
+            field <code>damageTakenWhileCorruptedMultiplier</code> on
+            <code>PlayerHealthContainer</code>. The exact default value isn&rsquo;t
+            dump-visible (it&rsquo;s configured per-character or per-run via
+            inspector serialization), but the multiplier sits late in the pipeline,
+            stacking with friendly-fire if both fire on the same hit.
+          </p>
+        </section>
+
+        <section id="examples" class="stack">
+          <h2>Worked examples</h2>
+
+          <h3>1. Plain enemy hit, light armor</h3>
+<pre class="formula"><code>incoming = <span class="f-num">42</span>
+Dodge    = <span class="f-num">15</span>
+Armor    = <span class="f-num">8</span>
+
+roll     = RandomFloat(<span class="f-num">0</span>,<span class="f-num">100</span>) = <span class="f-num">63.1</span>   <span class="f-comment">// 63.1 &lt; 15 false → no dodge</span>
+result   = max(<span class="f-num">0</span>, <span class="f-num">42</span> − <span class="f-num">8</span>)        = <span class="f-num">34</span>   <span class="f-comment">// 34 HP removed</span></code></pre>
+
+          <h3>2. Successful dodge</h3>
+<pre class="formula"><code>incoming = <span class="f-num">42</span>
+Dodge    = <span class="f-num">60</span>
+HealOnDodge = <span class="f-num">3</span>
+
+roll     = <span class="f-num">14.7</span>     <span class="f-comment">// 14.7 &lt; 60 → dodge!</span>
+result   = <span class="f-num">0</span>        <span class="f-comment">// no HP lost</span>
+heal     = +<span class="f-num">3</span> HP    <span class="f-comment">// HealOnDodge fires</span></code></pre>
+
+          <h3>3. Trash-mob threshold (armor clamps to zero)</h3>
+<pre class="formula"><code>incoming = <span class="f-num">6</span>
+Armor    = <span class="f-num">10</span>
+
+result   = max(<span class="f-num">0</span>, <span class="f-num">6</span> − <span class="f-num">10</span>)      = <span class="f-num">0</span>   <span class="f-comment">// trash mob can't break through</span></code></pre>
+
+          <h3>4. Friendly explosion through armor</h3>
+<pre class="formula"><code>incoming     = <span class="f-num">80</span>       <span class="f-comment">// (after attacker-side scaling)</span>
+friendly     = true
+Dodge        = <span class="f-num">10</span>
+Armor        = <span class="f-num">8</span>
+
+step1: ×<span class="f-num">0.25</span>                = <span class="f-num">20</span>
+step2: dodge roll = <span class="f-num">87</span>       → no dodge
+step3: max(<span class="f-num">0</span>, <span class="f-num">20</span> − <span class="f-num">8</span>)        = <span class="f-num">12</span>   <span class="f-comment">// final HP removed</span></code></pre>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Build implication</span>
+            <p>
+              Armor alone is great against small-tick swarms (clamps to zero), but
+              degrades against single big hits (a boss slam still goes through). Dodge
+              is the inverse — useless against guaranteed-hit zone DOT, but binary
+              salvation against a single big spike. Mixed defensive builds layer both
+              <em>because they fail in different conditions</em>, not because they
+              stack additively.
+            </p>
+          </aside>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/damage-system.html">
+            <strong>Damage system</strong>
+            Where this fits in the overall pipeline.
+          </a>
+          <a class="see-also__link" href="../mechanics/stats.html#armor">
+            <strong>Armor &amp; Dodge stats</strong>
+            The stat-table entries.
+          </a>
+          <a class="see-also__link" href="../artifacts/artifact-13.html">
+            <strong>IncreaseDamagePerArmor</strong>
+            The classic armor-into-damage conversion artifact.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

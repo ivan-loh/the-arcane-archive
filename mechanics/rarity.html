@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Rarity system in The Spell Brigade — four tiers, ImprovementValueContainer, RandomRarityPicker, and how the Luck stat biases rolls.">
+  <title>Rarity — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#tiers">Four tiers</a></li>
+        <li><a href="#container">ImprovementValueContainer</a></li>
+        <li><a href="#picker">RandomRarityPicker &amp; Luck</a></li>
+        <li><a href="#example">Worked example</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/stats.html">Stats</a></li>
+        <li><a href="../mechanics/stat-modifiers.html">Stat modifiers</a></li>
+        <li><a href="../mechanics/rarity.html" aria-current="page">Rarity</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Rarity</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Rarity</h1>
+          <p class="prose">
+            Improvement store items and drops in The Spell Brigade carry a tier from
+            the <code>RarityType</code> enum. Each tier has a hard-coded color
+            convention and a pre-baked value, so an &ldquo;Epic <code>+25% Damage</code>&rdquo;
+            and an &ldquo;Epic <code>+18% FireRate</code>&rdquo; both come from the same
+            roll-up: the store item declares four values (one per rarity), the rarity
+            picker chooses which to apply, and that value becomes a static modifier
+            on the player.
+          </p>
+
+          <div>
+            <span class="rarity-pill" data-rarity="common">Common</span>
+            <span class="rarity-pill" data-rarity="rare">Rare</span>
+            <span class="rarity-pill" data-rarity="epic">Epic</span>
+            <span class="rarity-pill" data-rarity="legendary">Legendary</span>
+          </div>
+        </section>
+
+        <section id="tiers" class="stack">
+          <h2>Four tiers</h2>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>The four <code>RarityType</code> values</caption>
+              <thead>
+                <tr><th class="num">ID</th><th>Name</th><th>Color convention</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">0</td><td><span class="rarity-pill" data-rarity="common">Common</span></td><td>white</td><td>Default tier; lowest value out of the <code>ImprovementValueContainer</code>.</td></tr>
+                <tr><td class="num">1</td><td><span class="rarity-pill" data-rarity="rare">Rare</span></td><td>blue</td><td>Medium tier.</td></tr>
+                <tr><td class="num">2</td><td><span class="rarity-pill" data-rarity="epic">Epic</span></td><td>purple</td><td>High tier.</td></tr>
+                <tr><td class="num">3</td><td><span class="rarity-pill" data-rarity="legendary">Legendary</span></td><td>gold</td><td>Top tier; highest value out of the container.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="container" class="stack">
+          <h2>ImprovementValueContainer</h2>
+          <p class="prose">
+            Every <code>ImprovementStoreItemData</code> carries one
+            <code>ImprovementValueContainer</code> — a struct with four serialized
+            floats (one per rarity). When you pick the item at a particular rarity,
+            the game calls:
+          </p>
+
+<pre class="formula"><code><span class="f-fn">ImprovementValueContainer</span>.GetValue(<span class="f-var">rarity</span>) → <span class="f-var">value</span></code></pre>
+
+          <p class="prose">
+            That float becomes the <code>Value</code> of a fresh
+            <code>StaticStatModifier</code>, which is added to the relevant
+            <code>Stat</code>&rsquo;s modifier list via
+            <code>IPlayerStats.AddCharacterImprovement</code> (or
+            <code>AddSpellImprovement</code> for spell-scoped items).
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">Pre-baked, not interpolated</span>
+            <p>
+              The four rarity values are individually authored by the designers — they
+              don&rsquo;t share a formula like <code>baseValue × rarityMultiplier</code>.
+              That&rsquo;s why <code>+25% Damage</code> at Epic isn&rsquo;t always
+              exactly <code>2.5×</code> the Common value: each tier is hand-tuned per
+              item type.
+            </p>
+          </aside>
+        </section>
+
+        <section id="picker" class="stack">
+          <h2>RandomRarityPicker &amp; Luck</h2>
+          <p class="prose">
+            <code>RandomRarityPicker</code> implements <code>ICanPickARarity</code> and
+            is the single source of rarity rolls for stores and drops. It takes the
+            player&rsquo;s <code>Luck</code> stat (<a href="../mechanics/stats.html#luck">id 9, Flat</a>)
+            as an input and biases the distribution toward higher tiers.
+          </p>
+
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">Exact weighting is not dump-visible</span>
+            <p>
+              The IL2CPP dump confirms the class name, the
+              <code>ICanPickARarity</code> contract, and the existence of a Luck input —
+              but the actual weight curve (linear? logarithmic? step function?) is in
+              the method body and not exposed. The strong-prior hypothesis is that
+              every extra Luck shifts the cumulative distribution upward toward Epic /
+              Legendary at a diminishing rate, but the exact numbers will need
+              empirical confirmation.
+            </p>
+          </aside>
+
+          <p class="prose">
+            Two stats from the same Stats reference page directly help you control rolls
+            without relying on Luck:
+          </p>
+          <dl class="meta-dl">
+            <dt><a href="../mechanics/stats.html#luck">Luck</a> <span class="tag">id 9</span></dt>
+            <dd>Bias the per-pick rarity roll upward.</dd>
+            <dt><code>Rerolls</code> <span class="tag">id 17</span></dt>
+            <dd>Reroll the current store offerings entirely — a second draw from the same picker.</dd>
+            <dt><code>Bans</code> <span class="tag">id 39</span></dt>
+            <dd>Remove a specific item from this run&rsquo;s store rolls permanently.</dd>
+            <dt><code>Pins</code> <span class="tag">id 40</span></dt>
+            <dd>Keep an item across shop visits, freezing its current rarity.</dd>
+          </dl>
+        </section>
+
+        <section id="example" class="stack">
+          <h2>Worked example — upgrade values</h2>
+          <p class="prose">
+            Suppose the <em>Damage Up</em> store item is configured with the container:
+          </p>
+
+<pre class="formula"><code>ImprovementValueContainer {
+    common    = <span class="f-num">0.10</span>      <span class="f-comment">// +10% Damage</span>
+    rare      = <span class="f-num">0.15</span>      <span class="f-comment">// +15% Damage</span>
+    epic      = <span class="f-num">0.25</span>      <span class="f-comment">// +25% Damage</span>
+    legendary = <span class="f-num">0.40</span>      <span class="f-comment">// +40% Damage</span>
+}</code></pre>
+
+          <p class="prose">
+            You enter a store with <code>Luck = 5</code>; the picker rolls
+            <strong>Epic</strong>. The game calls:
+          </p>
+
+<pre class="formula"><code>value = ImprovementValueContainer.GetValue(Epic)   <span class="f-comment">// = 0.25</span>
+mod   = new StaticStatModifier {
+            StatType = Damage,
+            Value    = <span class="f-num">0.25</span>
+        }
+IPlayerStats.AddCharacterImprovement(mod)</code></pre>
+
+          <p class="prose">
+            From that point on, every spell&rsquo;s <code>Damage</code> stat aggregation
+            includes <code>+0.25</code> in its sum, contributing <code>+25%</code> via
+            the PercentAdd path. If you take three of these picks across the run, your
+            Damage stat is <code>baseValue × (1 + 0.75) = baseValue × 1.75</code>.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Rarity persists, not magnitude</span>
+            <p>
+              Once chosen, the <code>StaticStatModifier</code> stores only the chosen
+              <em>float</em>. The fact that it came from an Epic roll is lost — there&rsquo;s
+              no way for later effects to ask &ldquo;was this an Epic <code>+25%</code>?&rdquo;
+              The four-tier system exists only at the moment of rolling.
+            </p>
+          </aside>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/stats.html#luck">
+            <strong>Luck stat</strong>
+            The flat input to the rarity roll.
+          </a>
+          <a class="see-also__link" href="../mechanics/stat-modifiers.html#static">
+            <strong>Static modifiers</strong>
+            What the picked rarity value becomes.
+          </a>
+          <a class="see-also__link" href="rarity.html">
+            <strong>Store strategy guide</strong>
+            When to reroll, ban, and pin.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

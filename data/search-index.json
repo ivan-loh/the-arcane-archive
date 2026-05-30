@@ -1,0 +1,1990 @@
+[
+  {
+    "title": "Home",
+    "url": "index.html",
+    "kind": "page",
+    "tags": [
+      "home",
+      "landing",
+      "wiki",
+      "spell",
+      "brigade"
+    ]
+  },
+  {
+    "title": "About this Wiki",
+    "url": "about.html",
+    "kind": "page",
+    "tags": [
+      "about",
+      "disclaimer",
+      "sources",
+      "methodology",
+      "provenance"
+    ]
+  },
+  {
+    "title": "Spells Hub",
+    "url": "spells/index.html",
+    "kind": "hub",
+    "tags": [
+      "spells",
+      "weapons",
+      "attacks",
+      "projectile",
+      "aoe",
+      "melee",
+      "summon",
+      "utility"
+    ]
+  },
+  {
+    "title": "Heroes / Characters Hub",
+    "url": "characters/index.html",
+    "kind": "hub",
+    "tags": [
+      "characters",
+      "heroes",
+      "mages",
+      "roster"
+    ]
+  },
+  {
+    "title": "Artifacts Hub",
+    "url": "artifacts/index.html",
+    "kind": "hub",
+    "tags": [
+      "artifacts",
+      "relics",
+      "passive",
+      "items"
+    ]
+  },
+  {
+    "title": "Enemies Hub",
+    "url": "enemies/index.html",
+    "kind": "hub",
+    "tags": [
+      "enemies",
+      "bestiary",
+      "monsters",
+      "mobs"
+    ]
+  },
+  {
+    "title": "Bosses Hub",
+    "url": "bosses/index.html",
+    "kind": "hub",
+    "tags": [
+      "bosses",
+      "boss",
+      "fights"
+    ]
+  },
+  {
+    "title": "Worlds Hub",
+    "url": "worlds/index.html",
+    "kind": "hub",
+    "tags": [
+      "worlds",
+      "biomes",
+      "maps",
+      "stages"
+    ]
+  },
+  {
+    "title": "Waves Hub",
+    "url": "waves/index.html",
+    "kind": "hub",
+    "tags": [
+      "waves",
+      "runs",
+      "spawn",
+      "timing"
+    ]
+  },
+  {
+    "title": "Mechanics Hub",
+    "url": "mechanics/index.html",
+    "kind": "hub",
+    "tags": [
+      "mechanics",
+      "rules",
+      "systems"
+    ]
+  },
+  {
+    "title": "Guides Hub",
+    "url": "guides/index.html",
+    "kind": "hub",
+    "tags": [
+      "guides",
+      "articles",
+      "builds",
+      "tips"
+    ]
+  },
+  {
+    "title": "Challenges Hub",
+    "url": "challenges/index.html",
+    "kind": "hub",
+    "tags": [
+      "challenges",
+      "achievements",
+      "unlocks"
+    ]
+  },
+  {
+    "title": "Arrow",
+    "url": "spells/arrow.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "projectile"
+    ]
+  },
+  {
+    "title": "Beam",
+    "url": "spells/beam.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "beam"
+    ]
+  },
+  {
+    "title": "Bell",
+    "url": "spells/bell.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "utility",
+      "aoe"
+    ]
+  },
+  {
+    "title": "Bomb Launcher",
+    "url": "spells/bomb-launcher.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aoe",
+      "explosive",
+      "projectile"
+    ]
+  },
+  {
+    "title": "Book",
+    "url": "spells/book.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "orbital",
+      "summon"
+    ]
+  },
+  {
+    "title": "Boomerang",
+    "url": "spells/boomerang.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "returning",
+      "projectile"
+    ]
+  },
+  {
+    "title": "Energy Zone",
+    "url": "spells/energy-zone.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aoe",
+      "zone"
+    ]
+  },
+  {
+    "title": "Falling Star",
+    "url": "spells/falling-star.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aoe",
+      "meteor"
+    ]
+  },
+  {
+    "title": "Fence",
+    "url": "spells/fence.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "wall",
+      "utility"
+    ]
+  },
+  {
+    "title": "Laser",
+    "url": "spells/laser.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "beam",
+      "piercing"
+    ]
+  },
+  {
+    "title": "Meteor",
+    "url": "spells/meteor.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aoe",
+      "meteor"
+    ]
+  },
+  {
+    "title": "Mine",
+    "url": "spells/mine.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "trap",
+      "aoe"
+    ]
+  },
+  {
+    "title": "Orb",
+    "url": "spells/orb.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "orbital",
+      "aoe"
+    ]
+  },
+  {
+    "title": "Plant",
+    "url": "spells/plant.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "summon",
+      "dot"
+    ]
+  },
+  {
+    "title": "Proximity",
+    "url": "spells/proximity.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aura",
+      "aoe"
+    ]
+  },
+  {
+    "title": "Rifle",
+    "url": "spells/rifle.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "projectile",
+      "single",
+      "target"
+    ]
+  },
+  {
+    "title": "Shotgun",
+    "url": "spells/shotgun.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "projectile",
+      "spread"
+    ]
+  },
+  {
+    "title": "Slash",
+    "url": "spells/slash.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "melee"
+    ]
+  },
+  {
+    "title": "Smg",
+    "url": "spells/smg.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "projectile",
+      "rapid",
+      "fire"
+    ]
+  },
+  {
+    "title": "Summon",
+    "url": "spells/summon.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "minion",
+      "pet"
+    ]
+  },
+  {
+    "title": "Trail",
+    "url": "spells/trail.html",
+    "kind": "spell",
+    "tags": [
+      "spell",
+      "aoe",
+      "dot"
+    ]
+  },
+  {
+    "title": "The Less HPThe More Move Speed",
+    "url": "artifacts/artifact-1.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "hp",
+      "speed"
+    ]
+  },
+  {
+    "title": "Add Armor Equal To Level",
+    "url": "artifacts/artifact-2.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "armor"
+    ]
+  },
+  {
+    "title": "The Less HPThe More XPGain",
+    "url": "artifacts/artifact-3.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "hp",
+      "xp"
+    ]
+  },
+  {
+    "title": "Increase Healing Done For Every Objective",
+    "url": "artifacts/artifact-4.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "heal"
+    ]
+  },
+  {
+    "title": "Increase Damage For Every Nearby Teammate",
+    "url": "artifacts/artifact-5.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "damage"
+    ]
+  },
+  {
+    "title": "Heal On Dodge",
+    "url": "artifacts/artifact-6.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "heal",
+      "dodge"
+    ]
+  },
+  {
+    "title": "Increase Crit Damage While Standing Still",
+    "url": "artifacts/artifact-7.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "crit",
+      "damage"
+    ]
+  },
+  {
+    "title": "Increase Luck When Not Rerolling",
+    "url": "artifacts/artifact-8.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "luck"
+    ]
+  },
+  {
+    "title": "Heal On Level Up",
+    "url": "artifacts/artifact-9.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "heal"
+    ]
+  },
+  {
+    "title": "Increase Max Health For Every Revive",
+    "url": "artifacts/artifact-10.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "heal",
+      "revive"
+    ]
+  },
+  {
+    "title": "Increase Damage For Every Revive",
+    "url": "artifacts/artifact-11.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "damage",
+      "revive"
+    ]
+  },
+  {
+    "title": "Increase Armor Per Objective Completed",
+    "url": "artifacts/artifact-12.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "armor"
+    ]
+  },
+  {
+    "title": "Increase Damage Per Armor",
+    "url": "artifacts/artifact-13.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "armor",
+      "damage"
+    ]
+  },
+  {
+    "title": "Increase Crit Damage For Every Revive",
+    "url": "artifacts/artifact-14.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "crit",
+      "damage",
+      "revive"
+    ]
+  },
+  {
+    "title": "Increase Elemental Damage For Every Infusion",
+    "url": "artifacts/artifact-15.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "damage",
+      "elemental",
+      "infusion"
+    ]
+  },
+  {
+    "title": "Increase Fire Rate While Standing Still",
+    "url": "artifacts/artifact-16.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "fire-rate"
+    ]
+  },
+  {
+    "title": "Heal On Crit",
+    "url": "artifacts/artifact-17.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "crit",
+      "heal"
+    ]
+  },
+  {
+    "title": "Increase Max HPFor Every Health Pickup",
+    "url": "artifacts/artifact-18.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "hp",
+      "heal"
+    ]
+  },
+  {
+    "title": "Heal On XPPickup",
+    "url": "artifacts/artifact-19.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "heal",
+      "xp"
+    ]
+  },
+  {
+    "title": "Increase Crit Damage For Every Common",
+    "url": "artifacts/artifact-20.html",
+    "kind": "artifact",
+    "tags": [
+      "artifact",
+      "relic",
+      "passive",
+      "crit",
+      "damage"
+    ]
+  },
+  {
+    "title": "Bell Mage",
+    "url": "characters/bell-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "bell"
+    ]
+  },
+  {
+    "title": "Bird Mage",
+    "url": "characters/bird-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "arrow"
+    ]
+  },
+  {
+    "title": "Campanelli",
+    "url": "characters/campanelli.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "shotgun"
+    ]
+  },
+  {
+    "title": "Flute Mage",
+    "url": "characters/flute-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "summon"
+    ]
+  },
+  {
+    "title": "Hatty",
+    "url": "characters/hatty.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "smg"
+    ]
+  },
+  {
+    "title": "Key Mage",
+    "url": "characters/key-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "trail"
+    ]
+  },
+  {
+    "title": "Ludwig",
+    "url": "characters/ludwig.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "laser"
+    ]
+  },
+  {
+    "title": "Moon Mage",
+    "url": "characters/moon-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "boomerang"
+    ]
+  },
+  {
+    "title": "Plant Mage",
+    "url": "characters/plant-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "plant"
+    ]
+  },
+  {
+    "title": "Reginald",
+    "url": "characters/reginald.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "orb"
+    ]
+  },
+  {
+    "title": "Smithy",
+    "url": "characters/smithy.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "beam"
+    ]
+  },
+  {
+    "title": "Star Mage",
+    "url": "characters/star-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "falling-star"
+    ]
+  },
+  {
+    "title": "Sun Mage",
+    "url": "characters/sun-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "proximity"
+    ]
+  },
+  {
+    "title": "Vampire Mage",
+    "url": "characters/vampire-mage.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "slash"
+    ]
+  },
+  {
+    "title": "Wizard King",
+    "url": "characters/wizard-king.html",
+    "kind": "hero",
+    "tags": [
+      "hero",
+      "character",
+      "mage",
+      "rifle"
+    ]
+  },
+  {
+    "title": "Skins (All Heroes)",
+    "url": "characters/index.html",
+    "kind": "page",
+    "tags": [
+      "skins",
+      "cosmetics",
+      "halloween",
+      "winter",
+      "prestige"
+    ]
+  },
+  {
+    "title": "Squid (Boss)",
+    "url": "bosses/squid.html",
+    "kind": "boss",
+    "tags": [
+      "boss",
+      "enemy",
+      "squid",
+      "phase-3"
+    ]
+  },
+  {
+    "title": "Toad (Boss)",
+    "url": "bosses/toad.html",
+    "kind": "boss",
+    "tags": [
+      "boss",
+      "enemy",
+      "toad",
+      "phase-2"
+    ]
+  },
+  {
+    "title": "Hydra (Boss)",
+    "url": "bosses/hydra.html",
+    "kind": "boss",
+    "tags": [
+      "boss",
+      "enemy",
+      "hydra",
+      "phase-3"
+    ]
+  },
+  {
+    "title": "Crabling",
+    "url": "enemies/regular.html#enemy-crabling",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Flesh Crab",
+    "url": "enemies/regular.html#enemy-fleshcrab",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Tripod",
+    "url": "enemies/regular.html#enemy-tripod",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Snipjaw",
+    "url": "enemies/regular.html#enemy-snipjaw",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Teethy Worm",
+    "url": "enemies/regular.html#enemy-teethyworm",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Shield Crab",
+    "url": "enemies/regular.html#enemy-shieldcrab",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Exploding Tick",
+    "url": "enemies/regular.html#enemy-explodingtick",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Crablodon",
+    "url": "enemies/regular.html#enemy-crablodon",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Spitter",
+    "url": "enemies/regular.html#enemy-spitter",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Buffer",
+    "url": "enemies/regular.html#enemy-buffer",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Squid",
+    "url": "enemies/regular.html#enemy-squid",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Sneaky Bug",
+    "url": "enemies/regular.html#enemy-sneakybug",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Hunt Target",
+    "url": "enemies/regular.html#enemy-hunttarget",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Teethy Worm Baby",
+    "url": "enemies/regular.html#enemy-teethywormbaby",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Flying Manta",
+    "url": "enemies/regular.html#enemy-flyingmanta",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Mole",
+    "url": "enemies/regular.html#enemy-mole",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Line Event",
+    "url": "enemies/regular.html#enemy-lineevent",
+    "kind": "event",
+    "tags": [
+      "event",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Mob Event",
+    "url": "enemies/regular.html#enemy-mobevent",
+    "kind": "event",
+    "tags": [
+      "event",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Convergent Event",
+    "url": "enemies/regular.html#enemy-convergentevent",
+    "kind": "event",
+    "tags": [
+      "event",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Toad",
+    "url": "enemies/regular.html#enemy-toad",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Stinkbug",
+    "url": "enemies/regular.html#enemy-stinkbug",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Static Shooter",
+    "url": "enemies/regular.html#enemy-staticshooter",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Bounce Event",
+    "url": "enemies/regular.html#enemy-bounceevent",
+    "kind": "event",
+    "tags": [
+      "event",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Spawner",
+    "url": "enemies/regular.html#enemy-spawner",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Spawner Egg",
+    "url": "enemies/regular.html#enemy-spawneregg",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Spawner Hatchling",
+    "url": "enemies/regular.html#enemy-spawnerhatchling",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Elite Teethy Worm",
+    "url": "enemies/regular.html#enemy-eliteteethyworm",
+    "kind": "elite",
+    "tags": [
+      "enemy",
+      "mob",
+      "elite"
+    ]
+  },
+  {
+    "title": "Elite Exploding Tick",
+    "url": "enemies/regular.html#enemy-eliteexplodingtick",
+    "kind": "elite",
+    "tags": [
+      "enemy",
+      "mob",
+      "elite"
+    ]
+  },
+  {
+    "title": "Elite Buffer",
+    "url": "enemies/regular.html#enemy-elitebuffer",
+    "kind": "elite",
+    "tags": [
+      "enemy",
+      "mob",
+      "elite"
+    ]
+  },
+  {
+    "title": "Hydra",
+    "url": "enemies/regular.html#enemy-hydra",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Exploding Tick Fast",
+    "url": "enemies/regular.html#enemy-explodingtickfast",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Buffer Fast",
+    "url": "enemies/regular.html#enemy-bufferfast",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Spitter Spread",
+    "url": "enemies/regular.html#enemy-spitterspread",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Teethy Worm Fast",
+    "url": "enemies/regular.html#enemy-teethywormfast",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Teethy Worm Baby Fast",
+    "url": "enemies/regular.html#enemy-teethywormbabyfast",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Hoarder",
+    "url": "enemies/regular.html#enemy-hoarder",
+    "kind": "enemy",
+    "tags": [
+      "enemy",
+      "mob"
+    ]
+  },
+  {
+    "title": "Verdant Meadows",
+    "url": "worlds/verdant-meadows.html",
+    "kind": "world",
+    "tags": [
+      "world",
+      "biome",
+      "map",
+      "verdant-meadows"
+    ]
+  },
+  {
+    "title": "Crystal Frostlands",
+    "url": "worlds/frozen-ancients.html",
+    "kind": "world",
+    "tags": [
+      "world",
+      "biome",
+      "map",
+      "crystal-frostlands"
+    ]
+  },
+  {
+    "title": "Scorched Abyss",
+    "url": "worlds/pyrestorm-pit.html",
+    "kind": "world",
+    "tags": [
+      "world",
+      "biome",
+      "map",
+      "scorched-abyss"
+    ]
+  },
+  {
+    "title": "Astral Planes",
+    "url": "worlds/astral-riftlands.html",
+    "kind": "world",
+    "tags": [
+      "world",
+      "biome",
+      "map",
+      "astral-planes"
+    ]
+  },
+  {
+    "title": "Stats Reference",
+    "url": "mechanics/stats.html",
+    "kind": "mechanic",
+    "tags": [
+      "36",
+      "stat",
+      "types",
+      "damage",
+      "crit",
+      "luck",
+      "armor"
+    ]
+  },
+  {
+    "title": "Damage Calculation",
+    "url": "mechanics/damage-system.html",
+    "kind": "mechanic",
+    "tags": [
+      "damage",
+      "formula",
+      "calc",
+      "multiplier",
+      "scaling"
+    ]
+  },
+  {
+    "title": "Damage System Overview",
+    "url": "mechanics/damage-system.html",
+    "kind": "mechanic",
+    "tags": [
+      "damage",
+      "system",
+      "overview"
+    ]
+  },
+  {
+    "title": "Elements (21 Types)",
+    "url": "mechanics/elements.html",
+    "kind": "mechanic",
+    "tags": [
+      "elements",
+      "fire",
+      "ice",
+      "lightning",
+      "arcane",
+      "nature",
+      "shadow"
+    ]
+  },
+  {
+    "title": "Element Matrix",
+    "url": "mechanics/element-matrix.html",
+    "kind": "mechanic",
+    "tags": [
+      "element",
+      "matchup",
+      "matrix",
+      "rock",
+      "paper",
+      "scissors",
+      "weaknesses"
+    ]
+  },
+  {
+    "title": "Modifiers",
+    "url": "mechanics/modifiers.html",
+    "kind": "mechanic",
+    "tags": [
+      "modifiers",
+      "run",
+      "modifiers",
+      "difficulty"
+    ]
+  },
+  {
+    "title": "Rarity Tiers",
+    "url": "mechanics/rarity.html",
+    "kind": "mechanic",
+    "tags": [
+      "rarity",
+      "common",
+      "rare",
+      "epic",
+      "legendary"
+    ]
+  },
+  {
+    "title": "Stat Calculation",
+    "url": "mechanics/stat-modifiers.html",
+    "kind": "mechanic",
+    "tags": [
+      "additive",
+      "multiplicative",
+      "override",
+      "stacking"
+    ]
+  },
+  {
+    "title": "Critical Hits",
+    "url": "mechanics/critical-hits.html",
+    "kind": "mechanic",
+    "tags": [
+      "crit",
+      "critical",
+      "hits",
+      "crit",
+      "chance",
+      "crit",
+      "damage"
+    ]
+  },
+  {
+    "title": "Armor and Dodge",
+    "url": "mechanics/armor-dodge.html",
+    "kind": "mechanic",
+    "tags": [
+      "armor",
+      "dodge",
+      "defense",
+      "mitigation"
+    ]
+  },
+  {
+    "title": "Curses (7)",
+    "url": "mechanics/curses.html",
+    "kind": "mechanic",
+    "tags": [
+      "curses",
+      "negative",
+      "effects"
+    ]
+  },
+  {
+    "title": "Upgrades (5 tiers, 120 levels)",
+    "url": "mechanics/upgrades.html",
+    "kind": "mechanic",
+    "tags": [
+      "upgrades",
+      "meta",
+      "progression",
+      "unlocks"
+    ]
+  },
+  {
+    "title": "Character Improvements",
+    "url": "mechanics/character-improvements.html",
+    "kind": "mechanic",
+    "tags": [
+      "character",
+      "improvements",
+      "per-hero",
+      "upgrades"
+    ]
+  },
+  {
+    "title": "Difficulties",
+    "url": "mechanics/difficulties.html",
+    "kind": "mechanic",
+    "tags": [
+      "difficulty",
+      "normal",
+      "hard",
+      "nightmare"
+    ]
+  },
+  {
+    "title": "Objectives",
+    "url": "mechanics/objectives.html",
+    "kind": "mechanic",
+    "tags": [
+      "objectives",
+      "run",
+      "goals"
+    ]
+  },
+  {
+    "title": "Damage Optimization Guide",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "damage",
+      "optimization",
+      "formula",
+      "stat",
+      "priority",
+      "build",
+      "archetype"
+    ]
+  },
+  {
+    "title": "Spell Tier List",
+    "url": "guides/spell-tier-list.html",
+    "kind": "guide",
+    "tags": [
+      "tier",
+      "list",
+      "ranking",
+      "best",
+      "spells"
+    ]
+  },
+  {
+    "title": "Artifact Priorities",
+    "url": "guides/artifact-priorities.html",
+    "kind": "guide",
+    "tags": [
+      "artifact",
+      "priority",
+      "picking",
+      "tier",
+      "list"
+    ]
+  },
+  {
+    "title": "Element Pairing Guide",
+    "url": "guides/element-pairing.html",
+    "kind": "guide",
+    "tags": [
+      "element",
+      "pairing",
+      "combo",
+      "synergy"
+    ]
+  },
+  {
+    "title": "New Player Primer",
+    "url": "guides/index.html",
+    "kind": "guide",
+    "tags": [
+      "beginner",
+      "new",
+      "player",
+      "primer",
+      "start"
+    ]
+  },
+  {
+    "title": "Co-op Roles",
+    "url": "guides/index.html",
+    "kind": "guide",
+    "tags": [
+      "coop",
+      "multiplayer",
+      "tank",
+      "dps",
+      "utility"
+    ]
+  },
+  {
+    "title": "Fire Burst Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "fire",
+      "build",
+      "burst",
+      "damage"
+    ]
+  },
+  {
+    "title": "Ice Control Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "ice",
+      "build",
+      "control",
+      "slow",
+      "freeze"
+    ]
+  },
+  {
+    "title": "Lightning Chain Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "lightning",
+      "chain",
+      "build"
+    ]
+  },
+  {
+    "title": "Arcane Summon Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "arcane",
+      "summon",
+      "build",
+      "minions"
+    ]
+  },
+  {
+    "title": "Nature DoT Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "nature",
+      "dot",
+      "poison",
+      "build"
+    ]
+  },
+  {
+    "title": "Shadow Curse Build",
+    "url": "guides/damage-optimization.html",
+    "kind": "guide",
+    "tags": [
+      "shadow",
+      "curse",
+      "dark",
+      "build"
+    ]
+  },
+  {
+    "title": "Best Spells per Hero",
+    "url": "guides/best-spells-per-hero.html",
+    "kind": "guide",
+    "tags": [
+      "spell",
+      "pairings",
+      "hero",
+      "recommendations"
+    ]
+  },
+  {
+    "title": "Wave Comparison",
+    "url": "waves/index.html",
+    "kind": "page",
+    "tags": [
+      "wave",
+      "comparison",
+      "table",
+      "density"
+    ]
+  },
+  {
+    "title": "Wave 01",
+    "url": "waves/wave-01.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-01",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 02",
+    "url": "waves/wave-02.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-02",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 03",
+    "url": "waves/wave-03.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-03",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 04",
+    "url": "waves/wave-04.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-04",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 05",
+    "url": "waves/wave-05.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-05",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 06",
+    "url": "waves/wave-06.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-06",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 07",
+    "url": "waves/wave-07.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-07",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 08",
+    "url": "waves/wave-08.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-08",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 09",
+    "url": "waves/wave-09.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-09",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 10",
+    "url": "waves/wave-10.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-10",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 11",
+    "url": "waves/wave-11.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-11",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 12",
+    "url": "waves/wave-12.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-12",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 13",
+    "url": "waves/wave-13.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-13",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 14",
+    "url": "waves/wave-14.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-14",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 15",
+    "url": "waves/wave-15.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-15",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 16",
+    "url": "waves/wave-16.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-16",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 17",
+    "url": "waves/wave-17.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-17",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 18",
+    "url": "waves/wave-18.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-18",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 19",
+    "url": "waves/wave-19.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-19",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 20",
+    "url": "waves/wave-20.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-20",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 21",
+    "url": "waves/wave-01.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-21",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 22",
+    "url": "waves/wave-02.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-22",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 23",
+    "url": "waves/wave-03.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-23",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 24",
+    "url": "waves/wave-04.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-24",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 25",
+    "url": "waves/wave-05.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-25",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 26",
+    "url": "waves/wave-06.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-26",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 27",
+    "url": "waves/wave-07.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-27",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 28",
+    "url": "waves/wave-08.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-28",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 29",
+    "url": "waves/wave-09.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-29",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 30",
+    "url": "waves/wave-10.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-30",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 31",
+    "url": "waves/wave-11.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-31",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Wave 32",
+    "url": "waves/wave-12.html",
+    "kind": "wave",
+    "tags": [
+      "wave",
+      "wave-32",
+      "spawn"
+    ]
+  },
+  {
+    "title": "Boss Challenges",
+    "url": "challenges/boss.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "boss"
+    ]
+  },
+  {
+    "title": "Covenant Challenges",
+    "url": "challenges/covenant.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "covenant"
+    ]
+  },
+  {
+    "title": "Curse Challenges",
+    "url": "challenges/curse.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "curse"
+    ]
+  },
+  {
+    "title": "Element Challenges",
+    "url": "challenges/element.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "element"
+    ]
+  },
+  {
+    "title": "Enchantment Challenges",
+    "url": "challenges/enchantment.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "enchantment"
+    ]
+  },
+  {
+    "title": "Halloweenskin Challenges",
+    "url": "challenges/halloweenskin.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "halloweenskin"
+    ]
+  },
+  {
+    "title": "Objective Challenges",
+    "url": "challenges/objective.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "objective"
+    ]
+  },
+  {
+    "title": "Prestigeskin Challenges",
+    "url": "challenges/prestigeskin.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "prestigeskin"
+    ]
+  },
+  {
+    "title": "Realm Challenges",
+    "url": "challenges/realm.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "realm"
+    ]
+  },
+  {
+    "title": "Relic Challenges",
+    "url": "challenges/relic.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "relic"
+    ]
+  },
+  {
+    "title": "Relicdrop Challenges",
+    "url": "challenges/relicdrop.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "relicdrop"
+    ]
+  },
+  {
+    "title": "Skin Challenges",
+    "url": "challenges/skin.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "skin"
+    ]
+  },
+  {
+    "title": "Spell Challenges",
+    "url": "challenges/spell.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "spell"
+    ]
+  },
+  {
+    "title": "Threatlevel Challenges",
+    "url": "challenges/threatlevel.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "threatlevel"
+    ]
+  },
+  {
+    "title": "Winterskin Challenges",
+    "url": "challenges/winterskin.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "winterskin"
+    ]
+  },
+  {
+    "title": "Wizard Challenges",
+    "url": "challenges/wizard.html",
+    "kind": "challenge-category",
+    "tags": [
+      "challenge",
+      "category",
+      "wizard"
+    ]
+  },
+  {
+    "title": "Search",
+    "url": "index.html",
+    "kind": "page",
+    "tags": [
+      "search",
+      "find",
+      "query"
+    ]
+  }
+]

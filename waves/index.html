@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="All 32 wave entries with spawn density, interval, and top enemy.">
+  <title>Waves &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" aria-current="page" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+      <a class="top-nav__link" href="../challenges/index.html">Challenges</a>
+    </nav>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="../worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="../waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="../challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+    <aside class="sidebar" aria-label="Section index">
+  <h2 class="sidebar__title">Waves</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../waves/index.html">All waves</a></li>
+        <li><a href="../waves/wave-01.html">Wave 01</a></li>
+        <li><a href="../waves/wave-02.html">Wave 02</a></li>
+        <li><a href="../waves/wave-03.html">Wave 03</a></li>
+        <li><a href="../waves/wave-04.html">Wave 04</a></li>
+        <li><a href="../waves/wave-05.html">Wave 05</a></li>
+        <li><a href="../waves/wave-06.html">Wave 06</a></li>
+        <li><a href="../waves/wave-07.html">Wave 07</a></li>
+        <li><a href="../waves/wave-08.html">Wave 08</a></li>
+        <li><a href="../waves/wave-09.html">Wave 09</a></li>
+        <li><a href="../waves/wave-10.html">Wave 10</a></li>
+        <li><a href="../waves/wave-11.html">Wave 11</a></li>
+        <li><a href="../waves/wave-12.html">Wave 12</a></li>
+        <li><a href="../waves/wave-13.html">Wave 13</a></li>
+        <li><a href="../waves/wave-14.html">Wave 14</a></li>
+        <li><a href="../waves/wave-15.html">Wave 15</a></li>
+        <li><a href="../waves/wave-16.html">Wave 16</a></li>
+        <li><a href="../waves/wave-17.html">Wave 17</a></li>
+        <li><a href="../waves/wave-18.html">Wave 18</a></li>
+        <li><a href="../waves/wave-19.html">Wave 19</a></li>
+        <li><a href="../waves/wave-20.html">Wave 20</a></li>
+  </ul>
+  <h2 class="sidebar__title">Worlds</h2>
+  <ul class="sidebar__nav">
+        <li><a href="../worlds/verdant-meadows.html">Verdant Meadows</a></li>
+        <li><a href="../worlds/frozen-ancients.html">Crystal Frostlands</a></li>
+        <li><a href="../worlds/pyrestorm-pit.html">Scorched Abyss</a></li>
+        <li><a href="../worlds/astral-riftlands.html">Astral Planes</a></li>
+  </ul>
+</aside>
+    <main id="main-content" tabindex="-1">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li aria-current="page">Waves</li>
+        </ol>
+      </nav>
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Waves</h1>
+          <p class="prose u-muted">
+            A run plays 20 waves (in a 20-minute window) drawn from a 20-slot timeline.
+            The base wave templates (wave_1 &hellip; wave_20) are shared, but each world
+            applies overrides at fixed slots to skew its enemy mix. This index lists every
+            wave entry the game ships &mdash; 32 total, including overrides.
+          </p>
+          <p class="prose">
+            Each wave defines: minimum concurrent enemies on field, spawn interval (seconds between
+            spawn events), enemies per spawn event, and a probability table the spawner draws from.
+            Click a wave to drill into its full spawn table.
+          </p>
+        </section>
+
+        <section id="comparison">
+          <h2>Full wave comparison</h2>
+          <p class="prose">Sort by any column. Override entries appear on the same wave-number page as the base.</p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>All wave entries &mdash; 32 rows</caption>
+              <thead>
+                <tr>
+                  <th data-sort="number" class="num">Wave&nbsp;#</th>
+                  <th data-sort="string">ID</th>
+                  <th data-sort="string">World</th>
+                  <th data-sort="number" class="num">Min concurrent</th>
+                  <th data-sort="number" class="num">Spawn interval (s)</th>
+                  <th data-sort="number" class="num">Per spawn</th>
+                  <th data-sort="string">Top enemy</th>
+                  <th data-sort="number" class="num">Enemy&nbsp;types</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">1</td><td><a href="wave-01.html">wave_1</a></td><td><em>Shared</em></td><td class="num">14</td><td class="num">6.48</td><td class="num">2</td><td>Crabling</td><td class="num">1</td></tr>
+                <tr><td class="num">2</td><td><a href="wave-02.html">wave_2</a></td><td><em>Shared</em></td><td class="num">15</td><td class="num">2.83</td><td class="num">3</td><td>Crabling</td><td class="num">3</td></tr>
+                <tr><td class="num">3</td><td><a href="wave-03.html">wave_3</a></td><td><em>Shared</em></td><td class="num">16</td><td class="num">2.83</td><td class="num">3</td><td>Crabling</td><td class="num">4</td></tr>
+                <tr><td class="num">4</td><td><a href="wave-04.html">wave_4</a></td><td><em>Shared</em></td><td class="num">17</td><td class="num">5.26</td><td class="num">3</td><td>Crabling</td><td class="num">5</td></tr>
+                <tr><td class="num">4</td><td><a href="wave-04.html#wave-wave_4_pyrestorm_pit">wave_4_pyrestorm_pit</a></td><td>Scorched Abyss</td><td class="num">17</td><td class="num">5.26</td><td class="num">3</td><td>FlyingManta</td><td class="num">5</td></tr>
+                <tr><td class="num">5</td><td><a href="wave-05.html">wave_5</a></td><td><em>Shared</em></td><td class="num">20</td><td class="num">6.41</td><td class="num">5</td><td>Crabling</td><td class="num">6</td></tr>
+                <tr><td class="num">5</td><td><a href="wave-05.html#wave-wave_5_astral_planes">wave_5_astral_planes</a></td><td>Astral Planes</td><td class="num">20</td><td class="num">6.41</td><td class="num">5</td><td>Stinkbug</td><td class="num">6</td></tr>
+                <tr><td class="num">6</td><td><a href="wave-06.html">wave_6</a></td><td><em>Shared</em></td><td class="num">28</td><td class="num">6.41</td><td class="num">5</td><td>FleshCrab</td><td class="num">7</td></tr>
+                <tr><td class="num">6</td><td><a href="wave-06.html#wave-wave_6_frozen_ancients">wave_6_frozen_ancients</a></td><td>Crystal Frostlands</td><td class="num">28</td><td class="num">7.70</td><td class="num">6</td><td>SneakyBug</td><td class="num">7</td></tr>
+                <tr><td class="num">6</td><td><a href="wave-06.html#wave-wave_6_verdant_meadows">wave_6_verdant_meadows</a></td><td>Verdant Meadows</td><td class="num">28</td><td class="num">7.70</td><td class="num">6</td><td>Mole</td><td class="num">7</td></tr>
+                <tr><td class="num">7</td><td><a href="wave-07.html">wave_7</a></td><td><em>Shared</em></td><td class="num">28</td><td class="num">5.26</td><td class="num">6</td><td>FleshCrab</td><td class="num">6</td></tr>
+                <tr><td class="num">8</td><td><a href="wave-08.html">wave_8</a></td><td><em>Shared</em></td><td class="num">32</td><td class="num">2.83</td><td class="num">4</td><td>Tripod</td><td class="num">7</td></tr>
+                <tr><td class="num">9</td><td><a href="wave-09.html">wave_9</a></td><td><em>Shared</em></td><td class="num">34</td><td class="num">2.83</td><td class="num">5</td><td>Tripod</td><td class="num">7</td></tr>
+                <tr><td class="num">9</td><td><a href="wave-09.html#wave-wave_9_pyrestorm_pit">wave_9_pyrestorm_pit</a></td><td>Scorched Abyss</td><td class="num">34</td><td class="num">2.83</td><td class="num">5</td><td>FlyingManta</td><td class="num">7</td></tr>
+                <tr><td class="num">10</td><td><a href="wave-10.html">wave_10</a></td><td><em>Shared</em></td><td class="num">42</td><td class="num">5.26</td><td class="num">5</td><td>Tripod</td><td class="num">7</td></tr>
+                <tr><td class="num">10</td><td><a href="wave-10.html#wave-wave_10_astral_planes">wave_10_astral_planes</a></td><td>Astral Planes</td><td class="num">42</td><td class="num">5.26</td><td class="num">5</td><td>Stinkbug</td><td class="num">7</td></tr>
+                <tr><td class="num">11</td><td><a href="wave-11.html">wave_11</a></td><td><em>Shared</em></td><td class="num">46</td><td class="num">7.70</td><td class="num">7</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">12</td><td><a href="wave-12.html">wave_12</a></td><td><em>Shared</em></td><td class="num">57</td><td class="num">6.73</td><td class="num">7</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">12</td><td><a href="wave-12.html#wave-wave_12_frozen_ancients">wave_12_frozen_ancients</a></td><td>Crystal Frostlands</td><td class="num">57</td><td class="num">6.73</td><td class="num">7</td><td>SneakyBug</td><td class="num">7</td></tr>
+                <tr><td class="num">12</td><td><a href="wave-12.html#wave-wave_12_verdant_meadows">wave_12_verdant_meadows</a></td><td>Verdant Meadows</td><td class="num">57</td><td class="num">6.73</td><td class="num">7</td><td>Mole</td><td class="num">7</td></tr>
+                <tr><td class="num">13</td><td><a href="wave-13.html">wave_13</a></td><td><em>Shared</em></td><td class="num">50</td><td class="num">5.26</td><td class="num">9</td><td>Snipjaw</td><td class="num">7</td></tr>
+                <tr><td class="num">14</td><td><a href="wave-14.html">wave_14</a></td><td><em>Shared</em></td><td class="num">57</td><td class="num">2.83</td><td class="num">7</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">14</td><td><a href="wave-14.html#wave-wave_14_pyrestorm_pit">wave_14_pyrestorm_pit</a></td><td>Scorched Abyss</td><td class="num">57</td><td class="num">2.83</td><td class="num">7</td><td>FlyingManta</td><td class="num">6</td></tr>
+                <tr><td class="num">15</td><td><a href="wave-15.html">wave_15</a></td><td><em>Shared</em></td><td class="num">58</td><td class="num">2.83</td><td class="num">7</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">15</td><td><a href="wave-15.html#wave-wave_15_astral_planes">wave_15_astral_planes</a></td><td>Astral Planes</td><td class="num">58</td><td class="num">2.83</td><td class="num">7</td><td>Stinkbug</td><td class="num">7</td></tr>
+                <tr><td class="num">16</td><td><a href="wave-16.html">wave_16</a></td><td><em>Shared</em></td><td class="num">75</td><td class="num">4.61</td><td class="num">7</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">17</td><td><a href="wave-17.html">wave_17</a></td><td><em>Shared</em></td><td class="num">89</td><td class="num">6.84</td><td class="num">8</td><td>Snipjaw</td><td class="num">7</td></tr>
+                <tr><td class="num">18</td><td><a href="wave-18.html">wave_18</a></td><td><em>Shared</em></td><td class="num">115</td><td class="num">5.77</td><td class="num">6</td><td>Snipjaw</td><td class="num">7</td></tr>
+                <tr><td class="num">18</td><td><a href="wave-18.html#wave-wave_18_frozen_ancients">wave_18_frozen_ancients</a></td><td>Crystal Frostlands</td><td class="num">115</td><td class="num">5.77</td><td class="num">6</td><td>SneakyBug</td><td class="num">7</td></tr>
+                <tr><td class="num">18</td><td><a href="wave-18.html#wave-wave_18_verdant_meadows">wave_18_verdant_meadows</a></td><td>Verdant Meadows</td><td class="num">115</td><td class="num">5.77</td><td class="num">6</td><td>Mole</td><td class="num">7</td></tr>
+                <tr><td class="num">19</td><td><a href="wave-19.html">wave_19</a></td><td><em>Shared</em></td><td class="num">100</td><td class="num">4.21</td><td class="num">8</td><td>Snipjaw</td><td class="num">6</td></tr>
+                <tr><td class="num">20</td><td><a href="wave-20.html">wave_20</a></td><td><em>Shared</em></td><td class="num">18</td><td class="num">2.43</td><td class="num">3</td><td>Snipjaw</td><td class="num">5</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="elites">
+          <h2>Elite spawns</h2>
+          <p class="prose">
+            Every run spawns a guaranteed elite at <strong>14:00 in-run</strong> drawn from
+            EliteBuffer, Spawner, EliteExplodingTick or EliteTeethyWorm. Each stack of
+            <a href="../mechanics/curses.html#stronger-enemies">StrongerEnemies</a> curse adds an extra
+            elite spawn (at 10:20, 16:20, then 4:10).
+          </p>
+        </section>
+
+        <section id="events">
+          <h2>Enemy events</h2>
+          <p class="prose">
+            Five enemy-event configurations may fire during any wave: Bounce (enemies drop from
+            above), Convergent (spawn at distance, run inward), Line (wall closing in from one direction),
+            Mob (dense cluster at a distance), and the Bounce starter cadence config.
+            See <a href="../enemies/events.html">enemy events</a>.
+          </p>
+        </section>
+
+        <section id="related">
+          <h2>Related</h2>
+          <div class="see-also">
+            <a class="see-also__link" href="../worlds/index.html"><strong>Worlds</strong> Wave overrides per world.</a>
+            <a class="see-also__link" href="../enemies/index.html"><strong>Bestiary</strong> Stat blocks for every enemy referenced above.</a>
+            <a class="see-also__link" href="../mechanics/curses.html"><strong>Curses</strong> Stronger-enemies and other run modifiers.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Unofficial fan reference. Game names &amp; lore belong to their respective owners.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+        <li><a href="../waves/index.html">Waves</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../guides/index.html">Guides</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Fan project &middot; no images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

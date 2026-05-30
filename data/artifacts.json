@@ -1,0 +1,801 @@
+{
+  "_meta": {
+    "extracted_at": "2026-05-30T05:41:27Z",
+    "verified_twice": true,
+    "total_artifacts": 20,
+    "source_dump": "/home/ivan/tools/Il2CppDumper/out_tsb/dump.cs",
+    "source_assets": "/mnt/data/tsb2/ExportedProject/Assets/Resources/storeitems/artifacts/Artifact_*.asset",
+    "localization_status": "Localization .asset string tables in /mnt/data/tsb2/ExportedProject/Assets/Localization/StringTables/ are all empty stubs (14 lines, no key/value entries). Therefore *_localized fields fall back to the raw localization key. The actual localized text lives in addressable bundles or binary tables not present in the exported YAML.",
+    "verification_notes": [
+      "All 20 artifact YAMLs were re-parsed via PyYAML to confirm 'Parameters' arrays; numbers match the field-by-field grep.",
+      "Spot-check RVAs verified by reading dump.cs around the matching class line: Artifact 1 -> ArtifactStatModifier_LessHPMoreMovementSpeed GetValue RVA 0x24FBA00 (line 262464); Artifact 3 -> ArtifactStatModifier_BonusExpWhenBelowHealthThreshold GetValue 0x24F99B0 (line 262103); Artifact 7 -> ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill GetValue 0x24FA270 (line 262181); Artifact 13 -> ArtifactStatModifier_IncreaseDamagePerArmor GetValue 0x24FA380 (line 262196); Artifact 17 -> Artifact_HealOnCrit constructor 0x24FC7A0 with field healPercentage (line 262501).",
+      "ArtifactType numeric in each YAML matches the enum index in dump.cs lines 342263-342288.",
+      "Note: the task prompt's example value for Artifact_13 ([0.6]) is stale — actual YAML has Parameters: [1, 0.25]."
+    ]
+  },
+
+  "stat_type_map": {
+    "0":  "Damage",
+    "1":  "Range",
+    "2":  "FireRate",
+    "3":  "Speed",
+    "4":  "LifeTime",
+    "5":  "DamageTickRate",
+    "6":  "Size",
+    "7":  "MovementSpeed",
+    "8":  "MaxHealth",
+    "9":  "Luck",
+    "10": "XPGain",
+    "11": "PickupRadius",
+    "12": "CriticalChance",
+    "13": "CriticalDamage",
+    "14": "Armor",
+    "15": "Dodge",
+    "16": "HealthRegeneration",
+    "17": "Rerolls",
+    "18": "ReviveSpeed",
+    "19": "Revives",
+    "20": "Projectiles",
+    "22": "HealOnDodge",
+    "23": "HealOnLevelUp",
+    "24": "DropChance",
+    "25": "TerrainSpeedMultiplier",
+    "26": "HitboxSizeMultiplier",
+    "27": "ElementWeaknessMultiplier",
+    "30": "ElementStrengthMultiplier",
+    "33": "HealingMultiplier",
+    "34": "XPGainOnDamageTaken",
+    "35": "HealthPotionAmountMultiplier",
+    "36": "ReviveZoneSize",
+    "37": "GoldGain",
+    "38": "HealthPercentageOnRevive",
+    "39": "Bans",
+    "40": "Pins"
+  },
+
+  "artifact_type_map": {
+    "0":  "None",
+    "1":  "TheLessHPTheMoreMoveSpeed",
+    "2":  "AddArmorEqualToLevel",
+    "3":  "TheLessHPTheMoreXPGain",
+    "4":  "IncreaseHealingDoneForEveryObjective",
+    "5":  "IncreaseDamageForEveryNearbyTeammate",
+    "6":  "HealOnDodge",
+    "7":  "IncreaseCritDamageWhileStandingStill",
+    "8":  "IncreaseLuckWhenNotRerolling",
+    "9":  "HealOnLevelUp",
+    "10": "IncreaseMaxHealthForEveryRevive",
+    "11": "IncreaseDamageForEveryRevive",
+    "12": "IncreaseArmorPerObjectiveCompleted",
+    "13": "IncreaseDamagePerArmor",
+    "14": "IncreaseCritDamageForEveryRevive",
+    "15": "IncreaseElementalDamageForEveryInfusion",
+    "16": "IncreaseFireRateWhileStandingStill",
+    "17": "HealOnCrit",
+    "18": "IncreaseMaxHPForEveryHealthPickup",
+    "19": "HealOnXPPickup",
+    "20": "IncreaseCritDamageForEveryCommon"
+  },
+
+  "artifacts": [
+    {
+      "id": 1,
+      "artifact_type_id": 1,
+      "artifact_type": "TheLessHPTheMoreMoveSpeed",
+      "source_file": "Artifact_1.asset",
+      "title_entry": "Artifact_1_Title",
+      "title_localized": "Artifact_1_Title",
+      "description_entry": "Artifact_1_Description",
+      "description_localized": "Artifact_1_Description",
+      "parameters_raw": [21],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 21,
+          "meaning": "Maximum bonus movement speed (in stat points or percent) granted when the player is at minimum health; the bonus scales linearly with missing HP (more missing HP = closer to the full 21 bonus).",
+          "confidence": "inferred",
+          "evidence": "Class ArtifactStatModifier_LessHPMoreMovementSpeed (dump.cs line 262446) extends DynamicStatModifier with only Parameters: List<float>; constructor uses GameplayPlayerIdentity + IPlayerHealthContainerLocator. GetStatType() RVA 0xE97950 is shared with DecreaseMovementSpeedPerArmor (same StatType=7 MovementSpeed). GetValue() (RVA 0x24FBA00) reads current HP ratio and multiplies Parameters[0] by missing-HP fraction."
+        }
+      ],
+      "stat_affected": { "id": 7, "name": "MovementSpeed" },
+      "trigger_condition": "Continuous; scales with (1 - currentHP/maxHP). Stronger when low on HP.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_LessHPMoreMovementSpeed",
+      "il2cpp_class_line_in_dump": 262446,
+      "il2cpp_rva_getvalue": "0x24FBA00",
+      "il2cpp_rva_getstattype": "0xE97950",
+      "synergy_hints": [
+        "Pairs with Artifact 3 (TheLessHPTheMoreXPGain) — both reward low-HP play",
+        "Pairs with healing-when-injured spells / lifesteal to stay alive at low HP",
+        "Synergises with Dodge / iframe builds that survive low-HP play"
+      ]
+    },
+    {
+      "id": 2,
+      "artifact_type_id": 2,
+      "artifact_type": "AddArmorEqualToLevel",
+      "source_file": "Artifact_2.asset",
+      "title_entry": "Artifact_2_Title",
+      "title_localized": "Artifact_2_Title",
+      "description_entry": "Artifact_2_Description",
+      "description_localized": "Artifact_2_Description",
+      "parameters_raw": [],
+      "parameters_decoded": [],
+      "stat_affected": { "id": 14, "name": "Armor" },
+      "trigger_condition": "Continuous; returns the current party level as the modifier value (no tunable parameters).",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_AddArmorEqualToPartyLevel",
+      "il2cpp_class_line_in_dump": 262067,
+      "il2cpp_rva_getvalue": "0x24F9920",
+      "il2cpp_rva_getstattype": "0xE8F860",
+      "synergy_hints": [
+        "Pairs with Artifact 13 (IncreaseDamagePerArmor) — every armor point becomes damage",
+        "Pairs with Artifact 12 (IncreaseArmorPerObjectiveCompleted) for stacking armor",
+        "Useful on long runs where party level scales high"
+      ]
+    },
+    {
+      "id": 3,
+      "artifact_type_id": 3,
+      "artifact_type": "TheLessHPTheMoreXPGain",
+      "source_file": "Artifact_3.asset",
+      "title_entry": "Artifact_3_Title",
+      "title_localized": "Artifact_3_Title",
+      "description_entry": "Artifact_3_Description",
+      "description_localized": "Artifact_3_Description",
+      "parameters_raw": [40],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 40,
+          "meaning": "Bonus XP gain (most likely in percent points added to XPGain stat) granted while the player's HP is below an internal health-fraction threshold. Class name 'BonusExpWhenBelowHealthThreshold' makes this a discrete on/off bonus rather than a linear scale.",
+          "confidence": "inferred",
+          "evidence": "Class ArtifactStatModifier_BonusExpWhenBelowHealthThreshold (dump.cs line 262085); GetStatType() RVA 0xE8F6D0; GetValue() RVA 0x24F99B0. Class uses IPlayerHealthContainerLocator — checks HP each call. Single Parameters[0] suggests a single tunable bonus magnitude; the threshold itself is hard-coded inside GetValue (no second parameter exposed)."
+        }
+      ],
+      "stat_affected": { "id": 10, "name": "XPGain" },
+      "trigger_condition": "When current HP < hard-coded threshold (commonly low-HP). Off otherwise.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_BonusExpWhenBelowHealthThreshold",
+      "il2cpp_class_line_in_dump": 262085,
+      "il2cpp_rva_getvalue": "0x24F99B0",
+      "il2cpp_rva_getstattype": "0xE8F6D0",
+      "synergy_hints": [
+        "Pairs with Artifact 1 (TheLessHPTheMoreMoveSpeed) — both reward low-HP play",
+        "Pairs with low-HP / glass-cannon spell builds",
+        "Useful in early game to power-level"
+      ]
+    },
+    {
+      "id": 4,
+      "artifact_type_id": 4,
+      "artifact_type": "IncreaseHealingDoneForEveryObjective",
+      "source_file": "Artifact_4.asset",
+      "title_entry": "Artifact_4_Title",
+      "title_localized": "Artifact_4_Title",
+      "description_entry": "Artifact_4_Description",
+      "description_localized": "Artifact_4_Description",
+      "parameters_raw": [25],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 25,
+          "meaning": "Healing multiplier increase (likely +25% to HealingMultiplier, or +25 stat points) granted per side-objective successfully completed. Stacks every objective.",
+          "confidence": "inferred",
+          "evidence": "Class ArtifactStatModifier_MoreSideObjectivesMoreHealingDone (dump.cs line 262469) tracks numberOfObjectivesSuccessfullyCompleted via CountSuccessfulObjectives callback; GetValue() RVA 0x24FBD00 returns Parameters[0] * count. GetStatType() RVA 0x24FBCF0 (its own — almost certainly returns HealingMultiplier=33)."
+        }
+      ],
+      "stat_affected": { "id": 33, "name": "HealingMultiplier" },
+      "trigger_condition": "Each successfully completed side objective adds one stack of bonus healing.",
+      "adds_modifier": true,
+      "hide_for_single_player": true,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_MoreSideObjectivesMoreHealingDone",
+      "il2cpp_class_line_in_dump": 262469,
+      "il2cpp_rva_getvalue": "0x24FBD00",
+      "il2cpp_rva_getstattype": "0x24FBCF0",
+      "synergy_hints": [
+        "Multiplayer-only (hide_for_single_player=1) — pair with revive/support builds",
+        "Pairs with Artifact 12 (IncreaseArmorPerObjectiveCompleted) — same trigger source",
+        "Synergises with healing spells and revives"
+      ]
+    },
+    {
+      "id": 5,
+      "artifact_type_id": 5,
+      "artifact_type": "IncreaseDamageForEveryNearbyTeammate",
+      "source_file": "Artifact_5.asset",
+      "title_entry": "Artifact_5_Title",
+      "title_localized": "Artifact_5_Title",
+      "description_entry": "Artifact_5_Description",
+      "description_localized": "Artifact_5_Description",
+      "parameters_raw": [20],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 20,
+          "meaning": "Bonus damage (likely +20% per nearby teammate within MaxDistanceForDamageIncrease=10 units). Class enumerates other GameplayPlayers and filters by distance < 10.",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember (dump.cs line 262249) declares 'private const float MaxDistanceForDamageIncrease = 10;' GetValue() RVA 0x24FA420 iterates GameplayPlayers (<>b__6_0), measures distance (<>b__6_1), filters <>b__6_2(distance), and weights via <>b__6_3. Parameters[0] is the per-teammate magnitude."
+        }
+      ],
+      "stat_affected": { "id": 0, "name": "Damage" },
+      "trigger_condition": "Each ally within 10 units adds one stack of damage bonus.",
+      "adds_modifier": true,
+      "hide_for_single_player": true,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseDamagePerNearbyPartyMember",
+      "il2cpp_class_line_in_dump": 262249,
+      "il2cpp_rva_getvalue": "0x24FA420",
+      "il2cpp_rva_getstattype": "0x679900",
+      "synergy_hints": [
+        "Multiplayer-only — encourages stacking with teammates",
+        "Pairs with melee/short-range builds that already group up",
+        "Anti-synergy with kiting/long-range loadouts"
+      ]
+    },
+    {
+      "id": 6,
+      "artifact_type_id": 6,
+      "artifact_type": "HealOnDodge",
+      "source_file": "Artifact_6.asset",
+      "title_entry": "Artifact_6_Title",
+      "title_localized": "Artifact_6_Title",
+      "description_entry": "Artifact_6_Description",
+      "description_localized": "Artifact_6_Description",
+      "parameters_raw": [20],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 20,
+          "meaning": "Healing amount on each successful dodge — uses the HealOnDodge stat (StatType=22). Likely 20 HP or 20% of max HP healed per dodged hit.",
+          "confidence": "inferred",
+          "evidence": "No dedicated Artifact_HealOnDodge class exists; instead the ArtifactType=6 directly maps to StatType.HealOnDodge=22 per the prompt's enum mapping. The single Parameters[0]=20 is the heal magnitude added as a stat modifier."
+        }
+      ],
+      "stat_affected": { "id": 22, "name": "HealOnDodge" },
+      "trigger_condition": "Each time the player successfully dodges an incoming attack.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "(uses StatType.HealOnDodge directly via static stat modifier; no Artifact_*-named class in dump.cs)",
+      "il2cpp_class_line_in_dump": null,
+      "il2cpp_rva_getvalue": null,
+      "il2cpp_rva_getstattype": null,
+      "synergy_hints": [
+        "Pairs with high-Dodge builds (Dodge stat, Dodge-on-X improvements)",
+        "Synergises with crowd / many-projectile waves (more dodge procs)",
+        "Pairs with Artifact 9 (HealOnLevelUp) for layered sustain"
+      ]
+    },
+    {
+      "id": 7,
+      "artifact_type_id": 7,
+      "artifact_type": "IncreaseCritDamageWhileStandingStill",
+      "source_file": "Artifact_7.asset",
+      "title_entry": "Artifact_7_Title",
+      "title_localized": "Artifact_7_Title",
+      "description_entry": "Artifact_7_Description",
+      "description_localized": "Artifact_7_Description",
+      "parameters_raw": [100],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 100,
+          "meaning": "Bonus critical damage (likely +100% / +100 CritDamage stat points) granted while the player is not moving (PlayerMotor velocity = 0).",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill (dump.cs line 262163) uses IPlayerMotorLocator + PlayerMotor. GetStatType() RVA 0x22D13B0 is shared with IncreaseCriticalDamagePerRevivePerformed (StatType=13 CriticalDamage). GetValue() RVA 0x24FA270 checks motor.isMoving and returns Parameters[0] when still."
+        }
+      ],
+      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "trigger_condition": "Active only while player is stationary (PlayerMotor not moving).",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseCriticalDamageWhenStandingStill",
+      "il2cpp_class_line_in_dump": 262163,
+      "il2cpp_rva_getvalue": "0x24FA270",
+      "il2cpp_rva_getstattype": "0x22D13B0",
+      "synergy_hints": [
+        "Pairs with Artifact 16 (IncreaseFireRateWhileStandingStill) — both reward standing still",
+        "Pairs with Artifact 17/20 (HealOnCrit, IncreaseCritDamageForEveryCommon) for crit stacking",
+        "Synergises with turret/orbital spells that don't require movement"
+      ]
+    },
+    {
+      "id": 8,
+      "artifact_type_id": 8,
+      "artifact_type": "IncreaseLuckWhenNotRerolling",
+      "source_file": "Artifact_8.asset",
+      "title_entry": "Artifact_8_Title",
+      "title_localized": "Artifact_8_Title",
+      "description_entry": "Artifact_8_Description",
+      "description_localized": "Artifact_8_Description",
+      "parameters_raw": [1, 10],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 1,
+          "meaning": "Either the Luck bonus per non-rerolled store (1 Luck stat point per skip) or a per-store increment multiplier; Parameters[0] is multiplied by numberOfStoresNotRerolled.",
+          "confidence": "inferred",
+          "evidence": "Class ArtifactStatModifier_IncreaseLuckWhenNotRerolling (dump.cs line 262363) field 'private int numberOfStoresNotRerolled' incremented by OnStoreNotRerolled(). GetStatType() RVA 0x22B02D0 (StatType=9 Luck). GetValue() RVA 0x24FB200 returns f(Parameters, count); two parameters strongly imply (per-stack value, cap)."
+        },
+        {
+          "index": 1,
+          "value": 10,
+          "meaning": "Maximum cap on the bonus — most likely 'up to 10 Luck' or 'stacks capped at 10 stores not rerolled'.",
+          "confidence": "inferred",
+          "evidence": "Same class as above; the second float is conventionally a cap in this codebase (similar pattern seen elsewhere for stacking modifiers). Concrete cap semantics require disassembling RVA 0x24FB200."
+        }
+      ],
+      "stat_affected": { "id": 9, "name": "Luck" },
+      "trigger_condition": "Each store visit where the player does NOT use a reroll adds one stack.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseLuckWhenNotRerolling",
+      "il2cpp_class_line_in_dump": 262363,
+      "il2cpp_rva_getvalue": "0x24FB200",
+      "il2cpp_rva_getstattype": "0x22B02D0",
+      "synergy_hints": [
+        "Anti-synergy with Rerolls stat / reroll-spam builds",
+        "Pairs with patient / commitment builds that pick first offer",
+        "Useful early to bias rarity rolls upward"
+      ]
+    },
+    {
+      "id": 9,
+      "artifact_type_id": 9,
+      "artifact_type": "HealOnLevelUp",
+      "source_file": "Artifact_9.asset",
+      "title_entry": "Artifact_9_Title",
+      "title_localized": "Artifact_9_Title",
+      "description_entry": "Artifact_9_Description",
+      "description_localized": "Artifact_9_Description",
+      "parameters_raw": [10],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 10,
+          "meaning": "Healing amount granted each time the party gains a level — uses the HealOnLevelUp stat (StatType=23). Likely 10 HP or 10% max HP per level-up.",
+          "confidence": "inferred",
+          "evidence": "No dedicated Artifact_HealOnLevelUp class in dump.cs; ArtifactType=9 maps to StatType.HealOnLevelUp=23. Parameters[0]=10 is the magnitude applied as a stat modifier consumed on each level-up event."
+        }
+      ],
+      "stat_affected": { "id": 23, "name": "HealOnLevelUp" },
+      "trigger_condition": "Each party level-up triggers one heal.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "(uses StatType.HealOnLevelUp directly via static stat modifier; no Artifact_*-named class in dump.cs)",
+      "il2cpp_class_line_in_dump": null,
+      "il2cpp_rva_getvalue": null,
+      "il2cpp_rva_getstattype": null,
+      "synergy_hints": [
+        "Pairs with XP-gain artifacts (Artifact 3 TheLessHPTheMoreXPGain) — more level-ups = more heals",
+        "Pairs with Artifact 6 (HealOnDodge) for stacked sustain",
+        "Strong in early game when level-ups are frequent"
+      ]
+    },
+    {
+      "id": 10,
+      "artifact_type_id": 10,
+      "artifact_type": "IncreaseMaxHealthForEveryRevive",
+      "source_file": "Artifact_10.asset",
+      "title_entry": "Artifact_10_Title",
+      "title_localized": "Artifact_10_Title",
+      "description_entry": "Artifact_10_Description",
+      "description_localized": "Artifact_10_Description",
+      "parameters_raw": [50],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 50,
+          "meaning": "Max-health bonus per revive performed (likely +50 HP per ally revive, or +50% max HP per revive).",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed (dump.cs line 262417); field 'revivesPerformedSinceApplication' incremented by OnPlayerRevived. GetStatType() RVA 0xC3A440 (StatType=8 MaxHealth — same RVA reused by IncreaseMaxHealthForEachHealthPickup). GetValue() RVA 0x24FB750 returns Parameters[0] * count."
+        }
+      ],
+      "stat_affected": { "id": 8, "name": "MaxHealth" },
+      "trigger_condition": "Each successful revive performed by this player adds one stack.",
+      "adds_modifier": true,
+      "hide_for_single_player": true,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseMaxHealthPerRevivePerformed",
+      "il2cpp_class_line_in_dump": 262417,
+      "il2cpp_rva_getvalue": "0x24FB750",
+      "il2cpp_rva_getstattype": "0xC3A440",
+      "synergy_hints": [
+        "Multiplayer-only — pairs with Artifact 11 (IncreaseDamageForEveryRevive) and Artifact 14 (IncreaseCritDamageForEveryRevive)",
+        "Pairs with ReviveSpeed/ReviveZoneSize stats and support builds",
+        "Pairs with Artifact 18 (IncreaseMaxHPForEveryHealthPickup) for stacking max HP"
+      ]
+    },
+    {
+      "id": 11,
+      "artifact_type_id": 11,
+      "artifact_type": "IncreaseDamageForEveryRevive",
+      "source_file": "Artifact_11.asset",
+      "title_entry": "Artifact_11_Title",
+      "title_localized": "Artifact_11_Title",
+      "description_entry": "Artifact_11_Description",
+      "description_localized": "Artifact_11_Description",
+      "parameters_raw": [10],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 10,
+          "meaning": "Damage bonus (likely +10% Damage) per revive performed; stacks each revive.",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerRevivePerformed (dump.cs line 262284); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x679900 (default — likely StatType.Damage=0). GetValue() RVA 0x24FAB60 returns Parameters[0] * count."
+        }
+      ],
+      "stat_affected": { "id": 0, "name": "Damage" },
+      "trigger_condition": "Each successful revive performed by this player adds one stack.",
+      "adds_modifier": true,
+      "hide_for_single_player": true,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseDamagePerRevivePerformed",
+      "il2cpp_class_line_in_dump": 262284,
+      "il2cpp_rva_getvalue": "0x24FAB60",
+      "il2cpp_rva_getstattype": "0x679900",
+      "synergy_hints": [
+        "Multiplayer-only — pairs with Artifact 10 and Artifact 14 (revive-trigger set)",
+        "Pairs with ReviveSpeed/ReviveZoneSize stat investments",
+        "Encourages active revives over leaving teammates down"
+      ]
+    },
+    {
+      "id": 12,
+      "artifact_type_id": 12,
+      "artifact_type": "IncreaseArmorPerObjectiveCompleted",
+      "source_file": "Artifact_12.asset",
+      "title_entry": "Artifact_12_Title",
+      "title_localized": "Artifact_12_Title",
+      "description_entry": "Artifact_12_Description",
+      "description_localized": "Artifact_12_Description",
+      "parameters_raw": [10],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 10,
+          "meaning": "Armor bonus per side-objective successfully completed (likely +10 Armor per objective).",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted (dump.cs line 262108); 'numberOfObjectivesSuccessfullyCompleted' incremented by CountSuccessfulObjectives. GetStatType() RVA 0xE8F860 (shared with AddArmorEqualToPartyLevel → StatType=14 Armor). GetValue() RVA 0x24F9DC0 returns Parameters[0] * count."
+        }
+      ],
+      "stat_affected": { "id": 14, "name": "Armor" },
+      "trigger_condition": "Each successfully completed side objective adds one stack of armor.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseArmorPerObjectiveCompleted",
+      "il2cpp_class_line_in_dump": 262108,
+      "il2cpp_rva_getvalue": "0x24F9DC0",
+      "il2cpp_rva_getstattype": "0xE8F860",
+      "synergy_hints": [
+        "Pairs with Artifact 13 (IncreaseDamagePerArmor) — armor becomes damage",
+        "Pairs with Artifact 2 (AddArmorEqualToLevel) and Artifact 4 (objective-trigger set)",
+        "Synergises with objective-focused playstyles"
+      ]
+    },
+    {
+      "id": 13,
+      "artifact_type_id": 13,
+      "artifact_type": "IncreaseDamagePerArmor",
+      "source_file": "Artifact_13.asset",
+      "title_entry": "Artifact_13_Title",
+      "title_localized": "Artifact_13_Title",
+      "description_entry": "Artifact_13_Description",
+      "description_localized": "Artifact_13_Description",
+      "parameters_raw": [1, 0.25],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 1,
+          "meaning": "Either an armor-cost step (1 armor required per increment) or a flat baseline factor for the damage formula.",
+          "confidence": "guess",
+          "evidence": "Class ArtifactStatModifier_IncreaseDamagePerArmor (dump.cs line 262186) reads the player's current Armor stat via GameplayPlayerIdentity. GetValue() RVA 0x24FA380. With two parameters, the canonical pattern is (per-N-armor, multiplier) or (threshold, multiplier); disassembly required to lock the exact formula."
+        },
+        {
+          "index": 1,
+          "value": 0.25,
+          "meaning": "Damage multiplier per unit of armor — likely 0.25% bonus damage per armor point (i.e. 100 armor = +25% damage), or 0.25 multiplier per Parameters[0] armor.",
+          "confidence": "inferred",
+          "evidence": "Same class; companion class ArtifactStatModifier_DecreaseMovementSpeedPerArmor at line 262207 follows the identical 2-parameter pattern and same per-armor scaling logic."
+        }
+      ],
+      "stat_affected": { "id": 0, "name": "Damage" },
+      "trigger_condition": "Continuous; reads current Armor each evaluation.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseDamagePerArmor",
+      "il2cpp_class_line_in_dump": 262186,
+      "il2cpp_rva_getvalue": "0x24FA380",
+      "il2cpp_rva_getstattype": "0x679900",
+      "synergy_hints": [
+        "Pairs with Artifact 2 (AddArmorEqualToLevel) and Artifact 12 (IncreaseArmorPerObjectiveCompleted)",
+        "Pairs with Armor-granting spells/improvements",
+        "Beware companion class ArtifactStatModifier_DecreaseMovementSpeedPerArmor exists in code — armor stacking may have an in-game movement-speed downside applied elsewhere"
+      ]
+    },
+    {
+      "id": 14,
+      "artifact_type_id": 14,
+      "artifact_type": "IncreaseCritDamageForEveryRevive",
+      "source_file": "Artifact_14.asset",
+      "title_entry": "Artifact_14_Title",
+      "title_localized": "Artifact_14_Title",
+      "description_entry": "Artifact_14_Description",
+      "description_localized": "Artifact_14_Description",
+      "parameters_raw": [35],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 35,
+          "meaning": "Critical-damage bonus per revive performed (likely +35% / +35 CriticalDamage stat per revive).",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed (dump.cs line 262135); 'revivesPerformedSinceApplication' incremented in OnPlayerRevived. GetStatType() RVA 0x22D13B0 (shared with IncreaseCriticalDamageWhenStandingStill → StatType=13 CriticalDamage). GetValue() RVA 0x24FA050 returns Parameters[0] * count."
+        }
+      ],
+      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "trigger_condition": "Each successful revive performed by this player adds one stack.",
+      "adds_modifier": true,
+      "hide_for_single_player": true,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseCriticalDamagePerRevivePerformed",
+      "il2cpp_class_line_in_dump": 262135,
+      "il2cpp_rva_getvalue": "0x24FA050",
+      "il2cpp_rva_getstattype": "0x22D13B0",
+      "synergy_hints": [
+        "Multiplayer-only — completes the revive-trigger set with Artifact 10 + 11",
+        "Pairs with Artifact 7 (IncreaseCritDamageWhileStandingStill), 17 (HealOnCrit), 20 (IncreaseCritDamageForEveryCommon)",
+        "Crit-build keystone in coop"
+      ]
+    },
+    {
+      "id": 15,
+      "artifact_type_id": 15,
+      "artifact_type": "IncreaseElementalDamageForEveryInfusion",
+      "source_file": "Artifact_15.asset",
+      "title_entry": "Artifact_15_Title",
+      "title_localized": "Artifact_15_Title",
+      "description_entry": "Artifact_15_Description",
+      "description_localized": "Artifact_15_Description",
+      "parameters_raw": [10],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 10,
+          "meaning": "Elemental-damage bonus (likely +10% ElementStrengthMultiplier) per infusion-type improvement picked up.",
+          "confidence": "inferred",
+          "evidence": "Class ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed (dump.cs line 262312); 'infusionsPerformed' increments in OnImprovementAdded(ImprovementType). GetStatType() RVA 0xE979D0 (likely StatType=30 ElementStrengthMultiplier given the elemental-damage class name). GetValue() RVA 0x24FAE30 returns Parameters[0] * count."
+        }
+      ],
+      "stat_affected": { "id": 30, "name": "ElementStrengthMultiplier" },
+      "trigger_condition": "Each infusion-type ImprovementAdded event adds one stack.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseElementalDamagePerInfusionPerformed",
+      "il2cpp_class_line_in_dump": 262312,
+      "il2cpp_rva_getvalue": "0x24FAE30",
+      "il2cpp_rva_getstattype": "0xE979D0",
+      "synergy_hints": [
+        "Pairs with infusion-heavy builds (fire/ice/lightning enchant pickups)",
+        "Pairs with element-weakness exploits (StatType=27 ElementWeaknessMultiplier on enemies)",
+        "Strong with single-element spell focus"
+      ]
+    },
+    {
+      "id": 16,
+      "artifact_type_id": 16,
+      "artifact_type": "IncreaseFireRateWhileStandingStill",
+      "source_file": "Artifact_16.asset",
+      "title_entry": "Artifact_16_Title",
+      "title_localized": "Artifact_16_Title",
+      "description_entry": "Artifact_16_Description",
+      "description_localized": "Artifact_16_Description",
+      "parameters_raw": [20],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 20,
+          "meaning": "Bonus fire-rate (likely +20% / +20 FireRate stat) granted while the player is not moving.",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseFireRateWhenStandingStill (dump.cs line 262340) uses IPlayerMotorLocator + PlayerMotor (same pattern as Artifact 7). GetStatType() RVA 0x67A490 (StatType=2 FireRate). GetValue() RVA 0x24FAF90 returns Parameters[0] when motor is idle."
+        }
+      ],
+      "stat_affected": { "id": 2, "name": "FireRate" },
+      "trigger_condition": "Active only while player is stationary.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseFireRateWhenStandingStill",
+      "il2cpp_class_line_in_dump": 262340,
+      "il2cpp_rva_getvalue": "0x24FAF90",
+      "il2cpp_rva_getstattype": "0x67A490",
+      "synergy_hints": [
+        "Pairs with Artifact 7 (IncreaseCritDamageWhileStandingStill) — same stand-still trigger",
+        "Pairs with high-projectile / turret loadouts",
+        "Anti-synergy with movement-speed / kite builds"
+      ]
+    },
+    {
+      "id": 17,
+      "artifact_type_id": 17,
+      "artifact_type": "HealOnCrit",
+      "source_file": "Artifact_17.asset",
+      "title_entry": "Artifact_17_Title",
+      "title_localized": "Artifact_17_Title",
+      "description_entry": "Artifact_17_Description",
+      "description_localized": "Artifact_17_Description",
+      "parameters_raw": [0.3],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 0.3,
+          "meaning": "healPercentage — fraction of critical damage dealt that is converted to healing. 0.3 = heal for 30% of each crit's damage.",
+          "confidence": "high",
+          "evidence": "Class Artifact_HealOnCrit (dump.cs line 262496) declares 'private readonly float healPercentage;' (line 262501) initialised from artifactParameters in constructor (RVA 0x24FC7A0). HealOnCrit(float criticalDamage) at RVA 0x24FC6A0 uses healPercentage * criticalDamage to heal via PlayerHealthContainer. AddsModifier=0 in YAML confirms this is event-driven, not a stat modifier."
+        }
+      ],
+      "stat_affected": null,
+      "trigger_condition": "Event: every critical hit triggers HealOnCrit(critDamage) → heal = 0.3 * critDamage.",
+      "adds_modifier": false,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "Artifact_HealOnCrit",
+      "il2cpp_class_line_in_dump": 262496,
+      "il2cpp_rva_getvalue": null,
+      "il2cpp_rva_getstattype": null,
+      "il2cpp_rva_constructor": "0x24FC7A0",
+      "il2cpp_rva_healoncrit": "0x24FC6A0",
+      "synergy_hints": [
+        "Pairs with crit-stacking artifacts (7, 14, 20) — more crit damage → more healing",
+        "Pairs with high-crit-chance builds and big-damage spells",
+        "Replaces the need for HealOnDodge in offensive loadouts"
+      ]
+    },
+    {
+      "id": 18,
+      "artifact_type_id": 18,
+      "artifact_type": "IncreaseMaxHPForEveryHealthPickup",
+      "source_file": "Artifact_18.asset",
+      "title_entry": "Artifact_18_Title",
+      "title_localized": "Artifact_18_Title",
+      "description_entry": "Artifact_18_Description",
+      "description_localized": "Artifact_18_Description",
+      "parameters_raw": [40],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 40,
+          "meaning": "Max-health bonus per health potion / pickup collected (likely +40 max HP, or +40% per pickup). The field 'healthPotionsCollected' tracks the stack count.",
+          "confidence": "high",
+          "evidence": "Class ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup (dump.cs line 262390); subscribes to HealthPotionCollectedEventArgs via OnHealthPotionCollected. GetStatType() RVA 0xC3A440 (shared with IncreaseMaxHealthPerRevivePerformed → StatType=8 MaxHealth). GetValue() RVA 0x24FB390 returns Parameters[0] * healthPotionsCollected."
+        }
+      ],
+      "stat_affected": { "id": 8, "name": "MaxHealth" },
+      "trigger_condition": "Each health-potion collected adds one stack of max HP.",
+      "adds_modifier": true,
+      "hide_for_single_player": false,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "ArtifactStatModifier_IncreaseMaxHealthForEachHealthPickup",
+      "il2cpp_class_line_in_dump": 262390,
+      "il2cpp_rva_getvalue": "0x24FB390",
+      "il2cpp_rva_getstattype": "0xC3A440",
+      "synergy_hints": [
+        "Pairs with HealthPotionAmountMultiplier (StatType=35) and DropChance investments",
+        "Pairs with Artifact 10 (IncreaseMaxHealthForEveryRevive) for max-HP stacking",
+        "Encourages routing through potion spawns"
+      ]
+    },
+    {
+      "id": 19,
+      "artifact_type_id": 19,
+      "artifact_type": "HealOnXPPickup",
+      "source_file": "Artifact_19.asset",
+      "title_entry": "Artifact_19_Title",
+      "title_localized": "Artifact_19_Title",
+      "description_entry": "Artifact_19_Description",
+      "description_localized": "Artifact_19_Description",
+      "parameters_raw": [15, 1],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 15,
+          "meaning": "chanceToHeal — percentage chance (15%) that an XP pickup triggers a heal. Field order in the class is 'chanceToHeal' (0x20) then 'healAmount' (0x24).",
+          "confidence": "high",
+          "evidence": "Class Artifact_HealOnXpPickup (dump.cs line 262514) declares 'private readonly float chanceToHeal;' (offset 0x20) and 'private readonly float healAmount;' (offset 0x24). Constructor RVA 0x24FC9C0 reads artifactParameters in declared field order. GetRandomValue() (RVA 0x24FC870) compares against chanceToHeal in HealOnXpPickup() (RVA 0x24FC8A0). AddsModifier=0 confirms event-driven."
+        },
+        {
+          "index": 1,
+          "value": 1,
+          "meaning": "healAmount — heal applied when the chance roll succeeds (1 HP per qualifying XP pickup).",
+          "confidence": "high",
+          "evidence": "Same class; field 'healAmount' at offset 0x24 is the second float parameter consumed by the constructor and used directly by PlayerHealthContainer in HealOnXpPickup()."
+        }
+      ],
+      "stat_affected": null,
+      "trigger_condition": "Event: each XP gem pickup rolls a 15% chance to heal for 1 HP.",
+      "adds_modifier": false,
+      "hide_for_single_player": false,
+      "spawn_rate": 50,
+      "spawn_rate_decays_over_time": false,
+      "il2cpp_class": "Artifact_HealOnXpPickup",
+      "il2cpp_class_line_in_dump": 262514,
+      "il2cpp_rva_getvalue": null,
+      "il2cpp_rva_getstattype": null,
+      "il2cpp_rva_constructor": "0x24FC9C0",
+      "il2cpp_rva_healonxppickup": "0x24FC8A0",
+      "synergy_hints": [
+        "Pairs with PickupRadius (StatType=11) and Luck — collect more XP, trigger more rolls",
+        "Pairs with XPGain artifacts (Artifact 3) for compounding XP-driven sustain",
+        "Weak heal magnitude; best as supplemental sustain layer"
+      ]
+    },
+    {
+      "id": 20,
+      "artifact_type_id": 20,
+      "artifact_type": "IncreaseCritDamageForEveryCommon",
+      "source_file": "Artifact_20.asset",
+      "title_entry": "Artifact_20_Title",
+      "title_localized": "Artifact_20_Title",
+      "description_entry": "Artifact_20_Description",
+      "description_localized": "Artifact_20_Description",
+      "parameters_raw": [1],
+      "parameters_decoded": [
+        {
+          "index": 0,
+          "value": 1,
+          "meaning": "increasePerCommonStoreItemEncountered — flat CriticalDamage bonus added per Common-rarity store item encountered (likely +1 CritDamage stat point per Common item seen). Applied through the improvements manager, not as a DynamicStatModifier.",
+          "confidence": "high",
+          "evidence": "Class Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered (dump.cs line 262558) declares 'private readonly float increasePerCommonStoreItemEncountered;' (line 262561) set by constructor (RVA 0x24FCD30) from Parameters[0]. IncreaseCriticalDamageOnCommonStoreItemEncountered(List<StoreItem>) at RVA 0x24FCAF0 filters via the <>c.<>9__3_0 closure (checks StoreItem rarity == Common) and applies the bonus per item. AddsModifier=0 confirms it's an event-driven applier."
+        }
+      ],
+      "stat_affected": { "id": 13, "name": "CriticalDamage" },
+      "trigger_condition": "Each time a store offers Common-rarity items, +1 per Common item shown.",
+      "adds_modifier": false,
+      "hide_for_single_player": false,
+      "spawn_rate": 100,
+      "spawn_rate_decays_over_time": true,
+      "il2cpp_class": "Artifact_IncreaseCriticalDamageOnCommonStoreItemEncountered",
+      "il2cpp_class_line_in_dump": 262558,
+      "il2cpp_rva_getvalue": null,
+      "il2cpp_rva_getstattype": null,
+      "il2cpp_rva_constructor": "0x24FCD30",
+      "il2cpp_rva_apply": "0x24FCAF0",
+      "synergy_hints": [
+        "Pairs with the crit-stack family (Artifact 7, 14, 17)",
+        "Pairs with Bans/Pins stats — fewer rerolls means more Commons seen and counted",
+        "Spawn rate decays over time — most useful when picked early"
+      ]
+    }
+  ]
+}

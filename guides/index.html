@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Guides hub for The Arcane Archive: damage optimization, spell tier list, artifact priorities, element pairing, and more.">
+  <title>Guides &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Guides nav">
+      <h2 class="sidebar__title">Guides</h2>
+      <ul class="sidebar__nav">
+        <li><a aria-current="page" href="index.html">All guides</a></li>
+        <li><a href="damage-optimization.html">Damage optimization</a></li>
+        <li><a href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a href="element-pairing.html">Element pairing</a></li>
+      </ul>
+      <h2 class="sidebar__title">Browse</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li aria-current="page">Guides</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section class="stack">
+          <h1>Strategy &amp; theorycraft guides</h1>
+          <p class="prose u-muted">
+            Long-form articles for theorycrafters, optimizers, and players
+            who want to understand <em>why</em> a build wins, not just
+            <em>which</em> one. Numbers throughout come from the
+            <a href="../mechanics/index.html">reverse-engineered mechanics
+            spec</a>; where confidence is lower, callouts say so.
+          </p>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">If you read one guide, read this one</span>
+            <p>
+              <a href="damage-optimization.html"><strong>Damage Optimization</strong></a>
+              is the centerpiece reference for the whole wiki &mdash; it
+              walks the full damage formula, ranks every relevant stat,
+              defines six build archetypes, and works through four
+              numerical examples. Most of the other guides reference it.
+            </p>
+          </aside>
+
+          <h2>Suggested reading order</h2>
+          <ol class="prose">
+            <li><a href="damage-optimization.html">Damage Optimization</a> &mdash; the formula and the stat hierarchy. The foundation.</li>
+            <li><a href="element-pairing.html">Element Pairing</a> &mdash; which infusions actually matter once you understand the formula.</li>
+            <li><a href="spell-tier-list.html">Spell Tier List</a> &mdash; how every spell maps onto archetypes from the optimization guide.</li>
+            <li><a href="artifact-priorities.html">Artifact Priorities</a> &mdash; what to grab when, given which archetype you&rsquo;re committing to.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>All guides</h2>
+          <div class="grid grid-cards">
+
+            <article class="item-card" data-kind="guide">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="damage-optimization.html">Damage Optimization</a></h3>
+                  <p class="item-card__subtitle">Centerpiece &middot; comprehensive</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">formula</span>
+                <span class="tag">archetypes</span>
+                <span class="tag">examples</span>
+              </div>
+              <p class="item-card__desc">
+                The complete damage pipeline from spell-cast to HP-removal.
+                Stat priority hierarchy with breakeven math, six build
+                archetypes, four worked numerical examples, late-game scaling,
+                pitfalls, and a one-table cheat sheet.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Length</span><span class="item-card__stat-value">long</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Level</span><span class="item-card__stat-value">all</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Math</span><span class="item-card__stat-value">yes</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Cites</span><span class="item-card__stat-value">dump.cs</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-kind="guide">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="spell-tier-list.html">Spell Tier List</a></h3>
+                  <p class="item-card__subtitle">All 21 spells ranked</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">tier-list</span>
+                <span class="tag">opinion</span>
+              </div>
+              <p class="item-card__desc">
+                S/A/B/C ranking of every spell with reasoning that maps each
+                spell onto the build archetypes from the optimization guide.
+                Includes per-spell ceiling notes (what build pushes the
+                spell into the next tier).
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Length</span><span class="item-card__stat-value">medium</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Spells</span><span class="item-card__stat-value">21/21</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Tiers</span><span class="item-card__stat-value">SSS&ndash;C</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Style</span><span class="item-card__stat-value">subjective</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-kind="guide">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="artifact-priorities.html">Artifact Priorities</a></h3>
+                  <p class="item-card__subtitle">All 20 artifacts in pick order</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">artifacts</span>
+                <span class="tag">decisions</span>
+              </div>
+              <p class="item-card__desc">
+                Pick-order discussion for the 20 in-run artifacts under each
+                of the six build archetypes. When to grab #13
+                IncreaseDamagePerArmor, when to skip #17 HealOnCrit,
+                and why #15 ElementalDmg/Infusion is the strongest item
+                in the pool late.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Length</span><span class="item-card__stat-value">medium</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Items</span><span class="item-card__stat-value">20/20</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Format</span><span class="item-card__stat-value">tier+matrix</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Use case</span><span class="item-card__stat-value">in-run</span></div>
+              </div>
+            </article>
+
+            <article class="item-card" data-kind="guide">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="element-pairing.html">Element Pairing</a></h3>
+                  <p class="item-card__subtitle">Single, double, and dual combos</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">elements</span>
+                <span class="tag">infusions</span>
+              </div>
+              <p class="item-card__desc">
+                What the formula actually says about single vs. double vs.
+                dual-combo infusions. Per-element strengths, the role of
+                ElementStrengthMultiplier, and which combos compound with
+                which spell archetype.
+              </p>
+              <div class="item-card__stats">
+                <div class="item-card__stat"><span class="item-card__stat-label">Length</span><span class="item-card__stat-value">medium</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Elements</span><span class="item-card__stat-value">5+15</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Matrix</span><span class="item-card__stat-value">included</span></div>
+                <div class="item-card__stat"><span class="item-card__stat-label">Verdict</span><span class="item-card__stat-value">included</span></div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section>
+          <h2>Cross-references</h2>
+          <p class="prose">
+            Every guide on this page is heavily cross-linked into the
+            <a href="../mechanics/index.html">mechanics</a>,
+            <a href="../spells/index.html">spells</a>,
+            <a href="../artifacts/index.html">artifacts</a>, and
+            <a href="../characters/index.html">heroes</a> sections. If a guide
+            asserts something quantitative, the source page is one click
+            away.
+          </p>
+          <p class="prose">
+            Anything missing? The
+            <a href="../about.html">contributing</a> page lists
+            the editorial conventions for adding a new guide.
+          </p>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">An unofficial fan reference. No images, no trackers, no CDN.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../about.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. Last updated by build script.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

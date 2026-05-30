@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The unofficial fan wiki for The Spell Brigade — every spell, hero, artifact, enemy, boss, and the math behind your damage. Text-only, fast, no ads.">
+  <title>The Arcane Archive</title>
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <link rel="icon"
+        href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">✶</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="spells/index.html">Spells</a>
+      <a class="top-nav__link" href="characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" href="guides/index.html">Guides</a>
+    </nav>
+
+    <div class="search" data-search data-search-index="data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input"
+             id="site-search"
+             type="search"
+             placeholder="Search spells, items, enemies…"
+             autocomplete="off"
+             spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+
+    <button class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="characters/index.html">Heroes</a>
+  <a class="mobile-nav__link" href="artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="enemies/index.html">Enemies</a>
+  <a class="mobile-nav__link" href="worlds/index.html">Worlds</a>
+  <a class="mobile-nav__link" href="bosses/index.html">Bosses</a>
+  <a class="mobile-nav__link" href="waves/index.html">Waves</a>
+  <a class="mobile-nav__link" href="challenges/index.html">Challenges</a>
+  <a class="mobile-nav__link" href="mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="guides/index.html">Guides</a>
+  <a class="mobile-nav__link" href="about.html">About</a>
+</nav>
+
+<!-- ============================ PAGE =============================== -->
+<div class="container">
+  <div class="page">
+    <main id="main-content" tabindex="-1">
+
+      <article class="content-frame">
+
+        <!-- =================== HERO =================== -->
+        <section id="hero" class="stack" aria-labelledby="hero-title">
+          <h1 id="hero-title" style="font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; margin-bottom: var(--sp-3);">
+            The Arcane Archive
+          </h1>
+          <p class="prose u-muted" style="font-size: 1.15rem; max-width: 56ch;">
+            A complete, text-only fan reference for the co-op wave-survival magic-brawler.
+            Every spell, every hero, every artifact, every enemy &mdash; and the damage math behind them.
+          </p>
+
+          <div class="row" style="margin-top: var(--sp-4);">
+            <a class="btn btn--primary" href="spells/index.html">Browse Spells</a>
+            <a class="btn" href="mechanics/damage-system.html">Read the Damage Guide</a>
+            <a class="btn btn--ghost" href="guides/index.html">New player primer</a>
+          </div>
+        </section>
+
+        <!-- =================== STATS COUNTER STRIP =================== -->
+        <section id="stats-strip" aria-label="Wiki at a glance" style="margin-top: var(--sp-6);">
+          <dl class="meta-dl" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--sp-3); text-align: center;">
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Spells</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">21</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Heroes</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">15</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Artifacts</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">20</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Enemies</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">36</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Bosses</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">3</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Worlds</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">4</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Waves</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">32</dd></div>
+            <div><dt class="u-muted" style="font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;">Challenges</dt><dd style="font-size: 1.8rem; font-weight: 600; color: var(--c-accent, #c9a961);">147</dd></div>
+          </dl>
+        </section>
+
+        <!-- =================== QUICK ACCESS TILE GRID =================== -->
+        <section id="browse" aria-labelledby="browse-title" style="margin-top: var(--sp-6);">
+          <h2 id="browse-title">Browse the wiki</h2>
+          <p class="prose u-muted">Six top sections. Every page is two clicks from here.</p>
+
+          <div class="see-also" style="margin-top: var(--sp-4);">
+
+            <a class="see-also__link" href="spells/index.html">
+              <strong>Spells <span class="u-muted" style="font-weight: 400;">· 21</span></strong>
+              Arrow, Beam, Meteor, Shotgun, and the rest. Base stats, infusion variants, improvements.
+            </a>
+
+            <a class="see-also__link" href="characters/index.html">
+              <strong>Heroes <span class="u-muted" style="font-weight: 400;">· 15</span></strong>
+              Moon Mage, Wizard King, Vampire Mage… starter spells, unique modifiers, and skins.
+            </a>
+
+            <a class="see-also__link" href="artifacts/index.html">
+              <strong>Artifacts <span class="u-muted" style="font-weight: 400;">· 20</span></strong>
+              Passive relics like <em>IncreaseDamagePerArmor</em> and <em>HealOnCrit</em>. With scaling tables.
+            </a>
+
+            <a class="see-also__link" href="bosses/index.html">
+              <strong>Bosses <span class="u-muted" style="font-weight: 400;">· 3</span></strong>
+              Squid, Toad, Hydra. Multi-phase rosters with bullet-hell patterns and counters.
+            </a>
+
+            <a class="see-also__link" href="worlds/index.html">
+              <strong>Worlds <span class="u-muted" style="font-weight: 400;">· 4</span></strong>
+              Verdant Meadows, Crystal Frostlands, Scorched Abyss, Astral Planes. Threat profiles per biome.
+            </a>
+
+            <a class="see-also__link" href="mechanics/damage-system.html">
+              <strong>Damage Guide</strong>
+              The master formula, every term explained, worked examples. The centerpiece reference.
+            </a>
+
+          </div>
+        </section>
+
+        <!-- =================== MOST USEFUL PAGES =================== -->
+        <section id="most-useful" aria-labelledby="useful-title" style="margin-top: var(--sp-6);">
+          <h2 id="useful-title">Most useful pages</h2>
+          <p class="prose u-muted">If you read just four things, read these.</p>
+
+          <div class="grid grid-cards" style="margin-top: var(--sp-4);">
+
+            <article class="item-card" data-kind="guide" data-rarity="legendary">
+              <span class="rarity-ribbon" data-rarity="legendary">Centerpiece</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="mechanics/damage-system.html">Damage Optimization Guide</a></h3>
+                  <p class="item-card__subtitle">Mechanics · Reference</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">formula</span>
+                <span class="tag">stats</span>
+                <span class="tag">builds</span>
+              </div>
+              <p class="item-card__desc">
+                The comprehensive damage formula, stat priorities, and six build archetypes.
+                Every spell, artifact, and stat page links into this guide.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="mechanic" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Reference</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="mechanics/stats.html">Stat Reference</a></h3>
+                  <p class="item-card__subtitle">Mechanics · 36 stats</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">stats</span>
+                <span class="tag">stacking</span>
+                <span class="tag">scaling</span>
+              </div>
+              <p class="item-card__desc">
+                All 36 in-game stats with calculation type, display format, and stacking rules.
+                Cross-linked from every page that touches a stat.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="guide" data-rarity="epic">
+              <span class="rarity-ribbon" data-rarity="epic">Curated</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="guides/artifact-priorities.html">Artifact Synergies</a></h3>
+                  <p class="item-card__subtitle">Guides · Pickup priority</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">tier list</span>
+                <span class="tag">synergy</span>
+              </div>
+              <p class="item-card__desc">
+                Which artifacts to grab first &mdash; ranked, with rationale and which heroes amplify them.
+              </p>
+            </article>
+
+            <article class="item-card" data-kind="guide" data-rarity="rare">
+              <span class="rarity-ribbon" data-rarity="rare">Curated</span>
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title"><a href="guides/spell-tier-list.html">Spell Tier List</a></h3>
+                  <p class="item-card__subtitle">Guides · Ranking</p>
+                </div>
+              </header>
+              <div class="item-card__badges">
+                <span class="tag">tier list</span>
+                <span class="tag">meta</span>
+              </div>
+              <p class="item-card__desc">
+                All 21 spells ranked SSS-to-C with notes on the infusions and improvements that
+                push each spell into its tier.
+              </p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- =================== WHAT'S IN THE WIKI =================== -->
+        <section id="overview" aria-labelledby="overview-title" style="margin-top: var(--sp-6);">
+          <h2 id="overview-title">What&rsquo;s in the wiki</h2>
+          <p class="prose">
+            Every entity in the current build of <em>The Spell Brigade</em> has its own page.
+            Each spell page covers base stats, element infusions, gameplay variants, and
+            improvements. Each artifact page shows the scaling stat and its synergistic
+            spells and heroes. Mechanics pages explain the underlying systems &mdash; the
+            damage formula, the element matchup matrix, stat stacking, curses, and rarity
+            tiers &mdash; and they are deeply cross-linked so you can dig from any spell to
+            the math and back.
+          </p>
+
+          <h3 style="margin-top: var(--sp-5);">Table of contents</h3>
+          <div class="grid grid-3">
+            <div>
+              <h4 style="margin-top:0;">Content</h4>
+              <ul>
+                <li><a href="spells/index.html">All 21 spells</a></li>
+                <li><a href="characters/index.html">All 15 heroes</a></li>
+                <li><a href="artifacts/index.html">All 20 artifacts</a></li>
+                <li><a href="enemies/index.html">All 36 enemies</a></li>
+                <li><a href="bosses/index.html">All 3 bosses</a></li>
+                <li><a href="worlds/index.html">All 4 worlds</a></li>
+                <li><a href="waves/index.html">All 32 waves</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin-top:0;">Mechanics</h4>
+              <ul>
+                <li><a href="mechanics/damage-system.html">Damage calculation</a></li>
+                <li><a href="mechanics/elements.html">Elements (21 types)</a></li>
+                <li><a href="mechanics/element-matrix.html">Element matrix</a></li>
+                <li><a href="mechanics/stats.html">Stats (36)</a></li>
+                <li><a href="mechanics/rarity.html">Rarity tiers</a></li>
+                <li><a href="mechanics/curses.html">Curses (7)</a></li>
+                <li><a href="mechanics/upgrades.html">Upgrades (120 levels)</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="margin-top:0;">Guides</h4>
+              <ul>
+                <li><a href="guides/index.html">New player primer</a></li>
+                <li><a href="guides/index.html">Co-op roles</a></li>
+                <li><a href="guides/damage-optimization.html">Fire burst build</a></li>
+                <li><a href="guides/damage-optimization.html">Ice control build</a></li>
+                <li><a href="guides/damage-optimization.html">Lightning chain build</a></li>
+                <li><a href="guides/best-spells-per-hero.html">Best spells per hero</a></li>
+                <li><a href="bosses/index.html">Boss kill order</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- =================== METHODOLOGY NOTE =================== -->
+        <section id="methodology" aria-labelledby="methodology-title" style="margin-top: var(--sp-6);">
+          <h2 id="methodology-title">Methodology</h2>
+          <aside class="callout" data-callout="note" role="note">
+            <p>
+              All data on this wiki was extracted from the game&rsquo;s shipped files
+              (Unity IL2CPP build) using <strong>AssetRipper</strong> and
+              <strong>Il2CppDumper</strong>. The wiki is <strong>not affiliated</strong>
+              with or endorsed by the developer. Content is <strong>text-only</strong>
+              &mdash; no game art, audio, or logos &mdash; to stay on the safe side of
+              copyright. Localized strings (item names, flavor text) are shown as Unity
+              localization keys (e.g. <code>SpellName_Arrow</code>) when the strings
+              themselves could not be unpacked from the compressed addressable bundles.
+            </p>
+            <p style="margin-bottom:0;">
+              Snapshot of build <code>d121863287924117b1157d5f5d667b78</code>.
+              See <a href="about.html">About</a> for the full source &amp; methodology
+              breakdown.
+            </p>
+          </aside>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, fan-built reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="spells/index.html">Spells</a></li>
+        <li><a href="characters/index.html">Heroes</a></li>
+        <li><a href="artifacts/index.html">Artifacts</a></li>
+        <li><a href="enemies/index.html">Enemies</a></li>
+        <li><a href="worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="mechanics/index.html">Game mechanics</a></li>
+        <li><a href="challenges/index.html">Challenges</a></li>
+        <li><a href="about.html">About this wiki</a></li>
+        <li><a href="styleguide.html">Visual styleguide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;·&nbsp; Data extracted from build <code>d121863287924117b1157d5f5d667b78</code>.
+  </div>
+</footer>
+
+<script src="js/wiki.js" defer></script>
+</body>
+</html>

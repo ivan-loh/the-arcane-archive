@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Tier list of all 21 spells in The Spell Brigade with reasoning grounded in the damage formula.">
+  <title>Spell Tier List &mdash; The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Heroes</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../mechanics/index.html">Mechanics</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Guides nav">
+      <h2 class="sidebar__title">Guides</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">All guides</a></li>
+        <li><a href="damage-optimization.html">Damage optimization</a></li>
+        <li><a aria-current="page" href="spell-tier-list.html">Spell tier list</a></li>
+        <li><a href="artifact-priorities.html">Artifact priorities</a></li>
+        <li><a href="element-pairing.html">Element pairing</a></li>
+      </ul>
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#tiers">The tier list</a></li>
+        <li><a href="#details">Per-spell notes</a></li>
+        <li><a href="#dps-table">Baseline DPS table</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="index.html">Guides</a></li>
+          <li aria-current="page">Spell Tier List</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section class="stack">
+          <h1>Spell tier list &mdash; all 21 spells</h1>
+          <p class="prose u-muted">
+            A ranked opinion of every offensive spell in the game, based on
+            the formula and stat-priority analysis from the
+            <a href="damage-optimization.html">Damage Optimization</a> guide.
+            <strong>Take this as one analyst&rsquo;s reading of the data</strong>
+            &mdash; the game has so much synergy depth that any spell can
+            win a run with the right combination. The list ranks <em>how
+            easily a spell reaches its ceiling</em>, not its hard maximum.
+          </p>
+
+          <aside class="callout" data-kind="note">
+            <span class="callout__title">How to read this</span>
+            <p>
+              <strong>SSS</strong>: pick instantly, build around it.
+              <strong>S</strong>: strong in 2+ archetypes, no major weaknesses.
+              <strong>A</strong>: shines in one archetype, viable in others.
+              <strong>B</strong>: archetype-locked, weaker baseline.
+              <strong>C</strong>: needs hero / artifact help to scale.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== METHODOLOGY ================== -->
+        <section id="methodology">
+          <h2>Methodology</h2>
+          <p class="prose">
+            Each spell is scored on three axes derived from its base stats
+            and variant list:
+          </p>
+          <ol class="prose">
+            <li><strong>Throughput</strong> &mdash; raw DPS at base
+              (<code>Damage &times; FireRate &times; Projectiles</code>),
+              before any improvement. See the
+              <a href="#dps-table">baseline DPS table</a> at the bottom.</li>
+            <li><strong>Scaling</strong> &mdash; how much the spell&rsquo;s
+              own variants multiply its damage. <code>ExtraProjectile</code>,
+              <code>IncreaseSizeAndDamageWithEveryAttack</code>, and
+              <code>BellZoneGivesArmor</code> all push a spell up a tier.</li>
+            <li><strong>Archetype fit</strong> &mdash; does it cleanly slot
+              into one of the six archetypes from the
+              <a href="damage-optimization.html#archetypes">optimization
+              guide</a>? Versatility matters; one-archetype spells get
+              docked.</li>
+          </ol>
+        </section>
+
+        <!-- ================== TIERS ================== -->
+        <section id="tiers">
+          <h2>The tier list</h2>
+
+          <div class="tier-list">
+
+            <div class="tier-row" data-tier="SSS">
+              <div class="tier-row__label">SSS</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../spells/slash.html">Slash</a>
+                <a class="tier-chip" href="../spells/shotgun.html">Shotgun</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="S">
+              <div class="tier-row__label">S</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../spells/falling-star.html">FallingStar</a>
+                <a class="tier-chip" href="../spells/bell.html">Bell</a>
+                <a class="tier-chip" href="../spells/orb.html">Orb</a>
+                <a class="tier-chip" href="../spells/beam.html">Beam</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="A">
+              <div class="tier-row__label">A</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../spells/smg.html">Smg</a>
+                <a class="tier-chip" href="../spells/meteor.html">Meteor</a>
+                <a class="tier-chip" href="../spells/arrow.html">Arrow</a>
+                <a class="tier-chip" href="../spells/plant.html">Plant</a>
+                <a class="tier-chip" href="../spells/rifle.html">Rifle</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="B">
+              <div class="tier-row__label">B</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../spells/trail.html">Trail</a>
+                <a class="tier-chip" href="../spells/proximity.html">Proximity</a>
+                <a class="tier-chip" href="../spells/boomerang.html">Boomerang</a>
+                <a class="tier-chip" href="../spells/mine.html">Mine</a>
+                <a class="tier-chip" href="../spells/bomb-launcher.html">BombLauncher</a>
+              </div>
+            </div>
+
+            <div class="tier-row" data-tier="C">
+              <div class="tier-row__label">C</div>
+              <div class="tier-row__items">
+                <a class="tier-chip" href="../spells/laser.html">Laser</a>
+                <a class="tier-chip" href="../spells/book.html">Book</a>
+                <a class="tier-chip" href="../spells/summon.html">Summon</a>
+                <a class="tier-chip" href="../spells/energy-zone.html">EnergyZone</a>
+                <a class="tier-chip" href="../spells/fence.html">Fence</a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================== DETAILS ================== -->
+        <section id="details">
+          <h2>Per-spell notes</h2>
+
+          <h3>SSS tier</h3>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/slash.html">Slash</a> &mdash; SSS</h3>
+                <p class="item-card__subtitle">Melee swing &middot; AOE+Crit hybrid</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              <strong>296 base damage</strong>, the second-highest in the
+              game, on a 3m frontal cone hitting multiple enemies per swing.
+              Carries every archetype: Crit Stacker (huge per-hit base),
+              Tank-DPS (<a href="../characters/vampire-mage.html">Vampire
+              Mage</a> lifesteal), Swarm Clearer (3m AoE). The
+              <code>IncreaseSizeWhenStandingStill</code> variant turns it
+              into a screen-wide damage zone; <code>ShootBackwards</code>
+              doubles hit-uptime. Base DPS 222.
+            </p>
+            <p>Ceiling: highest sustained damage in the game when running
+            Vampire Mage + <a href="../artifacts/index.html#artifact-13">#13 DmgPerArmor</a>.</p>
+          </article>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/shotgun.html">Shotgun</a> &mdash; SSS</h3>
+                <p class="item-card__subtitle">Projectile burst &middot; ExtraProjectile abuser</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              <strong>300 base damage &times; 3 projectiles</strong> is
+              gigantic, and the <code>ExtraProjectile</code> variant moves
+              it to 4 (<em>+33% damage</em>) &mdash; far better than any
+              <em>+%Damage</em> pick (see <a href="damage-optimization.html#example-shotgun">Example
+              D</a>). The <code>Burst</code> variant ramps cadence on
+              standing-still. Pairs naturally with
+              <a href="../characters/campanelli.html">Campanelli</a>&rsquo;s
+              kit. Base DPS 145, post-variant 194.
+            </p>
+          </article>
+
+          <h3>S tier</h3>
+
+          <article class="item-card" data-element="ice">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/falling-star.html">FallingStar</a> &mdash; S</h3>
+                <p class="item-card__subtitle">Sky-drop AoE</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              201 base, 0.87 FireRate, <strong>15m base size</strong> &mdash;
+              the biggest persistent AoE footprint in the game. Hits every
+              enemy in a giant circle on impact. <code>ExtraProjectile</code>
+              and <code>LeaveDamageAreaAtEnd</code> variants make it an
+              elite-deleter. The natural vehicle for
+              <a href="../characters/star-mage.html">Star Mage</a>&rsquo;s
+              <em>+15</em> ElementStrength. Base DPS 175.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="lightning">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/bell.html">Bell</a> &mdash; S</h3>
+                <p class="item-card__subtitle">Persistent zone &middot; armor synergy</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              142 damage applied over a 6.5s zone &mdash; raw DPS understates
+              the spell because it ticks every overlapping enemy. The
+              <code>BellZoneGivesArmor</code> variant is a hidden gem: it
+              feeds <a href="../artifacts/index.html#artifact-13">#13 IncreaseDamagePerArmor</a>
+              <em>while you stand in your own Bell</em>. With
+              <code>IncreaseInSize</code> + Size improvements you cover most
+              of the screen. Base "DPS" 35 dramatically understates real
+              throughput.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="lightning">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/orb.html">Orb</a> &mdash; S</h3>
+                <p class="item-card__subtitle">Auto-aim flak</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              170 damage &times; 1.15 FireRate = 196 base DPS, with an
+              auto-targeting projectile that needs zero player input. Slots
+              cleanly into Element Specialist (Reginald&rsquo;s starter, and
+              <a href="../characters/reginald.html">Reginald</a>&rsquo;s
+              <em>+2 Luck / +10 DropChance</em> stacks shop quality fast).
+            </p>
+          </article>
+
+          <article class="item-card" data-element="acid">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/beam.html">Beam</a> &mdash; S</h3>
+                <p class="item-card__subtitle">Sustained line &middot; boss killer</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              104 damage at 1.9 ticks/sec sustained on a 7.5m line. Eats
+              bosses (see <a href="damage-optimization.html#example-beam-squid">Example
+              C</a>). <code>ExtraProjectile</code> takes you from 1 to 2
+              beams &mdash; the largest multiplicative jump from a single
+              variant in the game (<em>+100%</em> throughput). Base DPS 198.
+            </p>
+          </article>
+
+          <h3>A tier</h3>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/smg.html">Smg</a> &mdash; A</h3>
+                <p class="item-card__subtitle">High cadence &middot; 4 base projectiles</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              118 &times; 1.455 &times; 4 = 686 raw projectile DPS. Sounds
+              like SSS, but the projectiles are small (0.95 size) and
+              short-lived (0.92s LifeTime); enemies at range eat very
+              little. Excellent on
+              <a href="../characters/hatty.html">Hatty</a> for sheer
+              throughput, weaker on heroes that can&rsquo;t close range.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/meteor.html">Meteor</a> &mdash; A</h3>
+                <p class="item-card__subtitle">Multi-projectile AoE</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              4 base projectiles, <code>ExtraProjectile</code> &rarr; 5,
+              <code>ExtraLine</code> for additional spawn patterns,
+              <code>LeaveDamageAreaAtEnd</code> for residual zones. 61 base
+              damage feels low until you realize you&rsquo;re hitting 5+
+              spots per cast. A consistent Swarm-Clearer pick.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="ice">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/arrow.html">Arrow</a> &mdash; A</h3>
+                <p class="item-card__subtitle">Heavy single-projectile</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              165 base, slow cadence buffed by <em>+12% FireRate</em>
+              starting modifier. Excellent vehicle for crit stacking
+              and infusions. <code>ExplodeAtEnd</code> variant makes it
+              AoE on terminal range, which pairs beautifully with
+              <a href="../artifacts/index.html#artifact-15">#15 ElementalDmg/Infusion</a>.
+              See <a href="damage-optimization.html#example-arrow">Example A</a>.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="acid">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/plant.html">Plant</a> &mdash; A</h3>
+                <p class="item-card__subtitle">DamageTickRate persistent zone</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              118 damage, 5s LifeTime, ticks at 1.35s by default. The
+              <code>IncreaseSizeAndDamageWithEveryAttack</code> variant is
+              one of the few in-game compounding mechanics &mdash; size
+              ramps over the spell&rsquo;s lifetime, then resets. Strong
+              swarm-clear, weak boss damage (single-target dilution).
+              <a href="../characters/plant-mage.html">Plant Mage</a> is the
+              natural pairing.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/rifle.html">Rifle</a> &mdash; A</h3>
+                <p class="item-card__subtitle">Single-target boss killer</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              140 base, low cadence, dedicated boss-killer with the
+              <code>AimAtHighestHP</code> variant locking onto bosses.
+              Lower wave-clear potential is why it&rsquo;s A and not S.
+              <a href="../characters/wizard-king.html">Wizard King</a>&rsquo;s
+              <em>+10 CritChance</em> innate is purpose-built for this spell.
+            </p>
+          </article>
+
+          <h3>B tier</h3>
+
+          <article class="item-card" data-element="lightning">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/trail.html">Trail</a> &mdash; B</h3>
+                <p class="item-card__subtitle">Movement-locked AoE</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              33.8 damage at 2.0/sec is the lowest base-DPS profile in the
+              game, but it&rsquo;s a <em>per-step</em> spell &mdash; the
+              trail you leave damages anything in its path. The
+              <code>TrailSpawnsGuaranteedCrits</code> variant elevates it
+              significantly for Crit Stackers. Hard-locked to
+              <a href="../characters/key-mage.html">Key Mage</a>&rsquo;s
+              kiting style; otherwise just OK.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="dark">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/proximity.html">Proximity</a> &mdash; B</h3>
+                <p class="item-card__subtitle">Aura around the player</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              50.7 damage &times; 1.8 FireRate sounds like A-tier numerically,
+              but Proximity requires enemies to be right next to you, which
+              is dangerous and limits use to specific heroes (notably
+              <a href="../characters/sun-mage.html">Sun Mage</a> with
+              <em>+7 Dodge</em>, who treats it as a defensive aura).
+            </p>
+          </article>
+
+          <article class="item-card" data-element="lightning">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/boomerang.html">Boomerang</a> &mdash; B</h3>
+                <p class="item-card__subtitle">Apex-crit gimmick</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              57 damage, two-way hit window. The
+              <code>BoomerangCriticalDamageOnApex</code> variant is the
+              only reason this is B and not C &mdash; it functionally
+              guarantees crits on the far point of every throw, turning a
+              mediocre spell into a fine Crit-Stacker vehicle. Without
+              that variant: skip.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="acid">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/mine.html">Mine</a> &mdash; B</h3>
+                <p class="item-card__subtitle">Stationary trap</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              134 damage on a 1.7m radius, 0.6/sec deploy rate. Trap spells
+              are awkward because enemies have to walk into them &mdash;
+              works in chokepoints, fails in open arenas. Solid filler when
+              your other spells handle clear.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="fire">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/bomb-launcher.html">BombLauncher</a> &mdash; B</h3>
+                <p class="item-card__subtitle">Arc-shot AoE</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              149 base, 0.275/sec, 41 raw DPS but a sizeable explosion radius.
+              Awkward aim (arc trajectory) and slow cadence keep it out of
+              A; in the right hands it&rsquo;s a respectable elite-clearer.
+            </p>
+          </article>
+
+          <h3>C tier</h3>
+
+          <article class="item-card" data-element="lightning">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/laser.html">Laser</a> &mdash; C</h3>
+                <p class="item-card__subtitle">Slow persistent beam</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              128 damage at 0.196/sec = 25 raw DPS. Lower throughput than
+              <a href="../spells/beam.html">Beam</a> with similar geometry
+              and no comparable scaling variants. Skip when Beam is
+              available.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="ice">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/book.html">Book</a> &mdash; C</h3>
+                <p class="item-card__subtitle">Floating projectile</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              140 damage at 0.2/sec = 28 DPS. Tiny 0.9m size, hard to hit
+              moving enemies. Best as a Crit-Stacker secondary with the
+              right hero, otherwise weak.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="dark">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/summon.html">Summon</a> &mdash; C</h3>
+                <p class="item-card__subtitle">AI-controlled minion</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              107 damage at 0.21/sec = 23 DPS, plus the inherent AI
+              unpredictability of summon targeting. Functional on
+              <a href="../characters/flute-mage.html">Flute Mage</a>
+              (starter spell), forgettable elsewhere.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="acid">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/energy-zone.html">EnergyZone</a> &mdash; C</h3>
+                <p class="item-card__subtitle">Static damage zone</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              40 damage, 2m base size, 1.5s LifeTime &mdash; 10 raw DPS
+              before tick-rate stacking. Needs enormous Size investment
+              to function; that&rsquo;s in tension with the
+              <a href="damage-optimization.html#log-curve">log curve</a>.
+              Useable as a Swarm Clearer accent, never the carry.
+            </p>
+          </article>
+
+          <article class="item-card" data-element="ice">
+            <header class="item-card__header">
+              <div>
+                <h3 class="item-card__title"><a href="../spells/fence.html">Fence</a> &mdash; C</h3>
+                <p class="item-card__subtitle">Wall placement</p>
+              </div>
+            </header>
+            <p class="item-card__desc">
+              47 damage at 0.08/sec = 3.76 raw DPS &mdash; the lowest
+              throughput in the entire game by a wide margin. Fence is a
+              <em>utility</em> spell (blocks enemy paths) more than a damage
+              spell; rated on damage alone it&rsquo;s a clear C, but in
+              co-op crowd-control roles it has its place.
+            </p>
+          </article>
+        </section>
+
+        <!-- ================== DPS TABLE ================== -->
+        <section id="dps-table">
+          <h2>Baseline DPS reference</h2>
+          <p class="prose">
+            Raw <code>Damage &times; FireRate &times; Projectiles</code> at
+            level 1, no improvements. <strong>This table is misleading on
+            purpose</strong> &mdash; persistent zones (Bell, Plant,
+            EnergyZone), multi-hit AoE (Slash, Trail, FallingStar), and
+            DamageTickRate spells all <em>vastly</em> outperform their raw
+            DPS number in practice. Use it as a starting reference, not a
+            ranking.
+          </p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>21 spells, sorted by raw baseline DPS</caption>
+              <thead>
+                <tr>
+                  <th data-sort="string">Spell</th>
+                  <th data-sort="number" class="num">Damage</th>
+                  <th data-sort="number" class="num">FireRate</th>
+                  <th data-sort="number" class="num">Proj</th>
+                  <th data-sort="number" class="num">Raw DPS</th>
+                  <th data-sort="string">Tier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><a href="../spells/smg.html">Smg</a></td><td class="num">118</td><td class="num">1.455</td><td class="num">4</td><td class="num">686.8</td><td>A</td></tr>
+                <tr><td><a href="../spells/shotgun.html">Shotgun</a></td><td class="num">300</td><td class="num">0.485</td><td class="num">3</td><td class="num">436.5</td><td>SSS</td></tr>
+                <tr><td><a href="../spells/slash.html">Slash</a></td><td class="num">296</td><td class="num">0.750</td><td class="num">1</td><td class="num">222.0</td><td>SSS</td></tr>
+                <tr><td><a href="../spells/beam.html">Beam</a></td><td class="num">104</td><td class="num">1.900</td><td class="num">1</td><td class="num">197.6</td><td>S</td></tr>
+                <tr><td><a href="../spells/orb.html">Orb</a></td><td class="num">170</td><td class="num">1.150</td><td class="num">1</td><td class="num">195.6</td><td>S</td></tr>
+                <tr><td><a href="../spells/falling-star.html">FallingStar</a></td><td class="num">201</td><td class="num">0.873</td><td class="num">1</td><td class="num">175.5</td><td>S</td></tr>
+                <tr><td><a href="../spells/meteor.html">Meteor</a></td><td class="num">61</td><td class="num">0.534</td><td class="num">4</td><td class="num">130.2</td><td>A</td></tr>
+                <tr><td><a href="../spells/proximity.html">Proximity</a></td><td class="num">50.7</td><td class="num">1.798</td><td class="num">1</td><td class="num">91.2</td><td>B</td></tr>
+                <tr><td><a href="../spells/mine.html">Mine</a></td><td class="num">134</td><td class="num">0.600</td><td class="num">1</td><td class="num">80.4</td><td>B</td></tr>
+                <tr><td><a href="../spells/trail.html">Trail</a></td><td class="num">33.8</td><td class="num">2.000</td><td class="num">1</td><td class="num">67.6</td><td>B</td></tr>
+                <tr><td><a href="../spells/arrow.html">Arrow</a></td><td class="num">165</td><td class="num">0.404</td><td class="num">1</td><td class="num">66.6</td><td>A</td></tr>
+                <tr><td><a href="../spells/rifle.html">Rifle</a></td><td class="num">140</td><td class="num">0.441</td><td class="num">1</td><td class="num">61.7</td><td>A</td></tr>
+                <tr><td><a href="../spells/bomb-launcher.html">BombLauncher</a></td><td class="num">149</td><td class="num">0.275</td><td class="num">1</td><td class="num">41.0</td><td>B</td></tr>
+                <tr><td><a href="../spells/bell.html">Bell</a></td><td class="num">142</td><td class="num">0.250</td><td class="num">1</td><td class="num">35.5</td><td>S</td></tr>
+                <tr><td><a href="../spells/plant.html">Plant</a></td><td class="num">118.5</td><td class="num">0.267</td><td class="num">1</td><td class="num">31.6</td><td>A</td></tr>
+                <tr><td><a href="../spells/boomerang.html">Boomerang</a></td><td class="num">57</td><td class="num">0.530</td><td class="num">1</td><td class="num">30.2</td><td>B</td></tr>
+                <tr><td><a href="../spells/book.html">Book</a></td><td class="num">140</td><td class="num">0.200</td><td class="num">1</td><td class="num">28.0</td><td>C</td></tr>
+                <tr><td><a href="../spells/laser.html">Laser</a></td><td class="num">128</td><td class="num">0.196</td><td class="num">1</td><td class="num">25.1</td><td>C</td></tr>
+                <tr><td><a href="../spells/summon.html">Summon</a></td><td class="num">107.2</td><td class="num">0.213</td><td class="num">1</td><td class="num">22.8</td><td>C</td></tr>
+                <tr><td><a href="../spells/energy-zone.html">EnergyZone</a></td><td class="num">40</td><td class="num">0.250</td><td class="num">1</td><td class="num">10.0</td><td>C</td></tr>
+                <tr><td><a href="../spells/fence.html">Fence</a></td><td class="num">47</td><td class="num">0.080</td><td class="num">1</td><td class="num">3.76</td><td>C</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="prose">
+            Notice the disconnect: Smg has the highest raw DPS but is only
+            A-tier because its 0.95m projectiles and 0.92s lifetime mean
+            most of those numerical hits never connect. Bell&rsquo;s
+            35.5 raw DPS is the most misleading entry in the table; in
+            practice it&rsquo;s an S-tier wave-clear spell because every
+            tick hits every overlapping enemy in a large persistent zone.
+          </p>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="damage-optimization.html">
+            <strong>Damage Optimization &rarr;</strong>
+            The formula and stat-priority math that grounds this list.
+          </a>
+          <a class="see-also__link" href="artifact-priorities.html">
+            <strong>Artifact priorities &rarr;</strong>
+            Which artifacts to pick once you&rsquo;ve chosen your spell.
+          </a>
+          <a class="see-also__link" href="element-pairing.html">
+            <strong>Element pairing &rarr;</strong>
+            How infusions reshuffle these rankings.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">Tier list is analytic opinion grounded in extracted game data.</p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="index.html">Guides hub</a></li>
+        <li><a href="../mechanics/index.html">Mechanics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

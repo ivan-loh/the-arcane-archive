@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The Spell Brigade — complete reference for the 13 hero-agnostic Character Improvements offered by the in-run store, with per-rarity values, stat caps, and a recommended pick order.">
+  <title>Character Improvements — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html" aria-label="The Arcane Archive home">
+      <span class="brand__sigil" aria-hidden="true">&#10038;</span>
+      <span>The Spell Brigade</span>
+      <span class="brand__sub">Wiki</span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" aria-current="page" href="index.html">Mechanics</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">&#8981;</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search&hellip;" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">&equiv;</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../characters/index.html">Characters</a>
+  <a class="mobile-nav__link" href="../artifacts/index.html">Artifacts</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="On this page">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#intro">Overview</a></li>
+        <li><a href="#vs-artifacts">vs. Artifacts &amp; Variants</a></li>
+        <li><a href="#table">Full upgrade table</a></li>
+        <li><a href="#details">Per-upgrade detail</a></li>
+        <li><a href="#priority">Recommended pick order</a></li>
+        <li><a href="#interactions">Interactions &amp; caps</a></li>
+        <li><a href="#cheat-sheet">Cheat sheet</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="stats.html">Stats reference</a></li>
+        <li><a href="rarity.html">Rarity tiers</a></li>
+        <li><a href="upgrades.html">Spell upgrades</a></li>
+        <li><a href="damage-system.html">Damage system</a></li>
+        <li><a href="critical-hits.html">Critical hits</a></li>
+        <li><a href="armor-dodge.html">Armor &amp; Dodge</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Character Improvements</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <!-- ================== INTRO ================== -->
+        <section id="intro" class="stack">
+          <h1>Character Improvements &mdash; persistent stat upgrades</h1>
+          <p class="prose u-muted">
+            The thirteen <em>CharacterImprovement</em> store items are the
+            most-frequent thing you&rsquo;ll click in any run. They are
+            <strong>hero-agnostic</strong> &mdash; every wizard sees the same
+            pool, the bonuses apply on top of whichever character you
+            selected, and they stack with starting modifiers, artifacts, and
+            spell-specific rolls.
+          </p>
+
+          <aside class="callout" data-kind="info">
+            <span class="callout__title">What "persistent" means here</span>
+            <p>
+              Improvements are persistent <em>within a single run</em>: once
+              picked from the in-run store, the stat bonus lasts until the
+              run ends. They are <strong>not</strong> a meta-progression
+              upgrade saved between runs (those live in the unlock /
+              challenge system). Treat them as the rolling shop choices that
+              shape your build from wave to wave.
+            </p>
+          </aside>
+
+          <p class="prose">
+            All values below are sourced from
+            <code>data/characters.json</code> &rarr;
+            <code>global_character_improvements</code>, which mirrors the
+            <code>storeitems/characterimprovements/</code> resource folder in
+            the game&rsquo;s assets. The pool is intentionally tight: most
+            picks land in one of four obvious S/A-tier improvements, and the
+            difficulty of the run is the only real reason to deviate.
+          </p>
+        </section>
+
+        <!-- ================== VS ARTIFACTS ================== -->
+        <section id="vs-artifacts">
+          <h2>1. Improvements vs. Artifacts vs. Spell upgrades</h2>
+          <p class="prose">
+            Three different shop categories all look similar at a glance.
+            Knowing which is which prevents you from over-picking one rail:
+          </p>
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>The three in-run upgrade rails</caption>
+              <thead>
+                <tr>
+                  <th>Rail</th>
+                  <th>Source data</th>
+                  <th>Applies to</th>
+                  <th>Stackable?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Character Improvement</strong></td>
+                  <td><code>storeitems/characterimprovements/</code></td>
+                  <td>Player&rsquo;s own stat block</td>
+                  <td>Yes &mdash; multiple picks of same stat allowed (subject to per-stat cap, see <a href="#interactions">&sect;5</a>)</td>
+                </tr>
+                <tr>
+                  <td><a href="../artifacts/index.html">Artifact</a></td>
+                  <td><code>artifacts/</code></td>
+                  <td>Unique conditional / triggered effect</td>
+                  <td>Each artifact unique; never duplicates</td>
+                </tr>
+                <tr>
+                  <td><a href="upgrades.html">Spell Upgrade</a></td>
+                  <td><code>spells/&lt;Spell&gt;/improvements/</code></td>
+                  <td>One specific spell&rsquo;s stat or variant</td>
+                  <td>Yes &mdash; spell stat improvements stack, variants do not</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="prose">
+            Character improvements are the <em>baseline</em> rail &mdash; they
+            buff <strong>every</strong> spell you have equipped at once (when
+            the buffed stat applies to that spell). A
+            <code>+15% Damage</code> improvement buffs your Shotgun
+            <em>and</em> your Boomerang <em>and</em> your Trail. A
+            spell-specific <code>+25% Damage</code> roll buffs only the spell
+            it&rsquo;s attached to. For multi-spell builds this matters a lot.
+          </p>
+        </section>
+
+        <!-- ================== FULL TABLE ================== -->
+        <section id="table">
+          <h2>2. Full improvement table</h2>
+          <p class="prose">
+            All thirteen improvements, ordered alphabetically. Values are the
+            additive bonus applied to your stat at each rarity (the same
+            number that appears on the store card). The "Cap" column is the
+            <code>stat_limit_for_offer</code> threshold &mdash; once your
+            stat reaches that value, the improvement stops being offered.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table" data-sortable>
+              <caption>The thirteen global Character Improvements</caption>
+              <thead>
+                <tr>
+                  <th>Improvement</th>
+                  <th>Stat</th>
+                  <th class="num">Common</th>
+                  <th class="num">Rare</th>
+                  <th class="num">Epic</th>
+                  <th class="num">Legendary</th>
+                  <th class="num">Cap</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#imp-armor">CharacterArmor</a></td>
+                  <td><a href="armor-dodge.html">Armor</a></td>
+                  <td class="num">16</td>
+                  <td class="num">26</td>
+                  <td class="num">36</td>
+                  <td class="num">50</td>
+                  <td class="num">&mdash;</td>
+                  <td>Flat damage subtraction; defence rail</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-crit-chance">CharacterCriticalChance</a></td>
+                  <td><a href="critical-hits.html">CriticalChance</a></td>
+                  <td class="num">+4</td>
+                  <td class="num">+6</td>
+                  <td class="num">+9</td>
+                  <td class="num">+12</td>
+                  <td class="num">80</td>
+                  <td>Hard offer-cap at 80% chance</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-crit-damage">CharacterCriticalDamage</a></td>
+                  <td><a href="critical-hits.html">CriticalDamage</a></td>
+                  <td class="num">+10</td>
+                  <td class="num">+20</td>
+                  <td class="num">+35</td>
+                  <td class="num">+50</td>
+                  <td class="num">&mdash;</td>
+                  <td>No cap; pair with CritChance</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-damage">CharacterDamage</a></td>
+                  <td>Damage</td>
+                  <td class="num">+5%</td>
+                  <td class="num">+10%</td>
+                  <td class="num">+15%</td>
+                  <td class="num">+20%</td>
+                  <td class="num">&mdash;</td>
+                  <td>S-tier; goes into the additive Damage bracket</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-dodge">CharacterDodge</a></td>
+                  <td><a href="armor-dodge.html">Dodge</a></td>
+                  <td class="num">+4</td>
+                  <td class="num">+6</td>
+                  <td class="num">+9</td>
+                  <td class="num">+12</td>
+                  <td class="num">75</td>
+                  <td>Hard offer-cap at 75% dodge</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-firerate">CharacterFireRate</a></td>
+                  <td>FireRate</td>
+                  <td class="num">+6%</td>
+                  <td class="num">+9%</td>
+                  <td class="num">+12%</td>
+                  <td class="num">+18%</td>
+                  <td class="num">&mdash;</td>
+                  <td>S-tier; second multiplier on DPS</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-hpregen">CharacterHealthRegeneration</a></td>
+                  <td>HealthRegen</td>
+                  <td class="num">+1</td>
+                  <td class="num">+2</td>
+                  <td class="num">+3</td>
+                  <td class="num">+4</td>
+                  <td class="num">&mdash;</td>
+                  <td>HP / sec; not offered in demo</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-luck">CharacterLuck</a></td>
+                  <td>Luck</td>
+                  <td class="num">+2</td>
+                  <td class="num">+4</td>
+                  <td class="num">+6</td>
+                  <td class="num">+8</td>
+                  <td class="num">25</td>
+                  <td>Caps low; take early, never late</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-maxhp">CharacterMaxHealth</a></td>
+                  <td>MaxHealth</td>
+                  <td class="num">+100</td>
+                  <td class="num">+200</td>
+                  <td class="num">+300</td>
+                  <td class="num">+400</td>
+                  <td class="num">&mdash;</td>
+                  <td>Largest absolute jumps in the pool</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-movespeed">CharacterMovementSpeed</a></td>
+                  <td>MovementSpeed</td>
+                  <td class="num">+8%</td>
+                  <td class="num">+12%</td>
+                  <td class="num">+18%</td>
+                  <td class="num">&mdash;<sup>&dagger;</sup></td>
+                  <td class="num">&mdash;</td>
+                  <td>Legendary tier value is 0 in data (likely retired)</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-pickup">CharacterPickUpRadius</a></td>
+                  <td>PickupRadius</td>
+                  <td class="num">+8%</td>
+                  <td class="num">+12%</td>
+                  <td class="num">+18%</td>
+                  <td class="num">+24%</td>
+                  <td class="num">&mdash;</td>
+                  <td>Quality of life; rarely build-defining</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-size">CharacterSize</a></td>
+                  <td>Size</td>
+                  <td class="num">0<sup>&dagger;</sup></td>
+                  <td class="num">+12%</td>
+                  <td class="num">+15%</td>
+                  <td class="num">+18%</td>
+                  <td class="num">&mdash;</td>
+                  <td>Common tier value is 0; effectively rare-and-up only</td>
+                </tr>
+                <tr>
+                  <td><a href="#imp-xp">CharacterXPGain</a></td>
+                  <td>XPGain</td>
+                  <td class="num">+7%</td>
+                  <td class="num">+12%</td>
+                  <td class="num">+17%</td>
+                  <td class="num">+21%</td>
+                  <td class="num">300</td>
+                  <td>Compounds the rest of your build by feeding more picks</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="prose u-muted">
+            <sup>&dagger;</sup> A zero value in
+            <code>values_by_rarity</code> means that rarity tier is
+            disabled / not offered for that improvement in the live build.
+            <code>CharacterSize</code> never appears at Common; the
+            Legendary tier of <code>CharacterMovementSpeed</code> is
+            unreachable.
+          </p>
+        </section>
+
+        <!-- ================== PER-UPGRADE DETAIL ================== -->
+        <section id="details">
+          <h2>3. Per-improvement detail</h2>
+          <p class="prose">
+            Each card lists the stat affected, the raw per-rarity values
+            from the asset dump, and a one-line "when to take" verdict.
+          </p>
+
+          <div class="grid grid-2 stack-lg">
+
+            <!-- DAMAGE -->
+            <article class="item-card" id="imp-damage" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterDamage</h3>
+                  <p class="item-card__subtitle">+% Damage to every spell</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Adds directly to the shared <em>Damage</em> bracket
+                (StatType&nbsp;0). Same additive pool as starting modifiers
+                and spell-specific damage rolls, so dilutes once stacked &mdash;
+                but always positive value.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +5%</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +10%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +15%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +20%</li>
+              </ul>
+              <p><strong>When to take:</strong> almost always among the top
+              two picks. Diminishing returns only matter once the bracket
+              passes ~150%.</p>
+            </article>
+
+            <!-- FIRERATE -->
+            <article class="item-card" id="imp-firerate" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterFireRate</h3>
+                  <p class="item-card__subtitle">+% shots per second</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Multiplies hit cadence linearly. Because FireRate is a
+                separate aggregate from Damage, the two combine
+                multiplicatively on final DPS &mdash; never skip the chance
+                to balance them.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +6%</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +9%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +12%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +18%</li>
+              </ul>
+              <p><strong>When to take:</strong> any time your existing
+              FireRate bracket is below your Damage bracket. See
+              <a href="../guides/damage-optimization.html#stat-priority">damage-optimization &sect;3</a>.</p>
+            </article>
+
+            <!-- CRITICAL CHANCE -->
+            <article class="item-card" id="imp-crit-chance" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterCriticalChance</h3>
+                  <p class="item-card__subtitle">+pp chance to crit</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Flat percentage points. Default is 10; the offer-cap is 80,
+                meaning the improvement disappears from the pool once you
+                hit 80. Pair with CriticalDamage.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +4</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +6</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +9</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +12</li>
+              </ul>
+              <p><strong>When to take:</strong> until you cross ~40% chance,
+              picking CritChance over CritDamage is correct at default 150
+              CritDamage. See the breakeven formula in
+              <a href="../guides/damage-optimization.html#stat-priority">damage-optimization</a>.</p>
+            </article>
+
+            <!-- CRITICAL DAMAGE -->
+            <article class="item-card" id="imp-crit-damage" data-element="fire">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterCriticalDamage</h3>
+                  <p class="item-card__subtitle">+ to crit damage multiplier</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Flat addition to <em>CriticalDamage</em>, which is itself a
+                percentage (default 150). +50 takes you from 1+1.5=2.5&times;
+                crits to 1+2.0=3.0&times; crits.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +10</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +20</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +35</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +50</li>
+              </ul>
+              <p><strong>When to take:</strong> only after CritChance is
+              above ~40%, or as a Legendary opportunistic pick.</p>
+            </article>
+
+            <!-- MAX HEALTH -->
+            <article class="item-card" id="imp-maxhp" data-element="neutral">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterMaxHealth</h3>
+                  <p class="item-card__subtitle">+ flat HP pool</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                The largest absolute numbers in the pool. Default MaxHealth
+                is 600; a single Legendary takes you to 1000. Critical for
+                low-HP heroes like <a href="../characters/hatty.html">Hatty</a>
+                (starts at 300).
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +100</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +200</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +300</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +400</li>
+              </ul>
+              <p><strong>When to take:</strong> top-pick for first 1&ndash;2
+              shops, especially on Hard+ difficulties. Skip if you&rsquo;re
+              running a Glass-Cannon build (low-HP artifacts reward staying
+              fragile).</p>
+            </article>
+
+            <!-- MOVE SPEED -->
+            <article class="item-card" id="imp-movespeed" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterMovementSpeed</h3>
+                  <p class="item-card__subtitle">+% walk speed</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Survivability scaling. Default 3.6 units/sec; each pick is
+                additive percentage. <strong>Legendary tier ships disabled</strong>
+                (value 0 in the data), so the practical max-tier pick is the
+                Epic +18%.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +8%</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +12%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +18%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> &mdash; (disabled)</li>
+              </ul>
+              <p><strong>When to take:</strong> first 2&ndash;3 shops of any
+              run; movement skill carries everything else. Pair with
+              <a href="../mechanics/curses.html">curse</a>-heavy challenges
+              that punish staying still.</p>
+            </article>
+
+            <!-- ARMOR -->
+            <article class="item-card" id="imp-armor" data-element="neutral">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterArmor</h3>
+                  <p class="item-card__subtitle">+ flat damage subtraction</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Subtracts the listed value from every incoming hit (clamped
+                at zero). Synergises hard with the
+                <a href="../artifacts/index.html#artifact-13">IncreaseDamagePerArmor</a>
+                artifact, which turns Armor into offence.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +16</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +26</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +36</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +50</li>
+              </ul>
+              <p><strong>When to take:</strong> mandatory if you have the
+              Damage-per-Armor artifact; otherwise pick once for the
+              defensive baseline and move on.</p>
+            </article>
+
+            <!-- DODGE -->
+            <article class="item-card" id="imp-dodge" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterDodge</h3>
+                  <p class="item-card__subtitle">+% chance to ignore a hit</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                On each incoming hit, rolls against your Dodge stat;
+                successes negate the hit entirely. Hard offer-cap at 75
+                &mdash; the pool stops handing it to you past that.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +4</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +6</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +9</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +12</li>
+              </ul>
+              <p><strong>When to take:</strong> excellent on
+              <a href="../characters/sun-mage.html">Sun Mage</a> (starts +7);
+              good general-purpose defence anywhere else. Each point is
+              worth more than 1% damage reduction because it dodges DoT
+              triggers as well.</p>
+            </article>
+
+            <!-- HP REGEN -->
+            <article class="item-card" id="imp-hpregen" data-element="plant">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterHealthRegeneration</h3>
+                  <p class="item-card__subtitle">+ HP regenerated per second</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Flat HP per second. Default is 0; even Common +1 is felt
+                between waves. Not included in the demo build.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +1</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +2</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +3</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +4</li>
+              </ul>
+              <p><strong>When to take:</strong> sustain rail. Strong on
+              <a href="../characters/smithy.html">Smithy</a> (starts +1) and
+              any healer-leaning composition; weak on Glass Cannon builds.</p>
+            </article>
+
+            <!-- XP GAIN -->
+            <article class="item-card" id="imp-xp" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterXPGain</h3>
+                  <p class="item-card__subtitle">+% experience per orb</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Meta-stat &mdash; doesn&rsquo;t damage anything itself, but
+                compounds <em>every other</em> improvement by letting you
+                level up faster and hit more shops. Offer-caps at 300.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +7%</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +12%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +17%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +21%</li>
+              </ul>
+              <p><strong>When to take:</strong> early-run only. A +17% XPGain
+              at wave 1 buys you maybe 3&ndash;4 extra shop visits over the
+              run. The same pick on the last wave buys you nothing.</p>
+            </article>
+
+            <!-- LUCK -->
+            <article class="item-card" id="imp-luck" data-element="lightning">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterLuck</h3>
+                  <p class="item-card__subtitle">+ to rarity-roll bias</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Biases shop and drop rarity rolls towards higher tiers. Hard
+                offer-cap at 25 &mdash; well below most other caps,
+                indicating the developers consider it strong.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +2</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +4</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +6</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +8</li>
+              </ul>
+              <p><strong>When to take:</strong> early-run only, same logic as
+              XPGain. <a href="../characters/reginald.html">Reginald</a>
+              starts +2 and pairs naturally.</p>
+            </article>
+
+            <!-- PICKUP RADIUS -->
+            <article class="item-card" id="imp-pickup" data-element="acid">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterPickUpRadius</h3>
+                  <p class="item-card__subtitle">+% XP and drop pickup range</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Quality of life. Lets you collect orbs without retracing,
+                which indirectly translates to more uptime on damage and
+                fewer wasted orbs at wave transitions.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> +8%</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +12%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +18%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +24%</li>
+              </ul>
+              <p><strong>When to take:</strong> filler pick. Solid on
+              <a href="../characters/plant-mage.html">Plant Mage</a>
+              (starts +20). Almost always lower-priority than a Damage or
+              FireRate pick at the same rarity.</p>
+            </article>
+
+            <!-- SIZE -->
+            <article class="item-card" id="imp-size" data-element="ice">
+              <header class="item-card__header">
+                <div>
+                  <h3 class="item-card__title">CharacterSize</h3>
+                  <p class="item-card__subtitle">+% spell area</p>
+                </div>
+              </header>
+              <p class="item-card__desc">
+                Adds to the <strong>logarithmically-stacked</strong> Size
+                bracket &mdash; nominal % is bigger than the felt %. See
+                <a href="../guides/damage-optimization.html#log-curve">log-curve table</a>.
+                Common tier is disabled (value 0), so this only appears at
+                rare and up.
+              </p>
+              <ul class="item-card__rarities">
+                <li><span class="rarity-pill" data-rarity="common">Common</span> &mdash; (disabled)</li>
+                <li><span class="rarity-pill" data-rarity="rare">Rare</span> +12%</li>
+                <li><span class="rarity-pill" data-rarity="epic">Epic</span> +15%</li>
+                <li><span class="rarity-pill" data-rarity="legendary">Legendary</span> +18%</li>
+              </ul>
+              <p><strong>When to take:</strong> AOE / persistent-zone
+              builds (<a href="../spells/bell.html">Bell</a>,
+              <a href="../spells/plant.html">Plant</a>,
+              <a href="../spells/energy-zone.html">EnergyZone</a>,
+              <a href="../spells/meteor.html">Meteor</a>). One pick early is
+              great; successive picks are crushed by the log curve.</p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ================== PRIORITY ================== -->
+        <section id="priority">
+          <h2>4. Recommended pick order</h2>
+          <p class="prose">
+            A default-difficulty triage for when the store deals you a
+            random spread. Higher tier always beats lower tier in the same
+            row, but a Common high-priority pick generally beats a
+            Legendary low-priority pick.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Default pick order, top-to-bottom is high-to-low priority</caption>
+              <thead>
+                <tr>
+                  <th class="num">Priority</th>
+                  <th>Improvement</th>
+                  <th>Why</th>
+                  <th>Stop picking when&hellip;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="num">1</td><td>CharacterMaxHealth</td><td>Survivability fixes most run-ending mistakes; biggest absolute numbers.</td><td>You&rsquo;re at 1000+ HP or running Glass Cannon.</td></tr>
+                <tr><td class="num">2</td><td>CharacterMovementSpeed</td><td>Multiplies every other defensive stat by enabling kiting; cheap insurance.</td><td>You&rsquo;ve had 2 picks; further stacks are luxury.</td></tr>
+                <tr><td class="num">3</td><td>CharacterDamage</td><td>Multiplies every spell; pure DPS in the additive bracket.</td><td>Bracket is past ~150% (other rails buy more DPS per pick).</td></tr>
+                <tr><td class="num">4</td><td>CharacterFireRate</td><td>Separate multiplier rail; combines multiplicatively with Damage.</td><td>Your FireRate bracket exceeds your Damage bracket.</td></tr>
+                <tr><td class="num">5</td><td>CharacterCriticalChance</td><td>Each +4 is worth roughly +6% expected DPS at default 150 CritDamage.</td><td>You&rsquo;re past 50% chance; rebalance to CritDamage.</td></tr>
+                <tr><td class="num">6</td><td>CharacterXPGain (early)</td><td>Compounds the rest of your build; near-worthless past wave ~5.</td><td>Past the first third of the run.</td></tr>
+                <tr><td class="num">7</td><td>CharacterCriticalDamage</td><td>Better than CritChance only when CritChance is &gt;40%.</td><td>Your CritDamage is past ~400.</td></tr>
+                <tr><td class="num">8</td><td>CharacterDodge</td><td>Each point of Dodge is worth more than 1% damage reduction because it negates triggers (DoTs, knockback).</td><td>Past 50; you hit the cap soon anyway.</td></tr>
+                <tr><td class="num">9</td><td>CharacterArmor</td><td>Pure defence rail unless paired with #13 artifact.</td><td>You&rsquo;ve picked once for the baseline.</td></tr>
+                <tr><td class="num">10</td><td>CharacterSize</td><td>AOE-only; log-stacked so first pick is most of the value.</td><td>One pick taken on relevant build; ignore otherwise.</td></tr>
+                <tr><td class="num">11</td><td>CharacterLuck (early)</td><td>Caps at 25; one Epic basically maxes it out.</td><td>Stat is at or near 25.</td></tr>
+                <tr><td class="num">12</td><td>CharacterHealthRegeneration</td><td>Slow but compounds with downtime; great on tank heroes.</td><td>Already at 3+ HP/sec.</td></tr>
+                <tr><td class="num">13</td><td>CharacterPickUpRadius</td><td>Quality of life; rarely the best pick on offer.</td><td>Always &mdash; only take if everything else is worse.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Difficulty modifier</span>
+            <p>
+              On Hard / Apocalypse, swap items #1 and #2 down behind a
+              second Damage / FireRate pick &mdash; you&rsquo;ll die to
+              outscaled waves long before you die to a single hit. On
+              Easy, take Luck and XPGain greedily; you have all the
+              survivability you need.
+            </p>
+          </aside>
+        </section>
+
+        <!-- ================== INTERACTIONS ================== -->
+        <section id="interactions">
+          <h2>5. Interactions &amp; caps</h2>
+
+          <h3>Stat-limit-for-offer (the offer cap)</h3>
+          <p class="prose">
+            Four improvements have a <code>stat_limit_for_offer</code> set
+            in their asset:
+          </p>
+          <ul>
+            <li><strong>CharacterCriticalChance</strong> &mdash; offer cap 80</li>
+            <li><strong>CharacterDodge</strong> &mdash; offer cap 75</li>
+            <li><strong>CharacterLuck</strong> &mdash; offer cap 25</li>
+            <li><strong>CharacterXPGain</strong> &mdash; offer cap 300</li>
+          </ul>
+          <p class="prose">
+            Once your current value for that stat meets-or-exceeds the cap,
+            the improvement is removed from the eligible pool for future
+            stores. The other nine improvements have
+            <code>stat_limit_for_offer = -1</code> &mdash; uncapped.
+          </p>
+
+          <h3>Interaction with starting modifiers</h3>
+          <p class="prose">
+            Character starting modifiers are applied <em>before</em> the
+            offer cap is checked. So a Sun Mage who starts +7 Dodge is
+            already 7 points closer to the 75 cap than a baseline hero.
+            <a href="../characters/wizard-king.html">Wizard King</a> starts
+            +10 CritChance and can comfortably reach the 80 cap with two
+            Epic picks.
+          </p>
+
+          <h3>Interaction with artifacts</h3>
+          <p class="prose">
+            Character improvements feed the same stat pool that artifacts
+            do. The combinations that change the calculus are:
+          </p>
+          <ul>
+            <li>
+              <a href="../artifacts/index.html#artifact-13">#13 Damage per Armor</a>
+              + CharacterArmor &rarr; Armor becomes a Damage rail; promote
+              CharacterArmor from priority #9 to priority #3 for that run.
+            </li>
+            <li>
+              <a href="../artifacts/index.html#artifact-1">#1 LessHP &rarr; MoveSpeed</a>
+              + <a href="../artifacts/index.html#artifact-3">#3 LessHP &rarr; XPGain</a>
+              + CharacterMaxHealth &rarr; <strong>conflict</strong>. Skip MaxHealth
+              entirely on a low-HP build.
+            </li>
+            <li>
+              <a href="../artifacts/index.html#artifact-8">#8 Luck When Not Rerolling</a>
+              + CharacterLuck &rarr; comfortably saturates the Luck cap; skip
+              additional Luck picks past Common.
+            </li>
+            <li>
+              <a href="../artifacts/index.html#artifact-15">#15 Elemental Damage per Infusion</a>
+              + CharacterDamage stack additively&hellip; sort of. The Element
+              multiplier is outside the Damage bracket, so its value rises
+              <em>with</em> your CharacterDamage picks. Both rails reinforce
+              each other.
+            </li>
+          </ul>
+
+          <h3>Interaction with spell-specific upgrades</h3>
+          <p class="prose">
+            Spell-store improvements (rolled per spell in the
+            <code>storeitems/improvements/</code> folder) cover most of the
+            same stats. The crucial difference: spell-specific
+            <code>Damage</code> rolls go into the <em>same</em> additive
+            bracket as <code>CharacterDamage</code> for that spell, but
+            other spells see only the CharacterDamage contribution. On a
+            mono-spell build the two are interchangeable; on a 3+ spell
+            build, prefer the CharacterDamage pick at equal rarity.
+          </p>
+        </section>
+
+        <!-- ================== CHEAT SHEET ================== -->
+        <section id="cheat-sheet">
+          <h2>6. Cheat sheet</h2>
+          <ul>
+            <li><strong>Default order:</strong> MaxHealth &rarr; MoveSpeed &rarr; Damage &rarr; FireRate &rarr; CritChance &rarr; XPGain (early) &rarr; CritDamage.</li>
+            <li><strong>Always cap:</strong> Luck (25), CritChance (80), Dodge (75) &mdash; one or two picks each is enough.</li>
+            <li><strong>Never max out:</strong> PickupRadius, HealthRegen &mdash; filler only.</li>
+            <li><strong>Build-defining:</strong> Size for AOE comps, Armor with #13 artifact, MaxHealth for Hatty / low-HP heroes.</li>
+            <li><strong>Disabled tiers in current build:</strong> MovementSpeed Legendary (0), Size Common (0).</li>
+            <li><strong>Multi-spell tax:</strong> spell-specific Damage helps one spell; CharacterDamage helps all &mdash; prefer the global at equal rarity.</li>
+          </ul>
+        </section>
+
+        <!-- ================== SEE ALSO ================== -->
+        <section class="stack">
+          <h2>See also</h2>
+          <div class="see-also grid grid-3">
+            <a class="see-also__link" href="stats.html"><strong>Stats reference</strong>The 36 StatType IDs, their calculation modes, and game-side meanings.</a>
+            <a class="see-also__link" href="rarity.html"><strong>Rarity tiers</strong>How common/rare/epic/legendary rolls work in the shop.</a>
+            <a class="see-also__link" href="upgrades.html"><strong>Spell upgrades</strong>Spell-specific store rolls that stack alongside these improvements.</a>
+            <a class="see-also__link" href="critical-hits.html"><strong>Critical hits</strong>How CriticalChance and CriticalDamage combine.</a>
+            <a class="see-also__link" href="armor-dodge.html"><strong>Armor &amp; Dodge</strong>Defensive mechanics that consume the Armor / Dodge stats.</a>
+            <a class="see-also__link" href="../guides/damage-optimization.html"><strong>Damage optimization</strong>Full guide on stat priorities and damage-bracket math.</a>
+            <a class="see-also__link" href="../guides/best-spells-per-hero.html"><strong>Best spells per hero</strong>Curated spell pairings keyed off each hero&rsquo;s starting kit.</a>
+            <a class="see-also__link" href="../characters/index.html"><strong>Characters</strong>All 15 heroes, their starting modifiers, and spell pairings.</a>
+            <a class="see-also__link" href="../artifacts/index.html"><strong>Artifacts</strong>Unique conditional effects that share the shop slot pool.</a>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div>
+      <h6>The Arcane Archive</h6>
+      <p class="u-muted">
+        An unofficial, community-maintained reference for the indie game
+        <em>The Spell Brigade</em>. All game names, lore, and trademarks
+        belong to their respective owners.
+      </p>
+    </div>
+    <div>
+      <h6>Browse</h6>
+      <ul>
+        <li><a href="../spells/index.html">Spells</a></li>
+        <li><a href="../characters/index.html">Characters</a></li>
+        <li><a href="../artifacts/index.html">Artifacts</a></li>
+        <li><a href="../enemies/index.html">Enemies</a></li>
+        <li><a href="../worlds/index.html">Worlds</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Meta</h6>
+      <ul>
+        <li><a href="../guides/index.html">Guides &amp; builds</a></li>
+        <li><a href="../mechanics/index.html">Game mechanics</a></li>
+        <li><a href="../challenges/index.html">Challenges</a></li>
+        <li><a href="../index.html">Contribute</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__legal">
+    Built as a fan project. No images, no trackers, no CDN.
+    &nbsp;&middot;&nbsp; Last updated by build script.
+  </div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>

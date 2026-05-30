@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="The infusion combo matrix for The Spell Brigade — what ElementType you get from layering a new element onto an existing one, and why most of the 21×21 grid is unreachable.">
+  <title>Element matrix — The Arcane Archive</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230d1117'/><text x='50%25' y='54%25' font-size='44' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' fill='%23c9a961'>%E2%9C%B6</text></svg>">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <nav class="top-nav" aria-label="Primary">
+      <a class="top-nav__link" href="../spells/index.html">Spells</a>
+      <a class="top-nav__link" href="../characters/index.html">Characters</a>
+      <a class="top-nav__link" href="../artifacts/index.html">Artifacts</a>
+      <a class="top-nav__link" href="../enemies/index.html">Enemies</a>
+      <a class="top-nav__link" href="../worlds/index.html">Worlds</a>
+      <a class="top-nav__link" href="../guides/index.html">Guides</a>
+    </nav>
+    <div class="search" data-search data-search-index="../data/search-index.json">
+      <span class="search__icon" aria-hidden="true">⌕</span>
+      <label class="u-sr-only" for="site-search">Search the wiki</label>
+      <input class="search__input" id="site-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false">
+      <div class="search__results" id="search-results" hidden></div>
+    </div>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">≡</button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Mobile primary">
+  <a class="mobile-nav__link" href="../spells/index.html">Spells</a>
+  <a class="mobile-nav__link" href="../mechanics/index.html">Mechanics</a>
+  <a class="mobile-nav__link" href="../guides/index.html">Guides</a>
+</nav>
+
+<div class="container">
+  <div class="page has-sidebar">
+
+    <aside class="sidebar" aria-label="Section index">
+      <h2 class="sidebar__title">On this page</h2>
+      <ul class="sidebar__nav">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#combo-matrix">Combo matrix</a></li>
+        <li><a href="#why-sparse">Why so many empty cells</a></li>
+        <li><a href="#no-element-vs">No element-vs-element bias</a></li>
+        <li><a href="#all-21">All 21 packed types</a></li>
+      </ul>
+      <h2 class="sidebar__title">Mechanics</h2>
+      <ul class="sidebar__nav">
+        <li><a href="../mechanics/index.html">Overview</a></li>
+        <li><a href="../mechanics/elements.html">Elements</a></li>
+        <li><a href="../mechanics/element-matrix.html" aria-current="page">Element matrix</a></li>
+      </ul>
+    </aside>
+
+    <main id="main-content" tabindex="-1">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../mechanics/index.html">Mechanics</a></li>
+          <li aria-current="page">Element matrix</li>
+        </ol>
+      </nav>
+
+      <article class="content-frame">
+
+        <section id="overview" class="stack">
+          <h1>Element matrix</h1>
+          <p class="prose">
+            This page is the lookup grid for <em>what packed
+            <code>ElementType</code></em> you end up with after a sequence of
+            infusions. The full enum has <strong>21</strong> values
+            (<code>None</code> + 5 singles + 5 doubles + 10 dual combos), but only
+            <strong>21</strong> of the <strong>21 × 21 = 441</strong> ordered cells of
+            a hypothetical input-by-input lookup are reachable. The rest are
+            unreachable because: (a) the enum doesn&rsquo;t define a triple-element
+            combo, and (b) the matrix is symmetric on element pair, so order
+            doesn&rsquo;t matter once you go dual.
+          </p>
+        </section>
+
+        <section id="combo-matrix" class="stack">
+          <h2>Combo matrix</h2>
+          <p class="prose">
+            <strong>Row = current spell element</strong> (before infusion).
+            <strong>Column = infusion element you commit</strong> (one of the five
+            singles). <strong>Cell = the resulting packed <code>ElementType</code></strong>.
+            Cells that the system never produces are marked <code>—</code>.
+          </p>
+
+          <div class="stat-table-wrap">
+            <table class="stat-table">
+              <caption>Infusion → result lookup. Five reachable input elements; five reachable infusions.</caption>
+              <thead>
+                <tr>
+                  <th>From \ Infuse</th>
+                  <th><span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span></th>
+                  <th><span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span></th>
+                  <th><span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span></th>
+                  <th><span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span></th>
+                  <th><span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>None</strong></td>          <td>Fire</td>          <td>Lightning</td>     <td>Acid</td>          <td>Ice</td>           <td>Dark</td></tr>
+                <tr><td><strong>Fire</strong></td>          <td>FireDouble</td>    <td>FireLightning</td> <td>AcidFire</td>      <td>FireIce</td>       <td>DarkFire</td></tr>
+                <tr><td><strong>Lightning</strong></td>     <td>FireLightning</td> <td>LightningDouble</td><td>AcidLightning</td><td>IceLightning</td>  <td>DarkLightning</td></tr>
+                <tr><td><strong>Acid</strong></td>          <td>AcidFire</td>      <td>AcidLightning</td> <td>AcidDouble</td>    <td>AcidIce</td>       <td>AcidDark</td></tr>
+                <tr><td><strong>Ice</strong></td>           <td>FireIce</td>       <td>IceLightning</td>  <td>AcidIce</td>       <td>IceDouble</td>     <td>DarkIce</td></tr>
+                <tr><td><strong>Dark</strong></td>          <td>DarkFire</td>      <td>DarkLightning</td> <td>AcidDark</td>      <td>DarkIce</td>       <td>DarkDouble</td></tr>
+                <tr><td><strong>Any Double</strong></td>    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                <tr><td><strong>Any Dual combo</strong></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="callout" data-kind="tip">
+            <span class="callout__title">Reading the diagonal</span>
+            <p>
+              The diagonal — Fire on Fire, Lightning on Lightning, etc. — always
+              produces the <code>*Double</code> form, which intensifies the
+              corresponding per-element side-effect (stronger DOT, more ricochets,
+              deeper shred, longer chill, faster corruption).
+            </p>
+          </aside>
+        </section>
+
+        <section id="why-sparse" class="stack">
+          <h2>Why the grid stops at five inputs</h2>
+          <p class="prose">
+            Three rules collapse the seemingly large 21×21 space:
+          </p>
+          <ol>
+            <li><strong>Infusions are always one of the five singles.</strong> You commit Fire, Lightning, Acid, Ice, or Dark — never a Double or Dual.</li>
+            <li><strong>Once a spell is at Double or Dual, further infusion has no defined target.</strong> The enum exposes no triple-element value, and the dump contains no &ldquo;upgrade dual to dual+&rdquo; behavior. Practically, the run&rsquo;s infusion economy caps a spell at two effects.</li>
+            <li><strong>Dual combo names are sorted by enum id.</strong> Acid &lt; Dark &lt; Fire &lt; Ice &lt; Lightning. So Fire-then-Acid and Acid-then-Fire both pack as <code>AcidFire</code> — the matrix is symmetric.</li>
+          </ol>
+        </section>
+
+        <section id="no-element-vs" class="stack">
+          <h2>No element-vs-element matrix exists</h2>
+          <aside class="callout" data-kind="warn">
+            <span class="callout__title">There is no &ldquo;Fire is strong vs Ice&rdquo;</span>
+            <p>
+              Many genre games ship a fixed matrix that says e.g. Fire deals +50%
+              against Ice. The Spell Brigade does <em>not</em> work this way. Elemental
+              damage is scaled only by the two
+              <a href="../mechanics/stats.html#elementstrength">player-side stats</a>:
+              <code>ElementStrengthMultiplier</code> on the attacker and
+              <code>ElementWeaknessMultiplier</code> on the target. Neither stat
+              distinguishes <em>which</em> element it&rsquo;s scaling. A target with
+              <code>+50% ElementWeaknessMultiplier</code> takes +50% from <em>every</em>
+              non-<code>None</code> element, not just one.
+            </p>
+            <p>
+              The only element-pair-specific behavior is that the
+              <strong>per-element effect</strong> classes are different
+              (<code>FireEffect</code>, <code>IceEffect</code>, etc.). A Fire spell will
+              <em>always</em> burn an Ice enemy because <code>FireEffect</code> is what
+              the element type carries, not because of a matchup table.
+            </p>
+          </aside>
+        </section>
+
+        <section id="all-21" class="stack">
+          <h2>All 21 packed ElementType values</h2>
+          <div class="element-matrix">
+            <a class="element-matrix__cell" href="../mechanics/elements.html#singles">
+              <span class="el-badge" data-element="neutral"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">None</span></span>
+              <span class="element-matrix__cell-name">None</span>
+              <span class="element-matrix__cell-meta">id 0 · skips element scaling</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#fire">
+              <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire</span></span>
+              <span class="element-matrix__cell-name">Fire</span>
+              <span class="element-matrix__cell-meta">id 1 · burning DOT</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#fire">
+              <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire ×2</span></span>
+              <span class="element-matrix__cell-name">FireDouble</span>
+              <span class="element-matrix__cell-meta">id 2 · intensified burn</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#lightning">
+              <span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning</span></span>
+              <span class="element-matrix__cell-name">Lightning</span>
+              <span class="element-matrix__cell-meta">id 3 · ricochet chain</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#lightning">
+              <span class="el-badge" data-element="lightning"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Lightning ×2</span></span>
+              <span class="element-matrix__cell-name">LightningDouble</span>
+              <span class="element-matrix__cell-meta">id 4 · more / harder ricochets</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#fire">
+              <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire+Lt</span></span>
+              <span class="element-matrix__cell-name">FireLightning</span>
+              <span class="element-matrix__cell-meta">id 5 · burn + ricochet</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid</span></span>
+              <span class="element-matrix__cell-name">Acid</span>
+              <span class="element-matrix__cell-meta">id 6 · resistance shred</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid ×2</span></span>
+              <span class="element-matrix__cell-name">AcidDouble</span>
+              <span class="element-matrix__cell-meta">id 7 · deeper / longer shred</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid+Fire</span></span>
+              <span class="element-matrix__cell-name">AcidFire</span>
+              <span class="element-matrix__cell-meta">id 8 · shred + burn</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid+Lt</span></span>
+              <span class="element-matrix__cell-name">AcidLightning</span>
+              <span class="element-matrix__cell-meta">id 9 · shred + ricochet</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#ice">
+              <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice</span></span>
+              <span class="element-matrix__cell-name">Ice</span>
+              <span class="element-matrix__cell-meta">id 10 · chill 0.2–0.72</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#ice">
+              <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice ×2</span></span>
+              <span class="element-matrix__cell-name">IceDouble</span>
+              <span class="element-matrix__cell-meta">id 11 · stronger / longer chill</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#fire">
+              <span class="el-badge" data-element="fire"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Fire+Ice</span></span>
+              <span class="element-matrix__cell-name">FireIce</span>
+              <span class="element-matrix__cell-meta">id 12 · burn + chill</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid+Ice</span></span>
+              <span class="element-matrix__cell-name">AcidIce</span>
+              <span class="element-matrix__cell-meta">id 13 · shred + chill</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#ice">
+              <span class="el-badge" data-element="ice"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Ice+Lt</span></span>
+              <span class="element-matrix__cell-name">IceLightning</span>
+              <span class="element-matrix__cell-meta">id 14 · chill + ricochet</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#dark">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark</span></span>
+              <span class="element-matrix__cell-name">Dark</span>
+              <span class="element-matrix__cell-meta">id 15 · corruption (turn enemies)</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#dark">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark ×2</span></span>
+              <span class="element-matrix__cell-name">DarkDouble</span>
+              <span class="element-matrix__cell-meta">id 16 · faster corruption fill</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#dark">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark+Fire</span></span>
+              <span class="element-matrix__cell-name">DarkFire</span>
+              <span class="element-matrix__cell-meta">id 17 · corruption + burn</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#dark">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark+Lt</span></span>
+              <span class="element-matrix__cell-name">DarkLightning</span>
+              <span class="element-matrix__cell-meta">id 18 · corruption + ricochet</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#acid">
+              <span class="el-badge" data-element="acid"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Acid+Dark</span></span>
+              <span class="element-matrix__cell-name">AcidDark</span>
+              <span class="element-matrix__cell-meta">id 19 · shred + corruption</span>
+            </a>
+            <a class="element-matrix__cell" href="../mechanics/elements.html#dark">
+              <span class="el-badge" data-element="dark"><span class="el-badge__glyph" aria-hidden="true"></span><span class="el-badge__label">Dark+Ice</span></span>
+              <span class="element-matrix__cell-name">DarkIce</span>
+              <span class="element-matrix__cell-meta">id 20 · corruption + chill</span>
+            </a>
+          </div>
+        </section>
+
+        <div class="see-also">
+          <a class="see-also__link" href="../mechanics/elements.html">
+            <strong>Elements</strong>
+            Per-element side-effects in depth.
+          </a>
+          <a class="see-also__link" href="../mechanics/damage-system.html#element-effectiveness">
+            <strong>Element effectiveness math</strong>
+            How the two element stats actually scale damage.
+          </a>
+        </div>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div><h6>The Arcane Archive</h6><p class="u-muted">Unofficial fan reference.</p></div>
+    <div><h6>Browse</h6><ul><li><a href="../spells/index.html">Spells</a></li><li><a href="../artifacts/index.html">Artifacts</a></li></ul></div>
+    <div><h6>Meta</h6><ul><li><a href="../mechanics/index.html">Mechanics</a></li><li><a href="../guides/index.html">Guides</a></li></ul></div>
+  </div>
+  <div class="site-footer__legal">Built as a fan project. No images, no trackers, no CDN.</div>
+</footer>
+
+<script src="../js/wiki.js" defer></script>
+</body>
+</html>
