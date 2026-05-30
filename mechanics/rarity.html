@@ -16,7 +16,7 @@
 
 <header class="site-header" role="banner">
   <div class="site-header__inner">
-    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Arcane</span><span class="brand__sub">Archive</span></a>
     <nav class="top-nav" aria-label="Primary">
       <a class="top-nav__link" href="../spells/index.html">Spells</a>
       <a class="top-nav__link" href="../characters/index.html">Characters</a>
@@ -125,7 +125,7 @@
 
           <p class="prose">
             That float becomes the <code>Value</code> of a fresh
-            <code>StaticStatModifier</code>, which is added to the relevant
+            <code>flat modifier</code>, which is added to the relevant
             <code>Stat</code>&rsquo;s modifier list via
             <code>IPlayerStats.AddCharacterImprovement</code> (or
             <code>AddSpellImprovement</code> for spell-scoped items).
@@ -155,7 +155,7 @@
           <aside class="callout" data-kind="warn">
             <span class="callout__title">Exact weighting is not dump-visible</span>
             <p>
-              The IL2CPP dump confirms the class name, the
+              The compiled code dump confirms the class name, the
               <code>ICanPickARarity</code> contract, and the existence of a Luck input —
               but the actual weight curve (linear? logarithmic? step function?) is in
               the method body and not exposed. The strong-prior hypothesis is that
@@ -200,7 +200,7 @@
           </p>
 
 <pre class="formula"><code>value = ImprovementValueContainer.GetValue(Epic)   <span class="f-comment">// = 0.25</span>
-mod   = new StaticStatModifier {
+mod   = new flat modifier {
             StatType = Damage,
             Value    = <span class="f-num">0.25</span>
         }
@@ -216,7 +216,7 @@ IPlayerStats.AddCharacterImprovement(mod)</code></pre>
           <aside class="callout" data-kind="tip">
             <span class="callout__title">Rarity persists, not magnitude</span>
             <p>
-              Once chosen, the <code>StaticStatModifier</code> stores only the chosen
+              Once chosen, the <code>flat modifier</code> stores only the chosen
               <em>float</em>. The fact that it came from an Epic roll is lost — there&rsquo;s
               no way for later effects to ask &ldquo;was this an Epic <code>+25%</code>?&rdquo;
               The four-tier system exists only at the moment of rolling.

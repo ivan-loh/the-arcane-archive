@@ -16,7 +16,7 @@
 
 <header class="site-header" role="banner">
   <div class="site-header__inner">
-    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Spell Brigade</span><span class="brand__sub">Wiki</span></a>
+    <a class="brand" href="../index.html"><span class="brand__sigil" aria-hidden="true">✶</span><span>The Arcane</span><span class="brand__sub">Archive</span></a>
     <nav class="top-nav" aria-label="Primary">
       <a class="top-nav__link" href="../spells/index.html">Spells</a>
       <a class="top-nav__link" href="../characters/index.html">Characters</a>
@@ -98,7 +98,7 @@
             <span class="callout__title">In one sentence</span>
             <p>
               Every <code>+25% Damage</code> roll you pick adds one
-              <code>StaticStatModifier</code> with <code>StatType = Damage</code> and
+              <code>flat modifier</code> with <code>StatType = Damage</code> and
               <code>Value = 0.25</code>. At hit time, <code>StatCalculator</code> sums
               all such modifiers and applies them to the spell&rsquo;s base damage as
               <code>base × (1 + Σ%)</code>.
@@ -126,10 +126,10 @@
 
           <p class="prose">
             The <code>StatModifier</code> base class is abstract; concrete subclasses
-            include <code>StaticStatModifier</code> (a fixed
+            include <code>flat modifier</code> (a fixed
             <code>Value</code> set once), <code>StartingStatModifier</code> (the same
             but tagged as baseline kit), <code>HiddenStatModifier</code> (numeric but
-            never shown in UI), and ~22 <code>DynamicStatModifier</code> subclasses
+            never shown in UI), and ~22 <code>computed modifier</code> subclasses
             whose <code>GetValue()</code> is recomputed on the fly. See the
             <a href="../mechanics/stat-modifiers.html">stat modifiers</a> page for the full tree.
           </p>
@@ -290,7 +290,7 @@
 
           <dl class="meta-dl">
             <dt id="damage">Damage <span class="tag">PercentAdd</span></dt>
-            <dd>Per-spell, not character-wide; every spell snapshots its own <code>Damage</code> stat. Equipping an item with <code>+25% Damage</code> appends one <code>StaticStatModifier</code> with <code>Value = 0.25</code>; the spell&rsquo;s outgoing damage becomes <code>base × (1 + Σ%)</code>.</dd>
+            <dd>Per-spell, not character-wide; every spell snapshots its own <code>Damage</code> stat. Equipping an item with <code>+25% Damage</code> appends one <code>flat modifier</code> with <code>Value = 0.25</code>; the spell&rsquo;s outgoing damage becomes <code>base × (1 + Σ%)</code>.</dd>
 
             <dt id="firerate">FireRate <span class="tag">PercentAdd</span></dt>
             <dd>Direct multiplier on shots per second. Stacks additively, so two <code>+50% FireRate</code> picks give exactly <code>2×</code> cadence (not <code>2.25×</code>).</dd>
@@ -330,7 +330,7 @@
             <span class="callout__title">Example — equipping a Damage roll</span>
             <p>
               You buy an Epic <code>+25% Damage</code> item from the store. The game
-              creates one <code>StaticStatModifier { StatType = Damage, Value = 0.25 }</code>
+              creates one <code>flat modifier { StatType = Damage, Value = 0.25 }</code>
               and calls <code>IPlayerStats.AddCharacterImprovement</code>. Next time any
               spell asks for its Damage stat, <code>StatCalculator.CalculatePercentAddValue</code>
               walks the modifier list, sums every <code>+%</code> contribution, and

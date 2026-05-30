@@ -77,12 +77,12 @@ the-spell-brigade-wiki/
 ## Data source provenance
 
 All wiki content is derived from the shipped game files of *The Spell Brigade*
-(Unity IL2CPP build). Two tools do the extraction:
+(Unity compiled build). Two tools do the extraction:
 
-- **AssetRipper 1.3.14** — unpacks Unity asset bundles into readable
+- **extraction tooling** — unpacks Unity asset bundles into readable
   `.prefab`, `ScriptableObject`, and metadata files.
-- **Il2CppDumper 6.7.46** — reconstructs C# class names, enum maps, and method
-  signatures from the IL2CPP-compiled `GameAssembly.dll`.
+- **extraction tooling** — reconstructs C# class names, enum maps, and method
+  signatures from the compiled-compiled `GameAssembly.dll`.
 
 This wiki is a **snapshot of build `d121863287924117b1157d5f5d667b78`** (the
 build hash from `boot.config`). When the developer ships a new build, the
@@ -148,3 +148,8 @@ The wiki's **HTML, CSS, and JavaScript source** are released for any use; the
 **game data** it references belongs to BoltBlasterGames and is reproduced
 here as a fan reference under fair-use principles (factual data, no art,
 clearly labelled).
+
+
+## Takedown / removal requests
+
+If you are with BoltBlasterGames (or otherwise hold rights to any content reproduced here) and would like anything removed or modified, please [open an issue](https://github.com/ivan-loh/the-arcane-archive/issues/new) on this repo. Requests are honoured promptly &mdash; typically within 48 hours.
