@@ -74,36 +74,6 @@ the-spell-brigade-wiki/
                          don't 404 if a page ever adds an SVG decoration).
 ```
 
-## Data source provenance
-
-All wiki content is derived from the shipped game files of *The Spell Brigade*
-(Unity compiled build). Two tools do the extraction:
-
-- **the extraction pipeline** — unpacks Unity asset bundles into readable
-  `.prefab`, `ScriptableObject`, and metadata files.
-- **the extraction pipeline** — reconstructs C# class names, enum maps, and method
-  signatures from the compiled `GameAssembly.dll`.
-
-This wiki is a **snapshot of current build** (the
-build hash from `boot.config`). When the developer ships a new build, the
-extraction pipeline is re-run and affected pages are regenerated.
-
-## How this wiki was generated
-
-The wiki was produced by a parallel-agent pipeline:
-
-1. **8 extractor agents** ran in parallel, each focused on one entity family
-   (spells, artifacts, characters, enemies, bosses, waves, mechanics, meta).
-   Every extractor verified its output twice against the raw dump before
-   writing JSON to `data/`.
-2. **8 builder agents** consumed those JSON files in parallel to produce the
-   per-family HTML.
-3. **5 reviewer agents** spot-checked the rendered HTML for data integrity,
-   anchor consistency, cross-link validity, and accessibility.
-
-The canonical site contract (URL conventions, anchor patterns, template
-names, cross-linking rules) lives in `data/site-structure.md` and was
-treated as a hard contract by every builder.
 
 ## The search index
 
